@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,11 +34,10 @@ import 'package:udemy_flutter/modules/bmi/bmi_screen.dart';
 import 'layout/news_app/news_layout.dart';
 import 'modules/bmi_result/bmi_result_screen.dart';
 import 'modules/login/login_screen.dart';
+
 // @dart=2.9
 //Mohammad Halaweh99
-void main()
-{
-
+void main() {
   //----------------------------------------------------------------------------
   // WidgetsFlutterBinding.ensureInitialized();
   // var bloc;
@@ -50,36 +48,34 @@ void main()
 
   runApp(MyApp());
 }
-class MyApp extends StatelessWidget
-{
+
+class MyApp extends StatelessWidget {
   // final bool isDark;
   // MyApp(this.isDark);
   @override
-  Widget build(BuildContext context)
-  {
-    return  BlocProvider(
+  Widget build(BuildContext context) {
+    return BlocProvider(
       create: (BuildContext context) => AppCubit(),
-      child: BlocConsumer<AppCubit,AppStates>(
-        listener: (context , state){},
-        builder:(context , state) {
-          return           MaterialApp(
+      child: BlocConsumer<AppCubit, AppStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return MaterialApp(
             //To Detect Language------------------------------------------------------
-            localizationsDelegates:
-            [
+            localizationsDelegates: [
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            supportedLocales:
-            [
+            supportedLocales: [
               // Locale('en', ''), // English, no country code
               Locale('ar', 'AE'), // Arabic, no country code
             ],
             debugShowCheckedModeBanner: false,
             //Theme Data--------------------------------------------------------------
             theme: lightTheme,
-            darkTheme:darkTheme,
-            themeMode: AppCubit.get(context).isDark?ThemeMode.dark:ThemeMode.light,
+            darkTheme: darkTheme,
+            themeMode:
+                AppCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
             // home:LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
             //   print(constraints.maxWidth.toInt());
             //
@@ -113,41 +109,23 @@ class MyApp extends StatelessWidget
             //
             // )
 
+            //     home:ScreenTypeLayout(
+            //       mobile: NewsLayout(),
+            //       desktop:
+            //       Text("Website",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red,fontSize: 20),),
+            //       // breakpoints: ScreenBreakpoints(
+            //       //   desktop:800 ,
+            //       //   tablet: 800,
+            //       //   watch: 800,
+            //       //
+            //       // ),
+            //   ),
+            //
 
-
-
-
-
-        //     home:ScreenTypeLayout(
-        //       mobile: NewsLayout(),
-        //       desktop:
-        //       Text("Website",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red,fontSize: 20),),
-        //       // breakpoints: ScreenBreakpoints(
-        //       //   desktop:800 ,
-        //       //   tablet: 800,
-        //       //   watch: 800,
-        //       //
-        //       // ),
-        //   ),
-        //
-
-
-
-
-              home:OnBoardingScreen(),
-
-
-
-
-
+            home: OnBoardingScreen(),
           );
         },
       ),
     );
   }
 }
-
-
-
-
-

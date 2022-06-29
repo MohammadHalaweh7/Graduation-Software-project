@@ -50,7 +50,8 @@ dependencies:
   responsive_builder: ^0.4.2
   universal_io: ^2.0.4
   smooth_page_indicator: ^1.0.0+2
-#  shared_preferences: ^2.0.15
+  http : ^0.13.4
+  shared_preferences: ^2.0.13
 #  webview_flutter: ^2.0.3
 
 
