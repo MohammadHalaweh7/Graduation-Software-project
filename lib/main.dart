@@ -18,6 +18,7 @@ import 'package:udemy_flutter/modules/phone/phone_screen.dart';
 import 'package:udemy_flutter/modules/profile/profileShop_screen.dart';
 import 'package:udemy_flutter/modules/search/search_screen.dart';
 import 'package:udemy_flutter/layout/shop_layout/shop_layout.dart';
+import 'package:udemy_flutter/modules/shop_app/on_boarding/on_boarding_screen.dart';
 import 'package:udemy_flutter/modules/shops/shops_screen.dart';
 import 'package:udemy_flutter/modules/signup/signUp_screen.dart';
 import 'package:udemy_flutter/modules/udemy_responsive/mobile.dart';
@@ -27,6 +28,7 @@ import 'package:udemy_flutter/shared/cubit/cubit.dart';
 import 'package:udemy_flutter/shared/cubit/states.dart';
 import 'package:udemy_flutter/shared/network/local/cache_helper.dart';
 import 'package:udemy_flutter/shared/network/remote/dio_helper.dart';
+import 'package:udemy_flutter/shared/styles/themes.dart';
 import 'package:udemy_flutter/sqflite.dart';
 import 'package:udemy_flutter/modules/users/users_screen.dart';
 import 'package:udemy_flutter/modules/bmi/bmi_screen.dart';
@@ -34,7 +36,7 @@ import 'layout/news_app/news_layout.dart';
 import 'modules/bmi_result/bmi_result_screen.dart';
 import 'modules/login/login_screen.dart';
 // @dart=2.9
-
+//Mohammad Halaweh99
 void main()
 {
 
@@ -75,85 +77,9 @@ class MyApp extends StatelessWidget
             ],
             debugShowCheckedModeBanner: false,
             //Theme Data--------------------------------------------------------------
-            theme: ThemeData(
-              primarySwatch: Colors.deepOrange,
-              scaffoldBackgroundColor: Colors.white,
-              appBarTheme:AppBarTheme(
-                iconTheme: IconThemeData(color: Colors.black),
-                titleTextStyle: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),
-                backgroundColor: Colors.white,
-                elevation: 0.0,
-                backwardsCompatibility: false,
-                systemOverlayStyle: SystemUiOverlayStyle(
-                  statusBarColor: Colors.white,
-                  statusBarIconBrightness: Brightness.dark,
-
-                ),
-
-
-              ) ,
-              bottomNavigationBarTheme: BottomNavigationBarThemeData(
-                  type: BottomNavigationBarType.fixed,
-                  selectedItemColor: Colors.deepOrange,
-                  elevation: 20.0,
-                  backgroundColor:  Colors.white,
-                  unselectedItemColor: Colors.grey
-
-              ),
-              floatingActionButtonTheme: FloatingActionButtonThemeData(
-                  backgroundColor: Colors.deepOrange
-              ),
-              textTheme: TextTheme(
-                  bodyText1: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black
-                  )
-              ),
-
-
-            ),
-            darkTheme: ThemeData(
-              scaffoldBackgroundColor: HexColor("333739"),
-              primarySwatch: Colors.deepOrange,
-              appBarTheme:AppBarTheme(
-                iconTheme: IconThemeData(color: Colors.white),
-                titleTextStyle: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),
-                backgroundColor: HexColor("333739"),
-                elevation: 0.0,
-                backwardsCompatibility: false,
-                systemOverlayStyle: SystemUiOverlayStyle(
-                  statusBarColor:  HexColor("333739"),
-                  statusBarIconBrightness: Brightness.light,
-
-                ),
-
-
-              ) ,
-              bottomNavigationBarTheme: BottomNavigationBarThemeData(
-                  type: BottomNavigationBarType.fixed,
-                  selectedItemColor: Colors.deepOrange,
-                  elevation: 20.0,
-                  backgroundColor:  HexColor("333739"),
-                  unselectedItemColor: Colors.grey
-
-
-              ),
-              floatingActionButtonTheme: FloatingActionButtonThemeData(
-                  backgroundColor: Colors.deepOrange
-              ),
-              textTheme: TextTheme(
-                  bodyText1: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white
-                  )
-              ),
-
-
-            ),
+            theme: lightTheme,
+            darkTheme:darkTheme,
             themeMode: AppCubit.get(context).isDark?ThemeMode.dark:ThemeMode.light,
-
             // home:LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
             //   print(constraints.maxWidth.toInt());
             //
@@ -163,29 +89,29 @@ class MyApp extends StatelessWidget
             //     return WebScreen();
             // },),
 
-            home:Builder(
-                builder: (BuildContext context)
-                    {
-
-
-                      if(MediaQuery.of(context).size.width.toInt() <=500)
-                        return MediaQuery(
-                            data: MediaQuery.of(context).copyWith(
-                              textScaleFactor: 0.5,
-                            ),
-                            child: MobileScreen()
-                        );
-                      else
-
-                        return MediaQuery(
-                            data: MediaQuery.of(context).copyWith(
-                              textScaleFactor: 2,
-                            ),
-                            child: WebScreen()
-                        );
-                    }
-
-            )
+            // home:Builder(
+            //     builder: (BuildContext context)
+            //         {
+            //
+            //
+            //           if(MediaQuery.of(context).size.width.toInt() <=500)
+            //             return MediaQuery(
+            //                 data: MediaQuery.of(context).copyWith(
+            //                   textScaleFactor: 0.5,
+            //                 ),
+            //                 child: MobileScreen()
+            //             );
+            //           else
+            //
+            //             return MediaQuery(
+            //                 data: MediaQuery.of(context).copyWith(
+            //                   textScaleFactor: 2,
+            //                 ),
+            //                 child: WebScreen()
+            //             );
+            //         }
+            //
+            // )
 
 
 
@@ -204,6 +130,13 @@ class MyApp extends StatelessWidget
         //       // ),
         //   ),
         //
+
+
+
+
+              home:OnBoardingScreen(),
+
+
 
 
 
