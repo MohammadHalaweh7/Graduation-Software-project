@@ -85,30 +85,6 @@ class MyApp extends StatelessWidget {
             //     return WebScreen();
             // },),
 
-            // home:Builder(
-            //     builder: (BuildContext context)
-            //         {
-            //
-            //
-            //           if(MediaQuery.of(context).size.width.toInt() <=500)
-            //             return MediaQuery(
-            //                 data: MediaQuery.of(context).copyWith(
-            //                   textScaleFactor: 0.5,
-            //                 ),
-            //                 child: MobileScreen()
-            //             );
-            //           else
-            //
-            //             return MediaQuery(
-            //                 data: MediaQuery.of(context).copyWith(
-            //                   textScaleFactor: 2,
-            //                 ),
-            //                 child: WebScreen()
-            //             );
-            //         }
-            //
-            // )
-
             //     home:ScreenTypeLayout(
             //       mobile: NewsLayout(),
             //       desktop:
@@ -123,6 +99,21 @@ class MyApp extends StatelessWidget {
             //
 
             home: OnBoardingScreen(),
+
+            //     home:ScreenTypeLayout(
+            //       mobile: NewsLayout(),
+            //       desktop:
+            //       Text("Website",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red,fontSize: 20),),
+            //       // breakpoints: ScreenBreakpoints(
+            //       //   desktop:800 ,
+            //       //   tablet: 800,
+            //       //   watch: 800,
+            //       //
+            //       // ),
+            //   ),
+            //
+
+            //  home:OnBoardingScreen(),
           );
         },
       ),

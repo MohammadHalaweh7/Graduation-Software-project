@@ -24,6 +24,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  //...........
   Future<void> Login() async {
     print(emailController.text);
     print(passwordController.text);
@@ -44,6 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+//............
   var formkey = GlobalKey<FormState>();
 
   bool isPassword = true;
@@ -306,6 +308,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     child: MaterialButton(
                       onPressed: () {
+                        //............
                         Login();
                         // if (formkey.currentState!.validate()) {
                         //   print(emailController.text);
