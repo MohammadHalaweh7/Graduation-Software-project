@@ -170,7 +170,7 @@ class MainScreen extends StatelessWidget {
                   color: Colors.blue,
                 ),
                 SizedBox(width: 7,),
-                Text("تسوق حسب الفئة",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+                Text("تسوق حسب الفئة",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
                 SizedBox(width: 170,),
                 TextButton(
                   onPressed:()
@@ -346,8 +346,8 @@ class MainScreen extends StatelessWidget {
                   color: Colors.blue,
                 ),
                 SizedBox(width: 7,),
-                Text("متاجراخترناها لك",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-                SizedBox(width: 170,),
+                Text("متاجراخترناها لك",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+                SizedBox(width: 180,),
                 TextButton(
                   onPressed:()
                   {
@@ -469,8 +469,8 @@ class MainScreen extends StatelessWidget {
                   color: Colors.blue,
                 ),
                 SizedBox(width: 7,),
-                Text("متاجر جديدة",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-                SizedBox(width: 205,),
+                Text("متاجر جديدة",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+                SizedBox(width: 210,),
                 TextButton(
                   onPressed:()
                   {
