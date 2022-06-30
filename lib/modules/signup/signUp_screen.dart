@@ -1,10 +1,49 @@
+import 'dart:convert';
+// import 'dart:js';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:udemy_flutter/API/fetchData.dart';
+import 'package:udemy_flutter/API/sharedPrefs.dart';
+import 'package:udemy_flutter/modules/home/main_screen.dart';
 import 'package:udemy_flutter/modules/login/login_screen.dart';
+import 'package:http/http.dart' as http;
+import 'package:udemy_flutter/shared/components/components.dart';
 
 class SignUpScreen extends StatelessWidget {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  var userNameController = TextEditingController();
+
+  Future<void> SignUp(BuildContext context) async {
+
+    print(userNameController.text);
+    print(emailController.text);
+    print(passwordController.text);
+
+    var body = jsonEncode({
+      'name': userNameController.text,
+      'email': emailController.text,
+      'password': passwordController.text
+    });
+
+    print(body);
+    var result = await http.post(Uri.parse(fetchData.baseURL + "/users"),
+        headers: {'Content-Type': 'application/json; charset=UTF-8'},
+        body: body);
+
+    print(result.statusCode);
+
+    if (result.statusCode == 503)
+    {
+      var body = jsonDecode(result.body);
+      sharedPrefs.saveToken(body['token']);
+      Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreen()));
+      // navigateTo(context,MainScreen());
+    }
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -153,7 +192,7 @@ class SignUpScreen extends StatelessWidget {
 
 
                 TextFormField(
-
+                  controller: userNameController,
 
                   onFieldSubmitted:(String value)
                   {
@@ -239,6 +278,7 @@ class SignUpScreen extends StatelessWidget {
                   child: MaterialButton(
 
                     onPressed:(){
+                      SignUp(context);
                       print(emailController.text);
                       print(passwordController.text);
                     },
@@ -261,6 +301,7 @@ class SignUpScreen extends StatelessWidget {
                       onPressed:()
                       {
                         Navigator.push(context,MaterialPageRoute(builder: (context) => LoginScreen()));
+
                       }
                       , child:
                     Text("عضو بالفعل؟ سجل الدخول!"),

@@ -1,10 +1,16 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:udemy_flutter/API/fetchData.dart';
+import 'package:udemy_flutter/API/sharedPrefs.dart';
 import 'package:udemy_flutter/modules/home/main_screen.dart';
 import 'package:udemy_flutter/modules/password/password_screen.dart';
 import 'package:udemy_flutter/modules/phone/phone_screen.dart';
 import 'package:udemy_flutter/shared/components/components.dart';
 import 'package:udemy_flutter/modules/signup/signUp_screen.dart';
+import 'package:http/http.dart' as http;
+
 //Mohammad
 //Reusable Components
 
@@ -15,12 +21,37 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   var emailController = TextEditingController();
-
   var passwordController = TextEditingController();
 
   var formkey = GlobalKey<FormState>();
 
   bool isPassword=true;
+
+  //Haytham---------------------------------------------------------------------
+  Future<void> Login() async {
+    print(emailController.text);
+    print(passwordController.text);
+
+    var body = jsonEncode(
+        {'email': emailController.text, 'password': passwordController.text}
+        );
+
+    print(body);
+
+    var result = await http.post(Uri.parse(fetchData.baseURL + "/users/login"),
+        headers: {'Content-Type': 'application/json; charset=UTF-8'},
+        body: body);
+
+    if (result.statusCode == 200)
+    {
+      var body = jsonDecode(result.body);
+      sharedPrefs.saveToken(body['token']);
+      Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreen()));
+    }
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -244,6 +275,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: MaterialButton(
 
                           onPressed:(){
+                            Login();
                             if(formkey.currentState!.validate())
                               {
                                 print(emailController.text);

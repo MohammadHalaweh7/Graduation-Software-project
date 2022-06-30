@@ -18,9 +18,7 @@ class SearchScreen extends StatefulWidget
 
 class _SearchScreenState extends State<SearchScreen> {
   var formkey = GlobalKey<FormState>();
-
   bool isPassword=true;
-
 
   final items =['شوز','شنطة',"مكياج"];
   String? value;
