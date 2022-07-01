@@ -301,19 +301,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.all(Radius.circular(20.0)),
                       color: Colors.blueAccent, // width: double.infinity,
                     ),
-                    // child: MaterialButton(
-                    //   onPressed: () { //TODO
-                    //     Login();
-                    //     if (formkey.currentState!.validate()) {
-                    //       print(emailController.text);
-                    //       print(passwordController.text);
-                    //     }
-                    //   },
-                    //   icon: isPassword
-                    //       ? Icon(Icons.visibility)
-                    //       : Icon(Icons.visibility_off),
-                    //   border: OutlineInputBorder(),
-                    // ),
+                    child: IconButton(
+                      onPressed: () {
+                        //TODO
+                        Login();
+                        if (formkey.currentState!.validate()) {
+                          print(emailController.text);
+                          print(passwordController.text);
+                        }
+                      },
+                      icon: isPassword
+                          ? Icon(Icons.visibility)
+                          : Icon(Icons.visibility_off),
+                      // border: OutlineInputBorder(),
+                    ),
                   ),
                   SizedBox(
                     height: 20,

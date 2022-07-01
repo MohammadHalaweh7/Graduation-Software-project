@@ -1,3 +1,3 @@
 class fetchData {
-  static const String baseURL = 'http://172.20.10.8:3000';
+  static const String baseURL = 'https://mystoreapii.herokuapp.com';
 }

@@ -1,13 +1,21 @@
-import 'package:flutter/material.dart';
-class UserModel {
-  final int id;
-  final String name;
-  final String phone;
+import 'package:json_annotation/json_annotation.dart';
 
-  UserModel(
-      {
-        required this.id,
-        required this.phone,
-        required this.name,
-      });
+part 'user_model.g.dart';
+
+@JsonSerializable()
+class UserModel {
+  // ignore: unused_field
+
+  @JsonKey(name: '_id')
+  late final String id;
+  late final String name;
+  late final String email;
+  UserModel();
+
+  /// factory.
+  factory UserModel.fromJson(Map<String, dynamic> json) =>
+      _$UserModelFromJson(json);
+
+  /// Connect the generated [_$PersonToJson] function to the `toJson` method.
+  Map<String, dynamic> toJson() => _$UserModelToJson(this);
 }

@@ -1,41 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hexcolor/hexcolor.dart';
-import 'package:responsive_builder/responsive_builder.dart';
-import 'package:udemy_flutter/modules/account/account_screen.dart';
-import 'package:udemy_flutter/modules/cart/cart_screen.dart';
-import 'package:udemy_flutter/modules/counter/counter_screen.dart';
-import 'package:udemy_flutter/modules/editPassword/editPassword.dart';
-import 'package:udemy_flutter/modules/home/home_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:udemy_flutter/modules/home/home_screen.dart';
 import 'package:udemy_flutter/modules/home/main_screen.dart';
-import 'package:udemy_flutter/modules/messenger/massenger_screen.dart';
-import 'package:udemy_flutter/modules/more/more_screen.dart';
-import 'package:udemy_flutter/modules/password/password_screen.dart';
-import 'package:udemy_flutter/modules/phone/phone_screen.dart';
-import 'package:udemy_flutter/modules/profile/profileShop_screen.dart';
-import 'package:udemy_flutter/modules/search/search_screen.dart';
-import 'package:udemy_flutter/layout/shop_layout/shop_layout.dart';
 import 'package:udemy_flutter/modules/shop_app/on_boarding/on_boarding_screen.dart';
-import 'package:udemy_flutter/modules/shops/shops_screen.dart';
-import 'package:udemy_flutter/modules/signup/signUp_screen.dart';
-import 'package:udemy_flutter/modules/udemy_responsive/mobile.dart';
-import 'package:udemy_flutter/modules/udemy_responsive/web.dart';
-import 'package:udemy_flutter/shared/bloc_observer.dart';
 import 'package:udemy_flutter/shared/cubit/cubit.dart';
 import 'package:udemy_flutter/shared/cubit/states.dart';
-import 'package:udemy_flutter/shared/network/local/cache_helper.dart';
 import 'package:udemy_flutter/shared/network/remote/dio_helper.dart';
 import 'package:udemy_flutter/shared/styles/themes.dart';
-import 'package:udemy_flutter/sqflite.dart';
-import 'package:udemy_flutter/modules/users/users_screen.dart';
-import 'package:udemy_flutter/modules/bmi/bmi_screen.dart';
-import 'layout/news_app/news_layout.dart';
-import 'modules/bmi_result/bmi_result_screen.dart';
-import 'modules/login/login_screen.dart';
 
 // @dart=2.9
 //Mohammad Halaweh99
@@ -63,12 +37,12 @@ class MyApp extends StatelessWidget {
         builder: (context, state) {
           return MaterialApp(
             //To Detect Language------------------------------------------------------
-            localizationsDelegates: [
+            localizationsDelegates: const [
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            supportedLocales: [
+            supportedLocales: const [
               // Locale('en', ''), // English, no country code
               Locale('ar', 'AE'), // Arabic, no country code
             ],
@@ -124,9 +98,19 @@ class MyApp extends StatelessWidget {
             //   ),
             //
 
-            home: OnBoardingScreen(),
-
-            home: OnBoardingScreen(),
+            home: FutureBuilder(
+              future: hasToken(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  if (snapshot.data == true) {
+                    return MainScreen();
+                  } else {
+                    return OnBoardingScreen();
+                  }
+                }
+                return Container();
+              },
+            ),
 
             //     home:ScreenTypeLayout(
             //       mobile: NewsLayout(),
@@ -146,5 +130,11 @@ class MyApp extends StatelessWidget {
         },
       ),
     );
+  }
+
+  hasToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+    return token != null;
   }
 }
