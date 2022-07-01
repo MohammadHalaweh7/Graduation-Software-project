@@ -3,9 +3,17 @@ import 'package:flutter/material.dart';
 // import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../login/login_screen.dart';
 
-class PasswordScreen extends StatelessWidget {
+class PasswordScreen extends StatefulWidget {
+  @override
+  State<PasswordScreen> createState() => _PasswordScreenState();
+}
+
+class _PasswordScreenState extends State<PasswordScreen> {
   var emailController = TextEditingController();
+
   var passwordController = TextEditingController();
+
+  var formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -45,81 +53,96 @@ class PasswordScreen extends StatelessWidget {
         padding:const EdgeInsets.all(20),
         child: Container(
           child: SingleChildScrollView(
-            child: Column(
-              // crossAxisAlignment: CrossAxisAlignment.center,
+            child: Form(
+              key:formkey,
+              child: Column(
+                // crossAxisAlignment: CrossAxisAlignment.center,
 
-              children: [
-                Image.asset('assets/images/logo3.png',width: 170,),
-                Text("متجراتي",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.blue),),
-                SizedBox(
-                  height: 80,
-                ),
-
-
-                TextFormField(
-                  controller: emailController,
-                  keyboardType: TextInputType.emailAddress,
-
-                  onFieldSubmitted:(String value)
-                  {
-                    print(value);
-                  },
-                  onChanged:(String value)
-                  {
-                    print(value);
-                  },
-                  decoration: InputDecoration(
-                    // hintText: "البريد الالكتروني",
-                    labelText: "البريد الالكتروني",
-                    prefixIcon: Icon(Icons.email),
-                    border:OutlineInputBorder(),
-
-                  ),
-                ),
-
-                SizedBox(
-                  height: 20,
-                ),
-
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                    color: Colors.blueAccent,                      // width: double.infinity,
+                children: [
+                  Image.asset('assets/images/logo3.png',width: 170,),
+                  Text("متجراتي",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.blue),),
+                  SizedBox(
+                    height: 80,
                   ),
 
-                  child: MaterialButton(
 
-                    onPressed:(){
-                      print(emailController.text);
-                      print(passwordController.text);
-                    },
-                    child:
-                    Text("ارسال",style: TextStyle(color: Colors.white),),
+                  TextFormField(
+                    controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
 
-
-
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextButton(
-                      onPressed:()
+                    onFieldSubmitted:(String value)
                     {
-                      Navigator.push(context,MaterialPageRoute(builder: (context) => LoginScreen()));
-                    }
-                    , child:
-                    Text("عضو بالفعل؟ سجل الدخول!"),
+                      print(value);
+                    },
+                    onChanged:(String value)
+                    {
+                      print(value);
+                    },
+                    validator: (value)
+                    {
+                      if(value!.isEmpty)
+                      {
+                        return"حط رقم السر يا بيبي";
+                      }
+                      return null;
+                    },
+
+                    decoration: InputDecoration(
+                      // hintText: "البريد الالكتروني",
+                      labelText: "البريد الالكdddتروني",
+                      prefixIcon: Icon(Icons.email),
+                      border:OutlineInputBorder(),
+
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 20,
+                  ),
+
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      color: Colors.blueAccent,                      // width: double.infinity,
                     ),
 
+                    child: MaterialButton(
 
-                  ],)
+                      onPressed:(){
+                        if(formkey.currentState!.validate())
+                        {
+                          print(emailController.text);
+                          print(passwordController.text);
+                        }
+
+                      },
+                      child:
+                      Text("ارسال",style: TextStyle(color: Colors.white),),
+
+
+
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                        onPressed:()
+                      {
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => LoginScreen()));
+                      }
+                      , child:
+                      Text("عضو بالفعل؟ سجل الدخول!"),
+                      ),
+
+
+                    ],)
 
 
 
@@ -132,7 +155,8 @@ class PasswordScreen extends StatelessWidget {
 
 
 
-              ],),
+                ],),
+            ),
           ),
         ),
       ),
@@ -142,19 +166,7 @@ class PasswordScreen extends StatelessWidget {
     );
   }
 
-
-
-
-
-
-
-
-
-
-
-
   void onNotification() {
     print("mama");
   }
-
 }

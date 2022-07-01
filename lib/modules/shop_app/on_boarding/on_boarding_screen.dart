@@ -30,19 +30,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   List<BoardingModel> boarding=[
     BoardingModel(
-       image:'assets/images/rawafed.jpg',
-      body: 'الشاشة الاولى',
-      title: 'فرعي واحد'
+       image:'assets/images/boardingimg1.png',
+      body: '',
+      title: 'العديد من المتاجر في مختلف المجالات'
     ),
     BoardingModel(
-        image:'assets/images/rawafed.jpg',
-        body: 'الشاشة الثانية',
-        title: 'فرعي 2'
+        image:'assets/images/boardingimg2.png',
+        body: '',
+        title: ' فئات متنوعة تناسب جميع احتياجاتك'
     ),
     BoardingModel(
-        image:'assets/images/rawafed.jpg',
-        body: 'الشاشة الثالثة',
-        title: 'فرعي 3'
+        image:'assets/images/boardingimg.png',
+        body: '',
+        title:'سهولة في الطلب وسرعة في التوصيل'
     ),
   ];
 
@@ -57,7 +57,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           TextButton(
               onPressed: ()
               {
-                navigateAndFinish(context,ShopLoginScreen());
+                navigateAndFinish(context,LoginScreen());
 
               },
 

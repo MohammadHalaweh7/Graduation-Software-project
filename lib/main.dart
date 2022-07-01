@@ -4,8 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:udemy_flutter/modules/account/account_screen.dart';
 import 'package:udemy_flutter/modules/cart/cart_screen.dart';
 import 'package:udemy_flutter/modules/counter/counter_screen.dart';
+import 'package:udemy_flutter/modules/editPassword/editPassword.dart';
 import 'package:udemy_flutter/modules/home/home_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
@@ -84,6 +86,30 @@ class MyApp extends StatelessWidget {
             //   else
             //     return WebScreen();
             // },),
+            //
+            // home:Builder(
+            //     builder: (BuildContext context)
+            //         {
+            //
+            //
+            //           if(MediaQuery.of(context).size.width.toInt() <=500)
+            //             return MediaQuery(
+            //                 data: MediaQuery.of(context).copyWith(
+            //                   textScaleFactor: 0.5,
+            //                 ),
+            //                 child: MobileScreen()
+            //             );
+            //           else
+            //
+            //             return MediaQuery(
+            //                 data: MediaQuery.of(context).copyWith(
+            //                   textScaleFactor: 2,
+            //                 ),
+            //                 child: WebScreen()
+            //             );
+            //         }
+            //
+            // )
 
             //     home:ScreenTypeLayout(
             //       mobile: NewsLayout(),
@@ -97,6 +123,8 @@ class MyApp extends StatelessWidget {
             //       // ),
             //   ),
             //
+
+            home: OnBoardingScreen(),
 
             home: OnBoardingScreen(),
 

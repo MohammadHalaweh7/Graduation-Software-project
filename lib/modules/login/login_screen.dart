@@ -25,6 +25,14 @@ class _LoginScreenState extends State<LoginScreen> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   //...........
+
+//............
+  var formkey = GlobalKey<FormState>();
+
+  bool isPassword = true;
+
+  //Haytham---------------------------------------------------------------------
+  // ignore: non_constant_identifier_names
   Future<void> Login() async {
     print(emailController.text);
     print(passwordController.text);
@@ -33,6 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
         {'email': emailController.text, 'password': passwordController.text});
 
     print(body);
+
     var result = await http.post(Uri.parse(fetchData.baseURL + "/users/login"),
         headers: {'Content-Type': 'application/json; charset=UTF-8'},
         body: body);
@@ -44,11 +53,6 @@ class _LoginScreenState extends State<LoginScreen> {
           context, MaterialPageRoute(builder: (context) => MainScreen()));
     }
   }
-
-//............
-  var formkey = GlobalKey<FormState>();
-
-  bool isPassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -272,15 +276,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     onFieldSubmitted: (String value) {
                       print(value);
                     },
-                    onChanged: (String value) {
-                      print(value);
-                    },
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "حط رقم السر يا بيبي";
-                      }
-                      return null;
-                    },
                     decoration: InputDecoration(
                       // hintText: "البريد الالكتروني",
                       labelText: "كلمة السر",
@@ -296,6 +291,29 @@ class _LoginScreenState extends State<LoginScreen> {
                               : Icon(Icons.visibility_off)),
                       border: OutlineInputBorder(),
                     ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      color: Colors.blueAccent, // width: double.infinity,
+                    ),
+                    // child: MaterialButton(
+                    //   onPressed: () { //TODO
+                    //     Login();
+                    //     if (formkey.currentState!.validate()) {
+                    //       print(emailController.text);
+                    //       print(passwordController.text);
+                    //     }
+                    //   },
+                    //   icon: isPassword
+                    //       ? Icon(Icons.visibility)
+                    //       : Icon(Icons.visibility_off),
+                    //   border: OutlineInputBorder(),
+                    // ),
                   ),
                   SizedBox(
                     height: 20,

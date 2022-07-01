@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:udemy_flutter/modules/account/account_screen.dart';
 import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
 import 'package:udemy_flutter/modules/language/language_screen.dart';
 import 'package:udemy_flutter/modules/login/login_screen.dart';
@@ -83,7 +84,7 @@ class MainScreen extends StatelessWidget {
                 title: Text("حسابي"),
                 leading: Icon(Icons.person,color:Color(0xff758DFF)),
                 onTap:(){
-                  Navigator.push(context,MaterialPageRoute(builder: (context) => LoginScreen()));
+                  Navigator.push(context,MaterialPageRoute(builder: (context) => AccountScreen()));
                 } ,
               ),
               ListTile(
@@ -163,13 +164,13 @@ class MainScreen extends StatelessWidget {
               margin: EdgeInsets.only(top: 20),
               child: Row(children: [
                 Container(
-                  margin: EdgeInsets.only(right: 5),
+                  margin: EdgeInsets.only(right: 10),
                   width: 5,
                   height: 40,
                   color: Colors.blue,
                 ),
                 SizedBox(width: 7,),
-                Text("تسوق حسب الفئة",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+                Text("تسوق حسب الفئة",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
                 SizedBox(width: 170,),
                 TextButton(
                   onPressed:()
@@ -345,8 +346,8 @@ class MainScreen extends StatelessWidget {
                   color: Colors.blue,
                 ),
                 SizedBox(width: 7,),
-                Text("متاجراخترناها لك",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-                SizedBox(width: 170,),
+                Text("متاجراخترناها لك",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+                SizedBox(width: 180,),
                 TextButton(
                   onPressed:()
                   {
@@ -468,8 +469,8 @@ class MainScreen extends StatelessWidget {
                   color: Colors.blue,
                 ),
                 SizedBox(width: 7,),
-                Text("متاجر جديدة",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-                SizedBox(width: 205,),
+                Text("متاجر جديدة",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+                SizedBox(width: 210,),
                 TextButton(
                   onPressed:()
                   {

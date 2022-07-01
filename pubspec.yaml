@@ -101,7 +101,9 @@ flutter:
      - assets/images/enara.png
      - assets/images/drift.jpg
      - assets/images/rawafed.jpg
-#     - assets/images
+     - assets/images/boardingimg1.png
+     - assets/images/boardingimg2.png
+     - assets/images/
 #     - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
