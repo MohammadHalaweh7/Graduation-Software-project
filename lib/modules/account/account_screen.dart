@@ -18,6 +18,7 @@ class AccountScreen extends StatefulWidget {
 class _AccountScreenState extends State<AccountScreen> {
   var formkey = GlobalKey<FormState>();
   String? value;
+  var nameController = TextEditingController();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var formkey2 = GlobalKey<FormState>();
@@ -38,6 +39,35 @@ class _AccountScreenState extends State<AccountScreen> {
     print(result);
 
     UserModel userModel = UserModel.fromJson(jsonDecode(result.body));
+
+    nameController.text = userModel.name;
+    emailController.text = userModel.email;
+
+    return userModel;
+  }
+
+  Future<UserModel> editData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+
+    print(token);
+
+    var body = jsonEncode(
+        {'email': emailController.text, 'name': nameController.text});
+
+    var result = await http.patch(Uri.parse(fetchData.baseURL + "/users/me"),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ' + token.toString()
+        },
+        body: body);
+
+    print(result);
+
+    UserModel userModel = UserModel.fromJson(jsonDecode(result.body));
+
+    nameController.text = userModel.name;
+    emailController.text = userModel.email;
 
     return userModel;
   }
@@ -177,6 +207,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                 ),
                                 //الاسم
                                 TextFormField(
+                                  controller: nameController,
                                   onFieldSubmitted: (String value) {
                                     print(value);
                                   },
@@ -243,6 +274,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                   ),
                                   child: MaterialButton(
                                     onPressed: () {
+                                      editData();
                                       if (formkey2.currentState!.validate()) {
                                         print(emailController.text);
                                         print(passwordController.text);

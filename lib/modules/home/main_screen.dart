@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:udemy_flutter/API/fetchData.dart';
+import 'package:udemy_flutter/models/store_model.dart';
 import 'package:udemy_flutter/modules/account/account_screen.dart';
 import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
 import 'package:udemy_flutter/modules/language/language_screen.dart';
@@ -9,6 +13,7 @@ import 'package:udemy_flutter/modules/password/password_screen.dart';
 import 'package:udemy_flutter/modules/phone/phone_screen.dart';
 import 'package:udemy_flutter/modules/shops/shops_screen.dart';
 import 'package:udemy_flutter/modules/signup/signUp_screen.dart';
+import 'package:http/http.dart' as http;
 
 //Haytham Saleh
 class MainScreen extends StatefulWidget {
@@ -17,6 +22,74 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  fetchData fetch = fetchData();
+
+  Widget fetchAllStores() {
+    return FutureBuilder(
+        future: fetch.allstores(),
+        builder: (contxt, snapchot) {
+          var employees = snapchot.data as List<StoreModel>;
+          return snapchot.data == null
+              ? CircularProgressIndicator(
+                  value: 0.8,
+                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+                )
+              : ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: employees == null ? 0 : employees.length,
+                  itemBuilder: (context, index) {
+                    return mystore(
+                      employees[index].name,
+                      employees[index].description,
+                      employees[index].id,
+                    );
+                  });
+        });
+  }
+
+  retfunc() {}
+
+  Widget mystore(name, description, id) {
+    return Container(
+      width: 300,
+      child: Column(
+        children: [
+          Image.network(
+            'https://mystoreapii.herokuapp.com/store/' + id + '/avatar',
+            width: 200,
+            height: 200,
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text(
+            name,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 29.0),
+            child: Text(
+              description,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontSize: 13),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    fetch.allstores();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -510,6 +583,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ),
             //متاجراخترناها لك------------------------------------------------------
+
             Container(
               margin: EdgeInsets.only(top: 0),
               child: Row(
@@ -543,6 +617,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ),
             //متاجر------------------------------------------------------
+            fetchAllStores(),
             Container(
               margin: EdgeInsets.only(top: 20),
               height: 310,
@@ -550,37 +625,6 @@ class _MainScreenState extends State<MainScreen> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    Container(
-                      width: 300,
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            'assets/images/daffodil.png',
-                            width: 200,
-                            height: 200,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "Daffodil | دافوديل",
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 29.0),
-                            child: Text(
-                              "متجر الكتروني مختص ببيع ارقى واجمل ملابس الصبايا,تفضلي بزيارة متجرنا لكي تكوني الاجمل",
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(fontSize: 13),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
                     SizedBox(
                       width: 15,
                     ),
