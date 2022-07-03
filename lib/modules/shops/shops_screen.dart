@@ -11,16 +11,40 @@ import 'package:udemy_flutter/modules/profile/profileShop_screen.dart';
 import 'package:udemy_flutter/layout/shop_layout/shop_layout.dart';
 import 'package:udemy_flutter/modules/signup/signUp_screen.dart';
 
+var type;
+var title;
+
 class ShopsScreen extends StatefulWidget {
+  setType(S) {
+    type = S;
+    //  print(type);
+  }
+
+  setTitle(S) {
+    title = S;
+    //  print(type);
+  }
+
+  String getType() {
+    // print(type);
+    return type;
+  }
+
+  String getTitle() {
+    // print(type);
+    return title;
+  }
+
   @override
   State<ShopsScreen> createState() => _ShopsScreenState();
 }
 
 class _ShopsScreenState extends State<ShopsScreen> {
   fetchData fetch = fetchData();
+
   Widget fetchTypeStores() {
     return FutureBuilder(
-        future: fetch.alltypestores(),
+        future: fetch.alltypestores(ShopsScreen().getType()),
         builder: (contxt, snapchot) {
           var stores = snapchot.data as List<StoreModel>;
           return snapchot.data == null
@@ -43,41 +67,65 @@ class _ShopsScreenState extends State<ShopsScreen> {
   }
 
   Widget mystore(name, description, id) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ShopLayout()));
-      },
-      child: Container(
-        margin: EdgeInsets.all(20),
-        width: double.infinity,
-        child: Column(
-          children: [
-            Container(
-                width: 200,
-                child: Image.network(
-                  'https://mystoreapii.herokuapp.com/store/' + id + '/avatar',
-                  width: 500,
-                )),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              name,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 29.0),
-              child: Text(
-                description,
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => ShopLayout()));
+        },
+        child: Container(
+          margin: EdgeInsets.all(10),
+          width: double.infinity,
+          child: Column(
+            children: [
+              Container(
+                  width: 385,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                        image: NetworkImage(
+                          'https://mystoreapii.herokuapp.com/store/' +
+                              id +
+                              '/avatar',
+                        ),
+                        fit: BoxFit.cover),
+                  )),
+              SizedBox(
+                height: 15,
+              ),
+              Text(
+                name,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: 13),
+                style: TextStyle(
+                    fontSize: 25,
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.bold),
               ),
-            )
-          ],
+              SizedBox(
+                height: 8,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 29.0),
+                child: Text(
+                  description,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(fontSize: 13),
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Container(
+                width: double.infinity,
+                height: 1,
+                color: Colors.grey,
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -96,7 +144,7 @@ class _ShopsScreenState extends State<ShopsScreen> {
               size: 35,
             )),
         title: Text(
-          "للأطفال",
+          ShopsScreen().getTitle(),
           style: TextStyle(
             color: Colors.blue,
             fontSize: 22,
@@ -263,227 +311,7 @@ class _ShopsScreenState extends State<ShopsScreen> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Container(
-          width: double.infinity,
-          child: Column(
-            children: [
-              //متاجر------------------------------------------------------
-              fetchTypeStores(),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ShopLayout()));
-                },
-                child: Container(
-                  margin: EdgeInsets.all(20),
-                  width: double.infinity,
-                  child: Column(
-                    children: [
-                      Container(
-                          width: 200,
-                          child: Image.asset(
-                            'assets/images/daffodil.png',
-                            width: 500,
-                          )),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Daffodil | دافوديل",
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 29.0),
-                        child: Text(
-                          "متجر الكتروني مختص ببيع ارقى واجمل ملابس الصبايا,تفضلي بزيارة متجرنا لكي تكوني الاجمل",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(fontSize: 13),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                width: double.infinity,
-                height: 1,
-                color: Colors.grey,
-              ),
-              SizedBox(
-                height: 15,
-              ),
-
-              Container(
-                margin: EdgeInsets.all(20),
-                width: double.infinity,
-                child: Column(
-                  children: [
-                    Image.asset(
-                      'assets/images/enara.png',
-                      width: double.infinity,
-                    ),
-                    SizedBox(
-                      height: 0,
-                    ),
-                    Text(
-                      "تنويرات الشروق",
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 29.0),
-                      child: Text(
-                        "متجر الكتروني مختص ببيع جميع لوازم النارة في المنزل , لكي تجعل منزلك اكثر رقي تفضل بزيارة متجرنا",
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 13),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                width: double.infinity,
-                height: 1,
-                color: Colors.grey,
-              ),
-              SizedBox(
-                height: 15,
-              ),
-
-              Container(
-                margin: EdgeInsets.all(20),
-                width: double.infinity,
-                child: Column(
-                  children: [
-                    Image.asset(
-                      'assets/images/drift.jpg',
-                      width: 230,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "Drift For Men",
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 29.0),
-                      child: Text(
-                        "متجر الكتروني مختص ببيع ارقى واجمل الأحذية الرجالية الاصلية ,تفضل بزيارة متجرنا واحصل على اجمل الاحذية",
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 13),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                width: double.infinity,
-                height: 1,
-                color: Colors.grey,
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                margin: EdgeInsets.all(20),
-                width: double.infinity,
-                child: Column(
-                  children: [
-                    Image.asset(
-                      'assets/images/rawafed.jpg',
-                      width: 250,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "الروافد للادوات المنزلية",
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 29.0),
-                      child: Text(
-                        "متجر الكتروني مختص ببيع جميع الادوات المنزلية,تفضل بزيارة متجرنا لكي تجعل بيتك اجمل",
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 13),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                width: double.infinity,
-                height: 1,
-                color: Colors.grey,
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                margin: EdgeInsets.all(20),
-                width: double.infinity,
-                child: Column(
-                  children: [
-                    Image.asset(
-                      'assets/images/baby.jpg',
-                      width: 270,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "Baby",
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 29.0),
-                      child: Text(
-                        "متجر الكتروني مختص ببيع ارقى واجمل ملابس الاطفال,تفضلي بزيارة متجرنا لكي تكوني الاجمل",
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 13),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      body: Center(child: fetchTypeStores()),
     );
   }
 

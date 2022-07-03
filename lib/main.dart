@@ -52,51 +52,6 @@ class MyApp extends StatelessWidget {
             darkTheme: darkTheme,
             themeMode:
                 AppCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
-            // home:LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-            //   print(constraints.maxWidth.toInt());
-            //
-            //   if(constraints.maxWidth.toInt() <= 530)
-            //     return MobileScreen();
-            //   else
-            //     return WebScreen();
-            // },),
-            //
-            // home:Builder(
-            //     builder: (BuildContext context)
-            //         {
-            //
-            //
-            //           if(MediaQuery.of(context).size.width.toInt() <=500)
-            //             return MediaQuery(
-            //                 data: MediaQuery.of(context).copyWith(
-            //                   textScaleFactor: 0.5,
-            //                 ),
-            //                 child: MobileScreen()
-            //             );
-            //           else
-            //
-            //             return MediaQuery(
-            //                 data: MediaQuery.of(context).copyWith(
-            //                   textScaleFactor: 2,
-            //                 ),
-            //                 child: WebScreen()
-            //             );
-            //         }
-            //
-            // )
-
-            //     home:ScreenTypeLayout(
-            //       mobile: NewsLayout(),
-            //       desktop:
-            //       Text("Website",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red,fontSize: 20),),
-            //       // breakpoints: ScreenBreakpoints(
-            //       //   desktop:800 ,
-            //       //   tablet: 800,
-            //       //   watch: 800,
-            //       //
-            //       // ),
-            //   ),
-            //
 
             home: FutureBuilder(
               future: hasToken(),
@@ -111,21 +66,6 @@ class MyApp extends StatelessWidget {
                 return Container();
               },
             ),
-
-            //     home:ScreenTypeLayout(
-            //       mobile: NewsLayout(),
-            //       desktop:
-            //       Text("Website",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red,fontSize: 20),),
-            //       // breakpoints: ScreenBreakpoints(
-            //       //   desktop:800 ,
-            //       //   tablet: 800,
-            //       //   watch: 800,
-            //       //
-            //       // ),
-            //   ),
-            //
-
-            //  home:OnBoardingScreen(),
           );
         },
       ),
