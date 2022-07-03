@@ -16,4 +16,15 @@ class fetchData {
 
     return body.map((store) => StoreModel.fromJson(store)).toList();
   }
+
+  Future<List<StoreModel>> alltypestores() async {
+    var res = await http.get(Uri.parse(fetchData.baseURL + '/store/typeall'));
+
+    print(res.body);
+    var body = jsonDecode(res.body) as List<dynamic>;
+
+    // print(body.toString());
+
+    return body.map((store) => StoreModel.fromJson(store)).toList();
+  }
 }

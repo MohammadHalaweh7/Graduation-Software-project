@@ -28,7 +28,7 @@ class _MainScreenState extends State<MainScreen> {
     return FutureBuilder(
         future: fetch.allstores(),
         builder: (contxt, snapchot) {
-          var employees = snapchot.data as List<StoreModel>;
+          var stores = snapchot.data as List<StoreModel>;
           return snapchot.data == null
               ? CircularProgressIndicator(
                   value: 0.8,
@@ -37,18 +37,16 @@ class _MainScreenState extends State<MainScreen> {
               : ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  itemCount: employees == null ? 0 : employees.length,
+                  itemCount: stores == null ? 0 : stores.length,
                   itemBuilder: (context, index) {
                     return mystore(
-                      employees[index].name,
-                      employees[index].description,
-                      employees[index].id,
+                      stores[index].name,
+                      stores[index].description,
+                      stores[index].id,
                     );
                   });
         });
   }
-
-  retfunc() {}
 
   Widget mystore(name, description, id) {
     return Container(
