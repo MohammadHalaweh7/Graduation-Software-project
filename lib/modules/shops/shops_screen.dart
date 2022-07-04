@@ -61,16 +61,20 @@ class _ShopsScreenState extends State<ShopsScreen> {
                       stores[index].name,
                       stores[index].description,
                       stores[index].id,
+                      stores[index].phoneNumber,
+                      stores[index].locationOnMap,
                     );
                   });
         });
   }
 
-  Widget mystore(name, description, id) {
+  Widget mystore(name, description, id, phoneNumber, locationOnMap) {
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: GestureDetector(
         onTap: () {
+          ShopLayout()
+              .setData(id, name, description, phoneNumber, locationOnMap);
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => ShopLayout()));
         },
