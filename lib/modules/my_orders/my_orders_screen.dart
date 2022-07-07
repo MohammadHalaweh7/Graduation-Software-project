@@ -1,0 +1,236 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
+import 'package:udemy_flutter/modules/language/language_screen.dart';
+import 'package:udemy_flutter/modules/login/login_screen.dart';
+import 'package:udemy_flutter/modules/order/order_screen.dart';
+import 'package:udemy_flutter/modules/password/password_screen.dart';
+import 'package:udemy_flutter/modules/phone/phone_screen.dart';
+import 'package:udemy_flutter/shared/components/components.dart';
+import 'package:udemy_flutter/modules/signup/signUp_screen.dart';
+import "package:url_launcher/url_launcher.dart";
+import '../../src/my_app.dart';
+
+class MyOrdersScreen extends StatefulWidget {
+  @override
+  State<MyOrdersScreen> createState() => _MyOrdersScreenState();
+}
+
+class _MyOrdersScreenState extends State<MyOrdersScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        leading: IconButton(
+            onPressed: onNotification,
+            icon: Icon(
+              Icons.menu,
+              color: Colors.blue,
+              size: 35,
+            )),
+        title: Text(
+          "منتجات طلبتها",
+          style: TextStyle(
+            color: Colors.blue,
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              onNotification;
+            },
+            icon: Icon(
+              Icons.add_alert_outlined,
+              color: Colors.grey,
+              size: 30,
+            ),
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          //انزل 10 سانتي
+          SizedBox(
+            height: 5,
+          ),
+          //هاد الكونتينر بحتوى على جميع الشغلات
+          Container(
+            //هون ديزاين الكونتينر
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5.0),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  offset: Offset(0, 1.0), //(x,y)
+                  blurRadius: 5.0,
+                ),
+              ],
+            ),
+            child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  children: [
+                    //رقم الطلب---------------------------------------------------------------------------------------------------------
+                    Row(
+                      children: [
+                        CircleAvatar(
+                            radius: 12,
+                            backgroundColor: Colors.blue,
+                            child: Icon(
+                              Icons.check,
+                              color: Colors.white,
+                            )),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Text(
+                          'رقم الطلب : ',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          '125648566',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    //الخط الفاصل---------------------------------------------------------------------------------------------------------
+                    Container(
+                      width: 300,
+                      height: 1,
+                      color: Colors.grey,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    //صورة المتجر---------------------------------------------------------------------------------------------------------
+                    Row(
+                      children: [
+                        Text(
+                          'صورة المنتج : ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[500]),
+                        ),
+                        Spacer(),
+                        Container(
+                          width: 90,
+                          height: 70,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              image: DecorationImage(
+                                  image: NetworkImage(
+                                      'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80'),
+                                  fit: BoxFit.cover)),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    //اسم المتجر---------------------------------------------------------------------------------------------------------
+                    Row(
+                      children: [
+                        Text(
+                          'اسم المتجر : ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[500]),
+                        ),
+                        Spacer(),
+                        Text(
+                          'تنويرات الشروق',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.blue),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    // اسم المنتج---------------------------------------------------------------------------------------------------------
+                    Row(
+                      children: [
+                        Text(
+                          'اسم المنتج : ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[500]),
+                        ),
+                        Spacer(),
+                        Text(
+                          'ترية مطبخ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.blue),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    //المبلغ الاجمالي---------------------------------------------------------------------------------------------------------
+                    Row(
+                      children: [
+                        Text(
+                          'المبلغ الاجمالي : ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[500]),
+                        ),
+                        Spacer(),
+                        Text(
+                          '300 NIS',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.blue),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    // حالة الطلب---------------------------------------------------------------------------------------------------------
+                    Row(
+                      children: [
+                        Text(
+                          'حالة الطلب : ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[500]),
+                        ),
+                        Spacer(),
+                        Text(
+                          'قيد التحضير',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.blue),
+                        )
+                      ],
+                    ),
+                  ],
+                )),
+          ),
+          //انزل 10 سانتي
+          SizedBox(
+            height: 10,
+          ),
+        ],
+      ),
+    );
+  }
+
+  void onNotification() {
+    var ScaffoldKey;
+    ScaffoldKey.currentState?.openDrawer();
+  }
+}
+
+
+
+//--------------------------------------------------------------------------
+

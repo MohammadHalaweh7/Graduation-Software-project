@@ -9,6 +9,8 @@ import 'package:udemy_flutter/modules/account/account_screen.dart';
 import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
 import 'package:udemy_flutter/modules/language/language_screen.dart';
 import 'package:udemy_flutter/modules/login/login_screen.dart';
+import 'package:udemy_flutter/modules/my_orders/my_orders_screen.dart';
+import 'package:udemy_flutter/modules/order/order_screen.dart';
 import 'package:udemy_flutter/modules/password/password_screen.dart';
 import 'package:udemy_flutter/modules/phone/phone_screen.dart';
 import 'package:udemy_flutter/modules/shops/shops_screen.dart';
@@ -228,7 +230,12 @@ class _MainScreenState extends State<MainScreen> {
                 ListTile(
                   title: Text("منتجات طلبتها"),
                   leading: Icon(Icons.add_chart, color: Color(0xff758DFF)),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MyOrdersScreen()));
+                  },
                 ),
                 ListTile(
                   title: Text("منتجات شاهدتها"),

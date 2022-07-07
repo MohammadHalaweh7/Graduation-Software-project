@@ -56,6 +56,8 @@ dependencies:
   json_serializable: ^6.2.0
   build_runner: ^2.1.11
   carousel_slider: ^4.1.1
+  rflutter_alert: ^1.0.3
+
 
 
 

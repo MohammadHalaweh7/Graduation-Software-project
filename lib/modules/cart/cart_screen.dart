@@ -10,6 +10,7 @@ import 'package:udemy_flutter/models/user/user_model.dart';
 import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
 import 'package:udemy_flutter/modules/language/language_screen.dart';
 import 'package:udemy_flutter/modules/login/login_screen.dart';
+import 'package:udemy_flutter/modules/order/order_screen.dart';
 //import 'package:udemy_flutter/modules/order/order_screen.dart';
 import 'package:udemy_flutter/modules/password/password_screen.dart';
 import 'package:udemy_flutter/modules/phone/phone_screen.dart';
@@ -301,7 +302,10 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                     child: MaterialButton(
                       onPressed: () {
-                        // Navigator.push(context,MaterialPageRoute(builder: (context) => OrderScreen()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => OrderScreen()));
                       },
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
