@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:udemy_flutter/modules/cart/cart_screen.dart';
 import 'package:udemy_flutter/modules/messenger/massenger_screen.dart';
 import 'package:udemy_flutter/modules/more/more_screen.dart';
+import 'package:udemy_flutter/modules/products/products_screen.dart';
 import 'package:udemy_flutter/modules/profile/profileShop_screen.dart';
 import 'package:udemy_flutter/modules/search/search_screen.dart';
 import 'package:udemy_flutter/modules/shops/shops_screen.dart';
@@ -31,7 +32,7 @@ class _ShopLayoutState extends State<ShopLayout> {
   int currentIndex = 1;
 
   List<Widget> screens = [
-    MassengerScreen(),
+    ProductsScreen(id),
     ProfileShoScreen(id, name, description, phoneNumber, locationOnMap),
     // ProfileShoScreen()
     //     .setData(id, name, description, phoneNumber, locationOnMap),

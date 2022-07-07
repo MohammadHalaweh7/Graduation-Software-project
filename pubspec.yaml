@@ -55,6 +55,8 @@ dependencies:
 #  webview_flutter: ^2.0.3
   json_serializable: ^6.2.0
   build_runner: ^2.1.11
+  carousel_slider: ^4.1.1
+
 
 
 
