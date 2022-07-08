@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:udemy_flutter/models/order_model.dart';
 import 'package:udemy_flutter/models/product_model.dart';
 import 'package:udemy_flutter/models/store_model.dart';
 
@@ -63,5 +64,23 @@ class fetchData {
     // print(body.toString());
 
     return body.map((product) => ProductModel.fromJson(product)).toList();
+  }
+
+  Future<List<OrderModel>> getorders() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+
+    var res = await http
+        .get(Uri.parse(fetchData.baseURL + '/orders/getAll'), headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer ' + token.toString()
+    });
+
+    // print(res.body);
+    var body = jsonDecode(res.body) as List<dynamic>;
+
+    // print(body.toString());
+
+    return body.map((order) => OrderModel.fromJson(order)).toList();
   }
 }

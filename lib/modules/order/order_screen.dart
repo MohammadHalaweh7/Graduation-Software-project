@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/layout/shop_layout/shop_layout.dart';
+import 'package:udemy_flutter/models/order_model.dart';
 import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
 import 'package:udemy_flutter/modules/language/language_screen.dart';
 import 'package:udemy_flutter/modules/login/login_screen.dart';
@@ -13,15 +18,26 @@ import 'package:udemy_flutter/shared/components/components.dart';
 import 'package:udemy_flutter/modules/signup/signUp_screen.dart';
 import "package:url_launcher/url_launcher.dart";
 import '../../src/my_app.dart';
+import 'package:http/http.dart' as http;
+
+var products;
 
 class OrderScreen extends StatefulWidget {
+  OrderScreen(prod) {
+    products = prod;
+  }
+
   @override
   State<OrderScreen> createState() => _OrderScreenState();
 }
 
 class _OrderScreenState extends State<OrderScreen> {
   var formkey = GlobalKey<FormState>();
+  var nameController = TextEditingController();
   var emailController = TextEditingController();
+  var phoneController = TextEditingController();
+  var cityController = TextEditingController();
+  var addressController = TextEditingController();
   final items = [
     'القدس',
     'راماالله',
@@ -34,6 +50,34 @@ class _OrderScreenState extends State<OrderScreen> {
     "الداخل"
   ];
   String? value;
+
+  Future<OrderModel> createOrder(id) async {
+    var ID = id;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+
+    print(token);
+    var body = jsonEncode({
+      'buyerName': nameController.text,
+      'buyerEmail': emailController.text,
+      'buyerPhone': phoneController.text,
+      'buyerCity': 'nablus',
+      'buyerAddress': addressController.text,
+    });
+
+    var result =
+        await http.post(Uri.parse(fetchData.baseURL + "/createOrder/" + ID),
+            headers: {
+              'Content-Type': 'application/json; charset=UTF-8',
+              'Authorization': 'Bearer ' + token.toString()
+            },
+            body: body);
+
+    OrderModel orderModel = OrderModel.fromJson(jsonDecode(result.body));
+    print(orderModel);
+
+    return orderModel;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,6 +127,7 @@ class _OrderScreenState extends State<OrderScreen> {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                     TextFormField(
+                      controller: nameController,
                       onFieldSubmitted: (String value) {
                         print(value);
                       },
@@ -135,6 +180,7 @@ class _OrderScreenState extends State<OrderScreen> {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                     TextFormField(
+                      controller: phoneController,
                       keyboardType: TextInputType.phone,
                       onFieldSubmitted: (String value) {
                         print(value);
@@ -207,6 +253,7 @@ class _OrderScreenState extends State<OrderScreen> {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                     TextFormField(
+                      controller: addressController,
                       keyboardType: TextInputType.multiline,
                       maxLines: 5,
                       maxLength: 1000,
@@ -230,6 +277,9 @@ class _OrderScreenState extends State<OrderScreen> {
                       ),
                       child: MaterialButton(
                         onPressed: () {
+                          for (int i = 0; i < products.length; i++) {
+                            createOrder(products[i].id);
+                          }
                           if (formkey.currentState!.validate()) {
                             showDialog(
                               context: context,

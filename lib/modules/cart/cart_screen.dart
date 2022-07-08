@@ -20,8 +20,6 @@ import "package:url_launcher/url_launcher.dart";
 import '../../src/my_app.dart';
 import 'package:http/http.dart' as http;
 
-var total = 0;
-
 class CartScreen extends StatefulWidget {
   @override
   State<CartScreen> createState() => _CartScreenState();
@@ -29,7 +27,10 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   var counter;
+  var i = 0;
   int total = 0;
+  var prod;
+  int tot = 0;
   int toNumbrs = 0;
   fetchData fetch = fetchData();
 
@@ -57,6 +58,8 @@ class _CartScreenState extends State<CartScreen> {
         future: fetch.getProductsOnCart(),
         builder: (contxt, snapchot) {
           var products = snapchot.data as List<ProductModel>;
+          prod = products;
+          // print(products);
           return snapchot.data == null
               ? CircularProgressIndicator(
                   value: 0.8,
@@ -73,8 +76,13 @@ class _CartScreenState extends State<CartScreen> {
                         .replaceAll(new RegExp(r'[^0-9]'), ''));
                     //   print(toNumbrs);
                     //print(int.parse(toNumbrs));
-                    total = total + toNumbrs;
-
+                    i++;
+                    tot = tot + toNumbrs;
+                    total = tot;
+                    if (i == products.length) {
+                      tot = 0;
+                      i = 0;
+                    }
                     return myCartProducts(
                       products[index].name,
                       products[index].description,
@@ -268,7 +276,7 @@ class _CartScreenState extends State<CartScreen> {
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        total.toString(),
+                        total.toString() + ' NIS',
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 15,
@@ -305,7 +313,7 @@ class _CartScreenState extends State<CartScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => OrderScreen()));
+                                builder: (context) => OrderScreen(prod)));
                       },
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
