@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/layout/shop_layout/shop_layout.dart';
 import 'package:udemy_flutter/models/order_model.dart';
+import 'package:udemy_flutter/modules/home/main_screen.dart';
 import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
 import 'package:udemy_flutter/modules/language/language_screen.dart';
 import 'package:udemy_flutter/modules/login/login_screen.dart';
@@ -333,8 +334,8 @@ class _OrderScreenState extends State<OrderScreen> {
         new FlatButton(
           onPressed: () {
             Navigator.of(context).pop();
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => MyOrdersScreen()));
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MainScreen()));
           },
           textColor: Colors.blue,
           child: const Text('موافق'),

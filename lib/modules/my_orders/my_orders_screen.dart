@@ -66,139 +66,156 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              //رقم الطلب---------------------------------------------------------------------------------------------------------
-              Row(
-                children: [
-                  CircleAvatar(
-                      radius: 12,
-                      backgroundColor: Colors.blue,
-                      child: Icon(
-                        Icons.check,
-                        color: Colors.white,
-                      )),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    'رقم الطلب : ',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    orderNumber,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  )
-                ],
-              ),
               SizedBox(
                 height: 10,
               ),
-              //الخط الفاصل---------------------------------------------------------------------------------------------------------
               Container(
-                width: 300,
-                height: 1,
-                color: Colors.grey,
+                child: Column(
+                  children: [
+                    //رقم الطلب---------------------------------------------------------------------------------------------------------
+                    Row(
+                      children: [
+                        CircleAvatar(
+                            radius: 12,
+                            backgroundColor: Colors.blue,
+                            child: Icon(
+                              Icons.check,
+                              color: Colors.white,
+                            )),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Text(
+                          'رقم الطلب : ',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          orderNumber,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    //الخط الفاصل---------------------------------------------------------------------------------------------------------
+                    Container(
+                      width: 300,
+                      height: 1,
+                      color: Colors.grey,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    //صورة المتجر---------------------------------------------------------------------------------------------------------
+                    Row(
+                      children: [
+                        Text(
+                          'صورة المنتج : ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[500]),
+                        ),
+                        Spacer(),
+                        Container(
+                          width: 90,
+                          height: 70,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              image: DecorationImage(
+                                  image: NetworkImage(
+                                      'https://mystoreapii.herokuapp.com/order/' +
+                                          id +
+                                          '/avatar'),
+                                  fit: BoxFit.cover)),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    //اسم المتجر---------------------------------------------------------------------------------------------------------
+                    Row(
+                      children: [
+                        Text(
+                          'اسم المتجر : ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[500]),
+                        ),
+                        Spacer(),
+                        Text(
+                          storeName,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.blue),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    // اسم المنتج---------------------------------------------------------------------------------------------------------
+                    Row(
+                      children: [
+                        Text(
+                          'اسم المنتج : ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[500]),
+                        ),
+                        Spacer(),
+                        Text(
+                          productName,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.blue),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    //المبلغ الاجمالي---------------------------------------------------------------------------------------------------------
+                    Row(
+                      children: [
+                        Text(
+                          'المبلغ الاجمالي : ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[500]),
+                        ),
+                        Spacer(),
+                        Text(
+                          price,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.blue),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    // حالة الطلب---------------------------------------------------------------------------------------------------------
+                    Row(
+                      children: [
+                        Text(
+                          'حالة الطلب : ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[500]),
+                        ),
+                        Spacer(),
+                        Text(
+                          orderStatus,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.blue),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
-                height: 10,
-              ),
-              //صورة المتجر---------------------------------------------------------------------------------------------------------
-              Row(
-                children: [
-                  Text(
-                    'صورة المنتج : ',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.grey[500]),
-                  ),
-                  Spacer(),
-                  Container(
-                    width: 90,
-                    height: 70,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                'https://mystoreapii.herokuapp.com/order/' +
-                                    id +
-                                    '/avatar'),
-                            fit: BoxFit.cover)),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              //اسم المتجر---------------------------------------------------------------------------------------------------------
-              Row(
-                children: [
-                  Text(
-                    'اسم المتجر : ',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.grey[500]),
-                  ),
-                  Spacer(),
-                  Text(
-                    storeName,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.blue),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              // اسم المنتج---------------------------------------------------------------------------------------------------------
-              Row(
-                children: [
-                  Text(
-                    'اسم المنتج : ',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.grey[500]),
-                  ),
-                  Spacer(),
-                  Text(
-                    productName,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.blue),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              //المبلغ الاجمالي---------------------------------------------------------------------------------------------------------
-              Row(
-                children: [
-                  Text(
-                    'المبلغ الاجمالي : ',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.grey[500]),
-                  ),
-                  Spacer(),
-                  Text(
-                    price,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.blue),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              // حالة الطلب---------------------------------------------------------------------------------------------------------
-              Row(
-                children: [
-                  Text(
-                    'حالة الطلب : ',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.grey[500]),
-                  ),
-                  Spacer(),
-                  Text(
-                    orderStatus,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.blue),
-                  )
-                ],
+                height: 20,
               ),
             ],
           )),
@@ -238,177 +255,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          //انزل 10 سانتي
-          SizedBox(
-            height: 5,
-          ),
-          getAllOrders(),
-          //هاد الكونتينر بحتوى على جميع الشغلات
-          // Container(
-          //   //هون ديزاين الكونتينر
-          //   decoration: BoxDecoration(
-          //     borderRadius: BorderRadius.circular(5.0),
-          //     color: Colors.white,
-          //     boxShadow: [
-          //       BoxShadow(
-          //         color: Colors.grey,
-          //         offset: Offset(0, 1.0), //(x,y)
-          //         blurRadius: 5.0,
-          //       ),
-          //     ],
-          //   ),
-          //   child: Padding(
-          //       padding: const EdgeInsets.all(10.0),
-          //       child: Column(
-          //         children: [
-          //           //رقم الطلب---------------------------------------------------------------------------------------------------------
-          //           Row(
-          //             children: [
-          //               CircleAvatar(
-          //                   radius: 12,
-          //                   backgroundColor: Colors.blue,
-          //                   child: Icon(
-          //                     Icons.check,
-          //                     color: Colors.white,
-          //                   )),
-          //               SizedBox(
-          //                 width: 8,
-          //               ),
-          //               Text(
-          //                 'رقم الطلب : ',
-          //                 style: TextStyle(fontWeight: FontWeight.bold),
-          //               ),
-          //               Text(
-          //                 '125648566',
-          //                 style: TextStyle(fontWeight: FontWeight.bold),
-          //               )
-          //             ],
-          //           ),
-          //           SizedBox(
-          //             height: 10,
-          //           ),
-          //           //الخط الفاصل---------------------------------------------------------------------------------------------------------
-          //           Container(
-          //             width: 300,
-          //             height: 1,
-          //             color: Colors.grey,
-          //           ),
-          //           SizedBox(
-          //             height: 10,
-          //           ),
-          //           //صورة المتجر---------------------------------------------------------------------------------------------------------
-          //           Row(
-          //             children: [
-          //               Text(
-          //                 'صورة المنتج : ',
-          //                 style: TextStyle(
-          //                     fontWeight: FontWeight.bold,
-          //                     color: Colors.grey[500]),
-          //               ),
-          //               Spacer(),
-          //               Container(
-          //                 width: 90,
-          //                 height: 70,
-          //                 decoration: BoxDecoration(
-          //                     borderRadius: BorderRadius.circular(5),
-          //                     image: DecorationImage(
-          //                         image: NetworkImage(
-          //                             'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80'),
-          //                         fit: BoxFit.cover)),
-          //               ),
-          //             ],
-          //           ),
-          //           SizedBox(
-          //             height: 10,
-          //           ),
-          //           //اسم المتجر---------------------------------------------------------------------------------------------------------
-          //           Row(
-          //             children: [
-          //               Text(
-          //                 'اسم المتجر : ',
-          //                 style: TextStyle(
-          //                     fontWeight: FontWeight.bold,
-          //                     color: Colors.grey[500]),
-          //               ),
-          //               Spacer(),
-          //               Text(
-          //                 'تنويرات الشروق',
-          //                 style: TextStyle(
-          //                     fontWeight: FontWeight.bold, color: Colors.blue),
-          //               )
-          //             ],
-          //           ),
-          //           SizedBox(
-          //             height: 10,
-          //           ),
-          //           // اسم المنتج---------------------------------------------------------------------------------------------------------
-          //           Row(
-          //             children: [
-          //               Text(
-          //                 'اسم المنتج : ',
-          //                 style: TextStyle(
-          //                     fontWeight: FontWeight.bold,
-          //                     color: Colors.grey[500]),
-          //               ),
-          //               Spacer(),
-          //               Text(
-          //                 'ترية مطبخ',
-          //                 style: TextStyle(
-          //                     fontWeight: FontWeight.bold, color: Colors.blue),
-          //               )
-          //             ],
-          //           ),
-          //           SizedBox(
-          //             height: 10,
-          //           ),
-          //           //المبلغ الاجمالي---------------------------------------------------------------------------------------------------------
-          //           Row(
-          //             children: [
-          //               Text(
-          //                 'المبلغ الاجمالي : ',
-          //                 style: TextStyle(
-          //                     fontWeight: FontWeight.bold,
-          //                     color: Colors.grey[500]),
-          //               ),
-          //               Spacer(),
-          //               Text(
-          //                 '300 NIS',
-          //                 style: TextStyle(
-          //                     fontWeight: FontWeight.bold, color: Colors.blue),
-          //               )
-          //             ],
-          //           ),
-          //           SizedBox(
-          //             height: 10,
-          //           ),
-          //           // حالة الطلب---------------------------------------------------------------------------------------------------------
-          //           Row(
-          //             children: [
-          //               Text(
-          //                 'حالة الطلب : ',
-          //                 style: TextStyle(
-          //                     fontWeight: FontWeight.bold,
-          //                     color: Colors.grey[500]),
-          //               ),
-          //               Spacer(),
-          //               Text(
-          //                 'قيد التحضير',
-          //                 style: TextStyle(
-          //                     fontWeight: FontWeight.bold, color: Colors.blue),
-          //               )
-          //             ],
-          //           ),
-          //         ],
-          //       )),
-          // ),
-          //انزل 10 سانتي
-          SizedBox(
-            height: 10,
-          ),
-        ],
-      ),
+      body: Center(child: getAllOrders()),
     );
   }
 
