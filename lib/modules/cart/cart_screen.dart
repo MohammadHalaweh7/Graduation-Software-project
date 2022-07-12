@@ -49,9 +49,16 @@ class _CartScreenState extends State<CartScreen> {
         });
 
     UserModel userModel = UserModel.fromJson(jsonDecode(result.body));
+    setState(() {});
 
     return userModel;
   }
+
+  // String set_total_count() {
+  //   while (total == 0) {}
+  //   setState(() {});
+  //   return total.toString();
+  // }
 
   Widget cartProducts() {
     return FutureBuilder(
@@ -243,6 +250,7 @@ class _CartScreenState extends State<CartScreen> {
       body: Column(
         children: [
           cartProducts(),
+
           //انزل 10 سانتي
           SizedBox(
             height: 10,
