@@ -277,9 +277,14 @@ class _OrderScreenState extends State<OrderScreen> {
                       ),
                       child: MaterialButton(
                         onPressed: () {
-                          for (int i = 0; i < products.length; i++) {
-                            createOrder(products[i].id);
+                          if (products.length == 24) {
+                            createOrder(products);
+                          } else {
+                            for (int i = 0; i < products.length; i++) {
+                              createOrder(products[i].id);
+                            }
                           }
+
                           if (formkey.currentState!.validate()) {
                             showDialog(
                               context: context,

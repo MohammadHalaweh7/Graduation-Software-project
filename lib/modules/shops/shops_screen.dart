@@ -79,15 +79,26 @@ class _ShopsScreenState extends State<ShopsScreen> {
               context, MaterialPageRoute(builder: (context) => ShopLayout()));
         },
         child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15.0),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey,
+                offset: Offset(0, 1.0), //(x,y)
+                blurRadius: 15.0,
+              ),
+            ],
+          ),
           margin: EdgeInsets.all(10),
           width: double.infinity,
           child: Column(
             children: [
               Container(
-                  width: 385,
+                  width: 391,
                   height: 200,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(15),
                     image: DecorationImage(
                         image: NetworkImage(
                           'https://mystoreapii.herokuapp.com/store/' +
@@ -123,11 +134,11 @@ class _ShopsScreenState extends State<ShopsScreen> {
               SizedBox(
                 height: 30,
               ),
-              Container(
-                width: double.infinity,
-                height: 1,
-                color: Colors.grey,
-              )
+              // Container(
+              //   width: double.infinity,
+              //   height: 1,
+              //   color: Colors.grey,
+              // )
             ],
           ),
         ),

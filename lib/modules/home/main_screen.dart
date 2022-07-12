@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,7 +11,6 @@ import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
 import 'package:udemy_flutter/modules/language/language_screen.dart';
 import 'package:udemy_flutter/modules/login/login_screen.dart';
 import 'package:udemy_flutter/modules/my_orders/my_orders_screen.dart';
-import 'package:udemy_flutter/modules/order/order_screen.dart';
 import 'package:udemy_flutter/modules/password/password_screen.dart';
 import 'package:udemy_flutter/modules/phone/phone_screen.dart';
 import 'package:udemy_flutter/modules/shops/shops_screen.dart';
@@ -105,6 +105,15 @@ class _MainScreenState extends State<MainScreen> {
     fetch.allstores();
     super.initState();
   }
+
+  final List<String> imgList = [
+    'https://www.cmarix.com/blog/wp-content/uploads/2020/07/The-best-eCommerce-platform-for-Food-delivery.png',
+    'https://www.nicepng.com/png/detail/254-2540580_we-create-a-customized-solution-to-meet-all.png',
+    'https://previews.123rf.com/images/pongsirionkham/pongsirionkham2004/pongsirionkham200400021/144173188-delivery-boy-ride-wearing-a-red-shirt-and-pink-scooter-motorcycle-from-the-store-s-mobile-to-the-cus.jpg?fj=1'
+        'https://img.freepik.com/premium-vector/fast-delivery-by-scooter-mobile-e-commerce-concept-online-food-pizza-order-packaging-box-infographic_131114-3.jpg?w=2000',
+    'https://img.freepik.com/free-vector/online-shopping-banner-mobile-app-templates-concept-flat-design_1150-34867.jpg?w=2000',
+    'https://img.freepik.com/premium-vector/transaction-people-character-concept-flat-style-investor-bring-money-ideas-online_75841-1.jpg?w=2000'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -323,6 +332,42 @@ class _MainScreenState extends State<MainScreen> {
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
+              SizedBox(
+                height: 10,
+              ),
+              CarouselSlider(
+                items: imgList
+                    .map((e) => ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              Image.network(
+                                e,
+                                height: 200,
+                                width: 100,
+                                fit: BoxFit.cover,
+                              ),
+                            ],
+                          ),
+                        ))
+                    .toList(),
+                //   //خصائصها
+
+                options: CarouselOptions(
+                  height: 217,
+                  autoPlay: true,
+                  enableInfiniteScroll: true,
+                  enlargeCenterPage: true,
+                  // initialPage: 0,
+                  // viewportFraction: 0.85,
+                  // reverse: false,
+                  autoPlayInterval: Duration(seconds: 3),
+                  autoPlayAnimationDuration: Duration(seconds: 1),
+                  // autoPlayCurve: Curves.fastOutSlowIn,
+                  // scrollDirection: Axis.horizontal,
+                ),
+              ),
               //تسوق حسب الفئة------------------------------------------------------
               Container(
                 margin: EdgeInsets.only(top: 20),
@@ -350,7 +395,7 @@ class _MainScreenState extends State<MainScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SignUpScreen()));
+                                builder: (context) => ShopsScreen()));
                       },
                       child: Text("عرض الكل"),
                     ),
@@ -381,10 +426,14 @@ class _MainScreenState extends State<MainScreen> {
                                     MaterialPageRoute(
                                         builder: (context) => ShopsScreen()));
                               },
-                              child: CircleAvatar(
-                                radius: 35.0,
-                                backgroundImage:
-                                    AssetImage('assets/images/baby.jpg'),
+                              child: Material(
+                                elevation: 10,
+                                borderRadius: BorderRadius.circular(35),
+                                child: CircleAvatar(
+                                  radius: 35.0,
+                                  backgroundImage:
+                                      AssetImage('assets/images/baby.jpg'),
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -414,10 +463,14 @@ class _MainScreenState extends State<MainScreen> {
                                     MaterialPageRoute(
                                         builder: (context) => ShopsScreen()));
                               },
-                              child: CircleAvatar(
-                                radius: 35.0,
-                                backgroundImage:
-                                    AssetImage('assets/images/women.png'),
+                              child: Material(
+                                elevation: 10,
+                                borderRadius: BorderRadius.circular(35),
+                                child: CircleAvatar(
+                                  radius: 35.0,
+                                  backgroundImage:
+                                      AssetImage('assets/images/women.png'),
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -447,10 +500,14 @@ class _MainScreenState extends State<MainScreen> {
                                     MaterialPageRoute(
                                         builder: (context) => ShopsScreen()));
                               },
-                              child: CircleAvatar(
-                                radius: 35.0,
-                                backgroundImage:
-                                    AssetImage('assets/images/man.jpg'),
+                              child: Material(
+                                elevation: 10,
+                                borderRadius: BorderRadius.circular(35),
+                                child: CircleAvatar(
+                                  radius: 35.0,
+                                  backgroundImage:
+                                      AssetImage('assets/images/man.jpg'),
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -480,10 +537,14 @@ class _MainScreenState extends State<MainScreen> {
                                     MaterialPageRoute(
                                         builder: (context) => ShopsScreen()));
                               },
-                              child: CircleAvatar(
-                                radius: 35.0,
-                                backgroundImage:
-                                    AssetImage('assets/images/Accessories.jpg'),
+                              child: Material(
+                                elevation: 10,
+                                borderRadius: BorderRadius.circular(35),
+                                child: CircleAvatar(
+                                  radius: 35.0,
+                                  backgroundImage: AssetImage(
+                                      'assets/images/Accessories.jpg'),
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -513,10 +574,14 @@ class _MainScreenState extends State<MainScreen> {
                                     MaterialPageRoute(
                                         builder: (context) => ShopsScreen()));
                               },
-                              child: CircleAvatar(
-                                radius: 35.0,
-                                backgroundImage:
-                                    AssetImage('assets/images/gifts.jpg'),
+                              child: Material(
+                                elevation: 10,
+                                borderRadius: BorderRadius.circular(35),
+                                child: CircleAvatar(
+                                  radius: 35.0,
+                                  backgroundImage:
+                                      AssetImage('assets/images/gifts.jpg'),
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -546,10 +611,14 @@ class _MainScreenState extends State<MainScreen> {
                                     MaterialPageRoute(
                                         builder: (context) => ShopsScreen()));
                               },
-                              child: CircleAvatar(
-                                radius: 35.0,
-                                backgroundImage:
-                                    AssetImage('assets/images/food.jpg'),
+                              child: Material(
+                                elevation: 10,
+                                borderRadius: BorderRadius.circular(35),
+                                child: CircleAvatar(
+                                  radius: 35.0,
+                                  backgroundImage:
+                                      AssetImage('assets/images/food.jpg'),
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -579,10 +648,14 @@ class _MainScreenState extends State<MainScreen> {
                                     MaterialPageRoute(
                                         builder: (context) => ShopsScreen()));
                               },
-                              child: CircleAvatar(
-                                radius: 35.0,
-                                backgroundImage:
-                                    AssetImage('assets/images/clothes.jpg'),
+                              child: Material(
+                                elevation: 10,
+                                borderRadius: BorderRadius.circular(35),
+                                child: CircleAvatar(
+                                  radius: 35.0,
+                                  backgroundImage:
+                                      AssetImage('assets/images/clothes.jpg'),
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -612,10 +685,14 @@ class _MainScreenState extends State<MainScreen> {
                                     MaterialPageRoute(
                                         builder: (context) => ShopsScreen()));
                               },
-                              child: CircleAvatar(
-                                radius: 35.0,
-                                backgroundImage:
-                                    AssetImage('assets/images/shoes.png'),
+                              child: Material(
+                                elevation: 10,
+                                borderRadius: BorderRadius.circular(35),
+                                child: CircleAvatar(
+                                  radius: 35.0,
+                                  backgroundImage:
+                                      AssetImage('assets/images/shoes.png'),
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -645,10 +722,14 @@ class _MainScreenState extends State<MainScreen> {
                                     MaterialPageRoute(
                                         builder: (context) => ShopsScreen()));
                               },
-                              child: CircleAvatar(
-                                radius: 35.0,
-                                backgroundImage:
-                                    AssetImage('assets/images/perfumes.png'),
+                              child: Material(
+                                elevation: 10,
+                                borderRadius: BorderRadius.circular(35),
+                                child: CircleAvatar(
+                                  radius: 35.0,
+                                  backgroundImage:
+                                      AssetImage('assets/images/perfumes.png'),
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -678,10 +759,14 @@ class _MainScreenState extends State<MainScreen> {
                                     MaterialPageRoute(
                                         builder: (context) => ShopsScreen()));
                               },
-                              child: CircleAvatar(
-                                radius: 35.0,
-                                backgroundImage:
-                                    AssetImage('assets/images/art.png'),
+                              child: Material(
+                                elevation: 10,
+                                borderRadius: BorderRadius.circular(35),
+                                child: CircleAvatar(
+                                  radius: 35.0,
+                                  backgroundImage:
+                                      AssetImage('assets/images/art.png'),
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -705,6 +790,7 @@ class _MainScreenState extends State<MainScreen> {
               SizedBox(
                 height: 10,
               ),
+
               //متاجراخترناها لك------------------------------------------------------
               Container(
                 margin: EdgeInsets.only(top: 0),

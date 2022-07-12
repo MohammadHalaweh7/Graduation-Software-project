@@ -277,9 +277,17 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
             children: [
               //الصورة
               Container(
-                height: 390,
+                height: 340,
                 margin: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        offset: Offset(0, 1.0), //(x,y)
+                        blurRadius: 20.0,
+                      ),
+                    ],
+                    color: Colors.white,
                     image: DecorationImage(
                         image: NetworkImage(
                           'https://mystoreapii.herokuapp.com/store/' +
@@ -289,14 +297,21 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                         fit: BoxFit.cover),
                     borderRadius: BorderRadius.circular(30)),
               ),
-
               //دافوديل
-              SizedBox(
-                height: 0,
-              ),
               Container(
-                color: Colors.white,
-                height: 180,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(0, 1.0), //(x,y)
+                      blurRadius: 5.0,
+                    ),
+                  ],
+                ),
+                // color: Colors.white,
+                height: 130,
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 child: Column(
@@ -333,8 +348,19 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                 height: 10,
               ),
               Container(
-                color: Colors.white,
-                height: 150,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(0, 1.0), //(x,y)
+                      blurRadius: 5.0,
+                    ),
+                  ],
+                ),
+                // color: Colors.white,
+                height: 130,
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 child: Column(
@@ -380,8 +406,19 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                 height: 10,
               ),
               Container(
-                color: Colors.white,
-                height: 200,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(0, 1.0), //(x,y)
+                      blurRadius: 5.0,
+                    ),
+                  ],
+                ),
+                // color: Colors.white,
+                height: 170,
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 child: Column(
@@ -429,8 +466,19 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                 height: 10,
               ),
               Container(
-                color: Colors.white,
-                height: 150,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(0, 1.0), //(x,y)
+                      blurRadius: 5.0,
+                    ),
+                  ],
+                ),
+                // color: Colors.white,
+                height: 130,
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 child: Column(
@@ -487,8 +535,19 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                 height: 10,
               ),
               Container(
-                color: Colors.white,
-                height: 150,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(0, 1.0), //(x,y)
+                      blurRadius: 5.0,
+                    ),
+                  ],
+                ),
+                // color: Colors.white,
+                height: 130,
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 child: Column(
@@ -545,8 +604,19 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                 height: 10,
               ),
               Container(
-                color: Colors.white,
-                height: 150,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(0, 1.0), //(x,y)
+                      blurRadius: 5.0,
+                    ),
+                  ],
+                ),
+                // color: Colors.white,
+                height: 130,
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 child: Column(
@@ -592,8 +662,19 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                 height: 10,
               ),
               Container(
-                color: Colors.white,
-                height: 150,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(0, 1.0), //(x,y)
+                      blurRadius: 5.0,
+                    ),
+                  ],
+                ),
+                // color: Colors.white,
+                height: 130,
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 child: Column(
@@ -650,7 +731,18 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                 height: 10,
               ),
               Container(
-                color: Colors.white,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(0, 1.0), //(x,y)
+                      blurRadius: 5.0,
+                    ),
+                  ],
+                ),
+                // color: Colors.white,
                 height: 230,
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
@@ -700,6 +792,9 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                     ])),
                   ],
                 ),
+              ),
+              SizedBox(
+                height: 10,
               ),
             ],
           ),

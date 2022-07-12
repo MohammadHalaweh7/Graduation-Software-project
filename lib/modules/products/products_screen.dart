@@ -12,6 +12,7 @@ import 'package:udemy_flutter/models/user/user_model.dart';
 import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
 import 'package:udemy_flutter/modules/language/language_screen.dart';
 import 'package:udemy_flutter/modules/login/login_screen.dart';
+import 'package:udemy_flutter/modules/order/order_screen.dart';
 import 'package:udemy_flutter/modules/password/password_screen.dart';
 import 'package:udemy_flutter/modules/phone/phone_screen.dart';
 import 'package:udemy_flutter/shared/components/components.dart';
@@ -94,13 +95,25 @@ class _ProductsScreenState extends State<ProductsScreen> {
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         crossAxisCount: 2,
-        mainAxisSpacing: 7,
-        crossAxisSpacing: 7,
+        mainAxisSpacing: 0,
+        crossAxisSpacing: 0,
         childAspectRatio: 1 / 1.7,
         children: List.generate(
           2,
           (index) => Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(0.0),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  offset: Offset(0, 1.0), //(x,y)
+                  blurRadius: 10.0,
+                ),
+              ],
+            ),
+            margin: EdgeInsets.only(bottom: 10, right: 5, left: 5),
+            // color: Colors.white,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -147,12 +160,17 @@ class _ProductsScreenState extends State<ProductsScreen> {
                               padding: EdgeInsets.zero,
                               onPressed: () {
                                 addToCart(id);
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      _buildPopupDialog(context),
+                                );
                               },
                               icon: CircleAvatar(
                                   radius: 17,
                                   backgroundColor: Colors.blue,
                                   child: Icon(
-                                    Icons.shopping_cart_outlined,
+                                    Icons.add_shopping_cart_outlined,
                                     color: Colors.white,
                                   )))
 
@@ -169,7 +187,12 @@ class _ProductsScreenState extends State<ProductsScreen> {
                               primary: Colors.blue,
                               elevation: 20,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => OrderScreen(id)));
+                            },
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -261,163 +284,103 @@ class _ProductsScreenState extends State<ProductsScreen> {
           ),
         ],
       ),
-      body: getstoreproducts(),
+      body: Center(child: getstoreproducts()),
 
       // SingleChildScrollView(
-      //     scrollDirection: Axis.vertical,
-      //     physics: BouncingScrollPhysics(),
-      //     child: Column(
-      //       children: <Widget>[
-      //         // SizedBox(
-      //         //   height: 10,
-      //         // ),
-      //         //الصور اللي بتتحرك باعلى الصفحة
-      //         // CarouselSlider(
-      //         //   items: imgList
-      //         //       .map((e) => ClipRRect(
-      //         //             borderRadius: BorderRadius.circular(6),
-      //         //             child: Stack(
-      //         //               fit: StackFit.expand,
-      //         //               children: [
-      //         //                 Image.network(
-      //         //                   e,
-      //         //                   height: 200,
-      //         //                   width: 100,
-      //         //                   fit: BoxFit.cover,
-      //         //                 ),
-      //         //               ],
-      //         //             ),
-      //         //           ))
-      //         //       .toList(),
-      //         //   //خصائصها
-      //         //   options: CarouselOptions(
-      //         //     height: 250,
-      //         //     autoPlay: true,
-      //         //     enableInfiniteScroll: true,
-      //         //     enlargeCenterPage: true,
-      //         //     // initialPage: 0,
-      //         //     // viewportFraction: 0.85,
-      //         //     // reverse: false,
-      //         //     autoPlayInterval: Duration(seconds: 1),
-      //         //     autoPlayAnimationDuration: Duration(seconds: 1),
-      //         //     // autoPlayCurve: Curves.fastOutSlowIn,
-      //         //     // scrollDirection: Axis.horizontal,
-      //         //   ),
-      //         // ),
-      //         // SizedBox(
-      //         //   height: 10,
-      //         // ),
-      //         //  هون المنتجات
-
-      //         getstoreproducts(),
-      //         // Container(
-      //         //   color: Colors.grey[300],
-      //         //   child: GridView.count(
-      //         //     shrinkWrap: true,
-      //         //     physics: NeverScrollableScrollPhysics(),
-      //         //     crossAxisCount: 2,
-      //         //     mainAxisSpacing: 7,
-      //         //     crossAxisSpacing: 7,
-      //         //     childAspectRatio: 1 / 1.7,
-      //         //     children: List.generate(
-      //         //       10,
-      //         //       (index) => Container(
-      //         //         color: Colors.white,
-      //         //         child: Column(
-      //         //           crossAxisAlignment: CrossAxisAlignment.start,
-      //         //           children: [
-      //         //             //صورة المنتج
-      //         //             Image(
-      //         //               image: NetworkImage(
-      //         //                   'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80'),
-      //         //               width: double.infinity,
-      //         //               height: 200,
-      //         //             ),
-      //         //             //هون الاسم والسعر والمفضلة والكبسة شراء الان
-      //         //             Padding(
-      //         //               padding: const EdgeInsets.only(left: 12, right: 12),
-      //         //               child: Column(
-      //         //                 crossAxisAlignment: CrossAxisAlignment.start,
-      //         //                 children: [
-      //         //                   //هون اسم المنتج
-      //         //                   Text(
-      //         //                     'Nokia',
-      //         //                     maxLines: 1,
-      //         //                     overflow: TextOverflow.ellipsis,
-      //         //                     style: TextStyle(
-      //         //                       fontSize: 14,
-      //         //                     ),
-      //         //                   ),
-      //         //                   SizedBox(
-      //         //                     height: 13,
-      //         //                   ),
-      //         //                   //هون السعر والمفضلة
-      //         //                   Row(
-      //         //                     children: [
-      //         //                       Text(
-      //         //                         '599',
-      //         //                         style: TextStyle(
-      //         //                           fontSize: 15,
-      //         //                           color: Colors.blue,
-      //         //                         ),
-      //         //                       ),
-      //         //                       Spacer(),
-      //         //                       //جديد جديد جديد
-      //         //                       IconButton(
-      //         //                           padding: EdgeInsets.zero,
-      //         //                           onPressed: () {},
-      //         //                           icon: CircleAvatar(
-      //         //                               radius: 17,
-      //         //                               backgroundColor: Colors.blue,
-      //         //                               child: Icon(
-      //         //                                 Icons.shopping_cart_outlined,
-      //         //                                 color: Colors.white,
-      //         //                               )))
-
-      //         //                       //  لهون
-      //         //                     ],
-      //         //                   ),
-      //         //                   //كبسة شراء الان
-      //         //                   Container(
-      //         //                     margin: EdgeInsets.only(right: 0),
-      //         //                     child: SizedBox(
-      //         //                       width: 210,
-      //         //                       child: ElevatedButton(
-      //         //                         style: ElevatedButton.styleFrom(
-      //         //                           primary: Colors.blue,
-      //         //                           elevation: 20,
-      //         //                         ),
-      //         //                         onPressed: () {},
-      //         //                         child: Row(
-      //         //                           mainAxisSize: MainAxisSize.min,
-      //         //                           children: [
-      //         //                             Text('شراء الان'), // <-- Text
-      //         //                             SizedBox(
-      //         //                               width: 10,
-      //         //                             ),
-      //         //                             Icon(
-      //         //                               // <-- Icon
-      //         //                               Icons.shopping_cart_outlined,
-      //         //                               size: 24.0,
-      //         //                             ),
-      //         //                           ],
-      //         //                         ),
-      //         //                       ),
-      //         //                     ),
-      //         //                   ),
-      //         //                 ],
-      //         //               ),
-      //         //             ),
-      //         //           ],
-      //         //         ),
-      //         //       ),
-      //         //     ),
-      //         //   ),
-      //         // ),
-      //       ],
-      //     )),
+      //   child: Column(
+      //
+      //     children: <Widget>[
+      //
+      //       SizedBox(
+      //         height: 10,
+      //       ),
+      //       //الصور اللي بتتحرك باعلى الصفحة
+      //
+      //       CarouselSlider(
+      //         items: imgList
+      //             .map((e) => ClipRRect(
+      //                   borderRadius: BorderRadius.circular(6),
+      //                   child: Stack(
+      //                     fit: StackFit.expand,
+      //                     children: [
+      //                       Image.network(
+      //                         e,
+      //                         height: 200,
+      //                         width: 100,
+      //                         fit: BoxFit.cover,
+      //                       ),
+      //                     ],
+      //                   ),
+      //                 ))
+      //             .toList(),
+      //       //   //خصائصها
+      //
+      //         options: CarouselOptions(
+      //           height: 250,
+      //           autoPlay: true,
+      //           enableInfiniteScroll: true,
+      //           enlargeCenterPage: true,
+      //           // initialPage: 0,
+      //           // viewportFraction: 0.85,
+      //           // reverse: false,
+      //           autoPlayInterval: Duration(seconds: 1),
+      //           autoPlayAnimationDuration: Duration(seconds: 1),
+      //           // autoPlayCurve: Curves.fastOutSlowIn,
+      //           // scrollDirection: Axis.horizontal,
+      //         ),
+      //       ),
+      //
+      //       Center(child: getstoreproducts()),
+      //
+      //
+      //
+      //
+      //     ],
+      //   ),
+      // ),
     );
   }
+
+  //Pub up Function--------------------------------------------------------------------------------------------
+  Widget _buildPopupDialog(BuildContext context) {
+    return new AlertDialog(
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CircleAvatar(
+              radius: 17,
+              backgroundColor: Colors.blue,
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            children: [
+              Text("تمت اضافته الى السلة "),
+              Icon(
+                Icons.add_shopping_cart_outlined,
+                color: Colors.blue,
+              )
+            ],
+          )
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Colors.blue,
+          child: const Text('موافق'),
+        ),
+      ],
+    );
+  }
+  //-----------------------------------------------------------------------------------------------------------
 
   //فنكشن مش مهم انساه
   void onNotification() {

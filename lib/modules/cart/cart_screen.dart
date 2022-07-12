@@ -5,6 +5,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
+import 'package:udemy_flutter/layout/shop_layout/shop_layout.dart';
 import 'package:udemy_flutter/models/product_model.dart';
 import 'package:udemy_flutter/models/user/user_model.dart';
 import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
@@ -54,22 +55,15 @@ class _CartScreenState extends State<CartScreen> {
     return userModel;
   }
 
-  // String set_total_count() {
-  //   while (total == 0) {}
-  //   setState(() {});
-  //   return total.toString();
-  // }
-
   Widget cartProducts() {
     return FutureBuilder(
         future: fetch.getProductsOnCart(),
         builder: (contxt, snapchot) {
           var products = snapchot.data as List<ProductModel>;
           prod = products;
-          // print(products);
           return snapchot.data == null
               ? CircularProgressIndicator(
-                  value: 0.8,
+                  value: 1,
                   valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
                 )
               : ListView.builder(
@@ -90,6 +84,7 @@ class _CartScreenState extends State<CartScreen> {
                       tot = 0;
                       i = 0;
                     }
+
                     return myCartProducts(
                       products[index].name,
                       products[index].description,
@@ -102,95 +97,108 @@ class _CartScreenState extends State<CartScreen> {
   }
 
   Widget myCartProducts(name, description, id, price, owner) {
-    return Container(
-      //هون ديزاين الكونتينر
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5.0),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey,
-            offset: Offset(0, 1.0), //(x,y)
-            blurRadius: 5.0,
+    return Column(
+      children: [
+        SizedBox(
+          height: 10,
+        ),
+        Container(
+          //هون ديزاين الكونتينر
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5.0),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey,
+                offset: Offset(0, 1.0), //(x,y)
+                blurRadius: 5.0,
+              ),
+            ],
           ),
-        ],
-      ),
-      child:
-          //هاد البادينغ يحتوي على الصورة والاسم والسعر وسلة الزبالة
-          Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Row(
-          children: [
-            //هاد الكونتينر للصورة
-            Container(
-              width: 120,
-              height: 120,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          'https://mystoreapii.herokuapp.com/product/' +
-                              id +
-                              '/avatar'),
-                      fit: BoxFit.cover)),
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            //هاد للاسم والسعر والسلة
-            Expanded(
-              child: Container(
-                height: 120,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Expanded(
-                        child: Text(
-                      name,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodyText1,
-                    )),
-                    Row(
+          child:
+              //هاد البادينغ يحتوي على الصورة والاسم والسعر وسلة الزبالة
+              Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              children: [
+                //هاد الكونتينر للصورة
+                Container(
+                  width: 120,
+                  height: 120,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                          image: NetworkImage(
+                              'https://mystoreapii.herokuapp.com/product/' +
+                                  id +
+                                  '/avatar'),
+                          fit: BoxFit.cover)),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                //هاد للاسم والسعر والسلة
+                Expanded(
+                  child: Container(
+                    height: 120,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
-                          'السعر : ',
-                          style: TextStyle(
-                              color: Colors.blue,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
+                        Expanded(
+                            child: Text(
+                          name,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context).textTheme.bodyText1,
+                        )),
+                        Row(
+                          children: [
+                            Text(
+                              'السعر : ',
+                              style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              price,
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Spacer(),
+                            IconButton(
+                                padding: EdgeInsets.zero,
+                                onPressed: () {
+                                  removeFromCart(id);
+
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        _buildPopupDialog(context),
+                                  );
+                                },
+                                icon: CircleAvatar(
+                                    radius: 17,
+                                    backgroundColor: Colors.grey,
+                                    child: Icon(
+                                      Icons.delete,
+                                      color: Colors.white,
+                                    )))
+                          ],
                         ),
-                        Text(
-                          price,
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Spacer(),
-                        IconButton(
-                            padding: EdgeInsets.zero,
-                            onPressed: () {
-                              removeFromCart(id);
-                            },
-                            icon: CircleAvatar(
-                                radius: 17,
-                                backgroundColor: Colors.grey,
-                                child: Icon(
-                                  Icons.delete,
-                                  color: Colors.white,
-                                )))
                       ],
                     ),
-                  ],
-                ),
-              ),
-            )
-          ],
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 
@@ -249,14 +257,10 @@ class _CartScreenState extends State<CartScreen> {
       ),
       body: Column(
         children: [
-          cartProducts(),
-
-          //انزل 10 سانتي
+          Expanded(child: cartProducts()),
           SizedBox(
             height: 10,
           ),
-
-          //هاد الكونتينر اللي تحت واللي بحتوي على استكمال الطلب
           Container(
               padding: EdgeInsets.all(15),
               decoration: BoxDecoration(
@@ -284,7 +288,7 @@ class _CartScreenState extends State<CartScreen> {
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        total.toString() + ' NIS',
+                        total.toString(),
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 15,
@@ -343,11 +347,55 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ),
                 ],
-              ))
+              )),
         ],
       ),
     );
   }
+
+  //Pub up Function--------------------------------------------------------------------------------------------
+  Widget _buildPopupDialog(BuildContext context) {
+    return new AlertDialog(
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CircleAvatar(
+              radius: 17,
+              backgroundColor: Colors.blue,
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            children: [
+              Text("تمت ازالته من السلة "),
+              Icon(
+                Icons.remove_shopping_cart,
+                color: Colors.blue,
+              )
+            ],
+          )
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+
+            // Navigator.push(
+            //     context, MaterialPageRoute(builder: (context) => ShopLayout()));
+          },
+          textColor: Colors.blue,
+          child: const Text('موافق'),
+        ),
+      ],
+    );
+  }
+  //-----------------------------------------------------------------------------------------------------------
 
   void onNotification() {
     var ScaffoldKey;
