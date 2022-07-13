@@ -753,7 +753,7 @@ class _MainScreenState extends State<MainScreen> {
                             GestureDetector(
                               onTap: () {
                                 ShopsScreen().setTitle("فنون");
-                                ShopsScreen().setType('art');
+                                ShopsScreen().setType('فنون');
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -829,7 +829,7 @@ class _MainScreenState extends State<MainScreen> {
                 height: 20,
               ),
               //المتاجر------------------------------------------------------
-              Container(height: 270, child: fetchAllStores()),
+              Container(height: 290, child: fetchAllStores()),
               SizedBox(
                 height: 10,
               ),

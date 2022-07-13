@@ -118,8 +118,12 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
 
     print(result.statusCode);
 
-    if (result.statusCode == 201) {
+    if (result.statusCode == 200) {
       var body = jsonDecode(result.body);
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => _buildPopupDialog2(context),
+      );
     }
   }
 
@@ -955,7 +959,9 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                       color: Colors.red, // width: double.infinity,
                     ),
                     child: MaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        declinePendingStore(context);
+                      },
                       child: Text(
                         "رفض",
                         style: TextStyle(color: Colors.white),
@@ -992,6 +998,39 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
             height: 10,
           ),
           Text("تم قبول هذا المتجر")
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AdminScreen()));
+          },
+          textColor: Colors.blue,
+          child: const Text('موافق'),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPopupDialog2(BuildContext context) {
+    return new AlertDialog(
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CircleAvatar(
+              radius: 17,
+              backgroundColor: Colors.blue,
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          Text("تم رفض هذا المتجر")
         ],
       ),
       actions: <Widget>[
