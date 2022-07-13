@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
-import 'package:udemy_flutter/models/store_model.dart';
+import 'package:udemy_flutter/models/store/store_model.dart';
 import 'package:udemy_flutter/modules/account/account_screen.dart';
 import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
 import 'package:udemy_flutter/modules/language/language_screen.dart';
@@ -494,7 +494,7 @@ class _MainScreenState extends State<MainScreen> {
                             GestureDetector(
                               onTap: () {
                                 ShopsScreen().setTitle("للرجال");
-                                ShopsScreen().setType('man');
+                                ShopsScreen().setType('للرجال');
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(

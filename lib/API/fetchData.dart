@@ -1,9 +1,10 @@
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:udemy_flutter/models/order_model.dart';
-import 'package:udemy_flutter/models/product_model.dart';
-import 'package:udemy_flutter/models/store_model.dart';
+import 'package:udemy_flutter/models/order/order_model.dart';
+import 'package:udemy_flutter/models/pendingStore/pendingStore_model.dart';
+import 'package:udemy_flutter/models/product/product_model.dart';
+import 'package:udemy_flutter/models/store/store_model.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -35,15 +36,9 @@ class fetchData {
   }
 
   Future<List<ProductModel>> allstoreproduct(id) async {
-    // print(type);
-    //print('////////////////////////////');
     var res =
         await http.get(Uri.parse(fetchData.baseURL + '/getproducts/' + id));
-
-    // print(res.body);
     var body = jsonDecode(res.body) as List<dynamic>;
-
-    // print(body.toString());
 
     return body.map((product) => ProductModel.fromJson(product)).toList();
   }
@@ -82,5 +77,22 @@ class fetchData {
     // print(body.toString());
 
     return body.map((order) => OrderModel.fromJson(order)).toList();
+  }
+
+  Future<List<pendingStoreModel>> allPendingStores() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+    var res = await http.get(
+        Uri.parse(fetchData.baseURL + '/admin/getAllPendingStores'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ' + token.toString()
+        });
+
+    var body = jsonDecode(res.body) as List<dynamic>;
+
+    return body
+        .map((pendingStore) => pendingStoreModel.fromJson(pendingStore))
+        .toList();
   }
 }

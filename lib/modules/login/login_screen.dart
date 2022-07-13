@@ -47,11 +47,20 @@ class _LoginScreenState extends State<LoginScreen> {
         headers: {'Content-Type': 'application/json; charset=UTF-8'},
         body: body);
 
+    var result2 = await http.post(Uri.parse(fetchData.baseURL + "/admin/login"),
+        headers: {'Content-Type': 'application/json; charset=UTF-8'},
+        body: body);
+
     if (result.statusCode == 200) {
       var body = jsonDecode(result.body);
       sharedPrefs.saveToken(body['token']);
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => MainScreen()));
+    } else if (result2.statusCode == 200) {
+      var body = jsonDecode(result2.body);
+      sharedPrefs.saveToken(body['token']);
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => AdminScreen()));
     }
   }
 
@@ -432,12 +441,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => AdminScreen()));
-                        },
+                        onPressed: () {},
                         child: Text("هل نسيت كلمة المرور؟"),
                       ),
                       SizedBox(width: 71),

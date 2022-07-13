@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/layout/shop_layout/shop_layout.dart';
-import 'package:udemy_flutter/models/product_model.dart';
+import 'package:udemy_flutter/models/product/product_model.dart';
 import 'package:udemy_flutter/models/user/user_model.dart';
 import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
 import 'package:udemy_flutter/modules/language/language_screen.dart';
