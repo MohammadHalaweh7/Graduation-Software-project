@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/API/sharedPrefs.dart';
+import 'package:udemy_flutter/modules/admin/admin_screen.dart';
 import 'package:udemy_flutter/modules/home/main_screen.dart';
 import 'package:udemy_flutter/modules/password/password_screen.dart';
 import 'package:udemy_flutter/modules/phone/phone_screen.dart';
@@ -273,11 +274,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: passwordController,
                     keyboardType: TextInputType.visiblePassword,
                     obscureText: isPassword,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "الرجاء ادخال كلمة السر";
+                      }
+                      return null;
+                    },
                     onFieldSubmitted: (String value) {
                       print(value);
                     },
                     decoration: InputDecoration(
-                      // hintText: "البريد الالكتروني",
                       labelText: "كلمة السر",
                       prefixIcon: Icon(Icons.lock),
                       suffixIcon: IconButton(
@@ -295,27 +301,27 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: 20,
                   ),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      color: Colors.blueAccent, // width: double.infinity,
-                    ),
-                    child: IconButton(
-                      onPressed: () {
-                        //TODO
-                        Login();
-                        if (formkey.currentState!.validate()) {
-                          print(emailController.text);
-                          print(passwordController.text);
-                        }
-                      },
-                      icon: isPassword
-                          ? Icon(Icons.visibility)
-                          : Icon(Icons.visibility_off),
-                      // border: OutlineInputBorder(),
-                    ),
-                  ),
+                  // Container(
+                  //   width: double.infinity,
+                  //   decoration: BoxDecoration(
+                  //     borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  //     color: Colors.blueAccent, // width: double.infinity,
+                  //   ),
+                  //   child: IconButton(
+                  //     onPressed: () {
+                  //       //TODO
+                  //       Login();
+                  //       if (formkey.currentState!.validate()) {
+                  //         print(emailController.text);
+                  //         print(passwordController.text);
+                  //       }
+                  //     },
+                  //     icon: isPassword
+                  //         ? Icon(Icons.visibility)
+                  //         : Icon(Icons.visibility_off),
+                  //     // border: OutlineInputBorder(),
+                  //   ),
+                  // ),
                   SizedBox(
                     height: 20,
                   ),
@@ -329,10 +335,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () {
                         //............
                         Login();
-                        // if (formkey.currentState!.validate()) {
-                        //   print(emailController.text);
-                        //   print(passwordController.text);
-                        // }
+                        if (formkey.currentState!.validate()) {
+                          print(emailController.text);
+                          print(passwordController.text);
+                        }
                       },
                       child: Text(
                         "تسجيل الدخول",
@@ -355,6 +361,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(
                     width: double.infinity,
                     child: FloatingActionButton.extended(
+                      heroTag: "faceboob",
                       backgroundColor: Color(0xff4267B2),
                       label: Text(
                         "قم بتسجبل الدخول باستخدام الفيسبوك",
@@ -377,6 +384,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(
                     width: double.infinity,
                     child: FloatingActionButton.extended(
+                      heroTag: "googel",
                       backgroundColor: Color(0xffE50914),
                       label: Text(
                         "قم بتسجبل الدخول باستخدام جوجل",
@@ -399,6 +407,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(
                     width: double.infinity,
                     child: FloatingActionButton.extended(
+                      heroTag: "phone",
                       label: Text(
                         "قم بتسجيل الدخول باستخدام الهاتف",
                         style: TextStyle(color: Colors.white),
@@ -427,7 +436,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => PasswordScreen()));
+                                  builder: (context) => AdminScreen()));
                         },
                         child: Text("هل نسيت كلمة المرور؟"),
                       ),

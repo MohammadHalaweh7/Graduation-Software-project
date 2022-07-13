@@ -39,9 +39,10 @@ class _OrderScreenState extends State<OrderScreen> {
   var phoneController = TextEditingController();
   var cityController = TextEditingController();
   var addressController = TextEditingController();
+  var city;
   final items = [
     'القدس',
-    'راماالله',
+    'رام الله',
     "نابلس",
     "بيت لحم",
     "طولكرم",
@@ -62,7 +63,7 @@ class _OrderScreenState extends State<OrderScreen> {
       'buyerName': nameController.text,
       'buyerEmail': emailController.text,
       'buyerPhone': phoneController.text,
-      'buyerCity': 'nablus',
+      'buyerCity': city,
       'buyerAddress': addressController.text,
     });
 
@@ -231,11 +232,15 @@ class _OrderScreenState extends State<OrderScreen> {
                                 child: DropdownButtonHideUnderline(
                                   child: DropdownButton<String>(
                                     icon: Icon(Icons.arrow_downward_rounded),
+                                    onTap: () {
+                                      controller:
+                                      cityController;
+                                    },
                                     isExpanded: true,
                                     value: value,
                                     items: items.map(buildMenuItem).toList(),
-                                    onChanged: (value) =>
-                                        setState(() => this.value = value),
+                                    onChanged: (value) => setState(() =>
+                                        {this.value = value, city = value}),
                                   ),
                                 ),
                               ),
