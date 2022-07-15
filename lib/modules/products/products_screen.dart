@@ -68,155 +68,154 @@ class _ProductsScreenState extends State<ProductsScreen> {
         builder: (contxt, snapchot) {
           var products = snapchot.data as List<ProductModel>;
           return snapchot.data == null
-              ? CircularProgressIndicator(
-                  value: 0.8,
-                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+              ? Center(
+                  child: CircularProgressIndicator(
+                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+                  ),
                 )
-              : ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: products == null ? 0 : products.length,
-                  itemBuilder: (context, index) {
-                    return myproducts(
-                      products[index].name,
-                      products[index].description,
-                      products[index].id,
-                      products[index].price,
-                      products[index].owner,
-                    );
-                  });
+              : Container(
+                  color: Colors.grey[300],
+                  child: GridView.count(
+                      shrinkWrap: true,
+                      // physics: NeverScrollableScrollPhysics(),
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 0,
+                      crossAxisSpacing: 0,
+                      childAspectRatio: 1 / 1.7,
+                      children: [
+                        ...products.map<Widget>((product) {
+                          return myproducts(
+                            product.name,
+                            product.description,
+                            product.id,
+                            product.price,
+                            product.owner,
+                            product.avatar,
+                          );
+                        }).toList(),
+                      ]),
+                );
         });
   }
 
-  Widget myproducts(name, description, id, price, owner) {
+  Widget myproducts(name, description, id, price, owner, avatar) {
     return Container(
-      color: Colors.grey[300],
-      child: GridView.count(
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        crossAxisCount: 2,
-        mainAxisSpacing: 0,
-        crossAxisSpacing: 0,
-        childAspectRatio: 1 / 1.7,
-        children: List.generate(
-          2,
-          (index) => Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(0.0),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  offset: Offset(0, 1.0), //(x,y)
-                  blurRadius: 10.0,
-                ),
-              ],
-            ),
-            margin: EdgeInsets.only(bottom: 10, right: 5, left: 5),
-            // color: Colors.white,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //صورة المنتج
-                Image(
-                  image: NetworkImage(
-                      'https://mystoreapii.herokuapp.com/product/' +
-                          id +
-                          '/avatar'),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(0.0),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey,
+            offset: Offset(0, 1.0), //(x,y)
+            blurRadius: 10.0,
+          ),
+        ],
+      ),
+      margin: EdgeInsets.only(bottom: 10, right: 5, left: 5),
+      // color: Colors.white,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          //صورة المنتج
+          avatar == null
+              ? Image.asset(
+                  'assets/images/logo3.png',
+                  width: double.infinity,
+                  height: 200,
+                )
+              : Image(
+                  image: MemoryImage(base64Decode(avatar)),
                   width: double.infinity,
                   height: 200,
                 ),
-                //هون الاسم والسعر والمفضلة والكبسة شراء الان
-                Padding(
-                  padding: const EdgeInsets.only(left: 12, right: 12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      //هون اسم المنتج
-                      Text(
-                        name,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 14,
-                        ),
+          //هون الاسم والسعر والمفضلة والكبسة شراء الان
+          Padding(
+            padding: const EdgeInsets.only(left: 12, right: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //هون اسم المنتج
+                Text(
+                  name,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 14,
+                  ),
+                ),
+                SizedBox(
+                  height: 13,
+                ),
+                //هون السعر والمفضلة
+                Row(
+                  children: [
+                    Text(
+                      price + ' NIS',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.blue,
                       ),
-                      SizedBox(
-                        height: 13,
-                      ),
-                      //هون السعر والمفضلة
-                      Row(
-                        children: [
-                          Text(
-                            price,
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.blue,
-                            ),
-                          ),
-                          Spacer(),
-                          //جديد جديد جديد
-                          IconButton(
-                              padding: EdgeInsets.zero,
-                              onPressed: () {
-                                addToCart(id);
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      _buildPopupDialog(context),
-                                );
-                              },
-                              icon: CircleAvatar(
-                                  radius: 17,
-                                  backgroundColor: Colors.blue,
-                                  child: Icon(
-                                    Icons.add_shopping_cart_outlined,
-                                    color: Colors.white,
-                                  )))
+                    ),
+                    Spacer(),
+                    //جديد جديد جديد
+                    IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          addToCart(id);
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                _buildPopupDialog(context),
+                          );
+                        },
+                        icon: CircleAvatar(
+                            radius: 17,
+                            backgroundColor: Colors.blue,
+                            child: Icon(
+                              Icons.add_shopping_cart_outlined,
+                              color: Colors.white,
+                            )))
 
-                          //  لهون
+                    //  لهون
+                  ],
+                ),
+                //كبسة شراء الان
+                Container(
+                  margin: EdgeInsets.only(right: 0),
+                  child: SizedBox(
+                    width: 210,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.blue,
+                        elevation: 20,
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => OrderScreen(id)));
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text('شراء الان'), // <-- Text
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Icon(
+                            // <-- Icon
+                            Icons.shopping_cart_outlined,
+                            size: 24.0,
+                          ),
                         ],
                       ),
-                      //كبسة شراء الان
-                      Container(
-                        margin: EdgeInsets.only(right: 0),
-                        child: SizedBox(
-                          width: 210,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.blue,
-                              elevation: 20,
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => OrderScreen(id)));
-                            },
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text('شراء الان'), // <-- Text
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Icon(
-                                  // <-- Icon
-                                  Icons.shopping_cart_outlined,
-                                  size: 24.0,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-        ),
+        ],
       ),
     );
   }

@@ -108,11 +108,12 @@ class _AdminScreenState extends State<AdminScreen> {
                 width: 115,
                 height: 115,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(
-                        image: NetworkImage(
-                            'https://www.nicepng.com/png/detail/254-2540580_we-create-a-customized-solution-to-meet-all.png'),
-                        fit: BoxFit.cover)),
+                  borderRadius: BorderRadius.circular(10),
+                  // image: DecorationImage(
+                  //     image: NetworkImage(
+                  //         'https://www.nicepng.com/png/detail/254-2540580_we-create-a-customized-solution-to-meet-all.png'),
+                  //     fit: BoxFit.cover)
+                ),
               ),
               SizedBox(
                 width: 10,

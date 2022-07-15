@@ -52,12 +52,10 @@ class fetchData {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer ' + token.toString()
     });
-
     // print(res.body);
     var body = jsonDecode(res.body) as List<dynamic>;
 
     // print(body.toString());
-
     return body.map((product) => ProductModel.fromJson(product)).toList();
   }
 

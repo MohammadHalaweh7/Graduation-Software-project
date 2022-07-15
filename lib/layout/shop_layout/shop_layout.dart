@@ -12,16 +12,18 @@ var name;
 var description;
 var phoneNumber;
 var locationOnMap;
+var avatar;
 
 class ShopLayout extends StatefulWidget {
   const ShopLayout({Key? key}) : super(key: key);
 
-  setData(ID, Name, Description, Phonenumber, Locationonmap) {
+  setData(ID, Name, Description, Phonenumber, Locationonmap, Avatar) {
     id = ID;
     name = Name;
     description = Description;
     phoneNumber = Phonenumber;
     locationOnMap = Locationonmap;
+    avatar = Avatar;
   }
 
   @override
@@ -33,7 +35,7 @@ class _ShopLayoutState extends State<ShopLayout> {
 
   List<Widget> screens = [
     ProductsScreen(id),
-    ProfileShoScreen(id, name, description, phoneNumber, locationOnMap),
+    ProfileShoScreen(id, name, description, phoneNumber, locationOnMap, avatar),
     // ProfileShoScreen()
     //     .setData(id, name, description, phoneNumber, locationOnMap),
     CartScreen(),

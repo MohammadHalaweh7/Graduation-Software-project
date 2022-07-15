@@ -15,6 +15,7 @@ class StoreModel {
   late final String location;
   late final String type;
   late final String locationOnMap;
+  late final String? avatar;
   Map result = {};
   // StoreModel();
   StoreModel(this.result);

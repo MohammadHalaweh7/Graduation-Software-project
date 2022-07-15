@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -27,9 +29,10 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
         builder: (contxt, snapchot) {
           var orders = snapchot.data as List<OrderModel>;
           return snapchot.data == null
-              ? CircularProgressIndicator(
-                  value: 0.8,
-                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+              ? Center(
+                  child: CircularProgressIndicator(
+                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+                  ),
                 )
               : ListView.builder(
                   scrollDirection: Axis.vertical,
@@ -43,12 +46,14 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                       orders[index].price,
                       orders[index].orderStatus,
                       orders[index].id,
+                      orders[index].avatar,
                     );
                   });
         });
   }
 
-  Widget myorders(orderNumber, storeName, productName, price, orderStatus, id) {
+  Widget myorders(
+      orderNumber, storeName, productName, price, orderStatus, id, avatar) {
     return Container(
       //هون ديزاين الكونتينر
       decoration: BoxDecoration(
@@ -121,13 +126,17 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                           width: 90,
                           height: 70,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                      'https://mystoreapii.herokuapp.com/order/' +
-                                          id +
-                                          '/avatar'),
-                                  fit: BoxFit.cover)),
+                            borderRadius: BorderRadius.circular(5),
+                            image: DecorationImage(
+                                image: avatar == null
+                                    ? (AssetImage(
+                                        'assets/images/logo3.png',
+                                      ) as ImageProvider)
+                                    : MemoryImage(
+                                        base64Decode(avatar),
+                                      ),
+                                fit: BoxFit.cover),
+                          ),
                         ),
                       ],
                     ),
@@ -185,7 +194,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                         ),
                         Spacer(),
                         Text(
-                          price,
+                          price + ' NIS',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.blue),
                         )

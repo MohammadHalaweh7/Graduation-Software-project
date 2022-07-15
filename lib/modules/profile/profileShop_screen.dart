@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -15,18 +17,20 @@ var name;
 var description;
 var phoneNumber;
 var locationOnMap;
+var avatar;
 
 class ProfileShoScreen extends StatefulWidget {
-  ProfileShoScreen(id, name, description, phoneNumber, locationOnMap) {
-    this.setData(id, name, description, phoneNumber, locationOnMap);
+  ProfileShoScreen(id, name, description, phoneNumber, locationOnMap, avatar) {
+    this.setData(id, name, description, phoneNumber, locationOnMap, avatar);
   }
 
-  setData(ID, Name, Description, Phonenumber, Locationonmap) {
+  setData(ID, Name, Description, Phonenumber, Locationonmap, Avatar) {
     id = ID;
     name = Name;
     description = Description;
     phoneNumber = Phonenumber;
     locationOnMap = Locationonmap;
+    avatar = Avatar;
   }
 
   String getID() {
@@ -289,11 +293,13 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                     ],
                     color: Colors.white,
                     image: DecorationImage(
-                        image: NetworkImage(
-                          'https://mystoreapii.herokuapp.com/store/' +
-                              id +
-                              '/avatar',
-                        ),
+                        image: avatar == null
+                            ? AssetImage(
+                                'assets/images/logo3.png',
+                              ) as ImageProvider
+                            : MemoryImage(
+                                base64Decode(avatar),
+                              ),
                         fit: BoxFit.cover),
                     borderRadius: BorderRadius.circular(30)),
               ),

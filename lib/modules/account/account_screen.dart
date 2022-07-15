@@ -77,6 +77,7 @@ class _AccountScreenState extends State<AccountScreen> {
     return FutureBuilder<UserModel>(
       future: loadData(),
       builder: (context, snapshot) {
+        var products = snapshot.data;
         if (!snapshot.hasData) {
           return Container(
             child: Center(
@@ -135,8 +136,16 @@ class _AccountScreenState extends State<AccountScreen> {
                               children: [
                                 CircleAvatar(
                                   radius: 50.0,
-                                  backgroundImage: NetworkImage(
-                                      'https://mystoreapii.herokuapp.com/users/${snapshot.data!.id}/avatar'),
+                                  // backgroundImage: NetworkImage(
+                                  //     'https://mystoreapii.herokuapp.com/users/${snapshot.data!.id}/avatar'),
+                                  backgroundImage: products!.avatar == null
+                                      ? (AssetImage(
+                                          'assets/images/logo3.png',
+                                        ) as ImageProvider)
+                                      : MemoryImage(
+                                          base64Decode(
+                                              products.avatar.toString()),
+                                        ),
                                 ),
                                 CircleAvatar(
                                   radius: 15.8,

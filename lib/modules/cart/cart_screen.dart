@@ -29,17 +29,16 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   var counter;
   var i = 0;
-  int total = 0;
   var prod;
-  int tot = 0;
   int toNumbrs = 0;
   fetchData fetch = fetchData();
+  TextEditingController totalController = new TextEditingController(text: '0');
+  TextEditingController countcontroller = new TextEditingController(text: '0');
 
   Future<UserModel> removeFromCart(id) async {
     var ID = id;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
-
     print(token);
 
     var result = await http.patch(
@@ -55,48 +54,53 @@ class _CartScreenState extends State<CartScreen> {
     return userModel;
   }
 
+  double total = 0;
+  double tot = 0;
+
+  List<ProductModel> products = [];
   Widget cartProducts() {
     return FutureBuilder(
         future: fetch.getProductsOnCart(),
         builder: (contxt, snapchot) {
-          var products = snapchot.data as List<ProductModel>;
-          prod = products;
-          return snapchot.data == null
-              ? CircularProgressIndicator(
-                  value: 1,
-                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+          products =
+              snapchot.hasData ? snapchot.data as List<ProductModel> : [];
+          Future.delayed(Duration(milliseconds: 1000), () {
+            if (snapchot.hasData) {
+              products.forEach((element) {
+                tot += double.parse(
+                    element.price.replaceAll(new RegExp(r'[^0-9]'), ''));
+              });
+              total = tot;
+              totalController.text = total.toStringAsFixed(2) + ' NIS';
+              countcontroller.text = products.length.toString();
+              tot = 0;
+            }
+          });
+
+          return !snapchot.hasData
+              ? Center(
+                  child: CircularProgressIndicator(
+                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+                  ),
                 )
               : ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  itemCount: products == null ? 0 : products.length,
+                  itemCount: products.length,
                   itemBuilder: (context, index) {
-                    counter = products.length;
-                    toNumbrs = int.parse(products[index]
-                        .price
-                        .replaceAll(new RegExp(r'[^0-9]'), ''));
-                    //   print(toNumbrs);
-                    //print(int.parse(toNumbrs));
-                    i++;
-                    tot = tot + toNumbrs;
-                    total = tot;
-                    if (i == products.length) {
-                      tot = 0;
-                      i = 0;
-                    }
-
                     return myCartProducts(
                       products[index].name,
                       products[index].description,
                       products[index].id,
                       products[index].price,
                       products[index].owner,
+                      products[index].avatar,
                     );
                   });
         });
   }
 
-  Widget myCartProducts(name, description, id, price, owner) {
+  Widget myCartProducts(name, description, id, price, owner, avatar) {
     return Column(
       children: [
         SizedBox(
@@ -126,13 +130,17 @@ class _CartScreenState extends State<CartScreen> {
                   width: 120,
                   height: 120,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                          image: NetworkImage(
-                              'https://mystoreapii.herokuapp.com/product/' +
-                                  id +
-                                  '/avatar'),
-                          fit: BoxFit.cover)),
+                    borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                        image: avatar == null
+                            ? (AssetImage(
+                                'assets/images/logo3.png',
+                              ) as ImageProvider)
+                            : MemoryImage(
+                                base64Decode(avatar),
+                              ),
+                        fit: BoxFit.cover),
+                  ),
                 ),
                 SizedBox(
                   width: 20,
@@ -163,7 +171,7 @@ class _CartScreenState extends State<CartScreen> {
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              price,
+                              price + ' NIS',
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 20,
@@ -287,12 +295,17 @@ class _CartScreenState extends State<CartScreen> {
                             fontSize: 15,
                             fontWeight: FontWeight.bold),
                       ),
-                      Text(
-                        total.toString(),
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
+                      SizedBox(
+                        height: 5,
+                        width: 150,
+                        child: TextField(
+                          enabled: false,
+                          controller: totalController,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                       Spacer(),
                       Text(
@@ -302,12 +315,17 @@ class _CartScreenState extends State<CartScreen> {
                             fontSize: 15,
                             fontWeight: FontWeight.bold),
                       ),
-                      Text(
-                        counter.toString(),
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
+                      SizedBox(
+                        height: 20,
+                        width: 50,
+                        child: TextField(
+                          enabled: false,
+                          controller: countcontroller,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ],
                   ),
@@ -325,7 +343,7 @@ class _CartScreenState extends State<CartScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => OrderScreen(prod)));
+                                builder: (context) => OrderScreen(products)));
                       },
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,

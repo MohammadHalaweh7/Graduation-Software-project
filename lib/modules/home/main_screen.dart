@@ -32,9 +32,10 @@ class _MainScreenState extends State<MainScreen> {
         builder: (contxt, snapchot) {
           var stores = snapchot.data as List<StoreModel>;
           return snapchot.data == null
-              ? CircularProgressIndicator(
-                  value: 0.8,
-                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+              ? Center(
+                  child: CircularProgressIndicator(
+                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+                  ),
                 )
               : ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -45,12 +46,15 @@ class _MainScreenState extends State<MainScreen> {
                       stores[index].name,
                       stores[index].description,
                       stores[index].id,
+                      stores[index].avatar,
                     );
                   });
         });
   }
 
-  Widget mystore(name, description, id) {
+  Widget mystore(name, description, id, avatar) {
+    print(name);
+    print(avatar);
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Container(
@@ -62,11 +66,13 @@ class _MainScreenState extends State<MainScreen> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
-                      image: NetworkImage(
-                        'https://mystoreapii.herokuapp.com/store/' +
-                            id +
-                            '/avatar',
-                      ),
+                      image: avatar == null
+                          ? (AssetImage(
+                              'assets/images/logo3.png',
+                            ) as ImageProvider)
+                          : MemoryImage(
+                              base64Decode(avatar),
+                            ),
                       fit: BoxFit.cover),
                 )),
             SizedBox(
@@ -420,7 +426,7 @@ class _MainScreenState extends State<MainScreen> {
                             GestureDetector(
                               onTap: () {
                                 ShopsScreen().setTitle("للأطفال");
-                                ShopsScreen().setType('children');
+                                ShopsScreen().setType('للأطفال');
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -531,7 +537,7 @@ class _MainScreenState extends State<MainScreen> {
                             GestureDetector(
                               onTap: () {
                                 ShopsScreen().setTitle("اكسسوارات");
-                                ShopsScreen().setType('accessories');
+                                ShopsScreen().setType('اكسسوارات');
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -753,7 +759,7 @@ class _MainScreenState extends State<MainScreen> {
                             GestureDetector(
                               onTap: () {
                                 ShopsScreen().setTitle("فنون");
-                                ShopsScreen().setType('فنون');
+                                ShopsScreen().setType('art');
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(

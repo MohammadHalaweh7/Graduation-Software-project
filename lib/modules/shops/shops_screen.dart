@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
@@ -48,9 +50,10 @@ class _ShopsScreenState extends State<ShopsScreen> {
         builder: (contxt, snapchot) {
           var stores = snapchot.data as List<StoreModel>;
           return snapchot.data == null
-              ? CircularProgressIndicator(
-                  value: 0.8,
-                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+              ? Center(
+                  child: CircularProgressIndicator(
+                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+                  ),
                 )
               : ListView.builder(
                   scrollDirection: Axis.vertical,
@@ -63,18 +66,19 @@ class _ShopsScreenState extends State<ShopsScreen> {
                       stores[index].id,
                       stores[index].phoneNumber,
                       stores[index].locationOnMap,
+                      stores[index].avatar,
                     );
                   });
         });
   }
 
-  Widget mystore(name, description, id, phoneNumber, locationOnMap) {
+  Widget mystore(name, description, id, phoneNumber, locationOnMap, avatar) {
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: GestureDetector(
         onTap: () {
-          ShopLayout()
-              .setData(id, name, description, phoneNumber, locationOnMap);
+          ShopLayout().setData(
+              id, name, description, phoneNumber, locationOnMap, avatar);
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => ShopLayout()));
         },
@@ -100,11 +104,13 @@ class _ShopsScreenState extends State<ShopsScreen> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     image: DecorationImage(
-                        image: NetworkImage(
-                          'https://mystoreapii.herokuapp.com/store/' +
-                              id +
-                              '/avatar',
-                        ),
+                        image: avatar == null
+                            ? (AssetImage(
+                                'assets/images/logo3.png',
+                              ) as ImageProvider)
+                            : MemoryImage(
+                                base64Decode(avatar),
+                              ),
                         fit: BoxFit.cover),
                   )),
               SizedBox(

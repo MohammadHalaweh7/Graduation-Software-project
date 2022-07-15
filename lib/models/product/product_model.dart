@@ -12,6 +12,7 @@ class ProductModel {
   late final String description;
   late final String price;
   late final String owner;
+  late final String? avatar;
   ProductModel();
 
   /// factory.

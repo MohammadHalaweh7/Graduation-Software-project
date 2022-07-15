@@ -16,7 +16,8 @@ StoreModel _$StoreModelFromJson(Map<String, dynamic> json) => StoreModel(
       ..phoneNumber = json['phoneNumber'] as String
       ..location = json['location'] as String
       ..type = json['type'] as String
-      ..locationOnMap = json['locationOnMap'] as String;
+      ..locationOnMap = json['locationOnMap'] as String
+      ..avatar = json['avatar'] as String?;
 
 Map<String, dynamic> _$StoreModelToJson(StoreModel instance) =>
     <String, dynamic>{
@@ -28,5 +29,6 @@ Map<String, dynamic> _$StoreModelToJson(StoreModel instance) =>
       'location': instance.location,
       'type': instance.type,
       'locationOnMap': instance.locationOnMap,
+      'avatar': instance.avatar,
       'result': instance.result,
     };

@@ -22,7 +22,8 @@ pendingStoreModel _$pendingStoreModelFromJson(Map<String, dynamic> json) =>
       ..instagram = json['instagram'] as String
       ..locationOnMap = json['locationOnMap'] as String
       ..location = json['location'] as String
-      ..type = json['type'] as String;
+      ..type = json['type'] as String
+      ..avatar = json['avatar'] as String?;
 
 Map<String, dynamic> _$pendingStoreModelToJson(pendingStoreModel instance) =>
     <String, dynamic>{
@@ -39,5 +40,6 @@ Map<String, dynamic> _$pendingStoreModelToJson(pendingStoreModel instance) =>
       'locationOnMap': instance.locationOnMap,
       'location': instance.location,
       'type': instance.type,
+      'avatar': instance.avatar,
       'result': instance.result,
     };

@@ -9,6 +9,7 @@ import 'package:udemy_flutter/modules/admin/admin_screen.dart';
 import 'package:udemy_flutter/modules/home/main_screen.dart';
 import 'package:udemy_flutter/modules/password/password_screen.dart';
 import 'package:udemy_flutter/modules/phone/phone_screen.dart';
+import 'package:udemy_flutter/modules/shopkeeper/shopkeeperMain_screen.dart';
 import 'package:udemy_flutter/shared/components/components.dart';
 import 'package:udemy_flutter/modules/signup/signUp_screen.dart';
 import 'package:http/http.dart' as http;
@@ -51,6 +52,12 @@ class _LoginScreenState extends State<LoginScreen> {
         headers: {'Content-Type': 'application/json; charset=UTF-8'},
         body: body);
 
+    var result3 = await http.post(Uri.parse(fetchData.baseURL + "/store/login"),
+        headers: {'Content-Type': 'application/json; charset=UTF-8'},
+        body: body);
+
+    print(result3.statusCode);
+
     if (result.statusCode == 200) {
       var body = jsonDecode(result.body);
       sharedPrefs.saveToken(body['token']);
@@ -61,6 +68,11 @@ class _LoginScreenState extends State<LoginScreen> {
       sharedPrefs.saveToken(body['token']);
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => AdminScreen()));
+    } else if (result3.statusCode == 200) {
+      var body = jsonDecode(result3.body);
+      sharedPrefs.saveToken(body['token']);
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => ShopKeeperMainScreen()));
     }
   }
 
@@ -426,12 +438,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Icons.phone,
                         size: 24.0,
                       ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PhoneScreen()));
-                      },
+                      onPressed: () {},
                     ),
                   ),
                   SizedBox(
