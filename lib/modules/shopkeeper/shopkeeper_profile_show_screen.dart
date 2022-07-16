@@ -1,134 +1,69 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:udemy_flutter/API/fetchData.dart';
-import 'package:udemy_flutter/modules/admin/adminMain_screen.dart';
-import 'package:udemy_flutter/modules/admin/admin_account_screen.dart';
-import 'package:udemy_flutter/modules/admin/admin_screen.dart';
-import 'package:udemy_flutter/modules/admin/admin_shops_screen.dart';
 import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
 import 'package:udemy_flutter/modules/language/language_screen.dart';
 import 'package:udemy_flutter/modules/login/login_screen.dart';
 import 'package:udemy_flutter/modules/password/password_screen.dart';
 import 'package:udemy_flutter/modules/phone/phone_screen.dart';
+import 'package:udemy_flutter/modules/shopkeeper/addProduct_screen.dart';
+import 'package:udemy_flutter/modules/shopkeeper/shopkeeperMain_screen.dart';
+import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_account_screen.dart';
+import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_products_screen.dart';
+import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_profile_screen.dart';
 import 'package:udemy_flutter/modules/signup/signUp_screen.dart';
 import "package:url_launcher/url_launcher.dart";
 import '../../src/my_app.dart';
-import 'package:http/http.dart' as http;
 
 var id;
 var name;
 var description;
-var type;
 var phoneNumber;
-var location;
-var detailedLocation;
-var facebook;
-var instagram;
-var snapchat;
-var whatsapp;
 var locationOnMap;
 
-class AdminShopsDetailsScreen extends StatefulWidget {
-  AdminShopsDetailsScreen(
-      id,
-      name,
-      description,
-      type,
-      phoneNumber,
-      location,
-      detailedLocation,
-      facebook,
-      instagram,
-      snapchat,
-      whatsapp,
-      locationOnMap) {
-    this.setData(
-        id,
-        name,
-        description,
-        type,
-        phoneNumber,
-        location,
-        detailedLocation,
-        facebook,
-        instagram,
-        snapchat,
-        whatsapp,
-        locationOnMap);
+class ShopkeeperProfileShowScreen extends StatefulWidget
+{
+  ProfileShoScreen(id, name, description, phoneNumber, locationOnMap) {
+    this.setData(id, name, description, phoneNumber, locationOnMap);
   }
 
-  setData(ID, Name, Description, Type, Phonenumber, Location, detlocation, face,
-      insta, snap, whats, locOnMap) {
+  setData(ID, Name, Description, Phonenumber, Locationonmap) {
     id = ID;
     name = Name;
     description = Description;
-    type = Type;
     phoneNumber = Phonenumber;
-    location = Location;
-    detailedLocation = detlocation;
-    facebook = face;
-    instagram = insta;
-    snapchat = snap;
-    whatsapp = whats;
-    locationOnMap = locOnMap;
+    locationOnMap = Locationonmap;
+  }
+
+  String getID() {
+    return id;
+  }
+
+  String getName() {
+    return name;
+  }
+
+  String getDescription() {
+    return description;
+  }
+
+  String getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  String getLocationOnMap() {
+    return locationOnMap;
   }
 
   @override
-  State<AdminShopsDetailsScreen> createState() =>
-      _AdminShopsDetailsScreenState();
+  State<ShopkeeperProfileShowScreen> createState() => _ShopkeeperProfileShowScreenState();
 }
 
-class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
+class _ShopkeeperProfileShowScreenState extends State<ShopkeeperProfileShowScreen> {
   var defaultText = TextStyle(color: Colors.black);
 
   var linkText = TextStyle(color: Colors.black);
-
-  Future<void> confirmPendingStore(BuildContext context) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.get('token');
-    var result = await http.post(
-        Uri.parse(fetchData.baseURL + '/admin/confirmPendingStore/' + id),
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer ' + token.toString()
-        });
-
-    print(result.statusCode);
-
-    if (result.statusCode == 201) {
-      var body = jsonDecode(result.body);
-
-      showDialog(
-        context: context,
-        builder: (BuildContext context) => _buildPopupDialog(context),
-      );
-    }
-  }
-
-  Future<void> declinePendingStore(BuildContext context) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.get('token');
-    var result = await http.post(
-        Uri.parse(fetchData.baseURL + '/admin/declinePendingStore/' + id),
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer ' + token.toString()
-        });
-
-    print(result.statusCode);
-
-    if (result.statusCode == 200) {
-      var body = jsonDecode(result.body);
-      showDialog(
-        context: context,
-        builder: (BuildContext context) => _buildPopupDialog2(context),
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -142,14 +77,8 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
               color: Colors.blue,
               size: 35,
             )),
-        title: Text(
-          "تفاصيل المتجر",
-          style: TextStyle(
-            color: Colors.blue,
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        title:Icon(Icons.remove_red_eye_sharp,size: 30,) ,
+
         actions: [
           IconButton(
             onPressed: () {
@@ -227,19 +156,10 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                 title: Text("الى الرئيسية"),
                 leading: Icon(Icons.store, color: Color(0xff758DFF)),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => AdminMainScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ShopKeeperMainScreen()));
                 },
               ),
-              ListTile(
-                title: Text("الى المتاجر"),
-                leading: Icon(Icons.storefront, color: Color(0xff758DFF)),
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => AdminShopsScreen()));
-                },
-              ),
-              SizedBox(
-                height: 0,
-              ),
+
               Container(
                 width: 300,
                 height: 1,
@@ -265,17 +185,47 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AdminAccountScreen()));
+                          builder: (context) => ShopkeeperAccountScreen()));
                 },
               ),
               ListTile(
-                title: Text("طلبات المتاجر الجديدة"),
-                leading: Icon(Icons.person, color: Color(0xff758DFF)),
+                title: Text("متجري"),
+                leading: Icon(Icons.storefront, color: Color(0xff758DFF)),
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AdminScreen()));
+                          builder: (context) => ShopkeeperProfileScreen()));
+                },
+              ),
+              ListTile(
+                title: Text("منتجاتي"),
+                leading: Icon(Icons.production_quantity_limits, color: Color(0xff758DFF)),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ShopkeeperProductsScreen()));
+                },
+              ),
+              ListTile(
+                title: Text("اضافة منتج جديد"),
+                leading: Icon(Icons.add_shopping_cart, color: Color(0xff758DFF)),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AddProductScreen()));
+                },
+              ),
+              ListTile(
+                title: Text("حذف المتجر نهائيا"),
+                leading: Icon(Icons.highlight_remove_sharp, color: Color(0xff758DFF)),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AddProductScreen()));
                 },
               ),
 
@@ -352,7 +302,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
             children: [
               //الصورة
               Container(
-                height: 180,
+                height: 340,
                 margin: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                     boxShadow: [
@@ -364,58 +314,11 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                     ],
                     color: Colors.white,
                     image: DecorationImage(
-                        image: NetworkImage(
-                            'https://www.nicepng.com/png/detail/254-2540580_we-create-a-customized-solution-to-meet-all.png'),
+                        image: NetworkImage('https://www.nicepng.com/png/detail/254-2540580_we-create-a-customized-solution-to-meet-all.png'),
                         fit: BoxFit.cover),
                     borderRadius: BorderRadius.circular(30)),
               ),
-              //اسم المتجر
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.0),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(0, 1.0), //(x,y)
-                      blurRadius: 5.0,
-                    ),
-                  ],
-                ),
-                // color: Colors.white,
-                height: 105,
-                width: double.infinity,
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
-                      children: [
-                        Text(
-                          'اسم المتجر : ',
-                          style: TextStyle(
-                              color: Colors.blue,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          name,
-                          style: TextStyle(
-                              fontSize: 13, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              //وصف المتجر
+              //الاسم والوصف
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0),
@@ -436,68 +339,12 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                          'وصف المتجر : ',
-                          style: TextStyle(
-                              color: Colors.blue,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 0),
-                      child: Text(
-                        description,
-                        style: TextStyle(
-                            fontSize: 13, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                ),
-              ),
-              //الفئة المختارة
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.0),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(0, 1.0), //(x,y)
-                      blurRadius: 5.0,
-                    ),
-                  ],
-                ),
-                // color: Colors.white,
-                height: 130,
-                width: double.infinity,
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 10,
-                    ),
                     Text(
-                      "الفئة المختارة : ",
+                      'تنويرات الشروق',
                       style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
-                      ),
+                          color: Colors.blue,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
                       height: 10,
@@ -505,7 +352,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                     Padding(
                       padding: const EdgeInsets.only(right: 0),
                       child: Text(
-                        type,
+                        "متجر متخصص لبيع كافة مستلومات الانارة",
                         style: TextStyle(
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
@@ -516,6 +363,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                   ],
                 ),
               ),
+
               //هاتف
               SizedBox(
                 height: 10,
@@ -543,26 +391,38 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text(
-                      "رقم الهاتف المحمول : ",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
-                      ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.phone,
+                          color: Colors.blue,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "هاتف",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     Text(
-                      phoneNumber,
+                      "0599865448",
                       style:
                       TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
               ),
-              //المدينة
+
+              //زيارة موقعنا
               SizedBox(
                 height: 10,
               ),
@@ -579,23 +439,31 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                   ],
                 ),
                 // color: Colors.white,
-                height: 130,
+                height: 170,
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "المدينة : ",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
-                      ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.place_outlined,
+                          color: Colors.blue,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "زيارة موقعنا",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(
                       height: 10,
@@ -603,59 +471,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                     Padding(
                       padding: const EdgeInsets.only(right: 0),
                       child: Text(
-                        location,
-                        style: TextStyle(
-                            fontSize: 13, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                ),
-              ),
-              //عنوان المتجر
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.0),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(0, 1.0), //(x,y)
-                      blurRadius: 5.0,
-                    ),
-                  ],
-                ),
-                // color: Colors.white,
-                height: 130,
-                width: double.infinity,
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "عنوان المتجر : ",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 0),
-                      child: Text(
-                        detailedLocation,
+                        "المعاجين",
                         style: TextStyle(
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
@@ -693,13 +509,24 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text(
-                      "رابط الفيسبوك : ",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
-                      ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.facebook,
+                          color: Colors.blue,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "فيسبوك",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(
                       height: 10,
@@ -708,76 +535,23 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                         text: TextSpan(children: [
                           TextSpan(
                               style: linkText,
-                              text: facebook,
+                              text: "www.facebook.com/DaffodilWomenFashion",
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () async {
-                                  var url = facebook;
+                                  var url =
+                                      "https://www.facebook.com/DaffodilWomenFashion";
                                   if (await canLaunch(url)) {
                                     await launch(url);
                                   } else {
                                     throw " cannot load url";
                                   }
                                 }),
-                        ])),
-                  ],
-                ),
-              ),
-              //انستغرام
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.0),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(0, 1.0), //(x,y)
-                      blurRadius: 5.0,
+                        ])
                     ),
                   ],
                 ),
-                // color: Colors.white,
-                height: 130,
-                width: double.infinity,
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "رابط الانستاغرام : ",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    RichText(
-                        text: TextSpan(children: [
-                          TextSpan(
-                              style: linkText,
-                              text: instagram,
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () async {
-                                  var url = instagram;
-                                  if (await canLaunch(url)) {
-                                    await launch(url);
-                                  } else {
-                                    throw " cannot load url";
-                                  }
-                                }),
-                        ])),
-                  ],
-                ),
               ),
+
               //سناب شات
               SizedBox(
                 height: 10,
@@ -805,13 +579,24 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text(
-                      "رابط السناب شات : ",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
-                      ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.chat,
+                          color: Colors.blue,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "سناب شات",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(
                       height: 10,
@@ -820,10 +605,11 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                         text: TextSpan(children: [
                           TextSpan(
                               style: linkText,
-                              text: snapchat,
+                              text: "www.snapchat.com/DaffodilWomenFashion",
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () async {
-                                  var url = snapchat;
+                                  var url =
+                                      "https://www.snapchat.com/DaffodilWomenFashion";
                                   if (await canLaunch(url)) {
                                     await launch(url);
                                   } else {
@@ -834,6 +620,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                   ],
                 ),
               ),
+
               //واتس أب
               SizedBox(
                 height: 10,
@@ -861,26 +648,38 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text(
-                      "رقم الواتس اب : ",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
-                      ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.phone,
+                          color: Colors.blue,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "واتس أب",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     Text(
-                      whatsapp,
+                      "+0098647854452",
                       style:
                       TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
               ),
-              //رابط الخريطة
+
+              //انستغرام
               SizedBox(
                 height: 10,
               ),
@@ -897,7 +696,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                   ],
                 ),
                 // color: Colors.white,
-                height: 290,
+                height: 130,
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 child: Column(
@@ -907,13 +706,93 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text(
-                      "رابط الخريطة : ",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
-                      ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.wysiwyg,
+                          color: Colors.blue,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "انستغرام",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    RichText(
+                        text: TextSpan(children: [
+                          TextSpan(
+                              style: linkText,
+                              text: "www.instagram.com/DaffodilWomenFashion",
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () async {
+                                  var url =
+                                      "https://www.instagram.com/DaffodilWomenFashion";
+                                  if (await canLaunch(url)) {
+                                    await launch(url);
+                                  } else {
+                                    throw " cannot load url";
+                                  }
+                                }),
+                        ])),
+                  ],
+                ),
+              ),
+
+              //عنوان المتجر
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(0, 1.0), //(x,y)
+                      blurRadius: 5.0,
+                    ),
+                  ],
+                ),
+                // color: Colors.white,
+                height: 230,
+                width: double.infinity,
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.place_rounded,
+                          color: Colors.blue,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "عنوان المتجر",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(
                       height: 10,
@@ -925,59 +804,19 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                               text: locationOnMap,
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () async {
-                                  // var url = locationOnMap;
-                                  // if (await canLaunch(url)) {
-                                  //   await launch(url);
-                                  // } else {
-                                  //   throw " cannot load url";
-                                  // }
+                                  var url = locationOnMap;
+                                  if (await canLaunch(url)) {
+                                    await launch(url);
+                                  } else {
+                                    throw " cannot load url";
+                                  }
                                 }),
                         ])),
                   ],
                 ),
               ),
               SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  Container(
-                    width: 170,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      color: Colors.green, // width: double.infinity,
-                    ),
-                    child: MaterialButton(
-                      onPressed: () {
-                        confirmPendingStore(context);
-                      },
-                      child: Text(
-                        "قبول",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  Spacer(),
-                  Container(
-                    width: 170,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      color: Colors.red, // width: double.infinity,
-                    ),
-                    child: MaterialButton(
-                      onPressed: () {
-                        declinePendingStore(context);
-                      },
-                      child: Text(
-                        "رفض",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
+                height: 10,
               ),
             ],
           ),
@@ -986,75 +825,6 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
     );
   }
 
-  //Pub up Function--------------------------------------------------------------------------------------------
-  Widget _buildPopupDialog(BuildContext context) {
-    return new AlertDialog(
-      content: new Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          CircleAvatar(
-              radius: 17,
-              backgroundColor: Colors.blue,
-              child: Icon(
-                Icons.check,
-                color: Colors.white,
-              )),
-          SizedBox(
-            height: 10,
-          ),
-          Text("تم قبول هذا المتجر")
-        ],
-      ),
-      actions: <Widget>[
-        new FlatButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => AdminScreen()));
-          },
-          textColor: Colors.blue,
-          child: const Text('موافق'),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildPopupDialog2(BuildContext context) {
-    return new AlertDialog(
-      content: new Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          CircleAvatar(
-              radius: 17,
-              backgroundColor: Colors.blue,
-              child: Icon(
-                Icons.check,
-                color: Colors.white,
-              )),
-          SizedBox(
-            height: 10,
-          ),
-          Text("تم رفض هذا المتجر")
-        ],
-      ),
-      actions: <Widget>[
-        new FlatButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => AdminScreen()));
-          },
-          textColor: Colors.blue,
-          child: const Text('موافق'),
-        ),
-      ],
-    );
-  }
-
-  //-----------------------------------------------------------------------------------------------------------
-  //مش مهم
   void onNotification() {
     var ScaffoldKey;
     ScaffoldKey.currentState?.openDrawer();

@@ -32,103 +32,20 @@ var snapchat;
 var whatsapp;
 var locationOnMap;
 
-class AdminShopsDetailsScreen extends StatefulWidget {
-  AdminShopsDetailsScreen(
-      id,
-      name,
-      description,
-      type,
-      phoneNumber,
-      location,
-      detailedLocation,
-      facebook,
-      instagram,
-      snapchat,
-      whatsapp,
-      locationOnMap) {
-    this.setData(
-        id,
-        name,
-        description,
-        type,
-        phoneNumber,
-        location,
-        detailedLocation,
-        facebook,
-        instagram,
-        snapchat,
-        whatsapp,
-        locationOnMap);
-  }
+class AdminShopsShowScreen extends StatefulWidget {
 
-  setData(ID, Name, Description, Type, Phonenumber, Location, detlocation, face,
-      insta, snap, whats, locOnMap) {
-    id = ID;
-    name = Name;
-    description = Description;
-    type = Type;
-    phoneNumber = Phonenumber;
-    location = Location;
-    detailedLocation = detlocation;
-    facebook = face;
-    instagram = insta;
-    snapchat = snap;
-    whatsapp = whats;
-    locationOnMap = locOnMap;
-  }
 
   @override
-  State<AdminShopsDetailsScreen> createState() =>
-      _AdminShopsDetailsScreenState();
+  State<AdminShopsShowScreen> createState() =>
+      _AdminShopsShowScreenState();
 }
 
-class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
+class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
+
   var defaultText = TextStyle(color: Colors.black);
 
   var linkText = TextStyle(color: Colors.black);
 
-  Future<void> confirmPendingStore(BuildContext context) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.get('token');
-    var result = await http.post(
-        Uri.parse(fetchData.baseURL + '/admin/confirmPendingStore/' + id),
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer ' + token.toString()
-        });
-
-    print(result.statusCode);
-
-    if (result.statusCode == 201) {
-      var body = jsonDecode(result.body);
-
-      showDialog(
-        context: context,
-        builder: (BuildContext context) => _buildPopupDialog(context),
-      );
-    }
-  }
-
-  Future<void> declinePendingStore(BuildContext context) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.get('token');
-    var result = await http.post(
-        Uri.parse(fetchData.baseURL + '/admin/declinePendingStore/' + id),
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer ' + token.toString()
-        });
-
-    print(result.statusCode);
-
-    if (result.statusCode == 200) {
-      var body = jsonDecode(result.body);
-      showDialog(
-        context: context,
-        builder: (BuildContext context) => _buildPopupDialog2(context),
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -346,7 +263,8 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: Container(
+        child:
+        Container(
           width: double.infinity,
           child: Column(
             children: [
@@ -364,8 +282,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                     ],
                     color: Colors.white,
                     image: DecorationImage(
-                        image: NetworkImage(
-                            'https://www.nicepng.com/png/detail/254-2540580_we-create-a-customized-solution-to-meet-all.png'),
+                        image: NetworkImage('https://www.nicepng.com/png/detail/254-2540580_we-create-a-customized-solution-to-meet-all.png'),
                         fit: BoxFit.cover),
                     borderRadius: BorderRadius.circular(30)),
               ),
@@ -403,7 +320,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                           height: 5,
                         ),
                         Text(
-                          name,
+                          'تنويرات الشروق',
                           style: TextStyle(
                               fontSize: 13, fontWeight: FontWeight.bold),
                         ),
@@ -453,7 +370,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                     Padding(
                       padding: const EdgeInsets.only(right: 0),
                       child: Text(
-                        description,
+                        'متجر متخصص لبيع كافة مستلزمات الانارة',
                         style: TextStyle(
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
@@ -505,7 +422,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                     Padding(
                       padding: const EdgeInsets.only(right: 0),
                       child: Text(
-                        type,
+                        'للاطفال',
                         style: TextStyle(
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
@@ -555,7 +472,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                       height: 10,
                     ),
                     Text(
-                      phoneNumber,
+                      "0599312556",
                       style:
                       TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
@@ -603,7 +520,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                     Padding(
                       padding: const EdgeInsets.only(right: 0),
                       child: Text(
-                        location,
+                        "نابلس",
                         style: TextStyle(
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
@@ -655,7 +572,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                     Padding(
                       padding: const EdgeInsets.only(right: 0),
                       child: Text(
-                        detailedLocation,
+                        "المعاجين",
                         style: TextStyle(
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
@@ -873,7 +790,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                       height: 10,
                     ),
                     Text(
-                      whatsapp,
+                      '0005685448525',
                       style:
                       TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
@@ -939,46 +856,27 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
               SizedBox(
                 height: 20,
               ),
-              Row(
-                children: [
-                  Container(
-                    width: 170,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      color: Colors.green, // width: double.infinity,
-                    ),
-                    child: MaterialButton(
-                      onPressed: () {
-                        confirmPendingStore(context);
-                      },
-                      child: Text(
-                        "قبول",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
+              //كبسة حذف المتجر
+              Container(
+                width: 330,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  color: Colors.red, // width: double.infinity,
+                ),
+                child: MaterialButton(
+                  onPressed: () {
+                    showDialog(context: context,builder: (BuildContext context) => _buildPopupDialog(context),);
+                  },
+                  child: Text(
+                    "حذف المتجر",
+                    style: TextStyle(color: Colors.white),
                   ),
-                  Spacer(),
-                  Container(
-                    width: 170,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      color: Colors.red, // width: double.infinity,
-                    ),
-                    child: MaterialButton(
-                      onPressed: () {
-                        declinePendingStore(context);
-                      },
-                      child: Text(
-                        "رفض",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
               SizedBox(
-                height: 20,
+                height: 16,
               ),
+
             ],
           ),
         ),
@@ -1003,52 +901,21 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
           SizedBox(
             height: 10,
           ),
-          Text("تم قبول هذا المتجر")
+          Text("تم حذف المتجر !! ")
         ],
       ),
       actions: <Widget>[
         new FlatButton(
-          onPressed: () {
+          onPressed: ()
+          {
             Navigator.of(context).pop();
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => AdminScreen()));
+                MaterialPageRoute(builder: (context) => AdminShopsScreen()));
           },
           textColor: Colors.blue,
           child: const Text('موافق'),
         ),
-      ],
-    );
-  }
 
-  Widget _buildPopupDialog2(BuildContext context) {
-    return new AlertDialog(
-      content: new Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          CircleAvatar(
-              radius: 17,
-              backgroundColor: Colors.blue,
-              child: Icon(
-                Icons.check,
-                color: Colors.white,
-              )),
-          SizedBox(
-            height: 10,
-          ),
-          Text("تم رفض هذا المتجر")
-        ],
-      ),
-      actions: <Widget>[
-        new FlatButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => AdminScreen()));
-          },
-          textColor: Colors.blue,
-          child: const Text('موافق'),
-        ),
       ],
     );
   }

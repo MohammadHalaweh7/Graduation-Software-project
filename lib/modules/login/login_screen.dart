@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/API/sharedPrefs.dart';
+import 'package:udemy_flutter/modules/admin/adminMain_screen.dart';
 import 'package:udemy_flutter/modules/admin/admin_screen.dart';
 import 'package:udemy_flutter/modules/home/main_screen.dart';
 import 'package:udemy_flutter/modules/password/password_screen.dart';
@@ -67,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
       var body = jsonDecode(result2.body);
       sharedPrefs.saveToken(body['token']);
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => AdminScreen()));
+          context, MaterialPageRoute(builder: (context) => AdminMainScreen()));
     } else if (result3.statusCode == 200) {
       var body = jsonDecode(result3.body);
       sharedPrefs.saveToken(body['token']);

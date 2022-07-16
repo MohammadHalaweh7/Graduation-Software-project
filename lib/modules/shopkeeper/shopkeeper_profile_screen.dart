@@ -14,6 +14,12 @@ import 'package:udemy_flutter/modules/language/language_screen.dart';
 import 'package:udemy_flutter/modules/login/login_screen.dart';
 import 'package:udemy_flutter/modules/password/password_screen.dart';
 import 'package:udemy_flutter/modules/phone/phone_screen.dart';
+import 'package:udemy_flutter/modules/shopkeeper/addProduct_screen.dart';
+import 'package:udemy_flutter/modules/shopkeeper/shopkeeperMain_screen.dart';
+import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_account_screen.dart';
+import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_products_screen.dart';
+import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_profile_edit_screen.dart';
+import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_profile_show_screen.dart';
 import 'package:udemy_flutter/modules/signup/signUp_screen.dart';
 import "package:url_launcher/url_launcher.dart";
 import '../../src/my_app.dart';
@@ -32,103 +38,19 @@ var snapchat;
 var whatsapp;
 var locationOnMap;
 
-class AdminShopsDetailsScreen extends StatefulWidget {
-  AdminShopsDetailsScreen(
-      id,
-      name,
-      description,
-      type,
-      phoneNumber,
-      location,
-      detailedLocation,
-      facebook,
-      instagram,
-      snapchat,
-      whatsapp,
-      locationOnMap) {
-    this.setData(
-        id,
-        name,
-        description,
-        type,
-        phoneNumber,
-        location,
-        detailedLocation,
-        facebook,
-        instagram,
-        snapchat,
-        whatsapp,
-        locationOnMap);
-  }
+class ShopkeeperProfileScreen extends StatefulWidget {
 
-  setData(ID, Name, Description, Type, Phonenumber, Location, detlocation, face,
-      insta, snap, whats, locOnMap) {
-    id = ID;
-    name = Name;
-    description = Description;
-    type = Type;
-    phoneNumber = Phonenumber;
-    location = Location;
-    detailedLocation = detlocation;
-    facebook = face;
-    instagram = insta;
-    snapchat = snap;
-    whatsapp = whats;
-    locationOnMap = locOnMap;
-  }
 
   @override
-  State<AdminShopsDetailsScreen> createState() =>
-      _AdminShopsDetailsScreenState();
+  State<ShopkeeperProfileScreen> createState() =>_ShopkeeperProfileScreenState();
 }
 
-class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
+class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
+
   var defaultText = TextStyle(color: Colors.black);
 
   var linkText = TextStyle(color: Colors.black);
 
-  Future<void> confirmPendingStore(BuildContext context) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.get('token');
-    var result = await http.post(
-        Uri.parse(fetchData.baseURL + '/admin/confirmPendingStore/' + id),
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer ' + token.toString()
-        });
-
-    print(result.statusCode);
-
-    if (result.statusCode == 201) {
-      var body = jsonDecode(result.body);
-
-      showDialog(
-        context: context,
-        builder: (BuildContext context) => _buildPopupDialog(context),
-      );
-    }
-  }
-
-  Future<void> declinePendingStore(BuildContext context) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.get('token');
-    var result = await http.post(
-        Uri.parse(fetchData.baseURL + '/admin/declinePendingStore/' + id),
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer ' + token.toString()
-        });
-
-    print(result.statusCode);
-
-    if (result.statusCode == 200) {
-      var body = jsonDecode(result.body);
-      showDialog(
-        context: context,
-        builder: (BuildContext context) => _buildPopupDialog2(context),
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +65,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
               size: 35,
             )),
         title: Text(
-          "تفاصيل المتجر",
+          "متجري",
           style: TextStyle(
             color: Colors.blue,
             fontSize: 22,
@@ -227,19 +149,10 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                 title: Text("الى الرئيسية"),
                 leading: Icon(Icons.store, color: Color(0xff758DFF)),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => AdminMainScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ShopKeeperMainScreen()));
                 },
               ),
-              ListTile(
-                title: Text("الى المتاجر"),
-                leading: Icon(Icons.storefront, color: Color(0xff758DFF)),
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => AdminShopsScreen()));
-                },
-              ),
-              SizedBox(
-                height: 0,
-              ),
+
               Container(
                 width: 300,
                 height: 1,
@@ -265,17 +178,47 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AdminAccountScreen()));
+                          builder: (context) => ShopkeeperAccountScreen()));
                 },
               ),
               ListTile(
-                title: Text("طلبات المتاجر الجديدة"),
-                leading: Icon(Icons.person, color: Color(0xff758DFF)),
+                title: Text("متجري"),
+                leading: Icon(Icons.storefront, color: Color(0xff758DFF)),
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AdminScreen()));
+                          builder: (context) => ShopkeeperProfileScreen()));
+                },
+              ),
+              ListTile(
+                title: Text("منتجاتي"),
+                leading: Icon(Icons.production_quantity_limits, color: Color(0xff758DFF)),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ShopkeeperProductsScreen()));
+                },
+              ),
+              ListTile(
+                title: Text("اضافة منتج جديد"),
+                leading: Icon(Icons.add_shopping_cart, color: Color(0xff758DFF)),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AddProductScreen()));
+                },
+              ),
+              ListTile(
+                title: Text("حذف المتجر نهائيا"),
+                leading: Icon(Icons.highlight_remove_sharp, color: Color(0xff758DFF)),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AddProductScreen()));
                 },
               ),
 
@@ -346,13 +289,14 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: Container(
+        child:
+        Container(
           width: double.infinity,
           child: Column(
             children: [
               //الصورة
               Container(
-                height: 180,
+                height: 200,
                 margin: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                     boxShadow: [
@@ -364,10 +308,55 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                     ],
                     color: Colors.white,
                     image: DecorationImage(
-                        image: NetworkImage(
-                            'https://www.nicepng.com/png/detail/254-2540580_we-create-a-customized-solution-to-meet-all.png'),
+                        image: NetworkImage('https://www.nicepng.com/png/detail/254-2540580_we-create-a-customized-solution-to-meet-all.png'),
                         fit: BoxFit.cover),
                     borderRadius: BorderRadius.circular(30)),
+              ),
+              //كبسة تعديل الملف الشخصي
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 200,
+                    decoration: BoxDecoration(
+
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      color: Colors.grey[300], // width: double.infinity,
+                    ),
+                    child: MaterialButton(
+                      onPressed: () {
+                        Navigator.push(context,MaterialPageRoute(builder: (context) =>ShopkeeperProfileEditScreen()));
+                      },
+                      child: Row(
+                        children: [
+                          Text(
+                            "تعديل الملف الشخصي",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          SizedBox(width: 7,),
+                          Icon(Icons.edit_sharp,color: Colors.black,)
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 15,),
+                  Container(
+                    width: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(100.0)),
+                      color: Colors.grey[300], // width: double.infinity,
+                    ),
+                    child: MaterialButton(
+                      onPressed: () {
+                        Navigator.push(context,MaterialPageRoute(builder: (context) =>ShopkeeperProfileShowScreen()));
+                      },
+                      child: Icon(Icons.remove_red_eye_sharp,color: Colors.black,size: 28,),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 22,
               ),
               //اسم المتجر
               Container(
@@ -403,7 +392,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                           height: 5,
                         ),
                         Text(
-                          name,
+                          'تنويرات الشروق',
                           style: TextStyle(
                               fontSize: 13, fontWeight: FontWeight.bold),
                         ),
@@ -453,7 +442,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                     Padding(
                       padding: const EdgeInsets.only(right: 0),
                       child: Text(
-                        description,
+                        'متجر متخصص لبيع كافة مستلزمات الانارة',
                         style: TextStyle(
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
@@ -505,7 +494,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                     Padding(
                       padding: const EdgeInsets.only(right: 0),
                       child: Text(
-                        type,
+                        'للاطفال',
                         style: TextStyle(
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
@@ -555,7 +544,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                       height: 10,
                     ),
                     Text(
-                      phoneNumber,
+                      "0599312556",
                       style:
                       TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
@@ -603,7 +592,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                     Padding(
                       padding: const EdgeInsets.only(right: 0),
                       child: Text(
-                        location,
+                        "نابلس",
                         style: TextStyle(
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
@@ -655,7 +644,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                     Padding(
                       padding: const EdgeInsets.only(right: 0),
                       child: Text(
-                        detailedLocation,
+                        "المعاجين",
                         style: TextStyle(
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
@@ -873,7 +862,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                       height: 10,
                     ),
                     Text(
-                      whatsapp,
+                      '0005685448525',
                       style:
                       TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
@@ -939,46 +928,9 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
               SizedBox(
                 height: 20,
               ),
-              Row(
-                children: [
-                  Container(
-                    width: 170,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      color: Colors.green, // width: double.infinity,
-                    ),
-                    child: MaterialButton(
-                      onPressed: () {
-                        confirmPendingStore(context);
-                      },
-                      child: Text(
-                        "قبول",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  Spacer(),
-                  Container(
-                    width: 170,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      color: Colors.red, // width: double.infinity,
-                    ),
-                    child: MaterialButton(
-                      onPressed: () {
-                        declinePendingStore(context);
-                      },
-                      child: Text(
-                        "رفض",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
+
+
+
             ],
           ),
         ),
@@ -1003,52 +955,21 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
           SizedBox(
             height: 10,
           ),
-          Text("تم قبول هذا المتجر")
+          Text("تم حذف المتجر !! ")
         ],
       ),
       actions: <Widget>[
         new FlatButton(
-          onPressed: () {
+          onPressed: ()
+          {
             Navigator.of(context).pop();
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => AdminScreen()));
+                MaterialPageRoute(builder: (context) => AdminShopsScreen()));
           },
           textColor: Colors.blue,
           child: const Text('موافق'),
         ),
-      ],
-    );
-  }
 
-  Widget _buildPopupDialog2(BuildContext context) {
-    return new AlertDialog(
-      content: new Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          CircleAvatar(
-              radius: 17,
-              backgroundColor: Colors.blue,
-              child: Icon(
-                Icons.check,
-                color: Colors.white,
-              )),
-          SizedBox(
-            height: 10,
-          ),
-          Text("تم رفض هذا المتجر")
-        ],
-      ),
-      actions: <Widget>[
-        new FlatButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => AdminScreen()));
-          },
-          textColor: Colors.blue,
-          child: const Text('موافق'),
-        ),
       ],
     );
   }

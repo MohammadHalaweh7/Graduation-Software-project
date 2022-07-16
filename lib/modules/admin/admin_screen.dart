@@ -5,7 +5,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/models/pendingStore/pendingStore_model.dart';
 import 'package:udemy_flutter/modules/account/account_screen.dart';
+import 'package:udemy_flutter/modules/admin/adminMain_screen.dart';
+import 'package:udemy_flutter/modules/admin/admin_account_screen.dart';
 import 'package:udemy_flutter/modules/admin/admin_shops_details_screen.dart';
+import 'package:udemy_flutter/modules/admin/admin_shops_screen.dart';
 import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
 import 'package:udemy_flutter/modules/language/language_screen.dart';
 import 'package:udemy_flutter/modules/login/login_screen.dart';
@@ -17,6 +20,7 @@ class AdminScreen extends StatefulWidget {
 }
 
 class _AdminScreenState extends State<AdminScreen> {
+
   fetchData fetch = fetchData();
 
   Widget fetchPendingStores() {
@@ -26,29 +30,31 @@ class _AdminScreenState extends State<AdminScreen> {
           var pendingStores = snapchot.data as List<pendingStoreModel>;
           return snapchot.data == null
               ? CircularProgressIndicator(
-                  value: 0.8,
-                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
-                )
+            value: 0.8,
+            valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+          )
               : ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: pendingStores == null ? 0 : pendingStores.length,
-                  itemBuilder: (context, index) {
-                    return myPendingStores(
-                      pendingStores[index].id,
-                      pendingStores[index].name,
-                      pendingStores[index].description,
-                      pendingStores[index].type,
-                      pendingStores[index].phoneNumber,
-                      pendingStores[index].location,
-                      pendingStores[index].detailedLocation,
-                      pendingStores[index].facebook,
-                      pendingStores[index].instagram,
-                      pendingStores[index].snapchat,
-                      pendingStores[index].whatsapp,
-                      pendingStores[index].locationOnMap,
-                    );
-                  });
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: pendingStores == null ? 0 : pendingStores.length,
+              itemBuilder: (context, index) {
+                print(pendingStores.length);
+                print('hello');
+                return myPendingStores(
+                  pendingStores[index].id,
+                  pendingStores[index].name,
+                  pendingStores[index].description,
+                  pendingStores[index].type,
+                  pendingStores[index].phoneNumber,
+                  pendingStores[index].location,
+                  pendingStores[index].detailedLocation,
+                  pendingStores[index].facebook,
+                  pendingStores[index].instagram,
+                  pendingStores[index].snapchat,
+                  pendingStores[index].whatsapp,
+                  pendingStores[index].locationOnMap,
+                );
+              });
         });
   }
 
@@ -87,8 +93,8 @@ class _AdminScreenState extends State<AdminScreen> {
                     locationOnMap)));
       },
       child:
-          //هاد الكونتينر بضم كلشي
-          Container(
+      //هاد الكونتينر بضم كلشي
+      Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.0),
           color: Colors.white,
@@ -108,12 +114,11 @@ class _AdminScreenState extends State<AdminScreen> {
                 width: 115,
                 height: 115,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  // image: DecorationImage(
-                  //     image: NetworkImage(
-                  //         'https://www.nicepng.com/png/detail/254-2540580_we-create-a-customized-solution-to-meet-all.png'),
-                  //     fit: BoxFit.cover)
-                ),
+                    borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                        image: NetworkImage(
+                            'https://www.nicepng.com/png/detail/254-2540580_we-create-a-customized-solution-to-meet-all.png'),
+                        fit: BoxFit.cover)),
               ),
               SizedBox(
                 width: 10,
@@ -153,10 +158,10 @@ class _AdminScreenState extends State<AdminScreen> {
 
                       Expanded(
                           child: Text(
-                        description,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      )),
+                            description,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          )),
                       // Text('${article['publishedAt']}',style: TextStyle(color: Colors.grey,fontSize: 20),),
                     ],
                   ),
@@ -213,9 +218,18 @@ class _AdminScreenState extends State<AdminScreen> {
                 ),
               ),
               ListTile(
-                title: Text("الى المتاجر"),
+                title: Text("الى الرئيسية"),
                 leading: Icon(Icons.store, color: Color(0xff758DFF)),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => AdminMainScreen()));
+                },
+              ),
+              ListTile(
+                title: Text("الى المتاجر"),
+                leading: Icon(Icons.storefront, color: Color(0xff758DFF)),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => AdminShopsScreen()));
+                },
               ),
               SizedBox(
                 height: 0,
@@ -242,37 +256,31 @@ class _AdminScreenState extends State<AdminScreen> {
                 title: Text("حسابي"),
                 leading: Icon(Icons.person, color: Color(0xff758DFF)),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AccountScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AdminAccountScreen()));
                 },
               ),
               ListTile(
-                title: Text("منتجات أعجبتني"),
-                leading: Icon(Icons.favorite, color: Color(0xff758DFF)),
-                onTap: () {},
-              ),
-              ListTile(
-                title: Text("منتجات طلبتها"),
-                leading: Icon(Icons.add_chart, color: Color(0xff758DFF)),
+                title: Text("طلبات المتاجر الجديدة"),
+                leading: Icon(Icons.person, color: Color(0xff758DFF)),
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => MyOrdersScreen()));
+                          builder: (context) => AdminScreen()));
                 },
               ),
-              ListTile(
-                title: Text("منتجات شاهدتها"),
-                leading: Icon(Icons.remove_red_eye_outlined,
-                    color: Color(0xff758DFF)),
-                onTap: () {},
-              ),
+
+
+
               ListTile(
                 title: Text("تسجيل خروج"),
                 leading: Icon(Icons.logout, color: Color(0xff758DFF)),
                 onTap: () async {
                   SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
+                  await SharedPreferences.getInstance();
                   prefs.remove('token');
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LoginScreen()));
@@ -309,14 +317,7 @@ class _AdminScreenState extends State<AdminScreen> {
                           builder: (context) => LanguageScreen()));
                 },
               ),
-              ListTile(
-                title: Text("للانضمام الى متجراتي"),
-                leading: Icon(Icons.person_add, color: Color(0xff758DFF)),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => JoinAppScreen()));
-                },
-              ),
+
               ListTile(
                 title: Text("عن متجراتي"),
                 leading: Icon(Icons.assignment, color: Color(0xff758DFF)),
@@ -332,11 +333,7 @@ class _AdminScreenState extends State<AdminScreen> {
                 leading: Icon(Icons.warning, color: Color(0xff758DFF)),
                 onTap: () {},
               ),
-              ListTile(
-                title: Text("قيم هذا التطبيق"),
-                leading: Icon(Icons.star, color: Color(0xff758DFF)),
-                onTap: () {},
-              ),
+
             ],
           ),
         ),
@@ -351,7 +348,7 @@ class _AdminScreenState extends State<AdminScreen> {
               size: 35,
             )),
         title: Text(
-          "الصفحة الرئيسية",
+          "طلبات المتاجر",
           style: TextStyle(
             color: Colors.blue,
             fontSize: 22,
@@ -372,7 +369,9 @@ class _AdminScreenState extends State<AdminScreen> {
         ],
       ),
 
-      body: fetchPendingStores(),
+      body: Center(child: fetchPendingStores()),
+
+
       //     //هاد بضم الكونتينر وكل اللي جواتو
       //     GestureDetector(
       //   onTap: () {
