@@ -16,7 +16,7 @@ class fetchData {
     //  print(res.body);
     var body = jsonDecode(res.body) as List<dynamic>;
 
-    // print(body.toString());
+    print(body.length);
 
     return body.map((store) => StoreModel.fromJson(store)).toList();
   }

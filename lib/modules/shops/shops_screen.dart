@@ -67,18 +67,35 @@ class _ShopsScreenState extends State<ShopsScreen> {
                       stores[index].phoneNumber,
                       stores[index].locationOnMap,
                       stores[index].avatar,
+                      stores[index].detailedLocation,
+                      stores[index].facebook,
+                      stores[index].snapchat,
+                      stores[index].whatsapp,
+                      stores[index].instagram,
                     );
                   });
         });
   }
 
-  Widget mystore(name, description, id, phoneNumber, locationOnMap, avatar) {
+  Widget mystore(name, description, id, phoneNumber, locationOnMap, avatar,
+      detailedLocation, facebook, snapchat, whatsapp, instagram) {
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: GestureDetector(
         onTap: () {
           ShopLayout().setData(
-              id, name, description, phoneNumber, locationOnMap, avatar);
+            id,
+            name,
+            description,
+            phoneNumber,
+            detailedLocation,
+            facebook,
+            snapchat,
+            whatsapp,
+            instagram,
+            locationOnMap,
+            avatar,
+          );
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => ShopLayout()));
         },

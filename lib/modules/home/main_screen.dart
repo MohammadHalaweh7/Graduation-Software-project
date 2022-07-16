@@ -53,8 +53,8 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Widget mystore(name, description, id, avatar) {
-    print(name);
-    print(avatar);
+    //print(name);
+    // print(avatar);
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Container(
@@ -265,6 +265,8 @@ class _MainScreenState extends State<MainScreen> {
                     SharedPreferences prefs =
                         await SharedPreferences.getInstance();
                     prefs.remove('token');
+                    prefs.remove('admintoken');
+                    prefs.remove('storetoken');
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => LoginScreen()));
                   },

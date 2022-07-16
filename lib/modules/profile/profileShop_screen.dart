@@ -18,19 +18,32 @@ var description;
 var phoneNumber;
 var locationOnMap;
 var avatar;
+var detailedLocation;
+var facebook;
+var snapchat;
+var whatsapp;
+var instagram;
 
 class ProfileShoScreen extends StatefulWidget {
-  ProfileShoScreen(id, name, description, phoneNumber, locationOnMap, avatar) {
-    this.setData(id, name, description, phoneNumber, locationOnMap, avatar);
+  ProfileShoScreen(id, name, description, phoneNumber, locationOnMap, avatar,
+      detailedLocation, facebook, snapchat, whatsapp, instagram) {
+    this.setData(id, name, description, phoneNumber, locationOnMap, avatar,
+        detailedLocation, facebook, snapchat, whatsapp, instagram);
   }
 
-  setData(ID, Name, Description, Phonenumber, Locationonmap, Avatar) {
+  setData(ID, Name, Description, Phonenumber, Locationonmap, Avatar, Detloc,
+      Face, Snap, Whats, Insta) {
     id = ID;
     name = Name;
     description = Description;
     phoneNumber = Phonenumber;
     locationOnMap = Locationonmap;
     avatar = Avatar;
+    detailedLocation = Detloc;
+    facebook = Face;
+    snapchat = Snap;
+    whatsapp = Whats;
+    instagram = Insta;
   }
 
   String getID() {
@@ -456,7 +469,7 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                     Padding(
                       padding: const EdgeInsets.only(right: 0),
                       child: Text(
-                        "لكي تكوني متميزة بارقى واحدث موديلات ملابس الصبايا . تفضلي بزيارة محلنا عنوان المحل نابلس - شارع كلية الروضة - بجانب مدرسة جردانة وسوق القهوة",
+                        detailedLocation,
                         style: TextStyle(
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
@@ -520,11 +533,10 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                         text: TextSpan(children: [
                       TextSpan(
                           style: linkText,
-                          text: "www.facebook.com/DaffodilWomenFashion",
+                          text: facebook,
                           recognizer: TapGestureRecognizer()
                             ..onTap = () async {
-                              var url =
-                                  "https://www.facebook.com/DaffodilWomenFashion";
+                              var url = facebook;
                               if (await canLaunch(url)) {
                                 await launch(url);
                               } else {
@@ -589,11 +601,10 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                         text: TextSpan(children: [
                       TextSpan(
                           style: linkText,
-                          text: "www.snapchat.com/DaffodilWomenFashion",
+                          text: snapchat,
                           recognizer: TapGestureRecognizer()
                             ..onTap = () async {
-                              var url =
-                                  "https://www.snapchat.com/DaffodilWomenFashion";
+                              var url = snapchat;
                               if (await canLaunch(url)) {
                                 await launch(url);
                               } else {
@@ -655,7 +666,7 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                       height: 10,
                     ),
                     Text(
-                      phoneNumber,
+                      whatsapp,
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
@@ -716,11 +727,10 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                         text: TextSpan(children: [
                       TextSpan(
                           style: linkText,
-                          text: "www.instagram.com/DaffodilWomenFashion",
+                          text: instagram,
                           recognizer: TapGestureRecognizer()
                             ..onTap = () async {
-                              var url =
-                                  "https://www.instagram.com/DaffodilWomenFashion";
+                              var url = instagram;
                               if (await canLaunch(url)) {
                                 await launch(url);
                               } else {

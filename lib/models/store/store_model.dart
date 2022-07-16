@@ -12,9 +12,14 @@ class StoreModel {
   late final String email;
   late final String description;
   late final String phoneNumber;
+  late final String detailedLocation;
+  late final String facebook;
+  late final String snapchat;
+  late final String whatsapp;
+  late final String instagram;
+  late final String locationOnMap;
   late final String location;
   late final String type;
-  late final String locationOnMap;
   late final String? avatar;
   Map result = {};
   // StoreModel();
