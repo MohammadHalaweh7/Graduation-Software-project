@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:udemy_flutter/API/fetchData.dart';
+import 'package:udemy_flutter/models/product/product_model.dart';
 import 'package:udemy_flutter/modules/language/language_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/addProduct_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeperMain_screen.dart';
@@ -11,41 +15,141 @@ import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_profile_screen.dart'
 import '../login/login_screen.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
 
-class ShopkeeperProductsEditScreen extends StatefulWidget
-{
-  @override
-  State<ShopkeeperProductsEditScreen> createState() => _ShopkeeperProductsEditScreenState();
-}
+var name;
+var description;
+var id;
+var price;
+var owner;
+var avatar;
 
-class _ShopkeeperProductsEditScreenState extends State<ShopkeeperProductsEditScreen> {
-
-  File? _image;
-  Future getImage() async
-  {
-    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if(image == null)return;
-
-    final imageTemporary = File(image.path);
-
-    setState(() {
-      this._image = imageTemporary ;
-    });
+class ShopkeeperProductsEditScreen extends StatefulWidget {
+  ShopkeeperProductsEditScreen(name, description, id, price, owner, avatar) {
+    this.setData(name, description, id, price, owner, avatar);
   }
 
+  setData(NAME, DESCRIPTION, ID, PRICE, OWNER, AVATAR) {
+    name = NAME;
+    description = DESCRIPTION;
+    id = ID;
+    price = PRICE;
+    owner = OWNER;
+    avatar = AVATAR;
+  }
+
+  @override
+  State<ShopkeeperProductsEditScreen> createState() =>
+      _ShopkeeperProductsEditScreenState();
+}
+
+class _ShopkeeperProductsEditScreenState
+    extends State<ShopkeeperProductsEditScreen> {
+  File? _image;
+  var myImage;
+  Future getImage() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (image == null) return;
+
+    final imageTemporary = File(image.path);
+    myImage = image;
+
+    setState(() {
+      this._image = imageTemporary;
+    });
+  }
 
   var formkey = GlobalKey<FormState>();
 
   var nameController = TextEditingController();
+  var priceController = TextEditingController();
+  var descriptionController = TextEditingController();
+
+  Future<ProductModel> editData() async {
+    var token;
+    var body;
+    if (!(myImage == null)) {
+      var bytes = await new File(myImage.path).readAsBytes();
+      String base64 = base64Encode(bytes);
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      token = prefs.get('token');
+      // print(token);
+      body = jsonEncode({
+        'name': nameController.text,
+        'description': descriptionController.text,
+        'price': priceController.text,
+        'avatar': base64
+      });
+    } else {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      token = prefs.get('token');
+      // print(token);
+      body = jsonEncode({
+        'name': nameController.text,
+        'description': descriptionController.text,
+        'price': priceController.text,
+      });
+    }
+
+    var result = await http.patch(
+        Uri.parse(fetchData.baseURL + "/product/" + id + "/editInfo"),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ' + token.toString()
+        },
+        body: body);
+
+    print(result.statusCode);
+
+    if (result.statusCode == 200) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => _buildPopupDialog(context),
+      );
+    }
+
+    ProductModel productModel = ProductModel.fromJson(jsonDecode(result.body));
+
+    return productModel;
+  }
+
+  Future<void> removeProduct(BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+    //print(token);
+    var result = await http.delete(
+        Uri.parse(fetchData.baseURL + '/store/deleteProduct/' + id),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ' + token.toString()
+        });
+
+    print(result.statusCode);
+
+    if (result.statusCode == 200) {
+      var body = jsonDecode(result.body);
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => _buildPopupDialog2(context),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    nameController.text = name;
+    priceController.text = price;
+    descriptionController.text = description;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(
             onPressed: onNotification,
-            icon: Icon(Icons.arrow_back, color: Colors.blue,size: 35,)),
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.blue,
+              size: 35,
+            )),
         title: Text(
           "تعديل / حذف المنتج",
           style: TextStyle(
@@ -111,10 +215,12 @@ class _ShopkeeperProductsEditScreenState extends State<ShopkeeperProductsEditScr
                 title: Text("الى الرئيسية"),
                 leading: Icon(Icons.store, color: Color(0xff758DFF)),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ShopKeeperMainScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ShopKeeperMainScreen()));
                 },
               ),
-
               Container(
                 width: 300,
                 height: 1,
@@ -155,7 +261,8 @@ class _ShopkeeperProductsEditScreenState extends State<ShopkeeperProductsEditScr
               ),
               ListTile(
                 title: Text("منتجاتي"),
-                leading: Icon(Icons.production_quantity_limits, color: Color(0xff758DFF)),
+                leading: Icon(Icons.production_quantity_limits,
+                    color: Color(0xff758DFF)),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -165,7 +272,8 @@ class _ShopkeeperProductsEditScreenState extends State<ShopkeeperProductsEditScr
               ),
               ListTile(
                 title: Text("اضافة منتج جديد"),
-                leading: Icon(Icons.add_shopping_cart, color: Color(0xff758DFF)),
+                leading:
+                    Icon(Icons.add_shopping_cart, color: Color(0xff758DFF)),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -175,7 +283,8 @@ class _ShopkeeperProductsEditScreenState extends State<ShopkeeperProductsEditScr
               ),
               ListTile(
                 title: Text("حذف المتجر نهائيا"),
-                leading: Icon(Icons.highlight_remove_sharp, color: Color(0xff758DFF)),
+                leading: Icon(Icons.highlight_remove_sharp,
+                    color: Color(0xff758DFF)),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -183,15 +292,12 @@ class _ShopkeeperProductsEditScreenState extends State<ShopkeeperProductsEditScr
                           builder: (context) => AddProductScreen()));
                 },
               ),
-
-
-
               ListTile(
                 title: Text("تسجيل خروج"),
                 leading: Icon(Icons.logout, color: Color(0xff758DFF)),
                 onTap: () async {
                   SharedPreferences prefs =
-                  await SharedPreferences.getInstance();
+                      await SharedPreferences.getInstance();
                   prefs.remove('token');
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LoginScreen()));
@@ -228,7 +334,6 @@ class _ShopkeeperProductsEditScreenState extends State<ShopkeeperProductsEditScr
                           builder: (context) => LanguageScreen()));
                 },
               ),
-
               ListTile(
                 title: Text("عن متجراتي"),
                 leading: Icon(Icons.assignment, color: Color(0xff758DFF)),
@@ -244,44 +349,38 @@ class _ShopkeeperProductsEditScreenState extends State<ShopkeeperProductsEditScr
                 leading: Icon(Icons.warning, color: Color(0xff758DFF)),
                 onTap: () {},
               ),
-
             ],
           ),
         ),
       ),
-      body:
-      SingleChildScrollView(
+      body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child:
-        Padding(
+        child: Padding(
           padding: const EdgeInsets.all(20),
-          child:
-          Container(
+          child: Container(
             child: SingleChildScrollView(
-              child:
-              Form(
+              child: Form(
                 key: formkey,
-                child:
-                Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     //  صورة المنتج-----------------------------------------------------------------------------------------------------------------
                     Text(
                       "صورة المنتج",
                       style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                     Row(
                       children: [
                         Container(
                           width: 220,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
                             color: Colors.blue, // width: double.infinity,
                           ),
                           child: MaterialButton(
-                            onPressed: ()
-                            {
+                            onPressed: () {
                               getImage();
                             },
                             child: Text(
@@ -291,8 +390,24 @@ class _ShopkeeperProductsEditScreenState extends State<ShopkeeperProductsEditScr
                           ),
                         ),
                         Spacer(),
-                        _image !=null ? Image.file(_image!,width: 120,height: 120,fit: BoxFit.cover,): Image.network('https://static.thenounproject.com/png/3322766-200.png',width: 120,height: 120,),
-
+                        _image != null
+                            ? Image.file(
+                                _image!,
+                                width: 120,
+                                height: 120,
+                                fit: BoxFit.cover,
+                              )
+                            : CircleAvatar(
+                                radius: 50.0,
+                                backgroundColor: Colors.white,
+                                backgroundImage: avatar == null
+                                    ? (NetworkImage(
+                                        'https://static.thenounproject.com/png/3322766-200.png',
+                                      ) as ImageProvider)
+                                    : MemoryImage(
+                                        base64Decode(avatar.toString()),
+                                      ),
+                              ),
                       ],
                     ),
                     SizedBox(
@@ -302,7 +417,7 @@ class _ShopkeeperProductsEditScreenState extends State<ShopkeeperProductsEditScr
                     Text(
                       "اسم المنتج",
                       style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                     TextFormField(
                       controller: nameController,
@@ -313,7 +428,6 @@ class _ShopkeeperProductsEditScreenState extends State<ShopkeeperProductsEditScr
                         print(value);
                       },
                       decoration: InputDecoration(
-
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -325,15 +439,13 @@ class _ShopkeeperProductsEditScreenState extends State<ShopkeeperProductsEditScr
                     Text(
                       "سعر المنتج",
                       style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                     TextFormField(
-                      onFieldSubmitted: (String value) {
-                      },
-                      onChanged: (String value) {
-                      },
+                      controller: priceController,
+                      onFieldSubmitted: (String value) {},
+                      onChanged: (String value) {},
                       decoration: InputDecoration(
-
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -344,10 +456,10 @@ class _ShopkeeperProductsEditScreenState extends State<ShopkeeperProductsEditScr
                     Text(
                       "وصف بسيط عن المنتج",
                       style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                     TextField(
-                      // controller: descriptionController,
+                      controller: descriptionController,
                       minLines: 5,
                       maxLines: 5,
                       onTap: () {},
@@ -356,7 +468,7 @@ class _ShopkeeperProductsEditScreenState extends State<ShopkeeperProductsEditScr
                           helperStyle: TextStyle(color: Colors.white70),
                           border: OutlineInputBorder(
                               borderRadius:
-                              BorderRadius.all(Radius.circular(10)))),
+                                  BorderRadius.all(Radius.circular(10)))),
                     ),
                     SizedBox(
                       height: 15,
@@ -364,19 +476,18 @@ class _ShopkeeperProductsEditScreenState extends State<ShopkeeperProductsEditScr
 
                     //تعديل / حذف -----------------------------------------------------------------------------------------------------------------
                     Row(
-                      children:
-                      [
+                      children: [
                         //تعديل
                         Container(
                           width: 175,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
                             color: Colors.blue, // width: double.infinity,
                           ),
                           child: MaterialButton(
-                            onPressed: ()
-                            {
-                              showDialog(context: context,builder: (BuildContext context) =>_buildPopupDialog(context),);
+                            onPressed: () {
+                              editData();
                             },
                             child: Text(
                               "تعديل",
@@ -389,13 +500,13 @@ class _ShopkeeperProductsEditScreenState extends State<ShopkeeperProductsEditScr
                         Container(
                           width: 175,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
                             color: Colors.red, // width: double.infinity,
                           ),
                           child: MaterialButton(
-                            onPressed: ()
-                            {
-                              showDialog(context: context,builder: (BuildContext context) =>_buildPopupDialog2(context),);
+                            onPressed: () {
+                              removeProduct(context);
                             },
                             child: Text(
                               "حذف المنتج",
@@ -405,9 +516,6 @@ class _ShopkeeperProductsEditScreenState extends State<ShopkeeperProductsEditScr
                         ),
                       ],
                     )
-
-
-
                   ],
                 ),
               ),
@@ -417,7 +525,6 @@ class _ShopkeeperProductsEditScreenState extends State<ShopkeeperProductsEditScr
       ),
     );
   }
-
 
   //Pub up Function1--------------------------------------------------------------------------------------------
   Widget _buildPopupDialog(BuildContext context) {
@@ -443,8 +550,10 @@ class _ShopkeeperProductsEditScreenState extends State<ShopkeeperProductsEditScr
         new FlatButton(
           onPressed: () {
             Navigator.of(context).pop();
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ShopkeeperProductsScreen()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ShopkeeperProductsScreen()));
           },
           textColor: Colors.blue,
           child: const Text('موافق'),
@@ -478,8 +587,10 @@ class _ShopkeeperProductsEditScreenState extends State<ShopkeeperProductsEditScr
         new FlatButton(
           onPressed: () {
             Navigator.of(context).pop();
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ShopkeeperProductsScreen()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ShopkeeperProductsScreen()));
           },
           textColor: Colors.blue,
           child: const Text('موافق'),
@@ -488,8 +599,6 @@ class _ShopkeeperProductsEditScreenState extends State<ShopkeeperProductsEditScr
     );
   }
   //-----------------------------------------------------------------------------------------------------------
-
-
 
   void onNotification() {
     print("mama");

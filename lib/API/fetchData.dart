@@ -43,6 +43,21 @@ class fetchData {
     return body.map((product) => ProductModel.fromJson(product)).toList();
   }
 
+  Future<List<ProductModel>> allproducts() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+    var res = await http
+        .get(Uri.parse(fetchData.baseURL + '/store/getproducts'), headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer ' + token.toString()
+    });
+    print(res.statusCode);
+    var body = jsonDecode(res.body) as List<dynamic>;
+    //  print(body);
+
+    return body.map((product) => ProductModel.fromJson(product)).toList();
+  }
+
   Future<List<ProductModel>> getProductsOnCart() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
