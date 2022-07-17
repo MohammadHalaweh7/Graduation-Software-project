@@ -182,18 +182,6 @@ class _ShopkeeperProfileEditScreenState
 
     StoreModel storeModel = StoreModel.fromJson(jsonDecode(result.body));
 
-    // nameController.text = storeModel.name;
-    // descriptionController.text = storeModel.description;
-    // phoneController.text = storeModel.phoneNumber;
-    // detailedLocationController.text = storeModel.detailedLocation;
-    // facebookController.text = storeModel.facebook;
-    // instagramController.text = storeModel.instagram;
-    // snapchatController.text = storeModel.snapchat;
-    // locationOnMapController.text = storeModel.locationOnMap;
-    // whatsappController.text = storeModel.whatsapp;
-    // value2 = storeModel.type;
-    // value3 = storeModel.location;
-
     return storeModel;
   }
 
