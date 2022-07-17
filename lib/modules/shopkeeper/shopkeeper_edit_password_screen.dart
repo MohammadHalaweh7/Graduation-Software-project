@@ -29,19 +29,48 @@ import 'package:http/http.dart' as http;
 
 class ShopkeeperEditPasswordScreen extends StatefulWidget {
   @override
-  State<ShopkeeperEditPasswordScreen> createState() => _ShopkeeperEditPasswordScreenState();
+  State<ShopkeeperEditPasswordScreen> createState() =>
+      _ShopkeeperEditPasswordScreenState();
 }
 
-class _ShopkeeperEditPasswordScreenState extends State<ShopkeeperEditPasswordScreen> {
-
+class _ShopkeeperEditPasswordScreenState
+    extends State<ShopkeeperEditPasswordScreen> {
   var formkey = GlobalKey<FormState>();
   String? value;
   var passwordController = TextEditingController();
   var passwordVerifiyController = TextEditingController();
 
+  Future<void> editData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+
+    // print(token);
+
+    if (passwordController.text == passwordVerifiyController.text) {
+      var body = jsonEncode({'password': passwordController.text});
+
+      var result =
+          await http.patch(Uri.parse(fetchData.baseURL + "/store/editInfo"),
+              headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+                'Authorization': 'Bearer ' + token.toString()
+              },
+              body: body);
+
+      print(result);
+      if (result.statusCode == 200) {
+        passwordController.text = '';
+        passwordVerifiyController.text = '';
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => _buildPopupDialog(context),
+        );
+      }
+    }
+  }
+
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -117,10 +146,12 @@ class _ShopkeeperEditPasswordScreenState extends State<ShopkeeperEditPasswordScr
                 title: Text("الى الرئيسية"),
                 leading: Icon(Icons.store, color: Color(0xff758DFF)),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ShopKeeperMainScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ShopKeeperMainScreen()));
                 },
               ),
-
               Container(
                 width: 300,
                 height: 1,
@@ -161,7 +192,8 @@ class _ShopkeeperEditPasswordScreenState extends State<ShopkeeperEditPasswordScr
               ),
               ListTile(
                 title: Text("منتجاتي"),
-                leading: Icon(Icons.production_quantity_limits, color: Color(0xff758DFF)),
+                leading: Icon(Icons.production_quantity_limits,
+                    color: Color(0xff758DFF)),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -171,7 +203,8 @@ class _ShopkeeperEditPasswordScreenState extends State<ShopkeeperEditPasswordScr
               ),
               ListTile(
                 title: Text("اضافة منتج جديد"),
-                leading: Icon(Icons.add_shopping_cart, color: Color(0xff758DFF)),
+                leading:
+                    Icon(Icons.add_shopping_cart, color: Color(0xff758DFF)),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -181,7 +214,8 @@ class _ShopkeeperEditPasswordScreenState extends State<ShopkeeperEditPasswordScr
               ),
               ListTile(
                 title: Text("حذف المتجر نهائيا"),
-                leading: Icon(Icons.highlight_remove_sharp, color: Color(0xff758DFF)),
+                leading: Icon(Icons.highlight_remove_sharp,
+                    color: Color(0xff758DFF)),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -189,15 +223,12 @@ class _ShopkeeperEditPasswordScreenState extends State<ShopkeeperEditPasswordScr
                           builder: (context) => AddProductScreen()));
                 },
               ),
-
-
-
               ListTile(
                 title: Text("تسجيل خروج"),
                 leading: Icon(Icons.logout, color: Color(0xff758DFF)),
                 onTap: () async {
                   SharedPreferences prefs =
-                  await SharedPreferences.getInstance();
+                      await SharedPreferences.getInstance();
                   prefs.remove('token');
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LoginScreen()));
@@ -234,7 +265,6 @@ class _ShopkeeperEditPasswordScreenState extends State<ShopkeeperEditPasswordScr
                           builder: (context) => LanguageScreen()));
                 },
               ),
-
               ListTile(
                 title: Text("عن متجراتي"),
                 leading: Icon(Icons.assignment, color: Color(0xff758DFF)),
@@ -250,7 +280,6 @@ class _ShopkeeperEditPasswordScreenState extends State<ShopkeeperEditPasswordScr
                 leading: Icon(Icons.warning, color: Color(0xff758DFF)),
                 onTap: () {},
               ),
-
             ],
           ),
         ),
@@ -343,13 +372,13 @@ class _ShopkeeperEditPasswordScreenState extends State<ShopkeeperEditPasswordScr
                             width: double.infinity,
                             decoration: BoxDecoration(
                               borderRadius:
-                              BorderRadius.all(Radius.circular(20.0)),
+                                  BorderRadius.all(Radius.circular(20.0)),
                               color:
-                              Colors.blueAccent, // width: double.infinity,
+                                  Colors.blueAccent, // width: double.infinity,
                             ),
                             child: MaterialButton(
                               onPressed: () {
-                                showDialog(context: context,builder: (BuildContext context) => _buildPopupDialog(context),);
+                                editData();
                               },
                               child: Text(
                                 "تعديل",
@@ -387,7 +416,6 @@ class _ShopkeeperEditPasswordScreenState extends State<ShopkeeperEditPasswordScr
     );
   }
 
-
   //Pub up Function--------------------------------------------------------------------------------------------
   Widget _buildPopupDialog(BuildContext context) {
     return new AlertDialog(
@@ -412,8 +440,10 @@ class _ShopkeeperEditPasswordScreenState extends State<ShopkeeperEditPasswordScr
         new FlatButton(
           onPressed: () {
             Navigator.of(context).pop();
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ShopkeeperAccountScreen()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ShopkeeperAccountScreen()));
           },
           textColor: Colors.blue,
           child: const Text('موافق'),
@@ -421,6 +451,7 @@ class _ShopkeeperEditPasswordScreenState extends State<ShopkeeperEditPasswordScr
       ],
     );
   }
+
   //------------------------------------------------------------------------------------------------------------
   void onNotification() {
     Navigator.push(

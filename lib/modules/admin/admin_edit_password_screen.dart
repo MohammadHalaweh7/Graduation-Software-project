@@ -24,19 +24,47 @@ import 'package:http/http.dart' as http;
 
 class AdminEditPasswordScreen extends StatefulWidget {
   @override
-  State<AdminEditPasswordScreen> createState() => _AdminEditPasswordScreenState();
+  State<AdminEditPasswordScreen> createState() =>
+      _AdminEditPasswordScreenState();
 }
 
 class _AdminEditPasswordScreenState extends State<AdminEditPasswordScreen> {
-
   var formkey = GlobalKey<FormState>();
   String? value;
   var passwordController = TextEditingController();
   var passwordVerifiyController = TextEditingController();
 
+  Future<void> editData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+
+    print(token);
+
+    if (passwordController.text == passwordVerifiyController.text) {
+      var body = jsonEncode({'password': passwordController.text});
+
+      var result =
+          await http.patch(Uri.parse(fetchData.baseURL + "/admin/editInfo"),
+              headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+                'Authorization': 'Bearer ' + token.toString()
+              },
+              body: body);
+
+      print(result);
+      if (result.statusCode == 200) {
+        passwordController.text = '';
+        passwordVerifiyController.text = '';
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => _buildPopupDialog(context),
+        );
+      }
+    }
+  }
+
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -112,14 +140,20 @@ class _AdminEditPasswordScreenState extends State<AdminEditPasswordScreen> {
                 title: Text("الى الرئيسية"),
                 leading: Icon(Icons.store, color: Color(0xff758DFF)),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => AdminMainScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AdminMainScreen()));
                 },
               ),
               ListTile(
                 title: Text("الى المتاجر"),
                 leading: Icon(Icons.storefront, color: Color(0xff758DFF)),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => AdminShopsScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AdminShopsScreen()));
                 },
               ),
               SizedBox(
@@ -157,21 +191,16 @@ class _AdminEditPasswordScreenState extends State<AdminEditPasswordScreen> {
                 title: Text("طلبات المتاجر الجديدة"),
                 leading: Icon(Icons.person, color: Color(0xff758DFF)),
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AdminScreen()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => AdminScreen()));
                 },
               ),
-
-
-
               ListTile(
                 title: Text("تسجيل خروج"),
                 leading: Icon(Icons.logout, color: Color(0xff758DFF)),
                 onTap: () async {
                   SharedPreferences prefs =
-                  await SharedPreferences.getInstance();
+                      await SharedPreferences.getInstance();
                   prefs.remove('token');
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LoginScreen()));
@@ -208,7 +237,6 @@ class _AdminEditPasswordScreenState extends State<AdminEditPasswordScreen> {
                           builder: (context) => LanguageScreen()));
                 },
               ),
-
               ListTile(
                 title: Text("عن متجراتي"),
                 leading: Icon(Icons.assignment, color: Color(0xff758DFF)),
@@ -224,7 +252,6 @@ class _AdminEditPasswordScreenState extends State<AdminEditPasswordScreen> {
                 leading: Icon(Icons.warning, color: Color(0xff758DFF)),
                 onTap: () {},
               ),
-
             ],
           ),
         ),
@@ -317,13 +344,13 @@ class _AdminEditPasswordScreenState extends State<AdminEditPasswordScreen> {
                             width: double.infinity,
                             decoration: BoxDecoration(
                               borderRadius:
-                              BorderRadius.all(Radius.circular(20.0)),
+                                  BorderRadius.all(Radius.circular(20.0)),
                               color:
-                              Colors.blueAccent, // width: double.infinity,
+                                  Colors.blueAccent, // width: double.infinity,
                             ),
                             child: MaterialButton(
                               onPressed: () {
-                                showDialog(context: context,builder: (BuildContext context) => _buildPopupDialog(context),);
+                                editData();
                               },
                               child: Text(
                                 "تعديل",
@@ -361,7 +388,6 @@ class _AdminEditPasswordScreenState extends State<AdminEditPasswordScreen> {
     );
   }
 
-
   //Pub up Function--------------------------------------------------------------------------------------------
   Widget _buildPopupDialog(BuildContext context) {
     return new AlertDialog(
@@ -395,6 +421,7 @@ class _AdminEditPasswordScreenState extends State<AdminEditPasswordScreen> {
       ],
     );
   }
+
   //------------------------------------------------------------------------------------------------------------
   void onNotification() {
     Navigator.push(

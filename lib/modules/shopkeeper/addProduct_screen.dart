@@ -21,7 +21,6 @@ class AddProductScreen extends StatefulWidget {
 class _AddProductScreenState extends State<AddProductScreen> {
   File? _image;
   var myImage;
-  String img = '';
 
   Future getImage() async {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -44,17 +43,29 @@ class _AddProductScreenState extends State<AddProductScreen> {
   var descriptionController = TextEditingController();
 
   Future<void> createProduct(BuildContext context) async {
-    var bytes = await new File(myImage.path).readAsBytes();
-    String base64 = base64Encode(bytes);
+    var token;
+    var body;
+    if (!(myImage == null)) {
+      var bytes = await new File(myImage.path).readAsBytes();
+      String base64 = base64Encode(bytes);
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.get('token');
-    var body = jsonEncode({
-      'name': nameController.text,
-      'price': priceController.text,
-      'description': descriptionController.text,
-      'avatar': base64
-    });
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      token = prefs.get('token');
+      body = jsonEncode({
+        'name': nameController.text,
+        'price': priceController.text,
+        'description': descriptionController.text,
+        'avatar': base64
+      });
+    } else {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      token = prefs.get('token');
+      body = jsonEncode({
+        'name': nameController.text,
+        'price': priceController.text,
+        'description': descriptionController.text,
+      });
+    }
 
     //print(body);
     var result =

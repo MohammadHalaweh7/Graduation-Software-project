@@ -77,11 +77,15 @@ class _AccountScreenState extends State<AccountScreen> {
     return FutureBuilder<UserModel>(
       future: loadData(),
       builder: (context, snapshot) {
-        var products = snapshot.data;
+        var account = snapshot.data;
         if (!snapshot.hasData) {
           return Container(
+            color: Colors.white,
             child: Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+                backgroundColor: Colors.white,
+              ),
             ),
           );
         } else {
@@ -138,13 +142,13 @@ class _AccountScreenState extends State<AccountScreen> {
                                   radius: 50.0,
                                   // backgroundImage: NetworkImage(
                                   //     'https://mystoreapii.herokuapp.com/users/${snapshot.data!.id}/avatar'),
-                                  backgroundImage: products!.avatar == null
+                                  backgroundImage: account!.avatar == null
                                       ? (AssetImage(
                                           'assets/images/logo3.png',
                                         ) as ImageProvider)
                                       : MemoryImage(
                                           base64Decode(
-                                              products.avatar.toString()),
+                                              account.avatar.toString()),
                                         ),
                                 ),
                                 CircleAvatar(

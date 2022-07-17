@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,7 @@ import 'package:udemy_flutter/modules/shopkeeper/addProduct_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_account_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_products_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_profile_screen.dart';
+import 'package:http/http.dart' as http;
 
 class ShopKeeperMainScreen extends StatefulWidget {
   @override
@@ -25,8 +28,26 @@ class ShopKeeperMainScreen extends StatefulWidget {
 }
 
 class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
+  Future<void> removeStore(BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+    //print(token);
+    var result = await http
+        .delete(Uri.parse(fetchData.baseURL + '/store/delete'), headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer ' + token.toString()
+    });
 
+    print(result.statusCode);
 
+    if (result.statusCode == 200) {
+      var body = jsonDecode(result.body);
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => _buildPopupDialog(context),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,10 +97,12 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                 title: Text("الى الرئيسية"),
                 leading: Icon(Icons.store, color: Color(0xff758DFF)),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ShopKeeperMainScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ShopKeeperMainScreen()));
                 },
               ),
-
               Container(
                 width: 300,
                 height: 1,
@@ -120,7 +143,8 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
               ),
               ListTile(
                 title: Text("منتجاتي"),
-                leading: Icon(Icons.production_quantity_limits, color: Color(0xff758DFF)),
+                leading: Icon(Icons.production_quantity_limits,
+                    color: Color(0xff758DFF)),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -130,7 +154,8 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
               ),
               ListTile(
                 title: Text("اضافة منتج جديد"),
-                leading: Icon(Icons.add_shopping_cart, color: Color(0xff758DFF)),
+                leading:
+                    Icon(Icons.add_shopping_cart, color: Color(0xff758DFF)),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -140,7 +165,8 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
               ),
               ListTile(
                 title: Text("حذف المتجر نهائيا"),
-                leading: Icon(Icons.highlight_remove_sharp, color: Color(0xff758DFF)),
+                leading: Icon(Icons.highlight_remove_sharp,
+                    color: Color(0xff758DFF)),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -148,15 +174,12 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                           builder: (context) => AddProductScreen()));
                 },
               ),
-
-
-
               ListTile(
                 title: Text("تسجيل خروج"),
                 leading: Icon(Icons.logout, color: Color(0xff758DFF)),
                 onTap: () async {
                   SharedPreferences prefs =
-                  await SharedPreferences.getInstance();
+                      await SharedPreferences.getInstance();
                   prefs.remove('token');
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LoginScreen()));
@@ -193,7 +216,6 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                           builder: (context) => LanguageScreen()));
                 },
               ),
-
               ListTile(
                 title: Text("عن متجراتي"),
                 leading: Icon(Icons.assignment, color: Color(0xff758DFF)),
@@ -209,29 +231,26 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                 leading: Icon(Icons.warning, color: Color(0xff758DFF)),
                 onTap: () {},
               ),
-
             ],
           ),
         ),
       ),
-      body:Stack(
+      body: Stack(
         children: <Widget>[
           Container(
-            height: size.height *0.6,
+            height: size.height * 0.6,
             width: double.infinity,
-
             decoration: BoxDecoration(
                 image: DecorationImage(
-                  alignment: Alignment.topCenter,
-                  image: Image.network("https://www.optrocom.net/sitepad-data/uploads//2021/05/header5.png").image,
-                )
-            ),
+              alignment: Alignment.topCenter,
+              image: Image.network(
+                      "https://www.optrocom.net/sitepad-data/uploads//2021/05/header5.png")
+                  .image,
+            )),
           ),
-
           SafeArea(
-            child:
-            Padding(
-              padding:  EdgeInsets.all(5.0),
+            child: Padding(
+              padding: EdgeInsets.all(5.0),
               child: Column(
                 children: <Widget>[
                   Container(
@@ -242,27 +261,37 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                       children: <Widget>[
                         CircleAvatar(
                           radius: 38,
-                          backgroundImage: NetworkImage('https://kecbatusopang.paserkab.go.id/po-content/uploads/profil-photo.jpg'),
+                          backgroundImage: NetworkImage(
+                              'https://kecbatusopang.paserkab.go.id/po-content/uploads/profil-photo.jpg'),
                         ),
-
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
                               'Haytham Saleh',
-                              style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,letterSpacing: 2,fontStyle: FontStyle.italic,fontSize: 16.5),
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 2,
+                                  fontStyle: FontStyle.italic,
+                                  fontSize: 16.5),
                             ),
-                            Text('Shop Owner',style: TextStyle(color: Colors.white,letterSpacing: 1,fontSize: 11),),
-
+                            Text(
+                              'Shop Owner',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  letterSpacing: 1,
+                                  fontSize: 11),
+                            ),
                           ],
                         )
                       ],
                     ),
                   ),
-
-
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Expanded(
                     child: GridView.count(
                       mainAxisSpacing: 10,
@@ -270,12 +299,14 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                       childAspectRatio: 1 / 1.3,
                       crossAxisCount: 2,
                       primary: false,
-                      children: <Widget>
-                      [
+                      children: <Widget>[
                         GestureDetector(
-                          onTap:()
-                          {
-                            Navigator.push(context,MaterialPageRoute(builder: (context) => ShopkeeperProfileScreen()));
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ShopkeeperProfileScreen()));
                           },
                           child: Card(
                             elevation: 15,
@@ -286,17 +317,30 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Image.network("https://library.kissclipart.com/20180914/bhw/kissclipart-7-clipart-ipho-1ff0ee7a9f7b557f.png",height: 128,),
-                                SizedBox(height: 20,),
-                                Text('متجري',style: TextStyle(fontSize: 18,),),
+                                Image.network(
+                                  "https://library.kissclipart.com/20180914/bhw/kissclipart-7-clipart-ipho-1ff0ee7a9f7b557f.png",
+                                  height: 128,
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  'متجري',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
                         ),
                         GestureDetector(
-                          onTap:()
-                          {
-                            Navigator.push(context,MaterialPageRoute(builder: (context) => ShopkeeperAccountScreen()));
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ShopkeeperAccountScreen()));
                           },
                           child: Card(
                             elevation: 15,
@@ -307,19 +351,31 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Image.asset('assets/images/adminIMG.jpg',height: 128,),
-                                SizedBox(height: 20,),
-                                Text('حسابي',style: TextStyle(fontSize: 18,),),
+                                Image.asset(
+                                  'assets/images/adminIMG.jpg',
+                                  height: 128,
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  'حسابي',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
                         ),
                         GestureDetector(
-                          onTap:()
-                          {
-                            Navigator.push(context,MaterialPageRoute(builder: (context) => ShopkeeperProductsScreen()));
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ShopkeeperProductsScreen()));
                           },
-
                           child: Card(
                             elevation: 15,
                             shadowColor: Colors.blue,
@@ -329,17 +385,29 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Image.network('https://library.kissclipart.com/20180831/tww/kissclipart-ecommerce-shopping-clipart-e-commerce-online-shopp-6884ad9727e26283.png',height: 128,),
-                                SizedBox(height: 20,),
-                                Text('منتجاتي',style: TextStyle(fontSize: 18,),),
+                                Image.network(
+                                  'https://library.kissclipart.com/20180831/tww/kissclipart-ecommerce-shopping-clipart-e-commerce-online-shopp-6884ad9727e26283.png',
+                                  height: 128,
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  'منتجاتي',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
                         ),
                         GestureDetector(
-                          onTap:()
-                          {
-                            Navigator.push(context,MaterialPageRoute(builder: (context) => AddProductScreen()));
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AddProductScreen()));
                           },
                           child: Card(
                             elevation: 15,
@@ -350,17 +418,26 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Image.network("https://thumbs.dreamstime.com/b/add-to-cart-icon-adding-shopping-cart-well-organized-fully-editable-add-to-cart-icon-adding-shopping-cart-any-use-like-167547900.jpg",height: 128,),
-                                SizedBox(height: 20,),
-                                Text('اضافة منتج جديد',style: TextStyle(fontSize: 18,),),
+                                Image.network(
+                                  "https://thumbs.dreamstime.com/b/add-to-cart-icon-adding-shopping-cart-well-organized-fully-editable-add-to-cart-icon-adding-shopping-cart-any-use-like-167547900.jpg",
+                                  height: 128,
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  'اضافة منتج جديد',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
                         ),
                         GestureDetector(
-                          onTap:()
-                          {
-                            // Navigator.push(context,MaterialPageRoute(builder: (context) => AdminScreen()));
+                          onTap: () {
+                            removeStore(context);
                           },
                           child: Card(
                             elevation: 15,
@@ -371,17 +448,32 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Image.network("https://media.istockphoto.com/vectors/cross-icon-x-vector-sign-flat-style-red-colored-symbol-isolated-vector-id1210968750?k=20&m=1210968750&s=170667a&w=0&h=YCYOtUL62_yGhCTUSUmYiL0A3nm-PfDFXyfjPhFXSc8=",height: 128,),
-                                SizedBox(height: 20,),
-                                Text('حذف المتجر',style: TextStyle(fontSize: 18,),),
+                                Image.network(
+                                  "https://media.istockphoto.com/vectors/cross-icon-x-vector-sign-flat-style-red-colored-symbol-isolated-vector-id1210968750?k=20&m=1210968750&s=170667a&w=0&h=YCYOtUL62_yGhCTUSUmYiL0A3nm-PfDFXyfjPhFXSc8=",
+                                  height: 128,
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  'حذف المتجر',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
                         ),
                         GestureDetector(
-                          onTap:()
-                          {
-
+                          onTap: () async {
+                            SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            prefs.remove('token');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginScreen()));
                           },
                           child: Card(
                             elevation: 15,
@@ -392,9 +484,19 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Image.network("https://us.123rf.com/450wm/faysalfarhan/faysalfarhan1710/faysalfarhan171013860/88895640-logout-icon-isolated-on-special-red-square-button-abstract-illustration.jpg?ver=6",height: 128,),
-                                SizedBox(height: 20,),
-                                Text('تسجيل الخروج',style: TextStyle(fontSize: 18,),),
+                                Image.network(
+                                  "https://us.123rf.com/450wm/faysalfarhan/faysalfarhan1710/faysalfarhan171013860/88895640-logout-icon-isolated-on-special-red-square-button-abstract-illustration.jpg?ver=6",
+                                  height: 128,
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  'تسجيل الخروج',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -408,7 +510,39 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
           )
         ],
       ),
+    );
+  }
 
+  Widget _buildPopupDialog(BuildContext context) {
+    return new AlertDialog(
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CircleAvatar(
+              radius: 17,
+              backgroundColor: Colors.blue,
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          Text("تم حذف هذا المتجر بنجاح")
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => LoginScreen()));
+            //  Navigator.of(context).pop();
+          },
+          textColor: Colors.blue,
+          child: const Text('موافق'),
+        ),
+      ],
     );
   }
 
