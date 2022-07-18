@@ -19,11 +19,13 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   File? _image;
+  var myImage;
   Future getImage() async {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image == null) return;
 
     final imageTemporary = File(image.path);
+    myImage = image;
 
     setState(() {
       this._image = imageTemporary;
@@ -40,14 +42,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
     print(userNameController.text);
     print(emailController.text);
     print(passwordController.text);
+    var body;
+    if (!(myImage == null)) {
+      var bytes = await new File(myImage.path).readAsBytes();
+      String base64 = base64Encode(bytes);
+      body = jsonEncode({
+        'name': userNameController.text,
+        'email': emailController.text,
+        'password': passwordController.text,
+        'avatar': base64
+      });
+    } else {
+      body = jsonEncode({
+        'name': userNameController.text,
+        'email': emailController.text,
+        'password': passwordController.text,
+      });
+    }
 
-    var body = jsonEncode({
-      'name': userNameController.text,
-      'email': emailController.text,
-      'password': passwordController.text
-    });
-
-    print(body);
+    //print(body);
     var result = await http.post(Uri.parse(fetchData.baseURL + "/users"),
         headers: {'Content-Type': 'application/json; charset=UTF-8'},
         body: body);

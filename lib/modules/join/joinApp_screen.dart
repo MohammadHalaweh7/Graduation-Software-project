@@ -19,7 +19,6 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
   //for Image-------------------------------------------------------------------
   File? _image;
   var myImage;
-  String img = '';
 
   Future getImage() async {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -84,21 +83,43 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
   String? value3;
 
   Future<void> pendingStoreSignUp(BuildContext context) async {
-    var body = jsonEncode({
-      'name': nameController.text,
-      'email': emailController.text,
-      'password': passwordController.text,
-      'description': descriptionController.text,
-      'phoneNumber': phoneController.text,
-      'detailedLocation': detailedLocationController.text,
-      'facebook': facebookController.text,
-      'snapchat': snapchatController.text,
-      'whatsapp': whatsappController.text,
-      'instagram': instagramController.text,
-      'locationOnMap': locationOnMapController.text,
-      'location': city,
-      'type': type,
-    });
+    var body;
+    if (!(myImage == null)) {
+      var bytes = await new File(myImage.path).readAsBytes();
+      String base64 = base64Encode(bytes);
+      body = jsonEncode({
+        'name': nameController.text,
+        'email': emailController.text,
+        'password': passwordController.text,
+        'description': descriptionController.text,
+        'phoneNumber': phoneController.text,
+        'detailedLocation': detailedLocationController.text,
+        'facebook': facebookController.text,
+        'snapchat': snapchatController.text,
+        'whatsapp': whatsappController.text,
+        'instagram': instagramController.text,
+        'locationOnMap': locationOnMapController.text,
+        'location': city,
+        'type': type,
+        'avatar': base64
+      });
+    } else {
+      body = jsonEncode({
+        'name': nameController.text,
+        'email': emailController.text,
+        'password': passwordController.text,
+        'description': descriptionController.text,
+        'phoneNumber': phoneController.text,
+        'detailedLocation': detailedLocationController.text,
+        'facebook': facebookController.text,
+        'snapchat': snapchatController.text,
+        'whatsapp': whatsappController.text,
+        'instagram': instagramController.text,
+        'locationOnMap': locationOnMapController.text,
+        'location': city,
+        'type': type,
+      });
+    }
 
     //print(body);
     var result = await http.post(Uri.parse(fetchData.baseURL + "/pendingStore"),
