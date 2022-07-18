@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/models/store/store_model.dart';
@@ -160,7 +161,7 @@ class _MainScreenState extends State<MainScreen> {
                   )),
             ),
             title: Text(
-              "الصفحة الرئيسية",
+              "الصفحة الرئيسية".tr,
             ),
             actions: [
               Container(
@@ -221,7 +222,7 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 ),
                 Text(
-                  "متجراتي",
+                  "متجراتي".tr,
                   style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
@@ -241,7 +242,7 @@ class _MainScreenState extends State<MainScreen> {
                 Padding(
                   padding: const EdgeInsets.only(left: 220),
                   child: Text(
-                    "الرئيسية",
+                    "الرئيسية".tr,
                     style: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.bold,
@@ -249,9 +250,12 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 ),
                 ListTile(
-                  title: Text("الى المتاجر"),
+                  title: Text("الى المتاجر".tr),
                   leading: Icon(Icons.store, color: Color(0xff758DFF)),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MainScreen()));
+                  },
                 ),
                 SizedBox(
                   height: 0,
@@ -267,7 +271,7 @@ class _MainScreenState extends State<MainScreen> {
                 Padding(
                   padding: const EdgeInsets.only(left: 147),
                   child: Text(
-                    "معلومات المستخدم",
+                    "معلومات المستخدم".tr,
                     style: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.bold,
@@ -275,7 +279,7 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 ),
                 ListTile(
-                  title: Text("حسابي"),
+                  title: Text("حسابي".tr),
                   leading: Icon(Icons.person, color: Color(0xff758DFF)),
                   onTap: () {
                     Navigator.push(
@@ -285,12 +289,12 @@ class _MainScreenState extends State<MainScreen> {
                   },
                 ),
                 ListTile(
-                  title: Text("منتجات أعجبتني"),
+                  title: Text("منتجات أعجبتني".tr),
                   leading: Icon(Icons.favorite, color: Color(0xff758DFF)),
                   onTap: () {},
                 ),
                 ListTile(
-                  title: Text("منتجات طلبتها"),
+                  title: Text("منتجات طلبتها".tr),
                   leading: Icon(Icons.add_chart, color: Color(0xff758DFF)),
                   onTap: () {
                     Navigator.push(
@@ -300,13 +304,13 @@ class _MainScreenState extends State<MainScreen> {
                   },
                 ),
                 ListTile(
-                  title: Text("منتجات شاهدتها"),
+                  title: Text("منتجات شاهدتها".tr),
                   leading: Icon(Icons.remove_red_eye_outlined,
                       color: Color(0xff758DFF)),
                   onTap: () {},
                 ),
                 ListTile(
-                  title: Text("تسجيل خروج"),
+                  title: Text("تسجيل خروج".tr),
                   leading: Icon(Icons.logout, color: Color(0xff758DFF)),
                   onTap: () async {
                     SharedPreferences prefs =
@@ -330,9 +334,9 @@ class _MainScreenState extends State<MainScreen> {
                   height: 20,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 220),
+                  padding: const EdgeInsets.only(left: 200),
                   child: Text(
-                    "التطبيق",
+                    "التطبيق".tr,
                     style: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.bold,
@@ -340,7 +344,7 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 ),
                 ListTile(
-                  title: Text("اللغة"),
+                  title: Text("اللغة".tr),
                   leading: Icon(Icons.g_translate, color: Color(0xff758DFF)),
                   onTap: () {
                     Navigator.push(
@@ -350,7 +354,7 @@ class _MainScreenState extends State<MainScreen> {
                   },
                 ),
                 ListTile(
-                  title: Text("للانضمام الى متجراتي"),
+                  title: Text("للانضمام الى متجراتي".tr),
                   leading: Icon(Icons.person_add, color: Color(0xff758DFF)),
                   onTap: () {
                     Navigator.push(
@@ -360,22 +364,22 @@ class _MainScreenState extends State<MainScreen> {
                   },
                 ),
                 ListTile(
-                  title: Text("عن متجراتي"),
+                  title: Text("عن متجراتي".tr),
                   leading: Icon(Icons.assignment, color: Color(0xff758DFF)),
                   onTap: () {},
                 ),
                 ListTile(
-                  title: Text("ضبط"),
+                  title: Text("ضبط".tr),
                   leading: Icon(Icons.gamepad, color: Color(0xff758DFF)),
                   onTap: () {},
                 ),
                 ListTile(
-                  title: Text("سياسة الخصوصية"),
+                  title: Text("سياسة الخصوصية".tr),
                   leading: Icon(Icons.warning, color: Color(0xff758DFF)),
                   onTap: () {},
                 ),
                 ListTile(
-                  title: Text("قيم هذا التطبيق"),
+                  title: Text("قيم هذا التطبيق".tr),
                   leading: Icon(Icons.star, color: Color(0xff758DFF)),
                   onTap: () {},
                 ),
@@ -438,12 +442,10 @@ class _MainScreenState extends State<MainScreen> {
                       width: 7,
                     ),
                     Text(
-                      "تسوق حسب الفئة",
+                      "تسوق حسب الفئة".tr,
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
-                    SizedBox(
-                      width: 170,
-                    ),
+                    Spacer(),
                     TextButton(
                       onPressed: () {
                         Navigator.push(
@@ -452,7 +454,7 @@ class _MainScreenState extends State<MainScreen> {
                                 builder: (context) => ShopsScreen()));
                       },
                       child: Text(
-                        "عرض الكل",
+                        "عرض الكل".tr,
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                     ),
@@ -499,7 +501,7 @@ class _MainScreenState extends State<MainScreen> {
                               height: 4,
                             ),
                             Text(
-                              "للأطفال",
+                              "للأطفال".tr,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             )
@@ -536,7 +538,7 @@ class _MainScreenState extends State<MainScreen> {
                               height: 4,
                             ),
                             Text(
-                              "للسيدات",
+                              "للسيدات".tr,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             )
@@ -573,7 +575,7 @@ class _MainScreenState extends State<MainScreen> {
                               height: 4,
                             ),
                             Text(
-                              "للرجال",
+                              "للرجال".tr,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             )
@@ -610,7 +612,7 @@ class _MainScreenState extends State<MainScreen> {
                               height: 4,
                             ),
                             Text(
-                              "اكسسوارات",
+                              "اكسسوارات".tr,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             )
@@ -647,7 +649,7 @@ class _MainScreenState extends State<MainScreen> {
                               height: 4,
                             ),
                             Text(
-                              "هدايا",
+                              "هدايا".tr,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             )
@@ -684,7 +686,7 @@ class _MainScreenState extends State<MainScreen> {
                               height: 4,
                             ),
                             Text(
-                              "ماكولات",
+                              "ماكولات".tr,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             )
@@ -721,7 +723,7 @@ class _MainScreenState extends State<MainScreen> {
                               height: 4,
                             ),
                             Text(
-                              "ملابس",
+                              "ملابس".tr,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             )
@@ -758,7 +760,7 @@ class _MainScreenState extends State<MainScreen> {
                               height: 4,
                             ),
                             Text(
-                              "أحذية",
+                              "أحذية".tr,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             )
@@ -795,7 +797,7 @@ class _MainScreenState extends State<MainScreen> {
                               height: 4,
                             ),
                             Text(
-                              "عطور",
+                              "عطور".tr,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             )
@@ -832,7 +834,7 @@ class _MainScreenState extends State<MainScreen> {
                               height: 4,
                             ),
                             Text(
-                              "فنون",
+                              "فنون".tr,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             )
@@ -865,12 +867,10 @@ class _MainScreenState extends State<MainScreen> {
                       width: 7,
                     ),
                     Text(
-                      "متاجراخترناها لك",
+                      "متاجراخترناها لك".tr,
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
-                    SizedBox(
-                      width: 170,
-                    ),
+                    Spacer(),
                     TextButton(
                       onPressed: () {
                         ShopsScreen().setTitle(
@@ -886,7 +886,7 @@ class _MainScreenState extends State<MainScreen> {
                                 builder: (context) => ShopsScreen()));
                       },
                       child: Text(
-                        "عرض الكل",
+                        "عرض الكل".tr,
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                     ),
@@ -916,12 +916,10 @@ class _MainScreenState extends State<MainScreen> {
                       width: 7,
                     ),
                     Text(
-                      "متاجر جديدة",
+                      "متاجر جديدة".tr,
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
-                    SizedBox(
-                      width: 205,
-                    ),
+                    Spacer(),
                     TextButton(
                       onPressed: () {
                         Navigator.push(
@@ -930,7 +928,7 @@ class _MainScreenState extends State<MainScreen> {
                                 builder: (context) => SignUpScreen()));
                       },
                       child: Text(
-                        "عرض الكل",
+                        "عرض الكل".tr,
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                     ),

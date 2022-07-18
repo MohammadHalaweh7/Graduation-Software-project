@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/modules/home/home_screen.dart';
 import 'package:udemy_flutter/modules/home/main_screen.dart';
@@ -10,6 +11,7 @@ import 'package:udemy_flutter/shared/cubit/cubit.dart';
 import 'package:udemy_flutter/shared/cubit/states.dart';
 import 'package:udemy_flutter/shared/network/remote/dio_helper.dart';
 import 'package:udemy_flutter/shared/styles/themes.dart';
+import 'package:udemy_flutter/translations.dart';
 
 // @dart=2.9
 //Mohammad Halaweh99
@@ -35,18 +37,24 @@ class MyApp extends StatelessWidget {
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          return MaterialApp(
-            //To Detect Language------------------------------------------------------
-            localizationsDelegates: const [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: const [
-              // Locale('en', ''), // English, no country code
-              Locale('ar', 'AE'), // Arabic, no country code
-            ],
+          return GetMaterialApp(
+            translations: Translation(),
+            locale: Locale('ar'),
+            fallbackLocale: Locale('ar'),
             debugShowCheckedModeBanner: false,
+            //To Detect Language------------------------------------------------------
+
+            // localizationsDelegates: const [
+            //   GlobalMaterialLocalizations.delegate,
+            //   GlobalWidgetsLocalizations.delegate,
+            //   GlobalCupertinoLocalizations.delegate,
+            // ],
+            // supportedLocales: const [
+            //   // Locale('en', ''), // English, no country code
+            //   Locale('ar', 'AE'), // Arabic, no country code
+            // ],
+            // debugShowCheckedModeBanner: false,
+
             //Theme Data--------------------------------------------------------------
             theme: lightTheme,
             darkTheme: darkTheme,
