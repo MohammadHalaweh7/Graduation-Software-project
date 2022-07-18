@@ -603,6 +603,15 @@ class _ShopkeeperProfileEditScreenState
                                       child: DropdownButtonHideUnderline(
                                         child: DropdownButton<String>(
                                           onTap: () {},
+                                          hint: Container(
+                                            width: 150, //and here
+                                            child: Text(
+                                              type,
+                                              style: TextStyle(
+                                                  color: Colors.black),
+                                              textAlign: TextAlign.end,
+                                            ),
+                                          ),
                                           icon: Icon(
                                               Icons.arrow_downward_rounded),
                                           isExpanded: true,
@@ -654,6 +663,15 @@ class _ShopkeeperProfileEditScreenState
                                       child: DropdownButtonHideUnderline(
                                         child: DropdownButton<String>(
                                           onTap: () {},
+                                          hint: Container(
+                                            width: 150, //and here
+                                            child: Text(
+                                              city,
+                                              style: TextStyle(
+                                                  color: Colors.black),
+                                              textAlign: TextAlign.end,
+                                            ),
+                                          ),
                                           icon: Icon(
                                               Icons.arrow_downward_rounded),
                                           isExpanded: true,

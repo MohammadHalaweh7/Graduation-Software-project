@@ -7,6 +7,8 @@ import 'package:udemy_flutter/API/sharedPrefs.dart';
 import 'package:udemy_flutter/modules/home/main_screen.dart';
 import '../login/login_screen.dart';
 import 'package:http/http.dart' as http;
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 class JoinAppScreen extends StatefulWidget {
   @override
@@ -14,6 +16,26 @@ class JoinAppScreen extends StatefulWidget {
 }
 
 class _JoinAppScreenState extends State<JoinAppScreen> {
+  //for Image-------------------------------------------------------------------
+  File? _image;
+  var myImage;
+  String img = '';
+
+  Future getImage() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (image == null) return;
+
+    final imageTemporary = File(image.path);
+
+    myImage = image;
+
+    setState(() {
+      this._image = imageTemporary;
+      //print(image.path);
+    });
+  }
+  //----------------------------------------------------------------------------
+
   var formkey = GlobalKey<FormState>();
 
   var emailController = TextEditingController();
@@ -148,6 +170,58 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                     SizedBox(
                       height: 10,
                     ),
+
+                    //  صورة المتجر-----------------------------------------------------------------------------------------------------------------
+                    Text(
+                      " صورة المتجر",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          width: 220,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                            color: Colors.blue, // width: double.infinity,
+                          ),
+                          child: MaterialButton(
+                            onPressed: () {
+                              getImage();
+                            },
+                            child: Text(
+                              "اختر صورة من المعرض",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                        Spacer(),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: _image != null
+                              ? Image.file(
+                                  _image!,
+                                  width: 120,
+                                  height: 120,
+                                  fit: BoxFit.cover,
+                                )
+                              : ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: Image.network(
+                                    'https://static.thenounproject.com/png/3322766-200.png',
+                                    width: 120,
+                                    height: 120,
+                                  ),
+                                ),
+                        ),
+                      ],
+                    ),
+
+                    SizedBox(
+                      height: 15,
+                    ),
+
                     //البريد الالكتروني------------------------------------------------------------------------------------------------------
                     Text(
                       "البريد الالكتروني",

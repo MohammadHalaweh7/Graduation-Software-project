@@ -16,6 +16,7 @@ import 'package:udemy_flutter/modules/phone/phone_screen.dart';
 import 'package:udemy_flutter/modules/shops/shops_screen.dart';
 import 'package:udemy_flutter/modules/signup/signUp_screen.dart';
 import 'package:http/http.dart' as http;
+import 'package:udemy_flutter/shared/cubit/cubit.dart';
 
 //Haytham Saleh
 class MainScreen extends StatefulWidget {
@@ -25,6 +26,21 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   fetchData fetch = fetchData();
+
+  var city;
+  final citiesItems = [
+    'القدس',
+    'راماالله',
+    "نابلس",
+    "بيت لحم",
+    "طولكرم",
+    "قلقيلية",
+    "الخليل",
+    "سلفيت",
+    "الداخل"
+  ];
+  String? value2;
+  String? value3;
 
   Widget fetchAllStores() {
     return FutureBuilder(
@@ -125,42 +141,70 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
-          leading: GestureDetector(
-            onTap: () {
-              var ScaffoldKey;
-              //ScaffoldKey.currentState?.openDrawer();
-              //        Navigator.push(context,MaterialPageRoute(builder: (context) => openDrawer()));
-            },
-            child: IconButton(
-                onPressed: onNotification,
-                icon: Icon(
-                  Icons.menu,
-                  color: Colors.blue,
-                  size: 35,
-                )),
-          ),
-          title: Text(
-            "الصفحة الرئيسية",
-            style: TextStyle(
-              color: Colors.blue,
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {
-                onNotification;
+
+            // backgroundColor: Colors.white,
+            leading: GestureDetector(
+              onTap: () {
+                var ScaffoldKey;
+                //ScaffoldKey.currentState?.openDrawer();
+                //        Navigator.push(context,MaterialPageRoute(builder: (context) => openDrawer()));
               },
-              icon: Icon(
-                Icons.add_alert_outlined,
-                color: Colors.black54,
-                size: 30,
-              ),
+              child: IconButton(
+                  onPressed: onNotification,
+                  icon: Icon(
+                    Icons.menu,
+                    size: 35,
+                  )),
             ),
-          ],
-        ),
+            title: Text(
+              "الصفحة الرئيسية",
+            ),
+            actions: [
+              Container(
+                margin: EdgeInsets.only(top: 8, left: 7),
+                width: 100,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    // crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 40,
+                        width: 100,
+                        margin: EdgeInsets.all(0),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.blue, width: 2),
+                            borderRadius: BorderRadius.circular(6)),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                            onTap: () {},
+                            icon: Icon(
+                              Icons.location_on,
+                              color: Colors.blue,
+                            ),
+                            isExpanded: true,
+                            value: value3,
+                            items: citiesItems.map(buildMenuItem).toList(),
+                            onChanged: (value) => setState(
+                                () => {this.value3 = value, city = value}),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              IconButton(
+                  onPressed: () {
+                    AppCubit.get(context).changeAppMode();
+                  },
+                  icon: Icon(
+                    Icons.brightness_4_rounded,
+                    size: 30,
+                  )),
+            ]),
         drawer: Drawer(
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
@@ -392,8 +436,7 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                     Text(
                       "تسوق حسب الفئة",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      style: Theme.of(context).textTheme.bodyText1,
                     ),
                     SizedBox(
                       width: 170,
@@ -405,7 +448,10 @@ class _MainScreenState extends State<MainScreen> {
                             MaterialPageRoute(
                                 builder: (context) => ShopsScreen()));
                       },
-                      child: Text("عرض الكل"),
+                      child: Text(
+                        "عرض الكل",
+                        style: Theme.of(context).textTheme.subtitle2,
+                      ),
                     ),
                   ],
                 ),
@@ -427,7 +473,9 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("للأطفال");
+                                ShopsScreen().setTitle(
+                                  "للأطفال",
+                                );
                                 ShopsScreen().setType('للأطفال');
                                 Navigator.push(
                                     context,
@@ -815,8 +863,7 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                     Text(
                       "متاجراخترناها لك",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      style: Theme.of(context).textTheme.bodyText1,
                     ),
                     SizedBox(
                       width: 170,
@@ -828,7 +875,10 @@ class _MainScreenState extends State<MainScreen> {
                             MaterialPageRoute(
                                 builder: (context) => SignUpScreen()));
                       },
-                      child: Text("عرض الكل"),
+                      child: Text(
+                        "عرض الكل",
+                        style: Theme.of(context).textTheme.subtitle2,
+                      ),
                     ),
                   ],
                 ),
@@ -857,8 +907,7 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                     Text(
                       "متاجر جديدة",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      style: Theme.of(context).textTheme.bodyText1,
                     ),
                     SizedBox(
                       width: 205,
@@ -870,7 +919,10 @@ class _MainScreenState extends State<MainScreen> {
                             MaterialPageRoute(
                                 builder: (context) => SignUpScreen()));
                       },
-                      child: Text("عرض الكل"),
+                      child: Text(
+                        "عرض الكل",
+                        style: Theme.of(context).textTheme.subtitle2,
+                      ),
                     ),
                   ],
                 ),
@@ -884,6 +936,16 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ));
   }
+
+  //هاد الفنكشن لخيارات الفئة---------------------------------------------------------------------------------
+  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+        value: item,
+        child: Text(
+          item,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+        ),
+      );
+  //--------------------------------------------------------------------------------------------------
 
   void onNotification() {
     var ScaffoldKey;
