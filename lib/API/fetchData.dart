@@ -17,13 +17,18 @@ class fetchData {
     var body = jsonDecode(res.body) as List<dynamic>;
 
     print(body.length);
+    return body.map((store) => StoreModel.fromJson(store)).toList();
+  }
 
+  Future<List<StoreModel>> allCityStores(city) async {
+    var res = await http
+        .get(Uri.parse(fetchData.baseURL + '/store/locationall/' + city));
+    var body = jsonDecode(res.body) as List<dynamic>;
+    print('hellop ' + city);
     return body.map((store) => StoreModel.fromJson(store)).toList();
   }
 
   Future<List<StoreModel>> alltypestores(type) async {
-    // print(type);
-    //print('////////////////////////////');
     var res =
         await http.get(Uri.parse(fetchData.baseURL + '/store/typeall/' + type));
 

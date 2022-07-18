@@ -15,6 +15,7 @@ import 'package:udemy_flutter/modules/signup/signUp_screen.dart';
 
 var type;
 var title;
+var city;
 
 class ShopsScreen extends StatefulWidget {
   setType(S) {
@@ -24,6 +25,11 @@ class ShopsScreen extends StatefulWidget {
 
   setTitle(S) {
     title = S;
+    //  print(type);
+  }
+
+  setCity(S) {
+    city = S;
     //  print(type);
   }
 
@@ -46,7 +52,11 @@ class _ShopsScreenState extends State<ShopsScreen> {
 
   Widget fetchTypeStores() {
     return FutureBuilder(
-        future: fetch.alltypestores(ShopsScreen().getType()),
+        future: (ShopsScreen().getType() != null)
+            ? fetch.alltypestores(ShopsScreen().getType())
+            : (city == null
+                ? (fetch.allstores())
+                : (fetch.allCityStores(city))),
         builder: (contxt, snapchot) {
           var stores = snapchot.data as List<StoreModel>;
           return snapchot.data == null
@@ -60,6 +70,8 @@ class _ShopsScreenState extends State<ShopsScreen> {
                   shrinkWrap: true,
                   itemCount: stores == null ? 0 : stores.length,
                   itemBuilder: (context, index) {
+                    print(city);
+                    print(stores.length);
                     return mystore(
                       stores[index].name,
                       stores[index].description,

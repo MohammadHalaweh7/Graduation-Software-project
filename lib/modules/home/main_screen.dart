@@ -29,6 +29,7 @@ class _MainScreenState extends State<MainScreen> {
 
   var city;
   final citiesItems = [
+    'الكل',
     'القدس',
     'راماالله',
     "نابلس",
@@ -44,7 +45,8 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget fetchAllStores() {
     return FutureBuilder(
-        future: fetch.allstores(),
+        future:
+            city == null ? (fetch.allstores()) : (fetch.allCityStores(city)),
         builder: (contxt, snapchot) {
           var stores = snapchot.data as List<StoreModel>;
           return snapchot.data == null
@@ -513,7 +515,7 @@ class _MainScreenState extends State<MainScreen> {
                             GestureDetector(
                               onTap: () {
                                 ShopsScreen().setTitle("للسيدات");
-                                ShopsScreen().setType('women');
+                                ShopsScreen().setType('للسيدات');
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -624,7 +626,7 @@ class _MainScreenState extends State<MainScreen> {
                             GestureDetector(
                               onTap: () {
                                 ShopsScreen().setTitle("هدايا");
-                                ShopsScreen().setType('gifts');
+                                ShopsScreen().setType('هدايا');
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -661,7 +663,7 @@ class _MainScreenState extends State<MainScreen> {
                             GestureDetector(
                               onTap: () {
                                 ShopsScreen().setTitle("ماكولات");
-                                ShopsScreen().setType('food');
+                                ShopsScreen().setType('ماكولات');
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -698,7 +700,7 @@ class _MainScreenState extends State<MainScreen> {
                             GestureDetector(
                               onTap: () {
                                 ShopsScreen().setTitle("ملابس");
-                                ShopsScreen().setType('clothes');
+                                ShopsScreen().setType('ملابس');
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -735,7 +737,7 @@ class _MainScreenState extends State<MainScreen> {
                             GestureDetector(
                               onTap: () {
                                 ShopsScreen().setTitle("أحذية");
-                                ShopsScreen().setType('shoes');
+                                ShopsScreen().setType('أحذية');
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -772,7 +774,7 @@ class _MainScreenState extends State<MainScreen> {
                             GestureDetector(
                               onTap: () {
                                 ShopsScreen().setTitle("عطور");
-                                ShopsScreen().setType('perfumes');
+                                ShopsScreen().setType('عطور');
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -809,7 +811,7 @@ class _MainScreenState extends State<MainScreen> {
                             GestureDetector(
                               onTap: () {
                                 ShopsScreen().setTitle("فنون");
-                                ShopsScreen().setType('art');
+                                ShopsScreen().setType('فنون');
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -870,10 +872,26 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                     TextButton(
                       onPressed: () {
+                        city == null
+                            ? {
+                                (ShopsScreen().setTitle(
+                                  "الكل",
+                                )),
+                                (ShopsScreen().setCity(null))
+                              }
+                            : {
+                                (ShopsScreen().setTitle(
+                                  city,
+                                )),
+                                ShopsScreen().setCity(
+                                  city,
+                                )
+                              };
+
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SignUpScreen()));
+                                builder: (context) => ShopsScreen()));
                       },
                       child: Text(
                         "عرض الكل",
