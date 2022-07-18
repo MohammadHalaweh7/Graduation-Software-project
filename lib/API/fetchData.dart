@@ -24,7 +24,7 @@ class fetchData {
     var res = await http
         .get(Uri.parse(fetchData.baseURL + '/store/locationall/' + city));
     var body = jsonDecode(res.body) as List<dynamic>;
-    print('hellop ' + city);
+    //print('hellop ' + city);
     return body.map((store) => StoreModel.fromJson(store)).toList();
   }
 

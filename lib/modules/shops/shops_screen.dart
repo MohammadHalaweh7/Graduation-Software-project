@@ -54,9 +54,7 @@ class _ShopsScreenState extends State<ShopsScreen> {
     return FutureBuilder(
         future: (ShopsScreen().getType() != null)
             ? fetch.alltypestores(ShopsScreen().getType())
-            : (city == null
-                ? (fetch.allstores())
-                : (fetch.allCityStores(city))),
+            : (fetch.allCityStores(city)),
         builder: (contxt, snapchot) {
           var stores = snapchot.data as List<StoreModel>;
           return snapchot.data == null

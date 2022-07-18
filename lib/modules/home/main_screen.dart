@@ -27,7 +27,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   fetchData fetch = fetchData();
 
-  var city;
+  String? city = 'الكل';
   final citiesItems = [
     'الكل',
     'القدس',
@@ -46,7 +46,8 @@ class _MainScreenState extends State<MainScreen> {
   Widget fetchAllStores() {
     return FutureBuilder(
         future:
-            city == null ? (fetch.allstores()) : (fetch.allCityStores(city)),
+            // city == null ? (fetch.allstores()) :
+            (fetch.allCityStores(city)),
         builder: (contxt, snapchot) {
           var stores = snapchot.data as List<StoreModel>;
           return snapchot.data == null
@@ -872,21 +873,12 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                     TextButton(
                       onPressed: () {
-                        city == null
-                            ? {
-                                (ShopsScreen().setTitle(
-                                  "الكل",
-                                )),
-                                (ShopsScreen().setCity(null))
-                              }
-                            : {
-                                (ShopsScreen().setTitle(
-                                  city,
-                                )),
-                                ShopsScreen().setCity(
-                                  city,
-                                )
-                              };
+                        ShopsScreen().setTitle(
+                          city,
+                        );
+                        ShopsScreen().setCity(
+                          city,
+                        );
 
                         Navigator.push(
                             context,
