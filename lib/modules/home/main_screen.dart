@@ -48,7 +48,7 @@ class _MainScreenState extends State<MainScreen> {
     return FutureBuilder(
         future:
             // city == null ? (fetch.allstores()) :
-            (fetch.allCityStores(city)),
+            (fetch.allCityAndInterests(city)),
         builder: (contxt, snapchot) {
           var stores = snapchot.data as List<StoreModel>;
           return snapchot.data == null

@@ -18,6 +18,20 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+//  هدول لل شيك بوكس
+  bool baby = false;
+  bool women = false;
+  bool men = false;
+  bool Accessori = false;
+  bool Gifts = false;
+  bool Foods = false;
+  bool Clothes = false;
+  bool shoes = false;
+  bool perfume = false;
+  bool Arts = false;
+
+  List<String> interests = [];
+
   File? _image;
   var myImage;
   Future getImage() async {
@@ -50,13 +64,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
         'name': userNameController.text,
         'email': emailController.text,
         'password': passwordController.text,
-        'avatar': base64
+        'avatar': base64,
+        'interests': interests
       });
     } else {
       body = jsonEncode({
         'name': userNameController.text,
         'email': emailController.text,
         'password': passwordController.text,
+        'interests': interests
       });
     }
 
@@ -78,6 +94,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print(interests);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -292,7 +309,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       Text(
                         'الصورة الشخصية',
-                        style: TextStyle(fontSize: 20, color: Colors.grey),
+                        style: TextStyle(fontSize: 18, color: Colors.grey),
                       ),
                       Spacer(),
                       GestureDetector(
@@ -342,7 +359,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   height: 120.0,
                   padding: EdgeInsets.all(12),
                   margin: const EdgeInsets.only(
-                      bottom: 6.0), //Same as `blurRadius` i guess
+                      bottom: 6.0,
+                      right: 1,
+                      left: 1), //Same as `blurRadius` i guess
 
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5.0),
@@ -400,6 +419,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   height: 10,
                 ),
 
+                //كلمة السر-----------------------------------------------------------------------------------------------------------
                 TextFormField(
                   controller: passwordController,
                   keyboardType: TextInputType.visiblePassword,
@@ -419,11 +439,205 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     border: OutlineInputBorder(),
                   ),
                 ),
+                SizedBox(height: 13),
+                //اهتماماتك--------------------------------------------------------------------------------------
+                Container(
+                  height: 205.0,
+                  padding: EdgeInsets.all(12),
+                  margin: const EdgeInsets.only(
+                      bottom: 6.0,
+                      right: 1,
+                      left: 1), //Same as `blurRadius` i guess
 
-                SizedBox(
-                  height: 20,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.0),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black,
+                        offset: Offset(0.0, 0.0), //(x,y)
+                        blurRadius: 1.0,
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'حدد اهتماماتك : ',
+                        style: TextStyle(fontSize: 18, color: Colors.black54),
+                      ),
+                      Row(
+                        children: [
+                          Row(
+                            children: [
+                              Text('للأطفال'),
+                              Checkbox(
+                                activeColor: Colors.blue,
+                                value: baby,
+                                onChanged: (val) {
+                                  setState(() {
+                                    baby = val!;
+                                    interests.add("للأطفال");
+                                  });
+                                },
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text('للسيدات'),
+                              Checkbox(
+                                activeColor: Colors.blue,
+                                value: women,
+                                onChanged: (val) {
+                                  setState(() {
+                                    women = val!;
+                                    interests.add("للسيدات");
+                                  });
+                                },
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("للرجال"),
+                              Checkbox(
+                                activeColor: Colors.blue,
+                                value: men,
+                                onChanged: (val) {
+                                  setState(() {
+                                    men = val!;
+                                    interests.add("للرجال");
+                                  });
+                                },
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("اكسسوارات"),
+                              Checkbox(
+                                activeColor: Colors.blue,
+                                value: Accessori,
+                                onChanged: (val) {
+                                  setState(() {
+                                    Accessori = val!;
+                                    interests.add("اكسسوارات");
+                                  });
+                                },
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Row(
+                            children: [
+                              Text("هدايا"),
+                              Checkbox(
+                                activeColor: Colors.blue,
+                                value: Gifts,
+                                onChanged: (val) {
+                                  setState(() {
+                                    Gifts = val!;
+                                    interests.add("هدايا");
+                                  });
+                                },
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("ماكولات"),
+                              Checkbox(
+                                activeColor: Colors.blue,
+                                value: Foods,
+                                onChanged: (val) {
+                                  setState(() {
+                                    Foods = val!;
+                                    interests.add("ماكولات");
+                                  });
+                                },
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("ملابس"),
+                              Checkbox(
+                                activeColor: Colors.blue,
+                                value: Clothes,
+                                onChanged: (val) {
+                                  setState(() {
+                                    Clothes = val!;
+                                    interests.add("ملابس");
+                                  });
+                                },
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("أحذية"),
+                              Checkbox(
+                                activeColor: Colors.blue,
+                                value: shoes,
+                                onChanged: (val) {
+                                  setState(() {
+                                    shoes = val!;
+                                    interests.add("أحذية");
+                                  });
+                                },
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Row(
+                            children: [
+                              Text("عطور"),
+                              Checkbox(
+                                activeColor: Colors.blue,
+                                value: perfume,
+                                onChanged: (val) {
+                                  setState(() {
+                                    perfume = val!;
+                                    interests.add("عطور");
+                                  });
+                                },
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("فنون"),
+                              Checkbox(
+                                activeColor: Colors.blue,
+                                value: Arts,
+                                onChanged: (val) {
+                                  setState(() {
+                                    Arts = val!;
+                                    interests.add("فنون");
+                                  });
+                                },
+                              )
+                            ],
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
 
+                //تسجيل---------------------------------------------------------------------------------------------------------
+                SizedBox(
+                  height: 10,
+                ),
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -443,7 +657,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 30,
+                  height: 20,
                 ),
 
                 Row(
@@ -456,7 +670,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             MaterialPageRoute(
                                 builder: (context) => JoinAppScreen()));
                       },
-                      child: Text("هل تريد انشاء متجر ؟ انشأه الان!"),
+                      child: Text(
+                        "هل تريد انشاء متجر ؟ انشأه الان!",
+                        style: TextStyle(
+                            fontSize: 16.5, fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ],
                 )
