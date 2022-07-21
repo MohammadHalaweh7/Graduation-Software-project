@@ -23,6 +23,7 @@ import '../../src/my_app.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 var Storeid;
+var search = 'الكل';
 
 class ProductsScreen extends StatefulWidget {
   ProductsScreen(id) {
@@ -38,6 +39,7 @@ class ProductsScreen extends StatefulWidget {
 }
 
 class _ProductsScreenState extends State<ProductsScreen> {
+  var searchController = TextEditingController();
   fetchData fetch = fetchData();
   var prod;
 
@@ -63,8 +65,13 @@ class _ProductsScreenState extends State<ProductsScreen> {
   }
 
   Widget getstoreproducts() {
+    if (searchController.text == '') {
+      search = 'الكل';
+    } else {
+      search = searchController.text;
+    }
     return FutureBuilder(
-        future: fetch.allstoreproduct(Storeid),
+        future: fetch.allstoreproduct(Storeid, search),
         builder: (contxt, snapchot) {
           var products = snapchot.data as List<ProductModel>;
           return snapchot.data == null
@@ -230,6 +237,13 @@ class _ProductsScreenState extends State<ProductsScreen> {
     'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
   ];
 
+  //للبحث
+  Icon customIcon = const Icon(
+    Icons.search,
+    size: 35,
+  );
+  Widget customSearchBar = const Text('المنتجات');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -242,101 +256,41 @@ class _ProductsScreenState extends State<ProductsScreen> {
               color: Colors.blue,
               size: 35,
             )),
-        title: Text(
-          "المنتجات",
-          style: TextStyle(
-            color: Colors.blue,
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        title: customSearchBar,
+        //كبسة السيرش
         actions: [
           IconButton(
             onPressed: () {
-              onNotification;
+              setState(() {
+                if (customIcon.icon == Icons.search) {
+                  customIcon = const Icon(Icons.cancel);
+                  customSearchBar = ListTile(
+                    title: TextField(
+                      controller: searchController,
+                      onChanged: (value) =>
+                          setState(() => {search = searchController.text}),
+                      decoration: InputDecoration(
+                        hintText: 'اكتب اسم المنتج ...',
+                        hintStyle: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 18,
+                          fontStyle: FontStyle.italic,
+                        ),
+                        border: InputBorder.none,
+                      ),
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                  );
+                }
+              });
             },
-            icon: Icon(
-              Icons.add_alert_outlined,
-              color: Colors.grey,
-              size: 30,
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              onNotification;
-            },
-            icon: Icon(
-              Icons.menu_book,
-              color: Colors.grey,
-              size: 30,
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              onNotification;
-            },
-            icon: Icon(
-              Icons.shopping_basket_sharp,
-              color: Colors.blue,
-              size: 30,
-            ),
-          ),
+            icon: customIcon,
+          )
         ],
       ),
       body: Center(child: getstoreproducts()),
-
-      // SingleChildScrollView(
-      //   child: Column(
-      //
-      //     children: <Widget>[
-      //
-      //       SizedBox(
-      //         height: 10,
-      //       ),
-      //       //الصور اللي بتتحرك باعلى الصفحة
-      //
-      //       CarouselSlider(
-      //         items: imgList
-      //             .map((e) => ClipRRect(
-      //                   borderRadius: BorderRadius.circular(6),
-      //                   child: Stack(
-      //                     fit: StackFit.expand,
-      //                     children: [
-      //                       Image.network(
-      //                         e,
-      //                         height: 200,
-      //                         width: 100,
-      //                         fit: BoxFit.cover,
-      //                       ),
-      //                     ],
-      //                   ),
-      //                 ))
-      //             .toList(),
-      //       //   //خصائصها
-      //
-      //         options: CarouselOptions(
-      //           height: 250,
-      //           autoPlay: true,
-      //           enableInfiniteScroll: true,
-      //           enlargeCenterPage: true,
-      //           // initialPage: 0,
-      //           // viewportFraction: 0.85,
-      //           // reverse: false,
-      //           autoPlayInterval: Duration(seconds: 1),
-      //           autoPlayAnimationDuration: Duration(seconds: 1),
-      //           // autoPlayCurve: Curves.fastOutSlowIn,
-      //           // scrollDirection: Axis.horizontal,
-      //         ),
-      //       ),
-      //
-      //       Center(child: getstoreproducts()),
-      //
-      //
-      //
-      //
-      //     ],
-      //   ),
-      // ),
     );
   }
 

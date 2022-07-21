@@ -57,9 +57,9 @@ class fetchData {
     return body.map((store) => StoreModel.fromJson(store)).toList();
   }
 
-  Future<List<ProductModel>> allstoreproduct(id) async {
-    var res =
-        await http.get(Uri.parse(fetchData.baseURL + '/getproducts/' + id));
+  Future<List<ProductModel>> allstoreproduct(id, search) async {
+    var res = await http.get(
+        Uri.parse(fetchData.baseURL + '/getproducts/' + id + '/' + search));
     var body = jsonDecode(res.body) as List<dynamic>;
 
     return body.map((product) => ProductModel.fromJson(product)).toList();

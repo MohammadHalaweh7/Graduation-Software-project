@@ -128,7 +128,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    fetch.allstores();
+    // fetch.allstores();
     super.initState();
   }
 

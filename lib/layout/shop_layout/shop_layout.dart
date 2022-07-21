@@ -51,8 +51,7 @@ class _ShopLayoutState extends State<ShopLayout> {
     // ProfileShoScreen()
     //     .setData(id, name, description, phoneNumber, locationOnMap),
     CartScreen(),
-    SearchScreen(),
-    MoreScreen(),
+    SearchScreen(id),
   ];
 
   @override
@@ -82,8 +81,6 @@ class _ShopLayoutState extends State<ShopLayout> {
           BottomNavigationBarItem(
               icon: Icon(Icons.shopping_basket_sharp), label: "السلة"),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: "بحث"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.more_horiz_outlined), label: "أكثر"),
         ],
       ),
     );
