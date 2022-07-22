@@ -19,6 +19,9 @@ import 'package:udemy_flutter/modules/login/login_screen.dart';
 import 'package:udemy_flutter/modules/my_orders/my_orders_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/addProduct_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_account_screen.dart';
+import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_allOrders_screen.dart';
+import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_deliveryOrders_screen.dart';
+import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_newOrders_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_products_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_profile_screen.dart';
 import 'package:http/http.dart' as http;
@@ -203,6 +206,54 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                       },
                     ),
                     ListTile(
+                      title: Text("الطلبات الجديدة"),
+                      leading: Icon(Icons.open_in_new_sharp,
+                          color: Color(0xff758DFF)),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ShopkeeperNewOrdersScreen()));
+                      },
+                    ),
+                    ListTile(
+                      title: Text("طلبات قيد التوصيل"),
+                      leading: Icon(Icons.delivery_dining_rounded,
+                          color: Color(0xff758DFF)),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ShopkeeperDeliveryOrdersScreen()));
+                      },
+                    ),
+                    ListTile(
+                      title: Text("جميع الطلبات"),
+                      leading: Icon(Icons.clear_all_rounded,
+                          color: Color(0xff758DFF)),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ShopkeeperAllOrdersScreen()));
+                      },
+                    ),
+                    ListTile(
+                      title: Text("الاحصائيات"),
+                      leading:
+                          Icon(Icons.addchart_sharp, color: Color(0xff758DFF)),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ShopkeeperAllOrdersScreen()));
+                      },
+                    ),
+                    ListTile(
                       title: Text("حذف المتجر نهائيا"),
                       leading: Icon(Icons.highlight_remove_sharp,
                           color: Color(0xff758DFF)),
@@ -372,7 +423,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                         height: 20,
                                       ),
                                       Text(
-                                        'متجري',
+                                        'بروفايلي',
                                         style: TextStyle(
                                           fontSize: 18,
                                         ),
@@ -475,6 +526,142 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                       ),
                                       Text(
                                         'اضافة منتج جديد',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ShopkeeperNewOrdersScreen()));
+                                },
+                                child: Card(
+                                  elevation: 15,
+                                  shadowColor: Colors.blue,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Image.asset(
+                                        'assets/images/shopkeeper2.png',
+                                        height: 128,
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text(
+                                        'الطلبات الجديدة',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ShopkeeperDeliveryOrdersScreen()));
+                                },
+                                child: Card(
+                                  elevation: 15,
+                                  shadowColor: Colors.blue,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Image.asset(
+                                        'assets/images/shopkeeper3.png',
+                                        height: 128,
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text(
+                                        'طلبات قيد التوصيل',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ShopkeeperAllOrdersScreen()));
+                                },
+                                child: Card(
+                                  elevation: 15,
+                                  shadowColor: Colors.blue,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Image.asset(
+                                        'assets/images/shopkeeper1.png',
+                                        height: 128,
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text(
+                                        'جميع الطلبات',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ShopkeeperProfileScreen()));
+                                },
+                                child: Card(
+                                  elevation: 15,
+                                  shadowColor: Colors.blue,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Image.network(
+                                        "https://img.freepik.com/premium-vector/research-finance-sales-data-audit-mobile-phone-report-online-statistics-info-analysis-smartphone-vector-flat-cartoon-isolated_212005-118.jpg",
+                                        height: 128,
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text(
+                                        'الاحصائيات',
                                         style: TextStyle(
                                           fontSize: 18,
                                         ),

@@ -116,6 +116,61 @@ class fetchData {
     return body.map((order) => OrderModel.fromJson(order)).toList();
   }
 
+  Future<List<OrderModel>> getNeworders() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+
+    var res = await http
+        .get(Uri.parse(fetchData.baseURL + '/orders/storeNewOrders'), headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer ' + token.toString()
+    });
+
+    // print(res.body);
+    var body = jsonDecode(res.body) as List<dynamic>;
+
+    // print(body.toString());
+
+    return body.map((order) => OrderModel.fromJson(order)).toList();
+  }
+
+  Future<List<OrderModel>> getInArrivalorders() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+
+    var res = await http.get(
+        Uri.parse(fetchData.baseURL + '/orders/storeInArrivalOrders'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ' + token.toString()
+        });
+
+    // print(res.body);
+    var body = jsonDecode(res.body) as List<dynamic>;
+
+    // print(body.toString());
+
+    return body.map((order) => OrderModel.fromJson(order)).toList();
+  }
+
+  Future<List<OrderModel>> getAllStoreorders() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+
+    var res = await http
+        .get(Uri.parse(fetchData.baseURL + '/orders/storeAllOrders'), headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer ' + token.toString()
+    });
+
+    // print(res.body);
+    var body = jsonDecode(res.body) as List<dynamic>;
+
+    // print(body.toString());
+
+    return body.map((order) => OrderModel.fromJson(order)).toList();
+  }
+
   Future<List<pendingStoreModel>> allPendingStores() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');

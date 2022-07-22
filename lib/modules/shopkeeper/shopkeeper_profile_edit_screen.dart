@@ -182,6 +182,18 @@ class _ShopkeeperProfileEditScreenState
 
     StoreModel storeModel = StoreModel.fromJson(jsonDecode(result.body));
 
+    // nameController.text = storeModel.name;
+    // descriptionController.text = storeModel.description;
+    // phoneController.text = storeModel.phoneNumber;
+    // detailedLocationController.text = storeModel.detailedLocation;
+    // facebookController.text = storeModel.facebook;
+    // instagramController.text = storeModel.instagram;
+    // snapchatController.text = storeModel.snapchat;
+    // locationOnMapController.text = storeModel.locationOnMap;
+    // whatsappController.text = storeModel.whatsapp;
+    // value2 = storeModel.type;
+    // value3 = storeModel.location;
+
     return storeModel;
   }
 
@@ -602,16 +614,15 @@ class _ShopkeeperProfileEditScreenState
                                               BorderRadius.circular(6)),
                                       child: DropdownButtonHideUnderline(
                                         child: DropdownButton<String>(
-                                          onTap: () {},
                                           hint: Container(
-                                            width: 150, //and here
+                                            width: 150,                      //and here
                                             child: Text(
                                               type,
-                                              style: TextStyle(
-                                                  color: Colors.black),
+                                              style: TextStyle(color: Colors.black),
                                               textAlign: TextAlign.end,
                                             ),
                                           ),
+                                          onTap: () {},
                                           icon: Icon(
                                               Icons.arrow_downward_rounded),
                                           isExpanded: true,
@@ -663,15 +674,6 @@ class _ShopkeeperProfileEditScreenState
                                       child: DropdownButtonHideUnderline(
                                         child: DropdownButton<String>(
                                           onTap: () {},
-                                          hint: Container(
-                                            width: 150, //and here
-                                            child: Text(
-                                              city,
-                                              style: TextStyle(
-                                                  color: Colors.black),
-                                              textAlign: TextAlign.end,
-                                            ),
-                                          ),
                                           icon: Icon(
                                               Icons.arrow_downward_rounded),
                                           isExpanded: true,
