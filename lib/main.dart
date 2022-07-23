@@ -12,10 +12,13 @@ import 'package:udemy_flutter/shared/cubit/states.dart';
 import 'package:udemy_flutter/shared/network/remote/dio_helper.dart';
 import 'package:udemy_flutter/shared/styles/themes.dart';
 import 'package:udemy_flutter/translations.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 // @dart=2.9
 //Mohammad Halaweh99
 void main() {
+  Firebase.initializeApp();
+
   //----------------------------------------------------------------------------
   // WidgetsFlutterBinding.ensureInitialized();
   // var bloc;
