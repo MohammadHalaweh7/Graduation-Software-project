@@ -156,7 +156,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 Row(
                   children: [
                     Text(
-                      price + ' NIS',
+                      price.toString() + ' NIS',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.blue,
@@ -196,10 +196,12 @@ class _SearchScreenState extends State<SearchScreen> {
                         elevation: 20,
                       ),
                       onPressed: () {
+                        OrderScreen().setID(id);
+                        OrderScreen().setPrice(price);
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => OrderScreen(id)));
+                                builder: (context) => OrderScreen()));
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,

@@ -16,7 +16,7 @@ class fetchData {
     //  print(res.body);
     var body = jsonDecode(res.body) as List<dynamic>;
 
-    print(body.length);
+    // print(body.length);
     return body.map((store) => StoreModel.fromJson(store)).toList();
   }
 
@@ -38,7 +38,7 @@ class fetchData {
           'Authorization': 'Bearer ' + token.toString()
         });
     print(res.statusCode);
-    print(res.body);
+    //print(res.body);
     var body = jsonDecode(res.body) as List<dynamic>;
     //  print(body);
 

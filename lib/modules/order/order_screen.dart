@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/layout/shop_layout/shop_layout.dart';
 import 'package:udemy_flutter/models/order/order_model.dart';
+import 'package:udemy_flutter/models/user/user_model.dart';
 import 'package:udemy_flutter/modules/home/main_screen.dart';
 import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
 import 'package:udemy_flutter/modules/language/language_screen.dart';
@@ -22,10 +23,30 @@ import '../../src/my_app.dart';
 import 'package:http/http.dart' as http;
 
 var products;
+var price;
+int points = 0;
+var id;
+int usedPoints = 0;
 
 class OrderScreen extends StatefulWidget {
-  OrderScreen(prod) {
-    products = prod;
+  setPoints(int P) {
+    points = P;
+  }
+
+  setPrice(P) {
+    price = P;
+  }
+
+  setProducts(P) {
+    products = P;
+  }
+
+  setID(ID) {
+    id = ID;
+  }
+
+  setUsedPoints(int U) {
+    usedPoints = U;
   }
 
   @override
@@ -53,30 +74,37 @@ class _OrderScreenState extends State<OrderScreen> {
   ];
   String? value;
 
-  Future<OrderModel> createOrder(id) async {
+  Future<OrderModel> createOrder(id, price, UsedPoints) async {
     var ID = id;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
 
-    print(token);
+    //print(token);
     var body = jsonEncode({
       'buyerName': nameController.text,
       'buyerEmail': emailController.text,
       'buyerPhone': phoneController.text,
       'buyerCity': city,
       'buyerAddress': addressController.text,
+      'price': price
     });
+    print(
+        fetchData.baseURL + "/createOrder/" + ID + "/" + UsedPoints.toString());
 
-    var result =
-        await http.post(Uri.parse(fetchData.baseURL + "/createOrder/" + ID),
-            headers: {
-              'Content-Type': 'application/json; charset=UTF-8',
-              'Authorization': 'Bearer ' + token.toString()
-            },
-            body: body);
+    var result = await http.post(
+        Uri.parse(fetchData.baseURL +
+            "/createOrder/" +
+            ID +
+            "/" +
+            UsedPoints.toString()),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ' + token.toString()
+        },
+        body: body);
 
     OrderModel orderModel = OrderModel.fromJson(jsonDecode(result.body));
-    print(orderModel);
+    // print(orderModel);
 
     return orderModel;
   }
@@ -283,12 +311,21 @@ class _OrderScreenState extends State<OrderScreen> {
                       ),
                       child: MaterialButton(
                         onPressed: () {
-                          if (products.length == 24) {
-                            createOrder(products);
-                          } else {
+                          if (id == null) {
+                            print(points);
+                            print(usedPoints);
                             for (int i = 0; i < products.length; i++) {
-                              createOrder(products[i].id);
+                              createOrder(products[i].id, products[i].price,
+                                  usedPoints);
+                              usedPoints = 0;
                             }
+                            // if (!(points == 0)) {
+                            //   print('i am here');
+                            //   // editData();
+                            // }
+                          } else {
+                            createOrder(products, price, usedPoints);
+                            usedPoints = 0;
                           }
 
                           if (formkey.currentState!.validate()) {

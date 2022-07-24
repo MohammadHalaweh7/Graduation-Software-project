@@ -27,13 +27,36 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  var price;
   var counter;
   var i = 0;
   var prod;
   int toNumbrs = 0;
+  var myPoints;
   fetchData fetch = fetchData();
   TextEditingController totalController = new TextEditingController(text: '0');
   TextEditingController countcontroller = new TextEditingController(text: '0');
+  TextEditingController pointscontroller = new TextEditingController(text: '0');
+
+  Future<UserModel> loadData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+
+    print(token);
+
+    var result = await http.get(
+      Uri.parse(fetchData.baseURL + "/users/me"),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer ' + token.toString()
+      },
+    );
+    print(result);
+
+    UserModel userModel = UserModel.fromJson(jsonDecode(result.body));
+
+    return userModel;
+  }
 
   Future<UserModel> removeFromCart(id) async {
     var ID = id;
@@ -67,8 +90,7 @@ class _CartScreenState extends State<CartScreen> {
           Future.delayed(Duration(milliseconds: 1000), () {
             if (snapchot.hasData) {
               products.forEach((element) {
-                tot += double.parse(
-                    element.price.replaceAll(new RegExp(r'[^0-9]'), ''));
+                tot += element.price;
               });
               total = tot;
               totalController.text = total.toStringAsFixed(2) + ' NIS';
@@ -171,7 +193,7 @@ class _CartScreenState extends State<CartScreen> {
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              price + ' NIS',
+                              price.toString() + ' NIS',
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 20,
@@ -212,162 +234,370 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton(
-            onPressed: onNotification,
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.blue,
-              size: 35,
-            )),
-        title: Text(
-          "السلة",
-          style: TextStyle(
-            color: Colors.blue,
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              onNotification;
-            },
-            icon: Icon(
-              Icons.add_alert_outlined,
-              color: Colors.grey,
-              size: 30,
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              onNotification;
-            },
-            icon: Icon(
-              Icons.menu_book,
-              color: Colors.grey,
-              size: 30,
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              onNotification;
-            },
-            icon: Icon(
-              Icons.shopping_basket_sharp,
-              color: Colors.blue,
-              size: 30,
-            ),
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          Expanded(child: cartProducts()),
-          SizedBox(
-            height: 10,
-          ),
-          Container(
-              padding: EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.0),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey,
-                    offset: Offset(0, 1.0), //(x,y)
-                    blurRadius: 5.0,
-                  ),
-                ],
+    return FutureBuilder<UserModel>(
+      future: loadData(),
+      builder: (context, snapshot) {
+        var account = snapshot.data;
+        if (!snapshot.hasData) {
+          return Container(
+            color: Colors.white,
+            child: Center(
+              child: CircularProgressIndicator(
+                valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+                backgroundColor: Colors.white,
               ),
-              width: double.infinity,
-              height: 125,
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        'مجموع السعر : ',
-                        style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 5,
-                        width: 150,
-                        child: TextField(
-                          enabled: false,
-                          controller: totalController,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Spacer(),
-                      Text(
-                        'عدد العناصر : ',
-                        style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 20,
-                        width: 50,
-                        child: TextField(
-                          enabled: false,
-                          controller: countcontroller,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ],
+            ),
+          );
+        } else {
+          pointscontroller.text = account!.points.toString();
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.white,
+              leading: IconButton(
+                  onPressed: onNotification,
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Colors.blue,
+                    size: 35,
+                  )),
+              title: Text(
+                "السلة",
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    onNotification;
+                  },
+                  icon: Icon(
+                    Icons.add_alert_outlined,
+                    color: Colors.grey,
+                    size: 30,
                   ),
-                  SizedBox(
-                    height: 10,
+                ),
+                IconButton(
+                  onPressed: () {
+                    onNotification;
+                  },
+                  icon: Icon(
+                    Icons.menu_book,
+                    color: Colors.grey,
+                    size: 30,
                   ),
-                  Container(
-                    width: double.infinity,
+                ),
+                IconButton(
+                  onPressed: () {
+                    onNotification;
+                  },
+                  icon: Icon(
+                    Icons.shopping_basket_sharp,
+                    color: Colors.blue,
+                    size: 30,
+                  ),
+                ),
+              ],
+            ),
+            body: Column(
+              children: [
+                Expanded(child: cartProducts()),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                    padding: EdgeInsets.all(15),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                      color: Colors.blueAccent, // width: double.infinity,
+                      borderRadius: BorderRadius.circular(5.0),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          offset: Offset(0, 1.0), //(x,y)
+                          blurRadius: 5.0,
+                        ),
+                      ],
                     ),
-                    child: MaterialButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => OrderScreen(products)));
-                      },
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "استكمال الطلب",
-                            style: TextStyle(color: Colors.white),
+                    width: double.infinity,
+                    height: 174,
+                    child: Column(
+                      children: [
+                        //مجموع السعر وعدد العناصر
+                        Row(
+                          children: [
+                            Text(
+                              'مجموع السعر : ',
+                              style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height: 5,
+                              width: 150,
+                              child: TextField(
+                                enabled: false,
+                                controller: totalController,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            Spacer(),
+                            Text(
+                              'عدد العناصر : ',
+                              style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height: 20,
+                              width: 50,
+                              child: TextField(
+                                enabled: false,
+                                controller: countcontroller,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        //كود الخصم وكبسة استعمال
+                        Row(
+                          children: [
+                            Text(
+                              'كود الخصم : ',
+                              style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              width: 205,
+                              height: 25,
+                              child: TextFormField(
+                                // controller: nameController,
+                                onFieldSubmitted: (String value) {
+                                  print(value);
+                                },
+                                onChanged: (String value) {
+                                  print(value);
+                                },
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                            ),
+                            Spacer(),
+                            Container(
+                              width: 85,
+                              height: 25,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5.0)),
+                                color: Colors
+                                    .blueAccent, // width: double.infinity,
+                              ),
+                              child: MaterialButton(
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        _buildPopupDialog2(context),
+                                  );
+                                },
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "استعمال",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        //نقاطي وكبسة استعمال
+                        Row(
+                          children: [
+                            Text(
+                              'نقاطي : ',
+                              style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height: 25,
+                              width: 230,
+                              child: TextField(
+                                // enabled: false,
+                                controller: pointscontroller,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            Spacer(),
+                            Container(
+                              width: 85,
+                              height: 25,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5.0)),
+                                color: Colors
+                                    .blueAccent, // width: double.infinity,
+                              ),
+                              child: MaterialButton(
+                                onPressed: () {
+                                  print(pointscontroller.text);
+                                  if (account.points < 50) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          _buildPopupDialog4(context),
+                                    );
+                                  } else {
+                                    if (int.parse(pointscontroller.text) ==
+                                        50) {
+                                      for (int i = 0;
+                                          i < products.length;
+                                          i++) {
+                                        products[i].price =
+                                            products[i].price * 0.97;
+                                      }
+                                      OrderScreen().setUsedPoints(
+                                          int.parse(pointscontroller.text));
+                                      OrderScreen().setPoints(account.points);
+                                      OrderScreen().setProducts(products);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  OrderScreen()));
+                                    } else if (int.parse(
+                                            pointscontroller.text) ==
+                                        100) {
+                                      for (int i = 0;
+                                          i < products.length;
+                                          i++) {
+                                        products[i].price =
+                                            products[i].price * 0.94;
+                                      }
+                                      OrderScreen().setUsedPoints(
+                                          int.parse(pointscontroller.text));
+                                      OrderScreen().setPoints(account.points);
+                                      OrderScreen().setProducts(products);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  OrderScreen()));
+                                    } else if (int.parse(
+                                            pointscontroller.text) ==
+                                        150) {
+                                      for (int i = 0;
+                                          i < products.length;
+                                          i++) {
+                                        products[i].price =
+                                            products[i].price * 0.90;
+                                      }
+                                      OrderScreen().setUsedPoints(
+                                          int.parse(pointscontroller.text));
+                                      OrderScreen().setPoints(account.points);
+                                      OrderScreen().setProducts(products);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  OrderScreen()));
+                                    } else {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            _buildPopupDialog5(context),
+                                      );
+                                    }
+                                  }
+                                },
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "استعمال",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        //كبسة استكمال الطلب
+                        Container(
+                          width: double.infinity,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(5.0)),
+                            color: Colors.blueAccent, // width: double.infinity,
                           ),
-                          SizedBox(
-                            width: 5,
+                          child: MaterialButton(
+                            onPressed: () {
+                              OrderScreen().setProducts(products);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => OrderScreen()));
+                            },
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "استكمال الطلب",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Icon(
+                                  Icons.border_color,
+                                  color: Colors.white,
+                                )
+                              ],
+                            ),
                           ),
-                          Icon(
-                            Icons.border_color,
-                            color: Colors.white,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              )),
-        ],
-      ),
+                        ),
+                      ],
+                    )),
+              ],
+            ),
+          );
+        }
+      },
     );
   }
 
@@ -406,6 +636,134 @@ class _CartScreenState extends State<CartScreen> {
 
             // Navigator.push(
             //     context, MaterialPageRoute(builder: (context) => ShopLayout()));
+          },
+          textColor: Colors.blue,
+          child: const Text('موافق'),
+        ),
+      ],
+    );
+  }
+  //-----------------------------------------------------------------------------------------------------------
+
+  //Pub up Function(2)--------------------------------------------------------------------------------------------
+  Widget _buildPopupDialog2(BuildContext context) {
+    return new AlertDialog(
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CircleAvatar(
+              radius: 17,
+              backgroundColor: Colors.blue,
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          Text("تم استعمال كود الخصم")
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Colors.blue,
+          child: const Text('موافق'),
+        ),
+      ],
+    );
+  }
+  //-----------------------------------------------------------------------------------------------------------
+
+  //Pub up Function(3)--------------------------------------------------------------------------------------------
+  Widget _buildPopupDialog3(BuildContext context) {
+    return new AlertDialog(
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CircleAvatar(
+              radius: 17,
+              backgroundColor: Colors.blue,
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          Text("تم استعمال النقاط")
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Colors.blue,
+          child: const Text('موافق'),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPopupDialog4(BuildContext context) {
+    return new AlertDialog(
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CircleAvatar(
+              radius: 17,
+              backgroundColor: Colors.blue,
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          Text("يجب ان يكون لديك على الاقل 50 نقطة , نقاطك لا تكفي ")
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Colors.blue,
+          child: const Text('موافق'),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPopupDialog5(BuildContext context) {
+    return new AlertDialog(
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CircleAvatar(
+              radius: 17,
+              backgroundColor: Colors.blue,
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          Text("يجب ان تستعمل 50 او 100 او 150 نقاط لاكمال هذه العملية ")
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
           },
           textColor: Colors.blue,
           child: const Text('موافق'),

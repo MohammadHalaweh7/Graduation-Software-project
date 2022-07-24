@@ -10,7 +10,7 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel()
   ..id = json['_id'] as String
   ..name = json['name'] as String
   ..description = json['description'] as String
-  ..price = json['price'] as String
+  ..price = (json['price'] as num).toDouble()
   ..owner = json['owner'] as String
   ..avatar = json['avatar'] as String?;
 

@@ -10,7 +10,7 @@ class ProductModel {
   late final String id;
   late final String name;
   late final String description;
-  late final String price;
+  late double price;
   late final String owner;
   late final String? avatar;
   ProductModel();
