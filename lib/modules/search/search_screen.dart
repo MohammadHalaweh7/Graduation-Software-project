@@ -197,6 +197,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                       onPressed: () {
                         OrderScreen().setID(id);
+                        OrderScreen().setUsedPoints(0);
                         OrderScreen().setPrice(price);
                         Navigator.push(
                             context,

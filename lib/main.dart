@@ -1,9 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:udemy_flutter/modules/admin/admin_main_web_screen.dart';
 import 'package:udemy_flutter/modules/home/home_screen.dart';
 import 'package:udemy_flutter/modules/home/main_screen.dart';
 import 'package:udemy_flutter/modules/shop_app/on_boarding/on_boarding_screen.dart';
@@ -12,12 +15,45 @@ import 'package:udemy_flutter/shared/cubit/states.dart';
 import 'package:udemy_flutter/shared/network/remote/dio_helper.dart';
 import 'package:udemy_flutter/shared/styles/themes.dart';
 import 'package:udemy_flutter/translations.dart';
+
+//import 'package:fluttertoast/fluttertoast.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+import 'package:udemy_flutter/sharedPrefs.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // @dart=2.9
 //Mohammad Halaweh99
-void main() {
-  Firebase.initializeApp();
+
+late SharedPreferences prefs;
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
+  runApp(MyApp());
+  prefs = await SharedPreferences.getInstance();
+
+  // var token = await FirebaseMessaging.instance.getToken();
+  // print(token);
+  //
+  // FirebaseMessaging.onMessage.listen((event)
+  // {
+  //   print('on oppenning app');
+  //   print(event.data.toString());
+  //
+  //   // showToast(text:'on massage',state: ToastStates.SUCCESS);
+  // });
+  //
+  // FirebaseMessaging.onMessageOpenedApp.listen((event)
+  // {
+  //   print(event.data.toString());
+  //   // showToast(text:'onMessageOpenedApp',state: ToastStates.SUCCESS);
+  // });
 
   //----------------------------------------------------------------------------
   // WidgetsFlutterBinding.ensureInitialized();

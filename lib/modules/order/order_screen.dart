@@ -317,7 +317,6 @@ class _OrderScreenState extends State<OrderScreen> {
                             for (int i = 0; i < products.length; i++) {
                               createOrder(products[i].id, products[i].price,
                                   usedPoints);
-                              usedPoints = 0;
                             }
                             // if (!(points == 0)) {
                             //   print('i am here');
@@ -325,7 +324,6 @@ class _OrderScreenState extends State<OrderScreen> {
                             // }
                           } else {
                             createOrder(products, price, usedPoints);
-                            usedPoints = 0;
                           }
 
                           if (formkey.currentState!.validate()) {

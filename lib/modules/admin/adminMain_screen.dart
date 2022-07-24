@@ -9,6 +9,7 @@ import 'package:udemy_flutter/models/pendingStore/pendingStore_model.dart';
 import 'package:udemy_flutter/models/user/user_model.dart';
 import 'package:udemy_flutter/modules/account/account_screen.dart';
 import 'package:udemy_flutter/modules/admin/admin_account_screen.dart';
+import 'package:udemy_flutter/modules/admin/admin_addNotification_screen.dart';
 import 'package:udemy_flutter/modules/admin/admin_screen.dart';
 import 'package:udemy_flutter/modules/admin/admin_shops_details_screen.dart';
 import 'package:udemy_flutter/modules/admin/admin_shops_screen.dart';
@@ -28,6 +29,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
   Future<UserModel> loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
+
 
     //print(token);
 
@@ -456,6 +458,36 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                                       ),
                                       Text(
                                         'الاحصائيات',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(context,MaterialPageRoute(builder: (context) => AddNotificationScreen()));
+                                },
+                                child: Card(
+                                  elevation: 15,
+                                  shadowColor: Colors.blue,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Image.asset(
+                                        'assets/images/notification.png',
+                                        height: 128,
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text(
+                                        'التنبيهات',
                                         style: TextStyle(
                                           fontSize: 18,
                                         ),

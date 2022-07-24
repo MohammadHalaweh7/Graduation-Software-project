@@ -19,6 +19,7 @@ import 'package:udemy_flutter/modules/login/login_screen.dart';
 import 'package:udemy_flutter/modules/my_orders/my_orders_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/addProduct_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_account_screen.dart';
+import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_addNotification_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_allOrders_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_deliveryOrders_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_newOrders_screen.dart';
@@ -672,7 +673,8 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  removeStore(context);
+                                  Navigator.push(context,MaterialPageRoute(builder: (context) => ShopkeeperAddNotificationScreen()));
+
                                 },
                                 child: Card(
                                   elevation: 15,
@@ -683,15 +685,15 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      Image.network(
-                                        "https://media.istockphoto.com/vectors/cross-icon-x-vector-sign-flat-style-red-colored-symbol-isolated-vector-id1210968750?k=20&m=1210968750&s=170667a&w=0&h=YCYOtUL62_yGhCTUSUmYiL0A3nm-PfDFXyfjPhFXSc8=",
+                                      Image.asset(
+                                        'assets/images/notification.png',
                                         height: 128,
                                       ),
                                       SizedBox(
                                         height: 20,
                                       ),
                                       Text(
-                                        'حذف المتجر',
+                                        'ارسال الاشعارات',
                                         style: TextStyle(
                                           fontSize: 18,
                                         ),

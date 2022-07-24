@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -12,6 +13,7 @@ import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
 import 'package:udemy_flutter/modules/language/language_screen.dart';
 import 'package:udemy_flutter/modules/login/login_screen.dart';
 import 'package:udemy_flutter/modules/my_orders/my_orders_screen.dart';
+import 'package:udemy_flutter/modules/notification/notification_screen.dart';
 import 'package:udemy_flutter/modules/password/password_screen.dart';
 import 'package:udemy_flutter/modules/phone/phone_screen.dart';
 import 'package:udemy_flutter/modules/shops/shops_screen.dart';
@@ -25,7 +27,11 @@ class MainScreen extends StatefulWidget {
   State<MainScreen> createState() => _MainScreenState();
 }
 
+late String deviceToken;
+
 class _MainScreenState extends State<MainScreen> {
+  var fbm = FirebaseMessaging.instance;
+
   fetchData fetch = fetchData();
 
   String? city = 'الكل';
@@ -127,6 +133,14 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
+    print('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm');
+
+    fbm.getToken().then((token) {
+      deviceToken = token.toString();
+      print(deviceToken);
+      print('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm');
+    });
+
     // TODO: implement initState
     // fetch.allstores();
     super.initState();
@@ -304,10 +318,15 @@ class _MainScreenState extends State<MainScreen> {
                   },
                 ),
                 ListTile(
-                  title: Text("منتجات شاهدتها".tr),
-                  leading: Icon(Icons.remove_red_eye_outlined,
+                  title: Text("الاشعارات".tr),
+                  leading: Icon(Icons.notification_important_outlined,
                       color: Color(0xff758DFF)),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => NotificationScreen()));
+                  },
                 ),
                 ListTile(
                   title: Text("تسجيل خروج".tr),

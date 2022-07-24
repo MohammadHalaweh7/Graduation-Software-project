@@ -564,6 +564,7 @@ class _CartScreenState extends State<CartScreen> {
                           ),
                           child: MaterialButton(
                             onPressed: () {
+                              OrderScreen().setUsedPoints(0);
                               OrderScreen().setProducts(products);
                               Navigator.push(
                                   context,

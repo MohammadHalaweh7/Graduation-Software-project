@@ -199,6 +199,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                       onPressed: () {
                         OrderScreen().setID(id);
                         OrderScreen().setPrice(price);
+                        OrderScreen().setUsedPoints(0);
                         Navigator.push(
                             context,
                             MaterialPageRoute(
