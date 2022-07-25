@@ -57,7 +57,7 @@ class _ShopkeeperEditPasswordScreenState
               },
               body: body);
 
-      print(result);
+      print(result.statusCode);
       if (result.statusCode == 200) {
         passwordController.text = '';
         passwordVerifiyController.text = '';

@@ -35,7 +35,6 @@ class _ShopkeeperProductsScreenState extends State<ShopkeeperProductsScreen> {
 
   List<ProductModel> products = [];
   Widget getstoreproducts() {
-    print('hello');
     return FutureBuilder(
         future: fetch.allproducts(),
         builder: (contxt, snapchot) {
@@ -53,7 +52,6 @@ class _ShopkeeperProductsScreenState extends State<ShopkeeperProductsScreen> {
                   shrinkWrap: true,
                   itemCount: products.length,
                   itemBuilder: (context, index) {
-                    print(products.length);
                     return myproducts(
                       products[index].name,
                       products[index].description,

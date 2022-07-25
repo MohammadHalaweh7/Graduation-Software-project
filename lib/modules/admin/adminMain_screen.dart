@@ -30,9 +30,6 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
 
-
-    //print(token);
-
     var result = await http.get(
       Uri.parse(fetchData.baseURL + "/admin/me"),
       headers: {
@@ -468,7 +465,11 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.push(context,MaterialPageRoute(builder: (context) => AddNotificationScreen()));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              AddNotificationScreen()));
                                 },
                                 child: Card(
                                   elevation: 15,

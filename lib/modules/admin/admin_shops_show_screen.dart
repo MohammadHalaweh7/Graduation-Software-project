@@ -93,8 +93,6 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
   Future<void> removeStore(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
-    print(token);
-    print(id);
     var result = await http.delete(
         Uri.parse(fetchData.baseURL + '/admin/' + id + '/deleteStore'),
         headers: {

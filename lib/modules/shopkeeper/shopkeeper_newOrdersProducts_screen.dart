@@ -82,8 +82,6 @@ class _ShopkeeperNewOrdersProductsScreenState
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
 
-    print(token);
-
     var result = await http.patch(
       Uri.parse(fetchData.baseURL + "/orders/changeStatus/" + ID),
       headers: {
@@ -100,7 +98,6 @@ class _ShopkeeperNewOrdersProductsScreenState
     }
 
     OrderModel orderModel = OrderModel.fromJson(jsonDecode(result.body));
-    print(orderModel);
 
     return orderModel;
   }

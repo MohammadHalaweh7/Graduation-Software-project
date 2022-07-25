@@ -42,8 +42,6 @@ class _CartScreenState extends State<CartScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
 
-    print(token);
-
     var result = await http.get(
       Uri.parse(fetchData.baseURL + "/users/me"),
       headers: {
@@ -51,7 +49,7 @@ class _CartScreenState extends State<CartScreen> {
         'Authorization': 'Bearer ' + token.toString()
       },
     );
-    print(result);
+    print(result.statusCode);
 
     UserModel userModel = UserModel.fromJson(jsonDecode(result.body));
 
@@ -62,7 +60,6 @@ class _CartScreenState extends State<CartScreen> {
     var ID = id;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
-    print(token);
 
     var result = await http.patch(
         Uri.parse(fetchData.baseURL + "/users/removeProductFromCart/" + ID),

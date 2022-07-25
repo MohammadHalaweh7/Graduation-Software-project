@@ -48,16 +48,12 @@ class _ProductsScreenState extends State<ProductsScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
 
-    print(token);
-
     var result = await http.patch(
         Uri.parse(fetchData.baseURL + "/users/addProductOnCart/" + ID),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ' + token.toString()
         });
-
-    // print(result);
 
     UserModel userModel = UserModel.fromJson(jsonDecode(result.body));
 

@@ -48,8 +48,6 @@ class _SearchScreenState extends State<SearchScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
 
-    print(token);
-
     var result = await http.patch(
         Uri.parse(fetchData.baseURL + "/users/addProductOnCart/" + ID),
         headers: {
@@ -68,7 +66,6 @@ class _SearchScreenState extends State<SearchScreen> {
     } else {
       search = searchController.text;
     }
-    print(search);
     return FutureBuilder(
         future: fetch.allstoreproduct(Storeid, search),
         builder: (contxt, snapchot) {

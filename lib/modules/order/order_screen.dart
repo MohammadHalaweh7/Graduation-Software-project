@@ -79,7 +79,6 @@ class _OrderScreenState extends State<OrderScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
 
-    //print(token);
     var body = jsonEncode({
       'buyerName': nameController.text,
       'buyerEmail': emailController.text,
@@ -88,13 +87,11 @@ class _OrderScreenState extends State<OrderScreen> {
       'buyerAddress': addressController.text,
       'price': price
     });
-    print(
-        fetchData.baseURL + "/createOrder/" + ID + "/" + UsedPoints.toString());
 
     var result = await http.post(
         Uri.parse(fetchData.baseURL +
             "/createOrder/" +
-            ID +
+            ID.toString() +
             "/" +
             UsedPoints.toString()),
         headers: {
@@ -103,8 +100,16 @@ class _OrderScreenState extends State<OrderScreen> {
         },
         body: body);
 
+    print('my status code ' + result.statusCode.toString());
+
+    if (result.statusCode == 201) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => _buildPopupDialog(context),
+      );
+    }
+
     OrderModel orderModel = OrderModel.fromJson(jsonDecode(result.body));
-    // print(orderModel);
 
     return orderModel;
   }
@@ -312,26 +317,12 @@ class _OrderScreenState extends State<OrderScreen> {
                       child: MaterialButton(
                         onPressed: () {
                           if (id == null) {
-                            print(points);
-                            print(usedPoints);
                             for (int i = 0; i < products.length; i++) {
                               createOrder(products[i].id, products[i].price,
                                   usedPoints);
                             }
-                            // if (!(points == 0)) {
-                            //   print('i am here');
-                            //   // editData();
-                            // }
                           } else {
-                            createOrder(products, price, usedPoints);
-                          }
-
-                          if (formkey.currentState!.validate()) {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) =>
-                                  _buildPopupDialog(context),
-                            );
+                            createOrder(id, price, usedPoints);
                           }
                         },
                         child: Text(

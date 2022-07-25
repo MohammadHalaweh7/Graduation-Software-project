@@ -79,8 +79,6 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Widget mystore(name, description, id, avatar) {
-    //print(name);
-    // print(avatar);
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Container(

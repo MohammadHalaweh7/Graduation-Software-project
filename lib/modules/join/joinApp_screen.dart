@@ -30,7 +30,6 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
 
     setState(() {
       this._image = imageTemporary;
-      //print(image.path);
     });
   }
   //----------------------------------------------------------------------------
@@ -121,7 +120,6 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
       });
     }
 
-    //print(body);
     var result = await http.post(Uri.parse(fetchData.baseURL + "/pendingStore"),
         headers: {'Content-Type': 'application/json; charset=UTF-8'},
         body: body);

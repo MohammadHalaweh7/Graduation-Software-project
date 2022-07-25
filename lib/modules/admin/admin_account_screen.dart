@@ -51,8 +51,6 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
 
-    //print(token);
-
     var result = await http.get(
       Uri.parse(fetchData.baseURL + "/admin/me"),
       headers: {
@@ -60,7 +58,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
         'Authorization': 'Bearer ' + token.toString()
       },
     );
-    print(result);
+    print(result.statusCode);
 
     UserModel userModel = UserModel.fromJson(jsonDecode(result.body));
 
@@ -78,7 +76,6 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
       String base64 = base64Encode(bytes);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       token = prefs.get('token');
-      // print(token);
       body = jsonEncode({
         'email': emailController.text,
         'name': nameController.text,
@@ -87,7 +84,6 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
     } else {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       token = prefs.get('token');
-      // print(token);
       body = jsonEncode({
         'email': emailController.text,
         'name': nameController.text,

@@ -68,8 +68,6 @@ class _ShopsScreenState extends State<ShopsScreen> {
                   shrinkWrap: true,
                   itemCount: stores == null ? 0 : stores.length,
                   itemBuilder: (context, index) {
-                    print(city);
-                    print(stores.length);
                     return mystore(
                       stores[index].name,
                       stores[index].description,

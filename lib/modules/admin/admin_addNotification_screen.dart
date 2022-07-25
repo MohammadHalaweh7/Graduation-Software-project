@@ -20,7 +20,38 @@ class AddNotificationScreen extends StatefulWidget {
 }
 
 class _AddNotificationScreenState extends State<AddNotificationScreen> {
+  var serverToken =
+      'AAAA1-uKg5g:APA91bGbOCRD5CsqtzDADIVk35DlYMVKMwK-VqcJ7bAbXassPWok45rFdRkWH7kk2TYo_ogERYfUUTkBsHwcBuBsBy4evMbmniLQr7TRlK4XpA_glaqvUivQdl9wWrUpeZjceIRCIz4k';
 
+  sendNotfiy(String title, String body) async {
+    await http.post(
+      Uri.parse("https://fcm.googleapis.com/fcm/send"),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'Authorization': 'key=$serverToken',
+      },
+      body: jsonEncode(
+        <String, dynamic>{
+          'notification': <String, dynamic>{
+            'body': body.toString(),
+            'title': title.toString()
+          },
+          'priority': 'high',
+          'data': <String, dynamic>{
+            'click_action': 'FLUTTER_NOTIFICATION_CLICK',
+            //'id': id.toString(),
+            'name': 'Mohammad',
+            'lastname': 'Halaweh',
+            'status': 'done'
+          },
+          'to':
+              "e3YH1bNXSEGLsMk4LV8ia4:APA91bEI6Cbyx9deSMJ0WLBNTRI8C4LviKkzBRNhlBgaVZhPAOswnjq4DNDnvt91L2D8gxc1UnYHeClUA6WOKsEctpqydkYubDPN4S5Tr8wr8eBgK2oG3lO7m0ast2uyXO6qgs9h_umG"
+
+          //await FirebaseMessaging.instance.getToken()
+        },
+      ),
+    );
+  }
 
   File? _image;
   var myImage;
@@ -45,8 +76,6 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
   var priceController = TextEditingController();
   var descriptionController = TextEditingController();
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +96,6 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -84,7 +112,7 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
                     Text(
                       "اضف صورة للاشعار",
                       style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                     Row(
                       children: [
@@ -92,7 +120,7 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
                           width: 220,
                           decoration: BoxDecoration(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(10.0)),
+                                BorderRadius.all(Radius.circular(10.0)),
                             color: Colors.blue, // width: double.infinity,
                           ),
                           child: MaterialButton(
@@ -108,16 +136,16 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
                         Spacer(),
                         _image != null
                             ? Image.file(
-                          _image!,
-                          width: 120,
-                          height: 120,
-                          fit: BoxFit.cover,
-                        )
+                                _image!,
+                                width: 120,
+                                height: 120,
+                                fit: BoxFit.cover,
+                              )
                             : Image.network(
-                          'https://static.thenounproject.com/png/3322766-200.png',
-                          width: 120,
-                          height: 120,
-                        ),
+                                'https://static.thenounproject.com/png/3322766-200.png',
+                                width: 120,
+                                height: 120,
+                              ),
                       ],
                     ),
 
@@ -128,10 +156,10 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
                     Text(
                       "عنوان الاشعار",
                       style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                     TextFormField(
-                      // controller: nameController,
+                      controller: nameController,
                       onFieldSubmitted: (String value) {
                         print(value);
                       },
@@ -150,7 +178,7 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
                     Text(
                       "وصف الاشعار",
                       style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                     TextField(
                       controller: descriptionController,
@@ -163,7 +191,7 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
                           helperStyle: TextStyle(color: Colors.white70),
                           border: OutlineInputBorder(
                               borderRadius:
-                              BorderRadius.all(Radius.circular(5)))),
+                                  BorderRadius.all(Radius.circular(5)))),
                     ),
                     SizedBox(
                       height: 20,
@@ -178,9 +206,14 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
                       ),
                       child: MaterialButton(
                         onPressed: () {
+                          sendNotfiy(
+                              nameController.text, descriptionController.text);
 
-                          showDialog(context: context,builder: (BuildContext context) => _buildPopupDialog(context),);
-
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                _buildPopupDialog(context),
+                          );
                         },
                         child: Text(
                           "ارسال",
@@ -197,7 +230,6 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
       ),
     );
   }
-
 
   //Pub up Function--------------------------------------------------------------------------------------------
   Widget _buildPopupDialog(BuildContext context) {
@@ -223,10 +255,8 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
         new FlatButton(
           onPressed: () {
             Navigator.of(context).pop();
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => AdminMainScreen()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AdminMainScreen()));
           },
           textColor: Colors.blue,
           child: const Text('موافق'),

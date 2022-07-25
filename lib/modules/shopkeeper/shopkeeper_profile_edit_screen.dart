@@ -123,7 +123,6 @@ class _ShopkeeperProfileEditScreenState
   Future<StoreModel> editData() async {
     var token;
     var body;
-    print(value2);
     if (!(myImage == null)) {
       var bytes = await new File(myImage.path).readAsBytes();
       String base64 = base64Encode(bytes);
@@ -615,10 +614,11 @@ class _ShopkeeperProfileEditScreenState
                                       child: DropdownButtonHideUnderline(
                                         child: DropdownButton<String>(
                                           hint: Container(
-                                            width: 150,                      //and here
+                                            width: 150, //and here
                                             child: Text(
                                               type,
-                                              style: TextStyle(color: Colors.black),
+                                              style: TextStyle(
+                                                  color: Colors.black),
                                               textAlign: TextAlign.end,
                                             ),
                                           ),

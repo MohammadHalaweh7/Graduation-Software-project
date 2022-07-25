@@ -13,10 +13,8 @@ class fetchData {
 
   Future<List<StoreModel>> allstores() async {
     var res = await http.get(Uri.parse(fetchData.baseURL + '/store/allinfo'));
-    //  print(res.body);
-    var body = jsonDecode(res.body) as List<dynamic>;
 
-    // print(body.length);
+    var body = jsonDecode(res.body) as List<dynamic>;
     return body.map((store) => StoreModel.fromJson(store)).toList();
   }
 
@@ -24,7 +22,6 @@ class fetchData {
     var res = await http
         .get(Uri.parse(fetchData.baseURL + '/store/locationall/' + city));
     var body = jsonDecode(res.body) as List<dynamic>;
-    //print('hellop ' + city);
     return body.map((store) => StoreModel.fromJson(store)).toList();
   }
 
@@ -38,9 +35,7 @@ class fetchData {
           'Authorization': 'Bearer ' + token.toString()
         });
     print(res.statusCode);
-    //print(res.body);
     var body = jsonDecode(res.body) as List<dynamic>;
-    //  print(body);
 
     return body.map((store) => StoreModel.fromJson(store)).toList();
   }
@@ -49,10 +44,7 @@ class fetchData {
     var res =
         await http.get(Uri.parse(fetchData.baseURL + '/store/typeall/' + type));
 
-    // print(res.body);
     var body = jsonDecode(res.body) as List<dynamic>;
-
-    // print(body.toString());
 
     return body.map((store) => StoreModel.fromJson(store)).toList();
   }
@@ -75,26 +67,21 @@ class fetchData {
     });
     print(res.statusCode);
     var body = jsonDecode(res.body) as List<dynamic>;
-    //  print(body);
 
     return body.map((product) => ProductModel.fromJson(product)).toList();
   }
 
   Future<List<ProductModel>> getProductsOnCart() async {
-    print('hello');
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
-    print(token);
     var res = await http
         .get(Uri.parse(fetchData.baseURL + '/getproductsOnCart'), headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer ' + token.toString()
     });
     print(res.statusCode);
-    // print(res.body);
     var body = jsonDecode(res.body) as List<dynamic>;
 
-    // print(body.toString());
     return body.map((product) => ProductModel.fromJson(product)).toList();
   }
 
@@ -108,10 +95,7 @@ class fetchData {
       'Authorization': 'Bearer ' + token.toString()
     });
 
-    // print(res.body);
     var body = jsonDecode(res.body) as List<dynamic>;
-
-    // print(body.toString());
 
     return body.map((order) => OrderModel.fromJson(order)).toList();
   }
@@ -126,10 +110,7 @@ class fetchData {
       'Authorization': 'Bearer ' + token.toString()
     });
 
-    // print(res.body);
     var body = jsonDecode(res.body) as List<dynamic>;
-
-    // print(body.toString());
 
     return body.map((order) => OrderModel.fromJson(order)).toList();
   }
@@ -145,10 +126,7 @@ class fetchData {
           'Authorization': 'Bearer ' + token.toString()
         });
 
-    // print(res.body);
     var body = jsonDecode(res.body) as List<dynamic>;
-
-    // print(body.toString());
 
     return body.map((order) => OrderModel.fromJson(order)).toList();
   }
@@ -163,10 +141,7 @@ class fetchData {
       'Authorization': 'Bearer ' + token.toString()
     });
 
-    // print(res.body);
     var body = jsonDecode(res.body) as List<dynamic>;
-
-    // print(body.toString());
 
     return body.map((order) => OrderModel.fromJson(order)).toList();
   }

@@ -38,8 +38,6 @@ class _AdminEditPasswordScreenState extends State<AdminEditPasswordScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
 
-    print(token);
-
     if (passwordController.text == passwordVerifiyController.text) {
       var body = jsonEncode({'password': passwordController.text});
 
@@ -51,7 +49,7 @@ class _AdminEditPasswordScreenState extends State<AdminEditPasswordScreen> {
               },
               body: body);
 
-      print(result);
+      print(result.statusCode);
       if (result.statusCode == 200) {
         passwordController.text = '';
         passwordVerifiyController.text = '';

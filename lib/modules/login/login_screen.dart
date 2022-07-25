@@ -58,8 +58,6 @@ class _LoginScreenState extends State<LoginScreen> {
         headers: {'Content-Type': 'application/json; charset=UTF-8'},
         body: body);
 
-    print(result3.statusCode);
-
     if (result.statusCode == 200) {
       var body = jsonDecode(result.body);
       sharedPrefs.saveToken(body['token']);
