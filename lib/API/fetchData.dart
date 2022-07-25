@@ -8,6 +8,8 @@ import 'package:udemy_flutter/models/store/store_model.dart';
 
 import 'package:http/http.dart' as http;
 
+import '../models/notification/notification_model.dart';
+
 class fetchData {
   static const String baseURL = 'https://mystoreapii.herokuapp.com';
 
@@ -47,6 +49,17 @@ class fetchData {
     var body = jsonDecode(res.body) as List<dynamic>;
 
     return body.map((store) => StoreModel.fromJson(store)).toList();
+  }
+
+  Future<List<NotificationModel>> allNotifications() async {
+    var res =
+        await http.get(Uri.parse(fetchData.baseURL + '/notifications/getAll'));
+
+    var body = jsonDecode(res.body) as List<dynamic>;
+
+    return body
+        .map((notification) => NotificationModel.fromJson(notification))
+        .toList();
   }
 
   Future<List<ProductModel>> allstoreproduct(id, search) async {

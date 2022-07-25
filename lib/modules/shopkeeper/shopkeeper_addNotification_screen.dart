@@ -78,9 +78,49 @@ class _ShopkeeperAddNotificationScreenState
 
   var formkey = GlobalKey<FormState>();
 
-  var nameController = TextEditingController();
-  var priceController = TextEditingController();
+  var titleController = TextEditingController();
   var descriptionController = TextEditingController();
+
+  Future<void> createNotification(BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+    var body;
+    if (!(myImage == null)) {
+      var bytes = await new File(myImage.path).readAsBytes();
+      String base64 = base64Encode(bytes);
+      body = jsonEncode({
+        'title': titleController.text,
+        'description': descriptionController.text,
+        'avatar': base64,
+      });
+    } else {
+      body = jsonEncode({
+        'title': titleController.text,
+        'description': descriptionController.text,
+      });
+    }
+
+    var result =
+        await http.post(Uri.parse(fetchData.baseURL + "/notifications"),
+            headers: {
+              'Content-Type': 'application/json; charset=UTF-8',
+              'Authorization': 'Bearer ' + token.toString()
+            },
+            body: body);
+
+    print(result.statusCode);
+
+    if (result.statusCode == 201) {
+      var body = jsonDecode(result.body);
+      sendNotfiy(titleController.text, descriptionController.text);
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => _buildPopupDialog(context),
+      );
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => ShopKeeperMainScreen()));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +205,7 @@ class _ShopkeeperAddNotificationScreenState
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                     TextFormField(
-                      controller: nameController,
+                      controller: titleController,
                       onFieldSubmitted: (String value) {
                         print(value);
                       },
@@ -212,13 +252,7 @@ class _ShopkeeperAddNotificationScreenState
                       ),
                       child: MaterialButton(
                         onPressed: () {
-                          sendNotfiy(
-                              nameController.text, descriptionController.text);
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) =>
-                                _buildPopupDialog(context),
-                          );
+                          createNotification(context);
                         },
                         child: Text(
                           "ارسال",

@@ -292,6 +292,12 @@ class _SearchScreenState extends State<SearchScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => SearhResultScreen()));
+                          } else {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) =>
+                                  _buildPopupDialog(context),
+                            );
                           }
                         },
                         child: Text(
@@ -339,7 +345,7 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
           Row(
             children: [
-              Text("تمت اضافته الى السلة "),
+              Text("يجب اضافة اقل سعر واعلى سعر "),
               Icon(
                 Icons.add_shopping_cart_outlined,
                 color: Colors.blue,

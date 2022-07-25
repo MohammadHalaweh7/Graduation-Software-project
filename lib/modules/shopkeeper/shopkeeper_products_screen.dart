@@ -148,7 +148,7 @@ class _ShopkeeperProductsScreenState extends State<ShopkeeperProductsScreen> {
                                 color: Colors.blue),
                           ),
                           Text(
-                            price + ' NIS',
+                            price.toString() + ' NIS',
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(),
