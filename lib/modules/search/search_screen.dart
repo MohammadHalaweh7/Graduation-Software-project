@@ -15,6 +15,7 @@ import 'package:udemy_flutter/modules/login/login_screen.dart';
 import 'package:udemy_flutter/modules/order/order_screen.dart';
 import 'package:udemy_flutter/modules/password/password_screen.dart';
 import 'package:udemy_flutter/modules/phone/phone_screen.dart';
+import 'package:udemy_flutter/modules/search/search_result_screen.dart';
 import 'package:udemy_flutter/shared/components/components.dart';
 import 'package:udemy_flutter/modules/signup/signUp_screen.dart';
 import 'package:universal_io/io.dart';
@@ -23,7 +24,10 @@ import '../../src/my_app.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 var Storeid;
-var search = 'الكل';
+var search = 'all';
+var leastPrice = "L";
+var highestPrice = "H";
+String sortBY = 'تصاعدي';
 
 class SearchScreen extends StatefulWidget {
   SearchScreen(id) {
@@ -39,192 +43,13 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  var searchController = TextEditingController();
-  fetchData fetch = fetchData();
-  var prod;
+  var formkey = GlobalKey<FormState>();
+  final items = ["تصاعدي", "تنازلي"];
+  String? value;
 
-  Future<UserModel> addToCart(id) async {
-    var ID = id;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.get('token');
-
-    var result = await http.patch(
-        Uri.parse(fetchData.baseURL + "/users/addProductOnCart/" + ID),
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer ' + token.toString()
-        });
-
-    UserModel userModel = UserModel.fromJson(jsonDecode(result.body));
-
-    return userModel;
-  }
-
-  Widget getstoreproducts() {
-    if (searchController.text == '') {
-      search = 'الكل';
-    } else {
-      search = searchController.text;
-    }
-    return FutureBuilder(
-        future: fetch.allstoreproduct(Storeid, search),
-        builder: (contxt, snapchot) {
-          var products = snapchot.data as List<ProductModel>;
-          return snapchot.data == null
-              ? Center(
-                  child: CircularProgressIndicator(
-                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
-                  ),
-                )
-              : Container(
-                  color: Colors.grey[300],
-                  child: GridView.count(
-                      shrinkWrap: true,
-                      // physics: NeverScrollableScrollPhysics(),
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 0,
-                      crossAxisSpacing: 0,
-                      childAspectRatio: 1 / 1.7,
-                      children: [
-                        ...products.map<Widget>((product) {
-                          return myproducts(
-                            product.name,
-                            product.description,
-                            product.id,
-                            product.price,
-                            product.owner,
-                            product.avatar,
-                          );
-                        }).toList(),
-                      ]),
-                );
-        });
-  }
-
-  Widget myproducts(name, description, id, price, owner, avatar) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(0.0),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey,
-            offset: Offset(0, 1.0), //(x,y)
-            blurRadius: 10.0,
-          ),
-        ],
-      ),
-      margin: EdgeInsets.only(bottom: 10, right: 5, left: 5),
-      // color: Colors.white,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          //صورة المنتج
-          avatar == null
-              ? Image.asset(
-                  'assets/images/logo3.png',
-                  width: double.infinity,
-                  height: 200,
-                )
-              : Image(
-                  image: MemoryImage(base64Decode(avatar)),
-                  width: double.infinity,
-                  height: 200,
-                ),
-          //هون الاسم والسعر والمفضلة والكبسة شراء الان
-          Padding(
-            padding: const EdgeInsets.only(left: 12, right: 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //هون اسم المنتج
-                Text(
-                  name,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 14,
-                  ),
-                ),
-                SizedBox(
-                  height: 13,
-                ),
-                //هون السعر والمفضلة
-                Row(
-                  children: [
-                    Text(
-                      price.toString() + ' NIS',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.blue,
-                      ),
-                    ),
-                    Spacer(),
-                    //جديد جديد جديد
-                    IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          addToCart(id);
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) =>
-                                _buildPopupDialog(context),
-                          );
-                        },
-                        icon: CircleAvatar(
-                            radius: 17,
-                            backgroundColor: Colors.blue,
-                            child: Icon(
-                              Icons.add_shopping_cart_outlined,
-                              color: Colors.white,
-                            )))
-
-                    //  لهون
-                  ],
-                ),
-                //كبسة شراء الان
-                Container(
-                  margin: EdgeInsets.only(right: 0),
-                  child: SizedBox(
-                    width: 210,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.blue,
-                        elevation: 20,
-                      ),
-                      onPressed: () {
-                        OrderScreen().setID(id);
-                        OrderScreen().setUsedPoints(0);
-                        OrderScreen().setPrice(price);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => OrderScreen()));
-                      },
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text('شراء الان'), // <-- Text
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Icon(
-                            // <-- Icon
-                            Icons.shopping_cart_outlined,
-                            size: 24.0,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  var nameController = TextEditingController();
+  var leastPriceController = TextEditingController();
+  var highestPriceController = TextEditingController();
 
   //للبحث
   Icon customIcon = const Icon(
@@ -247,42 +72,253 @@ class _SearchScreenState extends State<SearchScreen> {
         automaticallyImplyLeading: false,
         title: customSearchBar,
         // centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {
-              setState(() {
-                if (customIcon.icon == Icons.search) {
-                  customIcon = const Icon(Icons.cancel);
-                  customSearchBar = ListTile(
-                    title: TextField(
-                      controller: searchController,
-                      onChanged: (value) =>
-                          setState(() => {search = searchController.text}),
+        actions: [],
+      ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Container(
+            child: SingleChildScrollView(
+              child: Form(
+                key: formkey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "اسم المنتج",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    //الاسم
+                    TextFormField(
+                      controller: nameController,
+                      onFieldSubmitted: (String value) {
+                        print(value);
+                      },
+                      onChanged: (String value) {
+                        print(value);
+                      },
                       decoration: InputDecoration(
-                        hintText: 'اكتب اسم المنتج ...',
-                        hintStyle: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 18,
-                          fontStyle: FontStyle.italic,
-                        ),
-                        border: InputBorder.none,
-                      ),
-                      style: TextStyle(
-                        color: Colors.grey,
+                        labelText: "الاسم",
+                        border: OutlineInputBorder(),
                       ),
                     ),
-                  );
-                }
-              });
-            },
-            icon: customIcon,
-          )
-        ],
+                    SizedBox(
+                      height: 15,
+                    ),
+
+                    //السعر
+                    Text(
+                      "السعر",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            blurRadius: 1.0,
+                          ),
+                        ],
+                      ),
+                      height: 65,
+                      width: double.infinity,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "أقل سعر",
+                            style: TextStyle(fontSize: 17),
+                          ),
+                          SizedBox(
+                            width: 230,
+                          ),
+                          SizedBox(
+                            width: 60,
+                            height: 40,
+                            child: TextField(
+                              controller: leastPriceController,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            blurRadius: 1.0,
+                          ),
+                        ],
+                      ),
+                      height: 65,
+                      width: double.infinity,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "أعلى سعر",
+                            style: TextStyle(
+                              fontSize: 17,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 220,
+                          ),
+                          SizedBox(
+                            width: 60,
+                            height: 40,
+                            child: TextField(
+                              controller: highestPriceController,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    //رتب حسب
+                    Text(
+                      "رتب حسب السعر",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(0),
+                      child: Container(
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: Column(
+                            // crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 0,
+                              ),
+                              Container(
+                                margin: EdgeInsets.all(0),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 4),
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.grey, width: 1),
+                                    borderRadius: BorderRadius.circular(6)),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton<String>(
+                                    icon: Icon(Icons.arrow_downward_rounded),
+                                    isExpanded: true,
+                                    value: value,
+                                    items: items.map(buildMenuItem).toList(),
+                                    onChanged: (value) => setState(() =>
+                                        {this.value = value, sortBY = value!}),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 40,
+                    ),
+
+                    //بحث
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        color: Colors.blueAccent, // width: double.infinity,
+                      ),
+                      child: MaterialButton(
+                        onPressed: () {
+                          if (leastPriceController.text == '') {
+                            leastPrice = "L";
+                          } else {
+                            leastPrice = leastPriceController.text;
+                          }
+                          if (highestPriceController.text == '') {
+                            highestPrice = "H";
+                          } else {
+                            highestPrice = highestPriceController.text;
+                          }
+                          if (nameController.text == '') {
+                            search = "all";
+                          } else {
+                            search = nameController.text;
+                          }
+
+                          if ((leastPrice == "L" && highestPrice == "H") ||
+                              (leastPrice != "L" && highestPrice != "H")) {
+                            SearhResultScreen().setStoreID(Storeid);
+                            SearhResultScreen().setname(search);
+                            SearhResultScreen().setLeastPrice(leastPrice);
+                            SearhResultScreen().setHighestPrice(highestPrice);
+                            SearhResultScreen().setSortBy(sortBY);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SearhResultScreen()));
+                          }
+                        },
+                        child: Text(
+                          "بحث",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
-      body: Center(child: getstoreproducts()),
     );
-    //Center(child: Text('بحث')));
   }
+
+  //DropdownMenuItem Function---------------------------------------------------------------------------------
+  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+        value: item,
+        child: Text(
+          item,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+        ),
+      );
+  //-----------------------------------------------------------------------------------------------------------
 
   //Pub up Function--------------------------------------------------------------------------------------------
   Widget _buildPopupDialog(BuildContext context) {
@@ -327,7 +363,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   //فنكشن مش مهم انساه
   void onNotification() {
-    var ScaffoldKey;
-    ScaffoldKey.currentState?.openDrawer();
+    Navigator.pop(context);
   }
 }
+//----------------------------****************************

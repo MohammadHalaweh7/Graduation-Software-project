@@ -57,6 +57,24 @@ class fetchData {
     return body.map((product) => ProductModel.fromJson(product)).toList();
   }
 
+  Future<List<ProductModel>> allSearchProduct(
+      id, name, leastprice, highestprice, sortby) async {
+    var res = await http.get(Uri.parse(fetchData.baseURL +
+        '/getMyProducts/' +
+        id +
+        '/' +
+        name +
+        '/' +
+        leastprice +
+        '/' +
+        highestprice +
+        '/' +
+        sortby));
+    var body = jsonDecode(res.body) as List<dynamic>;
+
+    return body.map((product) => ProductModel.fromJson(product)).toList();
+  }
+
   Future<List<ProductModel>> allproducts() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
