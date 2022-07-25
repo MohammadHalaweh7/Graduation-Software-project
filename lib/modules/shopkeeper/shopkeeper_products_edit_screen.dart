@@ -138,7 +138,7 @@ class _ShopkeeperProductsEditScreenState
   @override
   Widget build(BuildContext context) {
     nameController.text = name;
-    priceController.text = price;
+    priceController.text = price.toString();
     descriptionController.text = description;
     return Scaffold(
       appBar: AppBar(
