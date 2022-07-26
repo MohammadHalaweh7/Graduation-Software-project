@@ -685,8 +685,8 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      Image.asset(
-                                        'assets/images/notification.png',
+                                      Image.network(
+                                        "https://static.vecteezy.com/system/resources/previews/002/130/449/original/new-message-notification-icon-email-alert-chat-notice-illustration-with-smartphone-screen-isolated-mobile-reminder-web-concept-envelopes-number-one-online-message-push-notification-logo-vector.jpg",
                                         height: 128,
                                       ),
                                       SizedBox(

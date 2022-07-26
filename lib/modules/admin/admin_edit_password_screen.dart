@@ -74,7 +74,7 @@ class _AdminEditPasswordScreenState extends State<AdminEditPasswordScreen> {
               size: 35,
             )),
         title: Text(
-          "تغييري كلمة السر",
+          "تغيير كلمة السر",
           style: TextStyle(
             color: Colors.blue,
             fontSize: 22,
@@ -82,16 +82,7 @@ class _AdminEditPasswordScreenState extends State<AdminEditPasswordScreen> {
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              onNotification;
-            },
-            icon: Icon(
-              Icons.add_alert_outlined,
-              color: Colors.grey,
-              size: 30,
-            ),
-          ),
+
         ],
       ),
       drawer: Drawer(
@@ -422,7 +413,6 @@ class _AdminEditPasswordScreenState extends State<AdminEditPasswordScreen> {
 
   //------------------------------------------------------------------------------------------------------------
   void onNotification() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => AccountScreen()));
+    Navigator.pop(context);
   }
 }

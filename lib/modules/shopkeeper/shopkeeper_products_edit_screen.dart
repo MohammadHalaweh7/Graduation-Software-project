@@ -77,7 +77,7 @@ class _ShopkeeperProductsEditScreenState
       body = jsonEncode({
         'name': nameController.text,
         'description': descriptionController.text,
-        'price': priceController.text,
+        'price': double.parse(priceController.text),
         'avatar': base64
       });
     } else {
@@ -87,7 +87,7 @@ class _ShopkeeperProductsEditScreenState
       body = jsonEncode({
         'name': nameController.text,
         'description': descriptionController.text,
-        'price': priceController.text,
+        'price': double.parse(priceController.text),
       });
     }
 
@@ -158,18 +158,7 @@ class _ShopkeeperProductsEditScreenState
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              onNotification;
-            },
-            icon: Icon(
-              Icons.add_alert_outlined,
-              color: Colors.black54,
-              size: 30,
-            ),
-          ),
-        ],
+
       ),
       drawer: Drawer(
         child: SingleChildScrollView(
@@ -601,6 +590,6 @@ class _ShopkeeperProductsEditScreenState
   //-----------------------------------------------------------------------------------------------------------
 
   void onNotification() {
-    print("mama");
+    Navigator.pop(context);
   }
 }

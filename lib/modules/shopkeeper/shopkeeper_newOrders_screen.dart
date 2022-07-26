@@ -297,16 +297,7 @@ class _ShopkeeperNewOrdersScreenState extends State<ShopkeeperNewOrdersScreen> {
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              onNotification;
-            },
-            icon: Icon(
-              Icons.add_alert_outlined,
-              color: Colors.grey,
-              size: 30,
-            ),
-          ),
+
         ],
       ),
       drawer: Drawer(

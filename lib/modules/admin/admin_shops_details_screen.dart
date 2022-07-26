@@ -155,36 +155,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              onNotification;
-            },
-            icon: Icon(
-              Icons.add_alert_outlined,
-              color: Colors.grey,
-              size: 30,
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              onNotification;
-            },
-            icon: Icon(
-              Icons.menu_book,
-              color: Colors.grey,
-              size: 30,
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              onNotification;
-            },
-            icon: Icon(
-              Icons.shopping_basket_sharp,
-              color: Colors.blue,
-              size: 30,
-            ),
-          ),
+
         ],
       ),
       drawer: Drawer(
@@ -759,10 +730,13 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                     ),
                     Text(
                       "رابط الانستاغرام : ",
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Colors.blue,
+
                       ),
                     ),
                     SizedBox(
@@ -1064,7 +1038,6 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
   //-----------------------------------------------------------------------------------------------------------
   //مش مهم
   void onNotification() {
-    var ScaffoldKey;
-    ScaffoldKey.currentState?.openDrawer();
+    Navigator.pop(context);
   }
 }

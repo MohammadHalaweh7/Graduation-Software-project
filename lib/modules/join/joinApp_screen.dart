@@ -57,12 +57,12 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
     'للسيدات',
     "للرجال",
     "اكسسوارات",
-    "هدايا",
+    "انارة",
     "ماكولات",
     "ملابس",
     "أحذية",
     "عطور",
-    'فنون'
+    'الكترونيك'
   ];
 
   final citiesItems = [
@@ -144,7 +144,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
         leading: IconButton(
             onPressed: onNotification,
             icon: Icon(
-              Icons.menu,
+              Icons.arrow_back,
               color: Colors.blue,
               size: 35,
             )),
@@ -157,16 +157,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              onNotification;
-            },
-            icon: Icon(
-              Icons.add_alert_outlined,
-              color: Colors.black54,
-              size: 30,
-            ),
-          ),
+
         ],
       ),
       body: SingleChildScrollView(
@@ -651,6 +642,6 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
   //-----------------------------------------------------------------------------------------------------------
 
   void onNotification() {
-    print("mama");
+    Navigator.pop(context);
   }
 }

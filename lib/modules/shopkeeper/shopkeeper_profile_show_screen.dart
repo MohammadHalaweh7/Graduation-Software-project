@@ -84,38 +84,7 @@ class _ShopkeeperProfileShowScreenState
                 Icons.remove_red_eye_sharp,
                 size: 30,
               ),
-              actions: [
-                IconButton(
-                  onPressed: () {
-                    onNotification;
-                  },
-                  icon: Icon(
-                    Icons.add_alert_outlined,
-                    color: Colors.grey,
-                    size: 30,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {
-                    onNotification;
-                  },
-                  icon: Icon(
-                    Icons.menu_book,
-                    color: Colors.grey,
-                    size: 30,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {
-                    onNotification;
-                  },
-                  icon: Icon(
-                    Icons.shopping_basket_sharp,
-                    color: Colors.blue,
-                    size: 30,
-                  ),
-                ),
-              ],
+
             ),
             drawer: Drawer(
               child: SingleChildScrollView(
@@ -456,7 +425,7 @@ class _ShopkeeperProfileShowScreenState
                         ],
                       ),
                       // color: Colors.white,
-                      height: 170,
+                      height: 130,
                       width: double.infinity,
                       padding: const EdgeInsets.all(20),
                       child: Column(
@@ -488,10 +457,14 @@ class _ShopkeeperProfileShowScreenState
                           Padding(
                             padding: const EdgeInsets.only(right: 0),
                             child: Text(
+
                               account.detailedLocation,
                               style: TextStyle(
                                   fontSize: 13, fontWeight: FontWeight.bold),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                             ),
+
                           ),
                           SizedBox(
                             height: 10,
@@ -549,6 +522,8 @@ class _ShopkeeperProfileShowScreenState
                             height: 10,
                           ),
                           RichText(
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                               text: TextSpan(children: [
                             TextSpan(
                                 style: linkText,
@@ -617,6 +592,8 @@ class _ShopkeeperProfileShowScreenState
                             height: 10,
                           ),
                           RichText(
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                               text: TextSpan(children: [
                             TextSpan(
                                 style: linkText,
@@ -743,6 +720,8 @@ class _ShopkeeperProfileShowScreenState
                             height: 10,
                           ),
                           RichText(
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                               text: TextSpan(children: [
                             TextSpan(
                                 style: linkText,
@@ -778,7 +757,7 @@ class _ShopkeeperProfileShowScreenState
                         ],
                       ),
                       // color: Colors.white,
-                      height: 230,
+                      height: 130,
                       width: double.infinity,
                       padding: const EdgeInsets.all(20),
                       child: Column(
@@ -811,6 +790,8 @@ class _ShopkeeperProfileShowScreenState
                             height: 10,
                           ),
                           RichText(
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                               text: TextSpan(children: [
                             TextSpan(
                                 style: linkText,
@@ -842,7 +823,6 @@ class _ShopkeeperProfileShowScreenState
   }
 
   void onNotification() {
-    var ScaffoldKey;
-    ScaffoldKey.currentState?.openDrawer();
+    Navigator.pop(context);
   }
 }

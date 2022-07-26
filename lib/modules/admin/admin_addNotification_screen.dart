@@ -267,6 +267,6 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
   //-----------------------------------------------------------------------------------------------------------
 
   void onNotification() {
-    print("mama");
+    Navigator.pop(context);
   }
 }

@@ -308,6 +308,6 @@ class _ShopkeeperAddNotificationScreenState
   //-----------------------------------------------------------------------------------------------------------
 
   void onNotification() {
-    print("mama");
+    Navigator.pop(context);
   }
 }

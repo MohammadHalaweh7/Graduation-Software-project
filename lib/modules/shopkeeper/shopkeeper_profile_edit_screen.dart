@@ -231,18 +231,7 @@ class _ShopkeeperProfileEditScreenState
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              actions: [
-                IconButton(
-                  onPressed: () {
-                    onNotification;
-                  },
-                  icon: Icon(
-                    Icons.add_alert_outlined,
-                    color: Colors.black54,
-                    size: 30,
-                  ),
-                ),
-              ],
+
             ),
             drawer: Drawer(
               child: SingleChildScrollView(
@@ -863,6 +852,6 @@ class _ShopkeeperProfileEditScreenState
   //-----------------------------------------------------------------------------------------------------------
 
   void onNotification() {
-    print("mama");
+    Navigator.pop(context);
   }
 }

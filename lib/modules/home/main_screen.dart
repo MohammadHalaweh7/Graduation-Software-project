@@ -49,15 +49,16 @@ class _MainScreenState extends State<MainScreen> {
   ];
   String? value2;
   String? value3;
-
+  List<StoreModel> stores = [];
   Widget fetchAllStores() {
     return FutureBuilder(
-        future:
-            // city == null ? (fetch.allstores()) :
-            (fetch.allCityAndInterests(city)),
+        future:fetch.allCityAndInterests(city),
         builder: (contxt, snapchot) {
-          var stores = snapchot.data as List<StoreModel>;
-          return snapchot.data == null
+          stores =
+          snapchot.hasData ? snapchot.data as List<StoreModel> : [];
+          print(stores.length);
+          print('ahhhhhhhhhhhhhhhhhhhhhhh');
+          return  !snapchot.hasData
               ? Center(
                   child: CircularProgressIndicator(
                     valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
@@ -68,6 +69,7 @@ class _MainScreenState extends State<MainScreen> {
                   shrinkWrap: true,
                   itemCount: stores == null ? 0 : stores.length,
                   itemBuilder: (context, index) {
+                    print(stores.length);
                     return mystore(
                       stores[index].name,
                       stores[index].description,
@@ -645,8 +647,8 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("هدايا");
-                                ShopsScreen().setType('هدايا');
+                                ShopsScreen().setTitle("انارة");
+                                ShopsScreen().setType('انارة');
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -658,7 +660,7 @@ class _MainScreenState extends State<MainScreen> {
                                 child: CircleAvatar(
                                   radius: 35.0,
                                   backgroundImage:
-                                      AssetImage('assets/images/gifts.jpg'),
+                                      AssetImage('assets/images/lights.png'),
                                 ),
                               ),
                             ),
@@ -666,7 +668,7 @@ class _MainScreenState extends State<MainScreen> {
                               height: 4,
                             ),
                             Text(
-                              "هدايا".tr,
+                              "انارة".tr,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             )
@@ -830,8 +832,8 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("فنون");
-                                ShopsScreen().setType('فنون');
+                                ShopsScreen().setTitle("الكترونيك");
+                                ShopsScreen().setType('الكترونيك');
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -842,8 +844,8 @@ class _MainScreenState extends State<MainScreen> {
                                 borderRadius: BorderRadius.circular(35),
                                 child: CircleAvatar(
                                   radius: 35.0,
-                                  backgroundImage:
-                                      AssetImage('assets/images/art.png'),
+                                  backgroundImage: AssetImage(
+                                      'assets/images/electronics.png'),
                                 ),
                               ),
                             ),
@@ -851,7 +853,7 @@ class _MainScreenState extends State<MainScreen> {
                               height: 4,
                             ),
                             Text(
-                              "فنون".tr,
+                              "الكترونيك".tr,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             )

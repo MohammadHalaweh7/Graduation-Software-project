@@ -132,36 +132,7 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              onNotification;
-            },
-            icon: Icon(
-              Icons.add_alert_outlined,
-              color: Colors.grey,
-              size: 30,
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              onNotification;
-            },
-            icon: Icon(
-              Icons.menu_book,
-              color: Colors.grey,
-              size: 30,
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              onNotification;
-            },
-            icon: Icon(
-              Icons.shopping_basket_sharp,
-              color: Colors.blue,
-              size: 30,
-            ),
-          ),
+
         ],
       ),
       drawer: Drawer(
@@ -690,6 +661,8 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                       height: 10,
                     ),
                     RichText(
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         text: TextSpan(children: [
                       TextSpan(
                           style: linkText,
@@ -736,6 +709,8 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                     ),
                     Text(
                       "رابط الانستاغرام : ",
+
+
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -746,22 +721,30 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                       height: 10,
                     ),
                     RichText(
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         text: TextSpan(children: [
                       TextSpan(
+
                           style: linkText,
                           text: instagram,
+
                           recognizer: TapGestureRecognizer()
                             ..onTap = () async {
                               var url = instagram;
+
                               if (await canLaunch(url)) {
                                 await launch(url);
                               } else {
                                 throw " cannot load url";
                               }
                             }),
+
                     ])),
+
                   ],
                 ),
+
               ),
               //سناب شات
               SizedBox(
@@ -792,6 +775,7 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                     ),
                     Text(
                       "رابط السناب شات : ",
+
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -802,6 +786,8 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                       height: 10,
                     ),
                     RichText(
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         text: TextSpan(children: [
                       TextSpan(
                           style: linkText,
@@ -882,7 +868,7 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                   ],
                 ),
                 // color: Colors.white,
-                height: 290,
+                height: 130,
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 child: Column(
@@ -904,6 +890,8 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                       height: 10,
                     ),
                     RichText(
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         text: TextSpan(children: [
                       TextSpan(
                           style: linkText,
@@ -988,7 +976,6 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
   //-----------------------------------------------------------------------------------------------------------
   //مش مهم
   void onNotification() {
-    var ScaffoldKey;
-    ScaffoldKey.currentState?.openDrawer();
+    Navigator.pop(context);
   }
 }

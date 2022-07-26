@@ -135,7 +135,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
               leading: IconButton(
                   onPressed: onNotification,
                   icon: Icon(
-                    Icons.menu,
+                    Icons.arrow_back,
                     color: Colors.blue,
                     size: 35,
                   )),
@@ -148,16 +148,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                 ),
               ),
               actions: [
-                IconButton(
-                  onPressed: () {
-                    onNotification;
-                  },
-                  icon: Icon(
-                    Icons.add_alert_outlined,
-                    color: Colors.grey,
-                    size: 30,
-                  ),
-                ),
+
               ],
             ),
             drawer: Drawer(
@@ -598,8 +589,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
   //------------------------------------------------------------------------------------------------------------
 
   void onNotification() {
-    var ScaffoldKey;
-    ScaffoldKey.currentState?.openDrawer();
+    Navigator.pop(context);
   }
 }
 

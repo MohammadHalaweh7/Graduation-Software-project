@@ -100,7 +100,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
         leading: IconButton(
             onPressed: onNotification,
             icon: Icon(
-              Icons.menu,
+              Icons.arrow_back,
               color: Colors.blue,
               size: 35,
             )),
@@ -112,18 +112,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              onNotification;
-            },
-            icon: Icon(
-              Icons.add_alert_outlined,
-              color: Colors.black54,
-              size: 30,
-            ),
-          ),
-        ],
+
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -318,6 +307,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
   //-----------------------------------------------------------------------------------------------------------
 
   void onNotification() {
-    print("mama");
+    Navigator.pop(context);
   }
 }

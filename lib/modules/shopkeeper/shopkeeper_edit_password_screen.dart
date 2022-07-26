@@ -90,16 +90,7 @@ class _ShopkeeperEditPasswordScreenState
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              onNotification;
-            },
-            icon: Icon(
-              Icons.add_alert_outlined,
-              color: Colors.grey,
-              size: 30,
-            ),
-          ),
+
         ],
       ),
       drawer: Drawer(
@@ -454,7 +445,6 @@ class _ShopkeeperEditPasswordScreenState
 
   //------------------------------------------------------------------------------------------------------------
   void onNotification() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => AccountScreen()));
+    Navigator.pop(context);
   }
 }

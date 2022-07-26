@@ -162,18 +162,7 @@ class _ShopkeeperAccountScreenState extends State<ShopkeeperAccountScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              actions: [
-                IconButton(
-                  onPressed: () {
-                    onNotification;
-                  },
-                  icon: Icon(
-                    Icons.add_alert_outlined,
-                    color: Colors.grey,
-                    size: 30,
-                  ),
-                ),
-              ],
+
             ),
             drawer: Drawer(
               child: SingleChildScrollView(
@@ -636,8 +625,7 @@ class _ShopkeeperAccountScreenState extends State<ShopkeeperAccountScreen> {
   //------------------------------------------------------------------------------------------------------------
 
   void onNotification() {
-    var ScaffoldKey;
-    ScaffoldKey.currentState?.openDrawer();
+    Navigator.pop(context);
   }
 }
 

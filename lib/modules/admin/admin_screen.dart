@@ -77,113 +77,119 @@ class _AdminScreenState extends State<AdminScreen> {
     type,
     location,
   ) {
-    return GestureDetector(
-      //هاد بضم الكونتينر وكل اللي جواتو
+    return Column(
+      children: [
+        SizedBox(height: 10,),
+        GestureDetector(
+        //هاد بضم الكونتينر وكل اللي جواتو
 
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => AdminShopsDetailsScreen(
-                    id,
-                    name,
-                    description,
-                    type,
-                    phoneNumber,
-                    location,
-                    detailedLocation,
-                    facebook,
-                    instagram,
-                    snapchat,
-                    whatsapp,
-                    locationOnMap,
-                    avatar)));
-      },
-      child:
-          //هاد الكونتينر بضم كلشي
-          Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15.0),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              offset: Offset(0, 1.0), //(x,y)
-              blurRadius: 5.0,
-            ),
-          ],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Row(
-            children: [
-              Container(
-                width: 115,
-                height: 115,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                      image: avatar == null
-                          ? (AssetImage(
-                              'assets/images/logo3.png',
-                            ) as ImageProvider)
-                          : MemoryImage(
-                              base64Decode(avatar),
-                            ),
-                      fit: BoxFit.cover),
-                ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Expanded(
-                child: Container(
-                  height: 113,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            'اسم المتجر : ',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blue),
-                          ),
-                          Text(
-                            name,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 3,
-                      ),
-                      Text(
-                        'وصف المتجر : ',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.blue),
-                      ),
+        onTap: () {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => AdminShopsDetailsScreen(
+                  id,
+                  name,
+                  description,
+                  type,
+                  phoneNumber,
+                  location,
+                  detailedLocation,
+                  facebook,
+                  instagram,
+                  snapchat,
+                  whatsapp,
+                  locationOnMap,
+                  avatar)));
+    },
+    child:
+    //هاد الكونتينر بضم كلشي
+    Container(
+    decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(15.0),
+    color: Colors.white,
+    boxShadow: [
+    BoxShadow(
+    color: Colors.grey,
+    offset: Offset(0, 1.0), //(x,y)
+    blurRadius: 5.0,
+    ),
+    ],
+    ),
+    child: Padding(
+    padding: const EdgeInsets.all(15.0),
+    child: Row(
+    children: [
+    Container(
+    width: 115,
+    height: 115,
+    decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(10),
+    image: DecorationImage(
+    image: avatar == null
+    ? (AssetImage(
+    'assets/images/logo3.png',
+    ) as ImageProvider)
+        : MemoryImage(
+    base64Decode(avatar),
+    ),
+    fit: BoxFit.cover),
+    ),
+    ),
+    SizedBox(
+    width: 10,
+    ),
+    Expanded(
+    child: Container(
+    height: 113,
+    child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    mainAxisAlignment: MainAxisAlignment.start,
+    mainAxisSize: MainAxisSize.min,
+    children: [
+    Row(
+    children: [
+    Text(
+    'اسم المتجر : ',
+    style: TextStyle(
+    fontWeight: FontWeight.bold,
+    color: Colors.blue),
+    ),
+    Text(
+    name,
+    maxLines: 2,
+    overflow: TextOverflow.ellipsis,
+    style: TextStyle(),
+    ),
+    ],
+    ),
+    SizedBox(
+    height: 3,
+    ),
+    Text(
+    'وصف المتجر : ',
+    style: TextStyle(
+    fontWeight: FontWeight.bold, color: Colors.blue),
+    ),
 
-                      Expanded(
-                          child: Text(
-                        description,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      )),
-                      // Text('${article['publishedAt']}',style: TextStyle(color: Colors.grey,fontSize: 20),),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
+    Expanded(
+    child: Text(
+    description,
+    maxLines: 2,
+    overflow: TextOverflow.ellipsis,
+    )),
+    // Text('${article['publishedAt']}',style: TextStyle(color: Colors.grey,fontSize: 20),),
+    ],
+    ),
+    ),
+    )
+    ],
+    ),
+    ),
+    ),
+    ),
+        SizedBox(height: 5,),
+      ],
     );
   }
 
@@ -355,7 +361,7 @@ class _AdminScreenState extends State<AdminScreen> {
         leading: IconButton(
             onPressed: onNotification,
             icon: Icon(
-              Icons.menu,
+              Icons.arrow_back,
               color: Colors.blue,
               size: 35,
             )),
@@ -368,16 +374,7 @@ class _AdminScreenState extends State<AdminScreen> {
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              onNotification;
-            },
-            icon: Icon(
-              Icons.add_alert_outlined,
-              color: Colors.grey,
-              size: 30,
-            ),
-          ),
+
         ],
       ),
 
@@ -475,8 +472,7 @@ class _AdminScreenState extends State<AdminScreen> {
   }
 
   void onNotification() {
-    var ScaffoldKey;
-    ScaffoldKey.currentState?.openDrawer();
+    Navigator.pop(context);
   }
 }
 

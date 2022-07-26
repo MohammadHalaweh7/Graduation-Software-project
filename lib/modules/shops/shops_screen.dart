@@ -362,7 +362,6 @@ class _ShopsScreenState extends State<ShopsScreen> {
   }
 
   void onNotification() {
-    var ScaffoldKey;
-    ScaffoldKey.currentState?.openDrawer();
+    Navigator.pop(context);
   }
 }
