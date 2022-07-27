@@ -57,8 +57,6 @@ class _MainScreenState extends State<MainScreen> {
         future: fetch.allCityAndInterests(city),
         builder: (contxt, snapchot) {
           stores = snapchot.hasData ? snapchot.data as List<StoreModel> : [];
-          print(stores.length);
-          print('ahhhhhhhhhhhhhhhhhhhhhhh');
           return !snapchot.hasData
               ? Center(
                   child: CircularProgressIndicator(
