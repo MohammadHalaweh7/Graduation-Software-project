@@ -64,6 +64,7 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 )
               : ListView.builder(
+                  physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   itemCount: stores == null ? 0 : stores.length,
@@ -89,6 +90,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget mystore(name, description, id, phoneNumber, locationOnMap, avatar,
       detailedLocation, facebook, snapchat, whatsapp, instagram) {
     return SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         child: Row(
           children: [
@@ -111,6 +113,7 @@ class _MainScreenState extends State<MainScreen> {
                     MaterialPageRoute(builder: (context) => ShopLayout()));
               },
               child: Container(
+                width: 200,
                 child: Column(
                   children: [
                     Container(
@@ -137,7 +140,7 @@ class _MainScreenState extends State<MainScreen> {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           fontSize: 17,
-                          fontStyle: FontStyle.italic,
+                          // fontStyle: FontStyle.italic,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
@@ -145,12 +148,13 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(right: 15.0, left: 15),
-                      child: Text(
-                        description,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 13),
-                      ),
+                      child: Text(description,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 13,
+                          ),
+                          textAlign: TextAlign.center),
                     ),
                   ],
                 ),
@@ -191,20 +195,15 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-
             // backgroundColor: Colors.white,
-            leading: GestureDetector(
-              onTap: () {
-                var ScaffoldKey;
-                //ScaffoldKey.currentState?.openDrawer();
-                //        Navigator.push(context,MaterialPageRoute(builder: (context) => openDrawer()));
-              },
-              child: IconButton(
-                  onPressed: onNotification,
-                  icon: Icon(
-                    Icons.menu,
-                    size: 35,
-                  )),
+            leading: Builder(
+              builder: (context) => IconButton(
+                icon: new Icon(
+                  Icons.menu,
+                  size: 35,
+                ),
+                onPressed: () => Scaffold.of(context).openDrawer(),
+              ),
             ),
             title: Text(
               "الصفحة الرئيسية".tr,
@@ -214,6 +213,7 @@ class _MainScreenState extends State<MainScreen> {
                 margin: EdgeInsets.only(top: 8, left: 7),
                 width: 100,
                 child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   child: Column(
                     // crossAxisAlignment: CrossAxisAlignment.center,
@@ -419,6 +419,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ),
         body: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
@@ -487,6 +488,7 @@ class _MainScreenState extends State<MainScreen> {
                 margin: EdgeInsets.only(top: 20),
                 height: 120,
                 child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
@@ -915,7 +917,10 @@ class _MainScreenState extends State<MainScreen> {
                 height: 20,
               ),
               //المتاجر------------------------------------------------------
-              Container(height: 290, child: fetchAllStores()),
+              Padding(
+                padding: const EdgeInsets.only(right: 13),
+                child: Container(height: 290, child: fetchAllStores()),
+              ),
               SizedBox(
                 height: 10,
               ),
@@ -964,7 +969,10 @@ class _MainScreenState extends State<MainScreen> {
                 height: 20,
               ),
               //المتاجر------------------------------------------------------
-              Container(height: 300, child: fetchAllStores()),
+              Padding(
+                padding: const EdgeInsets.only(right: 13),
+                child: Container(height: 300, child: fetchAllStores()),
+              ),
             ],
           ),
         ));
@@ -981,7 +989,6 @@ class _MainScreenState extends State<MainScreen> {
   //--------------------------------------------------------------------------------------------------
 
   void onNotification() {
-    var ScaffoldKey;
-    ScaffoldKey.currentState?.openDrawer();
+    // Scaffold.currentState?.openDrawer();
   }
 }

@@ -135,31 +135,30 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                       height: 65,
                       width: double.infinity,
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "أقل سعر",
-                            style: TextStyle(fontSize: 17),
-                          ),
-                          SizedBox(
-                            width: 230,
-                          ),
-                          SizedBox(
-                            width: 70,
-                            height: 40,
-                            child: TextField(
-                              controller: leastPriceController,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Row(
+                          children: [
+                            Text(
+                              "أقل سعر",
+                              style: TextStyle(fontSize: 17),
+                            ),
+                            Spacer(),
+                            SizedBox(
+                              width: 70,
+                              height: 40,
+                              child: TextField(
+                                controller: leastPriceController,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
+
                     SizedBox(
                       height: 15,
                     ),
@@ -175,36 +174,35 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                       height: 65,
                       width: double.infinity,
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "أعلى سعر",
-                            style: TextStyle(
-                              fontSize: 17,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 220,
-                          ),
-                          SizedBox(
-                            width: 70,
-                            height: 40,
-                            child: TextField(
-                              controller: highestPriceController,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Row(
+                          children: [
+                            Text(
+                              "أعلى سعر",
+                              style: TextStyle(
+                                fontSize: 17,
                               ),
                             ),
-                          ),
-                        ],
+                            Spacer(),
+                            SizedBox(
+                              width: 70,
+                              height: 40,
+                              child: TextField(
+                                controller: highestPriceController,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: 10,
                     ),
+
                     //رتب حسب
                     Text(
                       "رتب حسب السعر",

@@ -275,7 +275,7 @@ class _CartScreenState extends State<CartScreen> {
                   height: 10,
                 ),
                 Container(
-                    padding: EdgeInsets.all(15),
+                    padding: EdgeInsets.all(19),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5.0),
                       color: Colors.white,
@@ -288,7 +288,7 @@ class _CartScreenState extends State<CartScreen> {
                       ],
                     ),
                     width: double.infinity,
-                    height: 138,
+                    height: 147,
                     child: Column(
                       children: [
                         //مجموع السعر وعدد العناصر
@@ -303,7 +303,7 @@ class _CartScreenState extends State<CartScreen> {
                             ),
                             SizedBox(
                               height: 5,
-                              width: 150,
+                              width: 120,
                               child: TextField(
                                 enabled: false,
                                 controller: totalController,
@@ -482,7 +482,7 @@ class _CartScreenState extends State<CartScreen> {
                         //كبسة استكمال الطلب
                         Container(
                           width: double.infinity,
-                          height: 40,
+                          height: 34,
                           decoration: BoxDecoration(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(5.0)),

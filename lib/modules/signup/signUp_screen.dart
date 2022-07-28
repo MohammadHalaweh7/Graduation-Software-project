@@ -114,11 +114,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: [
-
-        ],
+        actions: [],
       ),
-
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Container(
@@ -323,11 +320,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'حدد اهتماماتك : ',
-                        style: TextStyle(fontSize: 18, color: Colors.black54),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 5),
+                        child: Text(
+                          'حدد اهتماماتك : ',
+                          style: TextStyle(fontSize: 18, color: Colors.black54),
+                        ),
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Row(
                             children: [
@@ -346,14 +348,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           Row(
                             children: [
-                              Text('للسيدات'),
+                              Text("الكترونيك"),
                               Checkbox(
                                 activeColor: Colors.blue,
-                                value: women,
+                                value: Arts,
                                 onChanged: (val) {
                                   setState(() {
-                                    women = val!;
-                                    interests.add("للسيدات");
+                                    Arts = val!;
+                                    interests.add("الكترونيك");
                                   });
                                 },
                               )
@@ -361,29 +363,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           Row(
                             children: [
-                              Text("للرجال"),
+                              Text("اكسسوارات"),
                               Checkbox(
                                 activeColor: Colors.blue,
-                                value: men,
+                                value: Accessori,
                                 onChanged: (val) {
                                   setState(() {
-                                    men = val!;
-                                    interests.add("للرجال");
-                                  });
-                                },
-                              )
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text("عطور"),
-                              Checkbox(
-                                activeColor: Colors.blue,
-                                value: perfume,
-                                onChanged: (val) {
-                                  setState(() {
-                                    perfume = val!;
-                                    interests.add("عطور");
+                                    Accessori = val!;
+                                    interests.add("اكسسوارات");
                                   });
                                 },
                               )
@@ -392,6 +379,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Row(
                             children: [
@@ -410,14 +399,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           Row(
                             children: [
-                              Text("ماكولات"),
+                              Text("عطور"),
                               Checkbox(
                                 activeColor: Colors.blue,
-                                value: Foods,
+                                value: perfume,
                                 onChanged: (val) {
                                   setState(() {
-                                    Foods = val!;
-                                    interests.add("ماكولات");
+                                    perfume = val!;
+                                    interests.add("عطور");
                                   });
                                 },
                               )
@@ -456,33 +445,49 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Row(
                             children: [
-                              Text("اكسسوارات"),
+                              Text("ماكولات"),
                               Checkbox(
                                 activeColor: Colors.blue,
-                                value: Accessori,
+                                value: Foods,
                                 onChanged: (val) {
                                   setState(() {
-                                    Accessori = val!;
-                                    interests.add("اكسسوارات");
+                                    Foods = val!;
+                                    interests.add("ماكولات");
                                   });
                                 },
                               )
                             ],
                           ),
-
                           Row(
                             children: [
-                              Text("الكترونيك"),
+                              Text('للسيدات'),
                               Checkbox(
                                 activeColor: Colors.blue,
-                                value: Arts,
+                                value: women,
                                 onChanged: (val) {
                                   setState(() {
-                                    Arts = val!;
-                                    interests.add("الكترونيك");
+                                    women = val!;
+                                    interests.add("للسيدات");
+                                  });
+                                },
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("للرجال"),
+                              Checkbox(
+                                activeColor: Colors.blue,
+                                value: men,
+                                onChanged: (val) {
+                                  setState(() {
+                                    men = val!;
+                                    interests.add("للرجال");
                                   });
                                 },
                               )
