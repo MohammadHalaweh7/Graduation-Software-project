@@ -64,7 +64,7 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 )
               : ListView.builder(
-              physics:BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   itemCount: stores == null ? 0 : stores.length,
@@ -90,7 +90,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget mystore(name, description, id, phoneNumber, locationOnMap, avatar,
       detailedLocation, facebook, snapchat, whatsapp, instagram) {
     return SingleChildScrollView(
-        physics:BouncingScrollPhysics(),
+        physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         child: Row(
           children: [
@@ -113,7 +113,6 @@ class _MainScreenState extends State<MainScreen> {
                     MaterialPageRoute(builder: (context) => ShopLayout()));
               },
               child: Container(
-
                 width: 200,
                 child: Column(
                   children: [
@@ -149,12 +148,13 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(right: 15.0, left: 15),
-                      child: Text(
-                        description,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 13,),textAlign: TextAlign.center
-                      ),
+                      child: Text(description,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 13,
+                          ),
+                          textAlign: TextAlign.center),
                     ),
                   ],
                 ),
@@ -194,14 +194,17 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
         appBar: AppBar(
-          // backgroundColor: Colors.white,
-        leading: Builder(
-        builder: (context) => IconButton(icon: new Icon(Icons.menu,size: 35,),
-        onPressed: () => Scaffold.of(context).openDrawer(),
-        ),
-        ),
+            // backgroundColor: Colors.white,
+            leading: Builder(
+              builder: (context) => IconButton(
+                icon: new Icon(
+                  Icons.menu,
+                  size: 35,
+                ),
+                onPressed: () => Scaffold.of(context).openDrawer(),
+              ),
+            ),
             title: Text(
               "الصفحة الرئيسية".tr,
             ),
@@ -210,7 +213,7 @@ class _MainScreenState extends State<MainScreen> {
                 margin: EdgeInsets.only(top: 8, left: 7),
                 width: 100,
                 child: SingleChildScrollView(
-                  physics:BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   child: Column(
                     // crossAxisAlignment: CrossAxisAlignment.center,
@@ -416,7 +419,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ),
         body: SingleChildScrollView(
-          physics:BouncingScrollPhysics(),
+          physics: BouncingScrollPhysics(),
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
@@ -485,7 +488,7 @@ class _MainScreenState extends State<MainScreen> {
                 margin: EdgeInsets.only(top: 20),
                 height: 120,
                 child: SingleChildScrollView(
-                  physics:BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
@@ -495,10 +498,9 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle(
-                                  "للأطفال",
-                                );
+                                ShopsScreen().setTitle("للأطفال - " + city!);
                                 ShopsScreen().setType('للأطفال');
+                                ShopsScreen().setCity(city);
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -534,8 +536,9 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("للسيدات");
+                                ShopsScreen().setTitle("للسيدات - " + city!);
                                 ShopsScreen().setType('للسيدات');
+                                ShopsScreen().setCity(city);
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -571,8 +574,9 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("للرجال");
+                                ShopsScreen().setTitle("للرجال - " + city!);
                                 ShopsScreen().setType('للرجال');
+                                ShopsScreen().setCity(city);
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -608,8 +612,9 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("اكسسوارات");
+                                ShopsScreen().setTitle("اكسسوارات - " + city!);
                                 ShopsScreen().setType('اكسسوارات');
+                                ShopsScreen().setCity(city);
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -645,8 +650,9 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("انارة");
+                                ShopsScreen().setTitle("انارة - " + city!);
                                 ShopsScreen().setType('انارة');
+                                ShopsScreen().setCity(city);
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -682,8 +688,9 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("ماكولات");
+                                ShopsScreen().setTitle("ماكولات - " + city!);
                                 ShopsScreen().setType('ماكولات');
+                                ShopsScreen().setCity(city);
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -719,8 +726,9 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("ملابس");
+                                ShopsScreen().setTitle("ملابس - " + city!);
                                 ShopsScreen().setType('ملابس');
+                                ShopsScreen().setCity(city);
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -756,8 +764,9 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("أحذية");
+                                ShopsScreen().setTitle("أحذية - " + city!);
                                 ShopsScreen().setType('أحذية');
+                                ShopsScreen().setCity(city);
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -793,8 +802,9 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("عطور");
+                                ShopsScreen().setTitle("عطور - " + city!);
                                 ShopsScreen().setType('عطور');
+                                ShopsScreen().setCity(city);
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -830,8 +840,9 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("الكترونيك");
+                                ShopsScreen().setTitle("الكترونيك - " + city!);
                                 ShopsScreen().setType('الكترونيك');
+                                ShopsScreen().setCity(city);
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -986,7 +997,6 @@ class _MainScreenState extends State<MainScreen> {
   //--------------------------------------------------------------------------------------------------
 
   void onNotification() {
-
     // Scaffold.currentState?.openDrawer();
   }
 }

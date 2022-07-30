@@ -53,7 +53,7 @@ class _ShopsScreenState extends State<ShopsScreen> {
   Widget fetchTypeStores() {
     return FutureBuilder(
         future: (ShopsScreen().getType() != null)
-            ? fetch.alltypestores(ShopsScreen().getType())
+            ? fetch.alltypeCitystores(ShopsScreen().getType(), city)
             : (fetch.allCityStores(city)),
         builder: (contxt, snapchot) {
           var stores = snapchot.data as List<StoreModel>;
@@ -64,7 +64,7 @@ class _ShopsScreenState extends State<ShopsScreen> {
                   ),
                 )
               : ListView.builder(
-              physics:BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemCount: stores == null ? 0 : stores.length,
@@ -89,9 +89,7 @@ class _ShopsScreenState extends State<ShopsScreen> {
   Widget mystore(name, description, id, phoneNumber, locationOnMap, avatar,
       detailedLocation, facebook, snapchat, whatsapp, instagram) {
     return SingleChildScrollView(
-
       scrollDirection: Axis.vertical,
-
       child: GestureDetector(
         onTap: () {
           ShopLayout().setData(
@@ -119,11 +117,10 @@ class _ShopsScreenState extends State<ShopsScreen> {
                 color: Colors.grey,
                 offset: Offset(0, 1.0), //(x,y)
                 blurRadius: 10.0,
-
               ),
             ],
           ),
-          margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           width: double.infinity,
           child: Column(
             children: [

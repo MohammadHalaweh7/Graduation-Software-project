@@ -68,40 +68,37 @@ class _ProductsScreenState extends State<ProductsScreen> {
       search = searchController.text;
     }
     return FutureBuilder(
-
         future: fetch.allstoreproduct(Storeid, search),
         builder: (contxt, snapchot) {
           var products = snapchot.data as List<ProductModel>;
           return snapchot.data == null
               ? Center(
-            child: CircularProgressIndicator(
-
-              valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
-            ),
-          )
+                  child: CircularProgressIndicator(
+                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+                  ),
+                )
               : Container(
-
-            color: Colors.grey[300],
-            child: GridView.count(
-                physics:BouncingScrollPhysics(),
-                // shrinkWrap: true,
-                crossAxisCount: 2,
-                mainAxisSpacing: 0,
-                crossAxisSpacing: 0,
-                childAspectRatio: 1 / 1.82,
-                children: [
-                  ...products.map<Widget>((product) {
-                    return myproducts(
-                      product.name,
-                      product.description,
-                      product.id,
-                      product.price,
-                      product.owner,
-                      product.avatar,
-                    );
-                  }).toList(),
-                ]),
-          );
+                  color: Colors.grey[300],
+                  child: GridView.count(
+                      physics: BouncingScrollPhysics(),
+                      // shrinkWrap: true,
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 0,
+                      crossAxisSpacing: 0,
+                      childAspectRatio: 1 / 1.82,
+                      children: [
+                        ...products.map<Widget>((product) {
+                          return myproducts(
+                            product.name,
+                            product.description,
+                            product.id,
+                            product.price,
+                            product.owner,
+                            product.avatar,
+                          );
+                        }).toList(),
+                      ]),
+                );
         });
   }
 
@@ -125,17 +122,16 @@ class _ProductsScreenState extends State<ProductsScreen> {
         children: [
           //صورة المنتج
           GestureDetector(
-            onTap:(){
+            onTap: () {
               showDialog(
                 context: context,
                 builder: (BuildContext context) =>
-                    _buildPopupDialog2(context),
+                    _buildPopupDialog2(avatar, description),
               );
             },
             child: Padding(
               padding: const EdgeInsets.all(5.0),
-              child:
-              Container(
+              child: Container(
                 width: double.infinity,
                 height: 190,
                 decoration: BoxDecoration(
@@ -143,12 +139,9 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   image: DecorationImage(
                       image: avatar == null
                           ? (AssetImage(
-                        'assets/images/logo3.png',
-
-                      ) as ImageProvider)
-                          : MemoryImage(base64Decode(avatar)
-                      ),
-
+                              'assets/images/logo3.png',
+                            ) as ImageProvider)
+                          : MemoryImage(base64Decode(avatar)),
                       fit: BoxFit.cover),
                 ),
               ),
@@ -161,16 +154,15 @@ class _ProductsScreenState extends State<ProductsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 5,),
+                SizedBox(
+                  height: 5,
+                ),
                 //هون اسم المنتج
                 Text(
                   name,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold
-                  ),
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: 0,
@@ -361,14 +353,12 @@ class _ProductsScreenState extends State<ProductsScreen> {
   //-----------------------------------------------------------------------------------------------------------
 
   //Pub up Function--------------------------------------------------------------------------------------------
-  Widget _buildPopupDialog2(BuildContext context) {
+  Widget _buildPopupDialog2(avatar, description) {
     return new AlertDialog(
-
       content: new Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-
           Center(
             child: Container(
               width: 320,
@@ -378,22 +368,24 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 image: DecorationImage(
                     image: avatar == null
                         ? (AssetImage(
-                      'assets/images/logo3.png',
-
-                    ) as ImageProvider)
-                        : MemoryImage(base64Decode(avatar)
-                    ),
-
+                            'assets/images/logo3.png',
+                          ) as ImageProvider)
+                        : MemoryImage(base64Decode(avatar)),
                     fit: BoxFit.cover),
               ),
             ),
           ),
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
           Center(
-
             child: Text(
-
-              "طقم ستاتي تركي  يتوفر منه كافة الاحجام (s,m,l,xl,xxl)",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,),textAlign: TextAlign.center,
+              description,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+              textAlign: TextAlign.center,
             ),
           ),
         ],
@@ -410,8 +402,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
     );
   }
   //-----------------------------------------------------------------------------------------------------------
-
-
 
   //فنكشن مش مهم انساه
   void onNotification() {

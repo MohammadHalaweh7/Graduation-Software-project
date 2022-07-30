@@ -37,7 +37,7 @@ class fetchData {
           'Authorization': 'Bearer ' + token.toString()
         });
     print(res.statusCode);
-   // print(res.body);
+    // print(res.body);
     var body = jsonDecode(res.body) as List<dynamic>;
     print(body);
     return body.map((store) => StoreModel.fromJson(store)).toList();
@@ -46,6 +46,15 @@ class fetchData {
   Future<List<StoreModel>> alltypestores(type) async {
     var res =
         await http.get(Uri.parse(fetchData.baseURL + '/store/typeall/' + type));
+
+    var body = jsonDecode(res.body) as List<dynamic>;
+
+    return body.map((store) => StoreModel.fromJson(store)).toList();
+  }
+
+  Future<List<StoreModel>> alltypeCitystores(type, city) async {
+    var res = await http.get(Uri.parse(
+        fetchData.baseURL + '/store/CityAndType/' + city + '/' + type));
 
     var body = jsonDecode(res.body) as List<dynamic>;
 
