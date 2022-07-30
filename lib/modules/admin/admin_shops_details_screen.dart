@@ -161,6 +161,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
       drawer: Drawer(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
+          physics:BouncingScrollPhysics(),
           child: Column(
             children: [
               Padding(
@@ -319,6 +320,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
         ),
       ),
       body: SingleChildScrollView(
+        physics:BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         child: Container(
           width: double.infinity,
@@ -326,7 +328,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
             children: [
               //الصورة
               Container(
-                height: 180,
+                height: 340,
                 margin: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                     boxShadow: [
@@ -362,7 +364,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                   ],
                 ),
                 // color: Colors.white,
-                height: 105,
+                height: 130,
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 child: Column(
@@ -408,7 +410,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                   ],
                 ),
                 // color: Colors.white,
-                height: 140,
+                height: 130,
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 child: Column(
@@ -433,6 +435,8 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                       padding: const EdgeInsets.only(right: 0),
                       child: Text(
                         description,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
@@ -635,6 +639,8 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                       padding: const EdgeInsets.only(right: 0),
                       child: Text(
                         detailedLocation,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             fontSize: 13, fontWeight: FontWeight.bold),
                       ),
@@ -684,6 +690,8 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                       height: 10,
                     ),
                     RichText(
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         text: TextSpan(children: [
                       TextSpan(
                           style: linkText,
@@ -743,6 +751,8 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                       height: 10,
                     ),
                     RichText(
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         text: TextSpan(children: [
                       TextSpan(
                           style: linkText,
@@ -799,6 +809,8 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                       height: 10,
                     ),
                     RichText(
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         text: TextSpan(children: [
                       TextSpan(
                           style: linkText,
@@ -879,7 +891,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                   ],
                 ),
                 // color: Colors.white,
-                height: 290,
+                height: 130,
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 child: Column(
@@ -901,6 +913,8 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                       height: 10,
                     ),
                     RichText(
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         text: TextSpan(children: [
                       TextSpan(
                           style: linkText,

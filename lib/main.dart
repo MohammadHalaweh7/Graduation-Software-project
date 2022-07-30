@@ -35,14 +35,14 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // await Firebase.initializeApp(
-  //   options: const FirebaseOptions(
-  //     apiKey:
-  //         "AAAA1-uKg5g:APA91bGbOCRD5CsqtzDADIVk35DlYMVKMwK-VqcJ7bAbXassPWok45rFdRkWH7kk2TYo_ogERYfUUTkBsHwcBuBsBy4evMbmniLQr7TRlK4XpA_glaqvUivQdl9wWrUpeZjceIRCIz4k",
-  //     appId: "1:927369692056:ios:ed7abdcb63a1e1133761ed",
-  //     messagingSenderId: "927369692056	",
-  //     projectId: "udemy-flutter-184b4",
-  //   ),
+  //  options: const FirebaseOptions(
+  //    apiKey:"AAAA1-uKg5g:APA91bGbOCRD5CsqtzDADIVk35DlYMVKMwK-VqcJ7bAbXassPWok45rFdRkWH7kk2TYo_ogERYfUUTkBsHwcBuBsBy4evMbmniLQr7TRlK4XpA_glaqvUivQdl9wWrUpeZjceIRCIz4k" ,
+  //    appId: "1:927369692056:ios:ed7abdcb63a1e1133761ed",
+  //    messagingSenderId:"927369692056	" ,
+  //    projectId:"udemy-flutter-184b4" ,
+  //  ),
   // );
+
 
   await Firebase.initializeApp();
   runApp(MyApp());

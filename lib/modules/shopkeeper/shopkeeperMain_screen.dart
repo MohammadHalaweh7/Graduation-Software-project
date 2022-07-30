@@ -93,7 +93,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
           );
         } else {
           return Scaffold(
-            drawer: Drawer(
+            endDrawer: Drawer(
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Column(
@@ -353,16 +353,26 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              CircleAvatar(
-                                radius: 38,
-                                backgroundImage: account!.avatar == null
-                                    ? (NetworkImage(
-                                        'https://kecbatusopang.paserkab.go.id/po-content/uploads/profil-photo.jpg',
-                                      ) as ImageProvider)
-                                    : MemoryImage(
-                                        base64Decode(account.avatar.toString()),
-                                      ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ShopkeeperAccountScreen()));
+                                },
+                                child: CircleAvatar(
+                                  radius: 38,
+                                  backgroundImage: account!.avatar == null
+                                      ? (NetworkImage(
+                                          'https://kecbatusopang.paserkab.go.id/po-content/uploads/profil-photo.jpg',
+                                        ) as ImageProvider)
+                                      : MemoryImage(
+                                          base64Decode(account.avatar.toString()),
+                                        ),
+                                ),
                               ),
+                              SizedBox(width: 4,),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -384,7 +394,13 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                         fontSize: 11),
                                   ),
                                 ],
-                              )
+                              ),
+                              Spacer(),
+                              Builder(
+                                builder: (context) => IconButton(icon: new Icon(Icons.menu,size: 38,color: Colors.white,),
+                                  onPressed: () => Scaffold.of(context).openEndDrawer(),
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -393,6 +409,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                         ),
                         Expanded(
                           child: GridView.count(
+                            physics:BouncingScrollPhysics(),
                             mainAxisSpacing: 10,
                             crossAxisSpacing: 10,
                             childAspectRatio: 1 / 1.3,

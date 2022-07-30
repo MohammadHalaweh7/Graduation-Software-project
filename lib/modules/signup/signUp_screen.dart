@@ -114,12 +114,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: [],
+        actions: [
+
+        ],
       ),
+
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Container(
           child: SingleChildScrollView(
+            physics:BouncingScrollPhysics(),
             child: Column(
               // crossAxisAlignment: CrossAxisAlignment.center,
 
@@ -164,23 +168,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           children: [
                             _image != null
                                 ? CircleAvatar(
-                                    radius: 52.0,
-                                    child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        child: Image.file(
-                                          _image!,
-                                          height: 100,
-                                          width: 100,
-                                          fit: BoxFit.cover,
-                                        )))
+                                radius: 52.0,
+                                child: ClipRRect(
+                                    borderRadius:
+                                    BorderRadius.circular(100),
+                                    child: Image.file(
+                                      _image!,
+                                      height: 100,
+                                      width: 100,
+                                      fit: BoxFit.cover,
+                                    )))
                                 : ClipRRect(
-                                    borderRadius: BorderRadius.circular(100),
-                                    child: Image.network(
-                                      'http://futosite.teneceschoolsupport.com/wp-content/uploads/2022/01/1-1.png',
-                                      width: 90,
-                                      height: 90,
-                                    )),
+                                borderRadius: BorderRadius.circular(100),
+                                child: Image.network(
+                                  'http://futosite.teneceschoolsupport.com/wp-content/uploads/2022/01/1-1.png',
+                                  width: 90,
+                                  height: 90,
+                                )),
                             CircleAvatar(
                               radius: 15,
                               backgroundColor: Colors.blue,
@@ -361,6 +365,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               )
                             ],
                           ),
+
+
                           Row(
                             children: [
                               Text("اكسسوارات"),
@@ -463,6 +469,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               )
                             ],
                           ),
+
                           Row(
                             children: [
                               Text('للسيدات'),
@@ -493,6 +500,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               )
                             ],
                           ),
+
                         ],
                       )
                     ],

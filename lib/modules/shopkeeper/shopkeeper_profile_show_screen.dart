@@ -275,6 +275,7 @@ class _ShopkeeperProfileShowScreenState
               ),
             ),
             body: SingleChildScrollView(
+              physics:BouncingScrollPhysics(),
               scrollDirection: Axis.vertical,
               child: Container(
                 width: double.infinity,

@@ -255,6 +255,7 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
         ),
       ),
       body: SingleChildScrollView(
+        physics:BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         child: Container(
           width: double.infinity,

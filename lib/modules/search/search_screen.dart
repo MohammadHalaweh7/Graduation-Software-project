@@ -159,6 +159,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                     ),
 
+
                     SizedBox(
                       height: 15,
                     ),
@@ -202,6 +203,9 @@ class _SearchScreenState extends State<SearchScreen> {
                     SizedBox(
                       height: 10,
                     ),
+
+
+
 
                     //رتب حسب
                     Text(

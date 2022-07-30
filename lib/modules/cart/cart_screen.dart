@@ -105,6 +105,7 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 )
               : ListView.builder(
+              physics:BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemCount: products.length,

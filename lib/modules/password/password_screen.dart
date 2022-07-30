@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 // import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../login/login_screen.dart';
 
@@ -22,7 +23,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
         backgroundColor: Colors.white,
         leading: IconButton(
             onPressed: onNotification,
-            icon: Icon(Icons.menu, color: Colors.blue,size: 35,)),
+            icon: Icon(Icons.arrow_back, color: Colors.blue,size: 35,)),
         title: Text(
           "هل نسيت كلمة المرور !",
           style: TextStyle(
@@ -33,17 +34,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              onNotification;
-            },
-            icon: Icon(
-              Icons.add_alert_outlined,
-              color: Colors.black54,
-              size: 30,
 
-            ),
-          ),
         ],
       ),
       body:
@@ -89,7 +80,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
 
                     decoration: InputDecoration(
                       // hintText: "البريد الالكتروني",
-                      labelText: "البريد الالكdddتروني",
+                      labelText: "البريد الالكتروني",
                       prefixIcon: Icon(Icons.email),
                       border:OutlineInputBorder(),
 
@@ -138,7 +129,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                         Navigator.push(context,MaterialPageRoute(builder: (context) => LoginScreen()));
                       }
                       , child:
-                      Text("عضو بالفعل؟ سجل الدخول!"),
+                      Text("عضو بالفعل؟ سجل الدخول!",style: TextStyle(fontWeight: FontWeight.bold),),
                       ),
 
 
@@ -167,6 +158,6 @@ class _PasswordScreenState extends State<PasswordScreen> {
   }
 
   void onNotification() {
-    print("mama");
+    Navigator.pop(context);
   }
 }

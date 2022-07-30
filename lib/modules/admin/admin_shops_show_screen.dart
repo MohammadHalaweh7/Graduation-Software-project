@@ -138,6 +138,7 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
       drawer: Drawer(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
+          physics:BouncingScrollPhysics(),
           child: Column(
             children: [
               Padding(
@@ -296,6 +297,7 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
         ),
       ),
       body: SingleChildScrollView(
+        physics:BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         child: Container(
           width: double.infinity,
@@ -303,7 +305,7 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
             children: [
               //الصورة
               Container(
-                height: 180,
+                height: 340,
                 margin: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                     boxShadow: [

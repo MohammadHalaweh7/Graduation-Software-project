@@ -64,7 +64,7 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 )
               : ListView.builder(
-                  physics: BouncingScrollPhysics(),
+              physics:BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   itemCount: stores == null ? 0 : stores.length,
@@ -90,7 +90,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget mystore(name, description, id, phoneNumber, locationOnMap, avatar,
       detailedLocation, facebook, snapchat, whatsapp, instagram) {
     return SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics:BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         child: Row(
           children: [
@@ -113,6 +113,7 @@ class _MainScreenState extends State<MainScreen> {
                     MaterialPageRoute(builder: (context) => ShopLayout()));
               },
               child: Container(
+
                 width: 200,
                 child: Column(
                   children: [
@@ -148,13 +149,12 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(right: 15.0, left: 15),
-                      child: Text(description,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 13,
-                          ),
-                          textAlign: TextAlign.center),
+                      child: Text(
+                        description,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: 13,),textAlign: TextAlign.center
+                      ),
                     ),
                   ],
                 ),
@@ -194,17 +194,14 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
         appBar: AppBar(
-            // backgroundColor: Colors.white,
-            leading: Builder(
-              builder: (context) => IconButton(
-                icon: new Icon(
-                  Icons.menu,
-                  size: 35,
-                ),
-                onPressed: () => Scaffold.of(context).openDrawer(),
-              ),
-            ),
+          // backgroundColor: Colors.white,
+        leading: Builder(
+        builder: (context) => IconButton(icon: new Icon(Icons.menu,size: 35,),
+        onPressed: () => Scaffold.of(context).openDrawer(),
+        ),
+        ),
             title: Text(
               "الصفحة الرئيسية".tr,
             ),
@@ -213,7 +210,7 @@ class _MainScreenState extends State<MainScreen> {
                 margin: EdgeInsets.only(top: 8, left: 7),
                 width: 100,
                 child: SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
+                  physics:BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   child: Column(
                     // crossAxisAlignment: CrossAxisAlignment.center,
@@ -419,7 +416,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ),
         body: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics:BouncingScrollPhysics(),
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
@@ -488,7 +485,7 @@ class _MainScreenState extends State<MainScreen> {
                 margin: EdgeInsets.only(top: 20),
                 height: 120,
                 child: SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
+                  physics:BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
@@ -989,6 +986,7 @@ class _MainScreenState extends State<MainScreen> {
   //--------------------------------------------------------------------------------------------------
 
   void onNotification() {
+
     // Scaffold.currentState?.openDrawer();
   }
 }

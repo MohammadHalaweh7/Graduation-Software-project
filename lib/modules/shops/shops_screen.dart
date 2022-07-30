@@ -64,6 +64,7 @@ class _ShopsScreenState extends State<ShopsScreen> {
                   ),
                 )
               : ListView.builder(
+              physics:BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemCount: stores == null ? 0 : stores.length,
@@ -88,7 +89,9 @@ class _ShopsScreenState extends State<ShopsScreen> {
   Widget mystore(name, description, id, phoneNumber, locationOnMap, avatar,
       detailedLocation, facebook, snapchat, whatsapp, instagram) {
     return SingleChildScrollView(
+
       scrollDirection: Axis.vertical,
+
       child: GestureDetector(
         onTap: () {
           ShopLayout().setData(
@@ -115,11 +118,12 @@ class _ShopsScreenState extends State<ShopsScreen> {
               BoxShadow(
                 color: Colors.grey,
                 offset: Offset(0, 1.0), //(x,y)
-                blurRadius: 15.0,
+                blurRadius: 10.0,
+
               ),
             ],
           ),
-          margin: EdgeInsets.all(10),
+          margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
           width: double.infinity,
           child: Column(
             children: [
@@ -143,7 +147,7 @@ class _ShopsScreenState extends State<ShopsScreen> {
               ),
               Text(
                 name,
-                maxLines: 2,
+                maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                     fontSize: 25,
@@ -153,14 +157,12 @@ class _ShopsScreenState extends State<ShopsScreen> {
               SizedBox(
                 height: 8,
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: 29.0),
-                child: Text(
-                  description,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 13),
-                ),
+              Text(
+                description,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontSize: 13),
+                textAlign: TextAlign.center,
               ),
               SizedBox(
                 height: 30,
@@ -180,6 +182,7 @@ class _ShopsScreenState extends State<ShopsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(

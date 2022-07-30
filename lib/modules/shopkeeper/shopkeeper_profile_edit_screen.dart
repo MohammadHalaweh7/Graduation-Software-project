@@ -422,6 +422,7 @@ class _ShopkeeperProfileEditScreenState
               ),
             ),
             body: SingleChildScrollView(
+              physics:BouncingScrollPhysics(),
               scrollDirection: Axis.vertical,
               child: Padding(
                 padding: const EdgeInsets.all(20),

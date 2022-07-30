@@ -65,9 +65,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         ],
 
       ),
-      body:Padding(
+      body:
+      Padding(
         padding: const EdgeInsets.all(30.0),
-        child: Column(children: [
+        child:
+
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
           Expanded(
             child: PageView.builder(
               onPageChanged: (int index)
@@ -91,7 +97,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           ),
           SizedBox(height: 40,),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+
               SmoothPageIndicator(
                   controller: boardController,
                   count: boarding.length,
@@ -140,7 +148,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   }
 
   Widget buildBoardingItem(BoardingModel model)=> Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.center,
     children: [
       Expanded(child: Image(image:AssetImage('${model.image}') )),
       // SizedBox(height: 30,),

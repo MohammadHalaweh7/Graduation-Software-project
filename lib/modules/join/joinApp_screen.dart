@@ -161,6 +161,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
         ],
       ),
       body: SingleChildScrollView(
+        physics:BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         child: Padding(
           padding: const EdgeInsets.all(20),

@@ -82,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
 
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(25),
         child: Container(
           child: SingleChildScrollView(
             child: Form(
@@ -91,10 +91,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 // crossAxisAlignment: CrossAxisAlignment.center,
 
                 children: [
-                  SizedBox(height: 120,),
+                  SizedBox(height: 100,),
                   Image.asset(
                     'assets/images/logo3.png',
-                    width: 170,
+                    width: 210,
                   ),
                   Text(
                     "متجراتي",
@@ -170,7 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 20,
                   ),
                   Container(
-                    width: double.infinity,
+                    width:360,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(20.0)),
                       color: Colors.blueAccent, // width: double.infinity,
@@ -198,10 +198,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextButton(
-                        onPressed: () {},
-                        child: Text("هل نسيت كلمة المرور؟"),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PasswordScreen()));
+                        },
+                        child: Text("هل نسيت كلمة المرور؟",style: TextStyle(fontWeight: FontWeight.bold),),
                       ),
-                      SizedBox(width: 71),
+                      // SizedBox(width: 71),
+                      Spacer(),
                       TextButton(
                         onPressed: () {
                           Navigator.push(
@@ -209,7 +215,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               MaterialPageRoute(
                                   builder: (context) => SignUpScreen()));
                         },
-                        child: Text("جديد هنا؟ سجل الان!"),
+                        child: Text("جديد هنا؟ سجل الان!",style: TextStyle(fontWeight: FontWeight.bold),),
                       )
                     ],
                   )

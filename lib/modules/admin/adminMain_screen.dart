@@ -48,13 +48,18 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHight = MediaQuery.of(context).size.height;
+
     var size = MediaQuery.of(context).size;
     return FutureBuilder<UserModel>(
       future: loadData(),
       builder: (context, snapshot) {
         var account = snapshot.data;
         if (!snapshot.hasData) {
-          return Container(
+          return
+            Container(
             color: Colors.white,
             child: Center(
               child: CircularProgressIndicator(
@@ -65,7 +70,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
           );
         } else {
           return Scaffold(
-            drawer: Drawer(
+            endDrawer: Drawer(
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Column(
@@ -233,313 +238,378 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
               ),
             ),
             body: Stack(
+
               children: <Widget>[
                 Container(
-                  height: size.height * 0.6,
+
+                  height: size.height * 0.9,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                     alignment: Alignment.topCenter,
                     image: Image.network(
-                            "https://www.optrocom.net/sitepad-data/uploads//2021/05/header5.png")
-                        .image,
+                            "https://www.pngkey.com/png/full/336-3369360_website-banner-background-png-header-png.png")   .image,
                   )),
                 ),
                 SafeArea(
-                  child: Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.only(bottom: 0),
-                          height: 64,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              CircleAvatar(
-                                radius: 38,
-                                // backgroundImage: NetworkImage(
-                                //     'https://j-rak.org.sa/wp-content/uploads/2021/02/5f406ab25e8942cbe0da6485afd26b71.jpg'),
-                                backgroundImage: account!.avatar == null
-                                    ? (NetworkImage(
-                                        'https://j-rak.org.sa/wp-content/uploads/2021/02/5f406ab25e8942cbe0da6485afd26b71.jpg',
-                                      ) as ImageProvider)
-                                    : MemoryImage(
-                                        base64Decode(account.avatar.toString()),
-                                      ),
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                  child:
+                  Column(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              height: 65,
+                              child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Text(
-                                    account.name,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        letterSpacing: 2,
-                                        fontStyle: FontStyle.italic,
-                                        fontSize: 16.5),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  AdminAccountScreen()));
+                                    },
+                                    child: CircleAvatar(
+                                      radius: 40,
+                                      // backgroundImage: NetworkImage(
+                                      //     'https://j-rak.org.sa/wp-content/uploads/2021/02/5f406ab25e8942cbe0da6485afd26b71.jpg'),
+                                      backgroundImage: account!.avatar == null
+                                          ? (NetworkImage(
+                                              'https://j-rak.org.sa/wp-content/uploads/2021/02/5f406ab25e8942cbe0da6485afd26b71.jpg',
+                                            ) as ImageProvider)
+                                          : MemoryImage(
+                                              base64Decode(account.avatar.toString()),
+                                            ),
+                                    ),
                                   ),
-                                  Text(
-                                    'Admin',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        letterSpacing: 2,
-                                        fontSize: 11),
+                                  SizedBox(width: 4,),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        account.name,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            letterSpacing: 2,
+                                            fontStyle: FontStyle.italic,
+                                            fontSize: 17.5),
+                                      ),
+                                      Text(
+                                        'Admin',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            letterSpacing: 2,
+                                            fontSize: 11),
+                                      ),
+                                      Text(
+                                        '',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            letterSpacing: 2,
+                                            fontSize: 11),
+                                      ),
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Builder(
+                                    builder: (context) => IconButton(icon: new Icon(Icons.menu,size: 38,color: Colors.white,),
+                                      onPressed: () => Scaffold.of(context).openEndDrawer(),
+                                    ),
                                   ),
                                 ],
-                              )
-                            ],
-                          ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Spacer(),
+                            Container(
+                              width:screenHight * 0.6 ,
+                              height: 512,
+
+                              child:
+                              GridView.count(
+                                physics:BouncingScrollPhysics(),
+                                padding: EdgeInsets.all(10),
+                                mainAxisSpacing: 20,
+                                crossAxisSpacing:20,
+                                childAspectRatio: 1 / 1.9,
+                                crossAxisCount: 3,
+                                // shrinkWrap: true,
+                                primary: false,
+                                children: <Widget>[
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  AdminShopsScreen()));
+                                    },
+                                    child:
+                                    Container(
+                                          // width:screenWidth*0.2 ,
+                                          // height: screenHight*0.1,
+                                      child: Card(
+                                        elevation: 15,
+                                        shadowColor: Colors.blue,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(20.0),
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            Image.network(
+                                              "https://hebergement-site-web.ma/hebergement-site-prestashop/wp-content/uploads/sites/24/2021/04/Selection_147.png",
+                                              height: 128,
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Text(
+                                              'جميع المتاجر',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  AdminAccountScreen()));
+                                    },
+                                    child: Container(
+                                      width:screenWidth/5 ,
+                                      height: screenWidth/9,
+                                      child: Card(
+                                        elevation: 15,
+                                        shadowColor: Colors.blue,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(20.0),
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            Image.asset(
+                                              'assets/images/adminIMG.jpg',
+                                              height: 128,
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Text(
+                                              'حسابي',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => AdminScreen()));
+                                    },
+                                    child: Container(
+                                      width:screenWidth/5 ,
+                                      height: screenWidth/9,
+                                      child: Card(
+                                        elevation: 15,
+                                        shadowColor: Colors.blue,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(20.0),
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            Image.network(
+                                              'https://thumbs.dreamstime.com/b/document-icons-add-remove-buttons-symbol-set-royalty-free-vector-illustration-95581404.jpg',
+                                              height: 128,
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Text(
+                                              'الطلبات',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      // Navigator.push(context,MaterialPageRoute(builder: (context) => AdminScreen()));
+                                    },
+                                    child: Container(
+                                      width:screenWidth/5 ,
+                                      height: screenWidth/9,
+                                      child: Card(
+                                        elevation: 15,
+                                        shadowColor: Colors.blue,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(20.0),
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            Image.network(
+                                              "https://theyarnbazaar.com/images/FInance.png",
+                                              height: 128,
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Text(
+                                              'المالية',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      // Navigator.push(context,MaterialPageRoute(builder: (context) => AdminScreen()));
+                                    },
+                                    child: Container(
+                                      width:screenWidth/5 ,
+                                      height: screenWidth/9,
+                                      child: Card(
+                                        elevation: 15,
+                                        shadowColor: Colors.blue,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(20.0),
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            Image.network(
+                                              "https://img.freepik.com/premium-vector/research-finance-sales-data-audit-mobile-phone-report-online-statistics-info-analysis-smartphone-vector-flat-cartoon-isolated_212005-118.jpg",
+                                              height: 128,
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Text(
+                                              'الاحصائيات',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  AddNotificationScreen()));
+                                    },
+                                    child: Container(
+                                      width:screenWidth/5 ,
+                                      height: screenWidth/9,
+                                      child: Card(
+                                        elevation: 15,
+                                        shadowColor: Colors.blue,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(20.0),
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            Image.asset(
+                                              'assets/images/notification.png',
+                                              height: 128,
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Text(
+                                              'التنبيهات',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () async {
+                                      SharedPreferences prefs =
+                                          await SharedPreferences.getInstance();
+                                      prefs.remove('token');
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => LoginScreen()));
+                                    },
+                                    child: Container(
+                                      width:screenWidth/5 ,
+                                      height: screenWidth/9,
+                                      child: Card(
+                                        elevation: 15,
+                                        shadowColor: Colors.blue,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(20.0),
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            Image.network(
+                                              "https://us.123rf.com/450wm/faysalfarhan/faysalfarhan1710/faysalfarhan171013860/88895640-logout-icon-isolated-on-special-red-square-button-abstract-illustration.jpg?ver=6",
+                                              height: 128,
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Text(
+                                              'خروج',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Spacer(),
+                          ],
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Expanded(
-                          child: GridView.count(
-                            mainAxisSpacing: 10,
-                            crossAxisSpacing: 10,
-                            childAspectRatio: 1 / 1.3,
-                            crossAxisCount: 2,
-                            primary: false,
-                            children: <Widget>[
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              AdminShopsScreen()));
-                                },
-                                child: Card(
-                                  elevation: 15,
-                                  shadowColor: Colors.blue,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Image.network(
-                                        "https://hebergement-site-web.ma/hebergement-site-prestashop/wp-content/uploads/sites/24/2021/04/Selection_147.png",
-                                        height: 128,
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                        'جميع المتاجر',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              AdminAccountScreen()));
-                                },
-                                child: Card(
-                                  elevation: 15,
-                                  shadowColor: Colors.blue,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Image.asset(
-                                        'assets/images/adminIMG.jpg',
-                                        height: 128,
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                        'حسابي',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => AdminScreen()));
-                                },
-                                child: Card(
-                                  elevation: 15,
-                                  shadowColor: Colors.blue,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Image.network(
-                                        'https://thumbs.dreamstime.com/b/document-icons-add-remove-buttons-symbol-set-royalty-free-vector-illustration-95581404.jpg',
-                                        height: 128,
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                        'طلبات المتاجر الجديدة',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  // Navigator.push(context,MaterialPageRoute(builder: (context) => AdminScreen()));
-                                },
-                                child: Card(
-                                  elevation: 15,
-                                  shadowColor: Colors.blue,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Image.network(
-                                        "https://theyarnbazaar.com/images/FInance.png",
-                                        height: 128,
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                        'المالية',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  // Navigator.push(context,MaterialPageRoute(builder: (context) => AdminScreen()));
-                                },
-                                child: Card(
-                                  elevation: 15,
-                                  shadowColor: Colors.blue,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Image.network(
-                                        "https://img.freepik.com/premium-vector/research-finance-sales-data-audit-mobile-phone-report-online-statistics-info-analysis-smartphone-vector-flat-cartoon-isolated_212005-118.jpg",
-                                        height: 128,
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                        'الاحصائيات',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              AddNotificationScreen()));
-                                },
-                                child: Card(
-                                  elevation: 15,
-                                  shadowColor: Colors.blue,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Image.asset(
-                                        'assets/images/notification.png',
-                                        height: 128,
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                        'التنبيهات',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () async {
-                                  SharedPreferences prefs =
-                                      await SharedPreferences.getInstance();
-                                  prefs.remove('token');
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => LoginScreen()));
-                                },
-                                child: Card(
-                                  elevation: 15,
-                                  shadowColor: Colors.blue,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Image.network(
-                                        "https://us.123rf.com/450wm/faysalfarhan/faysalfarhan1710/faysalfarhan171013860/88895640-logout-icon-isolated-on-special-red-square-button-abstract-illustration.jpg?ver=6",
-                                        height: 128,
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                        'تسجيل الخروج',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 )
               ],

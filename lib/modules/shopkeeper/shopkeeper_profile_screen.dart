@@ -297,6 +297,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
             ),
             body: SingleChildScrollView(
               scrollDirection: Axis.vertical,
+              physics:BouncingScrollPhysics(),
               child: Container(
                 width: double.infinity,
                 child: Column(

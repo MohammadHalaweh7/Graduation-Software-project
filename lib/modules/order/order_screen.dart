@@ -136,6 +136,7 @@ class _OrderScreenState extends State<OrderScreen> {
         ),
       ),
       body: SingleChildScrollView(
+        physics:BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -378,8 +379,7 @@ class _OrderScreenState extends State<OrderScreen> {
 
   //مش مهم
   void onNotification() {
-    var ScaffoldKey;
-    ScaffoldKey.currentState?.openDrawer();
+    Navigator.pop(context);
   }
 
   //هاد الفنكشن لخيارات المدن---------------------------------------------------------------------------------
