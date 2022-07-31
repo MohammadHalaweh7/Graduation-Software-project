@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/models/store/store_model.dart';
 import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
@@ -12,6 +13,7 @@ import 'package:udemy_flutter/modules/phone/phone_screen.dart';
 import 'package:udemy_flutter/modules/profile/profileShop_screen.dart';
 import 'package:udemy_flutter/layout/shop_layout/shop_layout.dart';
 import 'package:udemy_flutter/modules/signup/signUp_screen.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 var type;
 var title;
@@ -59,30 +61,30 @@ class _ShopsScreenState extends State<ShopsScreen> {
           var stores = snapchot.data as List<StoreModel>;
           return snapchot.data == null
               ? Center(
-                  child: CircularProgressIndicator(
-                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
-                  ),
-                )
+            child: CircularProgressIndicator(
+              valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+            ),
+          )
               : ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: stores == null ? 0 : stores.length,
-                  itemBuilder: (context, index) {
-                    return mystore(
-                      stores[index].name,
-                      stores[index].description,
-                      stores[index].id,
-                      stores[index].phoneNumber,
-                      stores[index].locationOnMap,
-                      stores[index].avatar,
-                      stores[index].detailedLocation,
-                      stores[index].facebook,
-                      stores[index].snapchat,
-                      stores[index].whatsapp,
-                      stores[index].instagram,
-                    );
-                  });
+              physics: BouncingScrollPhysics(),
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: stores == null ? 0 : stores.length,
+              itemBuilder: (context, index) {
+                return mystore(
+                  stores[index].name,
+                  stores[index].description,
+                  stores[index].id,
+                  stores[index].phoneNumber,
+                  stores[index].locationOnMap,
+                  stores[index].avatar,
+                  stores[index].detailedLocation,
+                  stores[index].facebook,
+                  stores[index].snapchat,
+                  stores[index].whatsapp,
+                  stores[index].instagram,
+                );
+              });
         });
   }
 
@@ -132,11 +134,11 @@ class _ShopsScreenState extends State<ShopsScreen> {
                     image: DecorationImage(
                         image: avatar == null
                             ? (AssetImage(
-                                'assets/images/logo3.png',
-                              ) as ImageProvider)
+                          'assets/images/logo3.png',
+                        ) as ImageProvider)
                             : MemoryImage(
-                                base64Decode(avatar),
-                              ),
+                          base64Decode(avatar),
+                        ),
                         fit: BoxFit.cover),
                   )),
               SizedBox(

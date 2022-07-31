@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   var formkey = GlobalKey<FormState>();
-  final items = ["تصاعدي", "تنازلي"];
+  final items = ["تصاعدي".tr, "تنازلي".tr];
   String? value;
 
   var nameController = TextEditingController();
@@ -56,7 +57,7 @@ class _SearchScreenState extends State<SearchScreen> {
     Icons.search,
     size: 35,
   );
-  Widget customSearchBar = const Text('البحث');
+  Widget customSearchBar =  Text('البحث'.tr);
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +90,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       height: 10,
                     ),
                     Text(
-                      "اسم المنتج",
+                      "اسم المنتج".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -106,7 +107,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         print(value);
                       },
                       decoration: InputDecoration(
-                        labelText: "الاسم",
+                        labelText: "الاسم".tr,
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -116,7 +117,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
                     //السعر
                     Text(
-                      "السعر",
+                      "السعر".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -140,7 +141,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         child: Row(
                           children: [
                             Text(
-                              "أقل سعر",
+                              "أقل سعر".tr,
                               style: TextStyle(fontSize: 17),
                             ),
                             Spacer(),
@@ -180,7 +181,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         child: Row(
                           children: [
                             Text(
-                              "أعلى سعر",
+                              "أعلى سعر".tr,
                               style: TextStyle(
                                 fontSize: 17,
                               ),
@@ -201,7 +202,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 15,
                     ),
 
 
@@ -209,7 +210,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
                     //رتب حسب
                     Text(
-                      "رتب حسب السعر",
+                      "رتب حسب السعر".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -257,7 +258,6 @@ class _SearchScreenState extends State<SearchScreen> {
                     SizedBox(
                       height: 40,
                     ),
-
                     //بحث
                     Container(
                       width: double.infinity,
@@ -303,7 +303,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           }
                         },
                         child: Text(
-                          "بحث",
+                          "بحث".tr,
                           style: TextStyle(color: Colors.white),
                         ),
                       ),

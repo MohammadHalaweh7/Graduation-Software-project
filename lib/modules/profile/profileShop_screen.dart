@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
 import 'package:udemy_flutter/modules/language/language_screen.dart';
 import 'package:udemy_flutter/modules/login/login_screen.dart';
@@ -88,7 +89,7 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
               size: 35,
             )),
         title: Text(
-          "عن المتجر",
+          "عن المتجر".tr,
           style: TextStyle(
             color: Colors.blue,
             fontSize: 22,
@@ -370,7 +371,7 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                           width: 10,
                         ),
                         Text(
-                          "هاتف",
+                          "هاتف".tr,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -425,7 +426,7 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                           width: 10,
                         ),
                         Text(
-                          "زيارة موقعنا",
+                          "زيارة موقعنا".tr,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -490,7 +491,7 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                           width: 10,
                         ),
                         Text(
-                          "فيسبوك",
+                          "فيسبوك".tr,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -560,7 +561,7 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                           width: 10,
                         ),
                         Text(
-                          "سناب شات",
+                          "سناب شات".tr,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -630,7 +631,7 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                           width: 10,
                         ),
                         Text(
-                          "واتس أب",
+                          "واتس أب".tr,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -688,7 +689,7 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                           width: 10,
                         ),
                         Text(
-                          "انستغرام",
+                          "انستغرام".tr,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -758,7 +759,7 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                           width: 10,
                         ),
                         Text(
-                          "عنوان المتجر",
+                          "عنوان المتجر".tr,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

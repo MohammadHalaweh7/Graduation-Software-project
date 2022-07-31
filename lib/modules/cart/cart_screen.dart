@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/layout/shop_layout/shop_layout.dart';
@@ -186,7 +187,7 @@ class _CartScreenState extends State<CartScreen> {
                         Row(
                           children: [
                             Text(
-                              'السعر : ',
+                              'السعر : '.tr,
                               style: TextStyle(
                                   color: Colors.blue,
                                   fontSize: 20,
@@ -261,7 +262,7 @@ class _CartScreenState extends State<CartScreen> {
                     size: 35,
                   )),
               title: Text(
-                "السلة",
+                "السلة".tr,
                 style: TextStyle(
                   color: Colors.blue,
                   fontSize: 22,
@@ -296,7 +297,7 @@ class _CartScreenState extends State<CartScreen> {
                         Row(
                           children: [
                             Text(
-                              'مجموع السعر : ',
+                              'مجموع السعر : '.tr,
                               style: TextStyle(
                                   color: Colors.blue,
                                   fontSize: 15,
@@ -316,7 +317,7 @@ class _CartScreenState extends State<CartScreen> {
                             ),
                             Spacer(),
                             Text(
-                              'عدد العناصر : ',
+                              'عدد العناصر : '.tr,
                               style: TextStyle(
                                   color: Colors.blue,
                                   fontSize: 15,
@@ -344,7 +345,7 @@ class _CartScreenState extends State<CartScreen> {
                         Row(
                           children: [
                             Text(
-                              'نقاطي : ',
+                              'نقاطي : '.tr,
                               style: TextStyle(
                                   color: Colors.blue,
                                   fontSize: 15,
@@ -468,7 +469,7 @@ class _CartScreenState extends State<CartScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "استعمال",
+                                      "استعمال".tr,
                                       style: TextStyle(color: Colors.white),
                                     ),
                                   ],
@@ -503,7 +504,7 @@ class _CartScreenState extends State<CartScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "استكمال الطلب",
+                                  "استكمال الطلب".tr,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),
@@ -548,7 +549,7 @@ class _CartScreenState extends State<CartScreen> {
           ),
           Row(
             children: [
-              Text("تمت ازالته من السلة "),
+              Text("تمت ازالته من السلة ".tr),
               Icon(
                 Icons.remove_shopping_cart,
                 color: Colors.blue,
@@ -566,7 +567,7 @@ class _CartScreenState extends State<CartScreen> {
             //     context, MaterialPageRoute(builder: (context) => ShopLayout()));
           },
           textColor: Colors.blue,
-          child: const Text('موافق'),
+          child:  Text('موافق'.tr),
         ),
       ],
     );
@@ -590,7 +591,7 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(
             height: 10,
           ),
-          Text("تم استعمال كود الخصم")
+          Text("تم استعمال كود الخصم".tr)
         ],
       ),
       actions: <Widget>[
@@ -599,7 +600,7 @@ class _CartScreenState extends State<CartScreen> {
             Navigator.of(context).pop();
           },
           textColor: Colors.blue,
-          child: const Text('موافق'),
+          child:  Text('موافق'.tr),
         ),
       ],
     );
@@ -623,7 +624,7 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(
             height: 10,
           ),
-          Text("تم استعمال النقاط")
+          Text("تم استعمال النقاط".tr)
         ],
       ),
       actions: <Widget>[
@@ -632,7 +633,7 @@ class _CartScreenState extends State<CartScreen> {
             Navigator.of(context).pop();
           },
           textColor: Colors.blue,
-          child: const Text('موافق'),
+          child:  Text('موافق'.tr),
         ),
       ],
     );
@@ -654,7 +655,7 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(
             height: 10,
           ),
-          Text("يجب ان يكون لديك على الاقل 50 نقطة , نقاطك لا تكفي ")
+          Text("يجب ان يكون لديك على الاقل 50 نقطة , نقاطك لا تكفي ".tr)
         ],
       ),
       actions: <Widget>[
@@ -663,7 +664,7 @@ class _CartScreenState extends State<CartScreen> {
             Navigator.of(context).pop();
           },
           textColor: Colors.blue,
-          child: const Text('موافق'),
+          child:  Text('موافق'.tr),
         ),
       ],
     );
@@ -685,7 +686,7 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(
             height: 10,
           ),
-          Text("يجب ان تستعمل 50 او 100 او 150 نقاط لاكمال هذه العملية ")
+          Text("يجب ان تستعمل 50 او 100 او 150 نقاط لاكمال هذه العملية ".tr)
         ],
       ),
       actions: <Widget>[
@@ -694,7 +695,7 @@ class _CartScreenState extends State<CartScreen> {
             Navigator.of(context).pop();
           },
           textColor: Colors.blue,
-          child: const Text('موافق'),
+          child:  Text('موافق'.tr),
         ),
       ],
     );

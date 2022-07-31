@@ -61,6 +61,8 @@ class _OrderScreenState extends State<OrderScreen> {
   var cityController = TextEditingController();
   var addressController = TextEditingController();
   var city;
+  var sizes;
+
   final items = [
     'القدس',
     'رام الله',
@@ -72,7 +74,17 @@ class _OrderScreenState extends State<OrderScreen> {
     "سلفيت",
     "الداخل"
   ];
+
+  final sizes_items = [
+    'Small (S)',
+    'Medium (M)',
+    "Large (L)",
+    "Extra Large (XL)",
+    "Double Extra Large (XXL)",
+    "...."
+  ];
   String? value;
+  String? value2;
 
   Future<OrderModel> createOrder(id, price, UsedPoints) async {
     var ID = id;
@@ -286,6 +298,55 @@ class _OrderScreenState extends State<OrderScreen> {
                         ),
                       ),
                     ),
+                    //الحجم--------------------------------------------------------------------------------------------------------------
+                    Text(
+                      "الحجم",
+                      style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(0),
+                      child: Container(
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: Column(
+                            // crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 0,
+                              ),
+                              Container(
+                                margin: EdgeInsets.all(0),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 4),
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.grey, width: 2),
+                                    borderRadius: BorderRadius.circular(6)),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton<String>(
+                                    hint: Text("حدد الحجم ان لزم او اتركه فارغ \" .... \" "),
+                                    icon: Icon(Icons.arrow_downward_rounded),
+                                    onTap: ()
+                                    {
+                                    //  انسخ ياروحي انسخ
+                                    },
+                                    isExpanded: true,
+                                    value: value2,
+                                    items: sizes_items.map(buildMenuItem).toList(),
+                                    onChanged: (value2) => setState(() =>
+                                    {this.value2 = value2, sizes = value2}),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                     //العنوان--------------------------------------------------------------------------------------------------------------
                     Text(
                       "العنوان",
@@ -302,13 +363,10 @@ class _OrderScreenState extends State<OrderScreen> {
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(
-                      height: 15,
-                    ),
+                    //ارسال-----------------------------------------------------------------------------------------------------------------
                     SizedBox(
                       height: 20,
                     ),
-                    //ارسال-----------------------------------------------------------------------------------------------------------------
                     Container(
                       width: double.infinity,
                       decoration: BoxDecoration(

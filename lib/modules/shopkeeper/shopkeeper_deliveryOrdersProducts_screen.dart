@@ -412,6 +412,27 @@ class _ShopkeeperDeliveryOrdersProductsScreenState
                 SizedBox(
                   height: 10,
                 ),
+                // الحجم---------------------------------------------------------------------------------------------------------
+                Row(
+                  children: [
+                    Text(
+                      'الحجم : ',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey[500]),
+                    ),
+                    Spacer(),
+                    Text(
+                      "....",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
               ],
             )),
       ),

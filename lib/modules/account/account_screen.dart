@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/models/user/user_model.dart';
@@ -96,7 +97,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     size: 35,
                   )),
               title: Text(
-                "حسابي",
+                "حسابي".tr,
                 style: TextStyle(
                   color: Colors.blue,
                   fontSize: 22,
@@ -195,7 +196,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                   height: 10,
                                 ),
                                 Text(
-                                  "اسم المستخدم",
+                                  "اسم المستخدم".tr,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 17),
@@ -214,7 +215,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                   },
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return "الرجاء ادخال اسم المستخدم";
+                                      return "الرجاء ادخال اسم المستخدم".tr;
                                     }
                                     return null;
                                   },
@@ -228,7 +229,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                 //----------------------------------------------------------------------------------------------------
                                 //البريد الالكتروني
                                 Text(
-                                  "البريد الالكتروني",
+                                  "البريد الالكتروني".tr,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 17),
@@ -248,7 +249,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                   },
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return "الرجاء ادخال البريد الالكتروني";
+                                      return "الرجاء ادخال البريد الالكتروني".tr;
                                     }
                                     return null;
                                   },
@@ -279,7 +280,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                       }
                                     },
                                     child: Text(
-                                      "تعديل",
+                                      "تعديل".tr,
                                       style: TextStyle(color: Colors.white),
                                     ),
                                   ),
@@ -305,7 +306,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                                   EditPasswordScreen()));
                                     },
                                     child: Text(
-                                      "تغيير كلمة السر",
+                                      "تغيير كلمة السر".tr,
                                       style: TextStyle(color: Colors.white),
                                     ),
                                   ),

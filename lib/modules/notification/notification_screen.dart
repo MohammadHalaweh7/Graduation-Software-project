@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:udemy_flutter/layout/shop_layout/shop_layout.dart';
 import 'package:udemy_flutter/models/notification/notification_model.dart';
 import 'package:udemy_flutter/modules/home/main_screen.dart';
@@ -141,7 +142,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
               size: 35,
             )),
         title: Text(
-          "الاشعارات",
+          "الاشعارات".tr,
           style: TextStyle(
             color: Colors.blue,
             fontSize: 22,

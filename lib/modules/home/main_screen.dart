@@ -36,12 +36,12 @@ class _MainScreenState extends State<MainScreen> {
 
   fetchData fetch = fetchData();
 
-  String? city = 'الكل';
+  String? city = 'الكل'.tr;
   final citiesItems = [
-    'الكل',
-    'القدس',
+    'الكل'.tr,
+    'القدس'.tr,
     'راماالله',
-    "نابلس",
+    "نابلس".tr,
     "بيت لحم",
     "طولكرم",
     "قلقيلية",
@@ -59,31 +59,31 @@ class _MainScreenState extends State<MainScreen> {
           stores = snapchot.hasData ? snapchot.data as List<StoreModel> : [];
           return !snapchot.hasData
               ? Center(
-                  child: CircularProgressIndicator(
-                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
-                  ),
-                )
+            child: CircularProgressIndicator(
+              valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+            ),
+          )
               : ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  itemCount: stores == null ? 0 : stores.length,
-                  itemBuilder: (context, index) {
-                    print(stores.length);
-                    return mystore(
-                      stores[index].name,
-                      stores[index].description,
-                      stores[index].id,
-                      stores[index].phoneNumber,
-                      stores[index].locationOnMap,
-                      stores[index].avatar,
-                      stores[index].detailedLocation,
-                      stores[index].facebook,
-                      stores[index].snapchat,
-                      stores[index].whatsapp,
-                      stores[index].instagram,
-                    );
-                  });
+              physics: BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              itemCount: stores == null ? 0 : stores.length,
+              itemBuilder: (context, index) {
+                print(stores.length);
+                return mystore(
+                  stores[index].name,
+                  stores[index].description,
+                  stores[index].id,
+                  stores[index].phoneNumber,
+                  stores[index].locationOnMap,
+                  stores[index].avatar,
+                  stores[index].detailedLocation,
+                  stores[index].facebook,
+                  stores[index].snapchat,
+                  stores[index].whatsapp,
+                  stores[index].instagram,
+                );
+              });
         });
   }
 
@@ -124,11 +124,11 @@ class _MainScreenState extends State<MainScreen> {
                           image: DecorationImage(
                               image: avatar == null
                                   ? (AssetImage(
-                                      'assets/images/logo3.png',
-                                    ) as ImageProvider)
+                                'assets/images/logo3.png',
+                              ) as ImageProvider)
                                   : MemoryImage(
-                                      base64Decode(avatar),
-                                    ),
+                                base64Decode(avatar),
+                              ),
                               fit: BoxFit.cover),
                         )),
                     SizedBox(
@@ -195,7 +195,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            // backgroundColor: Colors.white,
+          // backgroundColor: Colors.white,
             leading: Builder(
               builder: (context) => IconButton(
                 icon: new Icon(
@@ -223,7 +223,7 @@ class _MainScreenState extends State<MainScreen> {
                         width: 100,
                         margin: EdgeInsets.all(0),
                         padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                        EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.blue, width: 2),
                             borderRadius: BorderRadius.circular(6)),
@@ -238,7 +238,7 @@ class _MainScreenState extends State<MainScreen> {
                             value: value3,
                             items: citiesItems.map(buildMenuItem).toList(),
                             onChanged: (value) => setState(
-                                () => {this.value3 = value, city = value}),
+                                    () => {this.value3 = value, city = value}),
                           ),
                         ),
                       ),
@@ -406,7 +406,7 @@ class _MainScreenState extends State<MainScreen> {
                   leading: Icon(Icons.logout, color: Color(0xff758DFF)),
                   onTap: () async {
                     SharedPreferences prefs =
-                        await SharedPreferences.getInstance();
+                    await SharedPreferences.getInstance();
                     prefs.remove('token');
                     prefs.remove('admintoken');
                     prefs.remove('storetoken');
@@ -429,19 +429,19 @@ class _MainScreenState extends State<MainScreen> {
               CarouselSlider(
                 items: imgList
                     .map((e) => ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              Image.network(
-                                e,
-                                height: 200,
-                                width: 100,
-                                fit: BoxFit.cover,
-                              ),
-                            ],
-                          ),
-                        ))
+                  borderRadius: BorderRadius.circular(20),
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Image.network(
+                        e,
+                        height: 200,
+                        width: 100,
+                        fit: BoxFit.cover,
+                      ),
+                    ],
+                  ),
+                ))
                     .toList(),
                 //   //خصائصها
 
@@ -498,7 +498,7 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("للأطفال - " + city!);
+                                ShopsScreen().setTitle("للأطفال - ".tr + city!);
                                 ShopsScreen().setType('للأطفال');
                                 ShopsScreen().setCity(city);
                                 Navigator.push(
@@ -512,7 +512,7 @@ class _MainScreenState extends State<MainScreen> {
                                 child: CircleAvatar(
                                   radius: 35.0,
                                   backgroundImage:
-                                      AssetImage('assets/images/baby.jpg'),
+                                  AssetImage('assets/images/baby.jpg'),
                                 ),
                               ),
                             ),
@@ -536,7 +536,7 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("للسيدات - " + city!);
+                                ShopsScreen().setTitle("للسيدات - ".tr + city!);
                                 ShopsScreen().setType('للسيدات');
                                 ShopsScreen().setCity(city);
                                 Navigator.push(
@@ -550,7 +550,7 @@ class _MainScreenState extends State<MainScreen> {
                                 child: CircleAvatar(
                                   radius: 35.0,
                                   backgroundImage:
-                                      AssetImage('assets/images/women.png'),
+                                  AssetImage('assets/images/women.png'),
                                 ),
                               ),
                             ),
@@ -574,7 +574,7 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("للرجال - " + city!);
+                                ShopsScreen().setTitle("للرجال - ".tr + city!);
                                 ShopsScreen().setType('للرجال');
                                 ShopsScreen().setCity(city);
                                 Navigator.push(
@@ -588,7 +588,7 @@ class _MainScreenState extends State<MainScreen> {
                                 child: CircleAvatar(
                                   radius: 35.0,
                                   backgroundImage:
-                                      AssetImage('assets/images/man.jpg'),
+                                  AssetImage('assets/images/man.jpg'),
                                 ),
                               ),
                             ),
@@ -612,7 +612,7 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("اكسسوارات - " + city!);
+                                ShopsScreen().setTitle("اكسسوارات - ".tr + city!);
                                 ShopsScreen().setType('اكسسوارات');
                                 ShopsScreen().setCity(city);
                                 Navigator.push(
@@ -650,7 +650,7 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("انارة - " + city!);
+                                ShopsScreen().setTitle("انارة - ".tr + city!);
                                 ShopsScreen().setType('انارة');
                                 ShopsScreen().setCity(city);
                                 Navigator.push(
@@ -664,7 +664,7 @@ class _MainScreenState extends State<MainScreen> {
                                 child: CircleAvatar(
                                   radius: 35.0,
                                   backgroundImage:
-                                      AssetImage('assets/images/lights.png'),
+                                  AssetImage('assets/images/lights.png'),
                                 ),
                               ),
                             ),
@@ -688,7 +688,7 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("ماكولات - " + city!);
+                                ShopsScreen().setTitle("ماكولات - ".tr + city!);
                                 ShopsScreen().setType('ماكولات');
                                 ShopsScreen().setCity(city);
                                 Navigator.push(
@@ -702,7 +702,7 @@ class _MainScreenState extends State<MainScreen> {
                                 child: CircleAvatar(
                                   radius: 35.0,
                                   backgroundImage:
-                                      AssetImage('assets/images/food.jpg'),
+                                  AssetImage('assets/images/food.jpg'),
                                 ),
                               ),
                             ),
@@ -726,7 +726,7 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("ملابس - " + city!);
+                                ShopsScreen().setTitle("ملابس - ".tr + city!);
                                 ShopsScreen().setType('ملابس');
                                 ShopsScreen().setCity(city);
                                 Navigator.push(
@@ -740,7 +740,7 @@ class _MainScreenState extends State<MainScreen> {
                                 child: CircleAvatar(
                                   radius: 35.0,
                                   backgroundImage:
-                                      AssetImage('assets/images/clothes.jpg'),
+                                  AssetImage('assets/images/clothes.jpg'),
                                 ),
                               ),
                             ),
@@ -764,7 +764,7 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("أحذية - " + city!);
+                                ShopsScreen().setTitle("أحذية - ".tr + city!);
                                 ShopsScreen().setType('أحذية');
                                 ShopsScreen().setCity(city);
                                 Navigator.push(
@@ -778,7 +778,7 @@ class _MainScreenState extends State<MainScreen> {
                                 child: CircleAvatar(
                                   radius: 35.0,
                                   backgroundImage:
-                                      AssetImage('assets/images/shoes.png'),
+                                  AssetImage('assets/images/shoes.png'),
                                 ),
                               ),
                             ),
@@ -802,7 +802,7 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("عطور - " + city!);
+                                ShopsScreen().setTitle("عطور - ".tr + city!);
                                 ShopsScreen().setType('عطور');
                                 ShopsScreen().setCity(city);
                                 Navigator.push(
@@ -816,7 +816,7 @@ class _MainScreenState extends State<MainScreen> {
                                 child: CircleAvatar(
                                   radius: 35.0,
                                   backgroundImage:
-                                      AssetImage('assets/images/perfumes.png'),
+                                  AssetImage('assets/images/perfumes.png'),
                                 ),
                               ),
                             ),
@@ -840,7 +840,7 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("الكترونيك - " + city!);
+                                ShopsScreen().setTitle("الكترونيك - ".tr + city!);
                                 ShopsScreen().setType('الكترونيك');
                                 ShopsScreen().setCity(city);
                                 Navigator.push(
@@ -988,12 +988,12 @@ class _MainScreenState extends State<MainScreen> {
 
   //هاد الفنكشن لخيارات الفئة---------------------------------------------------------------------------------
   DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
-        value: item,
-        child: Text(
-          item,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-        ),
-      );
+    value: item,
+    child: Text(
+      item,
+      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+    ),
+  );
   //--------------------------------------------------------------------------------------------------
 
   void onNotification() {

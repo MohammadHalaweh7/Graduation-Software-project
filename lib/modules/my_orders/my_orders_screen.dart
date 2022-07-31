@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/models/order/order_model.dart';
 import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
@@ -35,6 +36,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                   ),
                 )
               : ListView.builder(
+                  physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemCount: orders == null ? 0 : orders.length,
@@ -96,7 +98,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                               width: 8,
                             ),
                             Text(
-                              'رقم الطلب : ',
+                              'رقم الطلب : '.tr,
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             Text(
@@ -121,7 +123,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                         Row(
                           children: [
                             Text(
-                              'صورة المنتج : ',
+                              'صورة المنتج : '.tr,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.grey[500]),
@@ -146,13 +148,13 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                           ],
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 13,
                         ),
                         //اسم المتجر---------------------------------------------------------------------------------------------------------
                         Row(
                           children: [
                             Text(
-                              'اسم المتجر : ',
+                              'اسم المتجر : '.tr,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.grey[500]),
@@ -160,6 +162,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                             Spacer(),
                             Text(
                               storeName,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.blue),
@@ -167,13 +171,13 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                           ],
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 5,
                         ),
                         // اسم المنتج---------------------------------------------------------------------------------------------------------
                         Row(
                           children: [
                             Text(
-                              'اسم المنتج : ',
+                              'اسم المنتج : '.tr,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.grey[500]),
@@ -181,6 +185,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                             Spacer(),
                             Text(
                               productName,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.blue),
@@ -188,13 +194,14 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                           ],
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 5,
                         ),
+
                         //المبلغ الاجمالي---------------------------------------------------------------------------------------------------------
                         Row(
                           children: [
                             Text(
-                              'المبلغ الاجمالي : ',
+                              'المبلغ الاجمالي : '.tr,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.grey[500]),
@@ -209,13 +216,36 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                           ],
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 5,
+                        ),
+                        //الحجم---------------------------------------------------------------------------------------------------------
+                        Row(
+                          children: [
+                            Text(
+                              'الحجم : '.tr,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey[500]),
+                            ),
+                            Spacer(),
+                            Text(
+                              "....",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blue),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5,
                         ),
                         // حالة الطلب---------------------------------------------------------------------------------------------------------
                         Row(
                           children: [
                             Text(
-                              'حالة الطلب : ',
+                              'حالة الطلب : '.tr,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.grey[500]),
@@ -223,6 +253,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                             Spacer(),
                             Text(
                               orderStatus,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.blue),
@@ -233,7 +265,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 5,
                   ),
                 ],
               )),
@@ -258,7 +290,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
               size: 35,
             )),
         title: Text(
-          "منتجات طلبتها",
+          "منتجات طلبتها".tr,
           style: TextStyle(
             color: Colors.blue,
             fontSize: 22,

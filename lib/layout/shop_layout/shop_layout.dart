@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:udemy_flutter/modules/cart/cart_screen.dart';
 import 'package:udemy_flutter/modules/messenger/massenger_screen.dart';
 import 'package:udemy_flutter/modules/more/more_screen.dart';
@@ -71,12 +72,12 @@ class _ShopLayoutState extends State<ShopLayout> {
         items: [
           BottomNavigationBarItem(
               icon: Icon(Icons.store_mall_directory_outlined),
-              label: "الرئيسية"),
+              label: "الرئيسية".tr),
           BottomNavigationBarItem(
-              icon: Icon(Icons.announcement_outlined), label: "عن المتجر"),
+              icon: Icon(Icons.announcement_outlined), label: "عن المتجر".tr),
           BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_basket_sharp), label: "السلة"),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: "بحث"),
+              icon: Icon(Icons.shopping_basket_sharp), label: "السلة".tr),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: "بحث".tr),
         ],
       ),
     );

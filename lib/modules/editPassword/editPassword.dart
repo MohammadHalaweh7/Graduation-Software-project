@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/models/user/user_model.dart';
@@ -64,7 +65,7 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
               size: 35,
             )),
         title: Text(
-          "تغيير كلمة السر",
+          "تغيير كلمة السر".tr,
           style: TextStyle(
             color: Colors.blue,
             fontSize: 22,
@@ -93,7 +94,7 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                             height: 10,
                           ),
                           Text(
-                            "كلمة المرور",
+                            "كلمة المرور".tr,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
@@ -111,7 +112,7 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                             },
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "الرجاء ادخال كلمة المرور";
+                                return "الرجاء ادخال كلمة المرور".tr;
                               }
                               return null;
                             },
@@ -126,7 +127,7 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                           //----------------------------------------------------------------------------------------------------
                           //تاكيد كلمة المرور
                           Text(
-                            " تاكيد كلمة المرور",
+                            "تاكيد كلمة المرور".tr,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
@@ -144,7 +145,7 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                             },
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "الرجاء ادخال كلمة المرور";
+                                return "الرجاء ادخال كلمة المرور".tr;
                               }
                               return null;
                             },
@@ -174,7 +175,7 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                                 }
                               },
                               child: Text(
-                                "تعديل",
+                                "تعديل".tr,
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),

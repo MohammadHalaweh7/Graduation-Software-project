@@ -136,17 +136,36 @@ class _SearhResultScreenState extends State<SearhResultScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //صورة المنتج
-          avatar == null
-              ? Image.asset(
-                  'assets/images/logo3.png',
-                  width: double.infinity,
-                  height: 200,
-                )
-              : Image(
-                  image: MemoryImage(base64Decode(avatar)),
-                  width: double.infinity,
-                  height: 200,
+          GestureDetector(
+            onTap:(){
+              showDialog(
+                context: context,
+                builder: (BuildContext context) =>
+                    _buildPopupDialog2(context),
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child:
+              Container(
+                width: double.infinity,
+                height: 190,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  image: DecorationImage(
+                      image: avatar == null
+                          ? (AssetImage(
+                        'assets/images/logo3.png',
+
+                      ) as ImageProvider)
+                          : MemoryImage(base64Decode(avatar)
+                      ),
+
+                      fit: BoxFit.cover),
                 ),
+              ),
+            ),
+          ),
           //هون الاسم والسعر والمفضلة والكبسة شراء الان
           Padding(
             padding: const EdgeInsets.only(left: 12, right: 12),
@@ -304,6 +323,59 @@ class _SearhResultScreenState extends State<SearhResultScreen> {
     );
   }
   //-----------------------------------------------------------------------------------------------------------
+
+
+  //Pub up Function--------------------------------------------------------------------------------------------
+  Widget _buildPopupDialog2(BuildContext context) {
+    return new AlertDialog(
+
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+
+          Center(
+            child: Container(
+              width: 320,
+              height: 320,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                image: DecorationImage(
+                    image: avatar == null
+                        ? (AssetImage(
+                      'assets/images/logo3.png',
+
+                    ) as ImageProvider)
+                        : MemoryImage(base64Decode(avatar)
+                    ),
+
+                    fit: BoxFit.cover),
+              ),
+            ),
+          ),
+          SizedBox(height: 10,),
+          Center(
+
+            child: Text(
+
+              "طقم ستاتي تركي  يتوفر منه كافة الاحجام (s,m,l,xl,xxl)",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,),textAlign: TextAlign.center,
+            ),
+          ),
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Colors.blue,
+          child: const Text('اغلاق'),
+        ),
+      ],
+    );
+  }
+  //-----------------------------------------------------------------------------------------------------------
+
 
   //فنكشن مش مهم انساه
   void onNotification() {

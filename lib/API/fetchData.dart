@@ -45,7 +45,7 @@ class fetchData {
 
   Future<List<StoreModel>> alltypestores(type) async {
     var res =
-        await http.get(Uri.parse(fetchData.baseURL + '/store/typeall/' + type));
+    await http.get(Uri.parse(fetchData.baseURL + '/store/typeall/' + type));
 
     var body = jsonDecode(res.body) as List<dynamic>;
 
@@ -63,7 +63,7 @@ class fetchData {
 
   Future<List<NotificationModel>> allNotifications() async {
     var res =
-        await http.get(Uri.parse(fetchData.baseURL + '/notifications/getAll'));
+    await http.get(Uri.parse(fetchData.baseURL + '/notifications/getAll'));
 
     var body = jsonDecode(res.body) as List<dynamic>;
 
