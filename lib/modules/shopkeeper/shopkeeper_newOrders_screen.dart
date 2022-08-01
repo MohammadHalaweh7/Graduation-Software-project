@@ -61,13 +61,25 @@ class _ShopkeeperNewOrdersScreenState extends State<ShopkeeperNewOrdersScreen> {
                       orders[index].price,
                       orders[index].id,
                       orders[index].avatar,
+                      orders[index].size,
                     );
                   });
         });
   }
 
-  Widget myNeworders(orderNumber, buyerName, buyerCity, buyerAddress,
-      buyerPhone, buyerEmail, orderStatus, productName, price, id, avatar) {
+  Widget myNeworders(
+      orderNumber,
+      buyerName,
+      buyerCity,
+      buyerAddress,
+      buyerPhone,
+      buyerEmail,
+      orderStatus,
+      productName,
+      price,
+      id,
+      avatar,
+      size) {
     return //لكونتينر اللي بضم كلشي
         Column(
       children: [
@@ -140,7 +152,8 @@ class _ShopkeeperNewOrdersScreenState extends State<ShopkeeperNewOrdersScreen> {
                                             productName,
                                             price,
                                             id,
-                                            avatar)));
+                                            avatar,
+                                            size)));
                           },
                           child: Text(
                             "التفاصيل",

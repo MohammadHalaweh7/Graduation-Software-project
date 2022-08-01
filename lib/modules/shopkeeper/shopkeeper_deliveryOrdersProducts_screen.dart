@@ -38,6 +38,7 @@ var productName;
 var price;
 var id;
 var avatar;
+var size;
 
 class ShopkeeperDeliveryOrdersProductsScreen extends StatefulWidget {
   ShopkeeperDeliveryOrdersProductsScreen(
@@ -51,12 +52,13 @@ class ShopkeeperDeliveryOrdersProductsScreen extends StatefulWidget {
       productName,
       price,
       id,
-      avatar) {
+      avatar,
+      size) {
     this.setData(orderNumber, buyerName, buyerCity, buyerAddress, buyerPhone,
-        buyerEmail, orderStatus, productName, price, id, avatar);
+        buyerEmail, orderStatus, productName, price, id, avatar, size);
   }
   setData(OrderNumber, BuyerName, BuyerCity, BuyerAddress, BuyerPhone,
-      BuyerEmail, OrderStatus, ProductName, Price, Id, Avatar) {
+      BuyerEmail, OrderStatus, ProductName, Price, Id, Avatar, SIZE) {
     orderNumber = OrderNumber;
     buyerName = BuyerName;
     buyerCity = BuyerCity;
@@ -68,6 +70,7 @@ class ShopkeeperDeliveryOrdersProductsScreen extends StatefulWidget {
     price = Price;
     id = Id;
     avatar = Avatar;
+    size = SIZE;
   }
 
   @override
@@ -97,9 +100,7 @@ class _ShopkeeperDeliveryOrdersProductsScreenState
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: [
-
-        ],
+        actions: [],
       ),
       drawer: Drawer(
         child: SingleChildScrollView(
@@ -418,15 +419,13 @@ class _ShopkeeperDeliveryOrdersProductsScreenState
                     Text(
                       'الحجم : ',
                       style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey[500]),
+                          fontWeight: FontWeight.bold, color: Colors.grey[500]),
                     ),
                     Spacer(),
                     Text(
-                      "....",
+                      size,
                       style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue),
+                          fontWeight: FontWeight.bold, color: Colors.blue),
                     )
                   ],
                 ),
@@ -446,7 +445,5 @@ class _ShopkeeperDeliveryOrdersProductsScreenState
             builder: (context) => ShopkeeperDeliveryOrdersScreen()));
   }
 }
-
-
 
 //--------------------------------------------------------------------------

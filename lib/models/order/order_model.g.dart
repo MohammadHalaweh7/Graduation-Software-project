@@ -17,6 +17,7 @@ OrderModel _$OrderModelFromJson(Map<String, dynamic> json) => OrderModel()
   ..storeName = json['storeName'] as String
   ..productName = json['productName'] as String
   ..price = json['price'] as String
+  ..size = json['size'] as String
   ..orderStatus = json['orderStatus'] as String
   ..avatar = json['avatar'] as String?;
 
@@ -32,6 +33,7 @@ Map<String, dynamic> _$OrderModelToJson(OrderModel instance) =>
       'storeName': instance.storeName,
       'productName': instance.productName,
       'price': instance.price,
+      'size': instance.size,
       'orderStatus': instance.orderStatus,
       'avatar': instance.avatar,
     };

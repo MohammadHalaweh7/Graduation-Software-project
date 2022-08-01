@@ -62,7 +62,7 @@ class _OrderScreenState extends State<OrderScreen> {
   var cityController = TextEditingController();
   var addressController = TextEditingController();
   var city;
-  var sizes;
+  var sizes = "....";
 
   final items = [
     'القدس',
@@ -98,7 +98,8 @@ class _OrderScreenState extends State<OrderScreen> {
       'buyerPhone': phoneController.text,
       'buyerCity': city,
       'buyerAddress': addressController.text,
-      'price': price
+      'price': price,
+      'size': sizes
     });
 
     var result = await http.post(
@@ -120,6 +121,29 @@ class _OrderScreenState extends State<OrderScreen> {
         context: context,
         builder: (BuildContext context) => _buildPopupDialog(context),
       );
+    }
+
+    OrderModel orderModel = OrderModel.fromJson(jsonDecode(result.body));
+
+    return orderModel;
+  }
+
+  Future<OrderModel> deleteFromCart() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+
+    var result = await http.delete(
+      Uri.parse(fetchData.baseURL + "/deleteProductsOnCart"),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer ' + token.toString()
+      },
+    );
+
+    print('status code ' + result.statusCode.toString());
+
+    if (result.statusCode == 201) {
+      print("Doneeeeeeeeeeeee");
     }
 
     OrderModel orderModel = OrderModel.fromJson(jsonDecode(result.body));
@@ -149,7 +173,7 @@ class _OrderScreenState extends State<OrderScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        physics:BouncingScrollPhysics(),
+        physics: BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -303,7 +327,7 @@ class _OrderScreenState extends State<OrderScreen> {
                     Text(
                       "الحجم".tr,
                       style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(0),
@@ -326,17 +350,21 @@ class _OrderScreenState extends State<OrderScreen> {
                                     borderRadius: BorderRadius.circular(6)),
                                 child: DropdownButtonHideUnderline(
                                   child: DropdownButton<String>(
-                                    hint: Text("حدد الحجم ان لزم او اتركه فارغ \" .... \" ".tr),
+                                    hint: Text(
+                                        "حدد الحجم ان لزم او اتركه فارغ \" .... \" "
+                                            .tr),
                                     icon: Icon(Icons.arrow_downward_rounded),
-                                    onTap: ()
-                                    {
-                                    //  انسخ ياروحي انسخ
+                                    onTap: () {
+                                      //  انسخ ياروحي انسخ
                                     },
                                     isExpanded: true,
                                     value: value2,
-                                    items: sizes_items.map(buildMenuItem).toList(),
-                                    onChanged: (value2) => setState(() =>
-                                    {this.value2 = value2, sizes = value2}),
+                                    items:
+                                        sizes_items.map(buildMenuItem).toList(),
+                                    onChanged: (value2) => setState(() => {
+                                          this.value2 = value2,
+                                          sizes = value2!
+                                        }),
                                   ),
                                 ),
                               ),
@@ -381,6 +409,7 @@ class _OrderScreenState extends State<OrderScreen> {
                               createOrder(products[i].id, products[i].price,
                                   usedPoints);
                             }
+                            deleteFromCart();
                           } else {
                             createOrder(id, price, usedPoints);
                           }
@@ -429,7 +458,7 @@ class _OrderScreenState extends State<OrderScreen> {
                 context, MaterialPageRoute(builder: (context) => MainScreen()));
           },
           textColor: Colors.blue,
-          child:  Text('موافق'.tr),
+          child: Text('موافق'.tr),
         ),
       ],
     );

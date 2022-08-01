@@ -67,13 +67,25 @@ class _ShopkeeperDeliveryOrdersScreenState
                       orders[index].price,
                       orders[index].id,
                       orders[index].avatar,
+                      orders[index].size,
                     );
                   });
         });
   }
 
-  Widget myNeworders(orderNumber, buyerName, buyerCity, buyerAddress,
-      buyerPhone, buyerEmail, orderStatus, productName, price, id, avatar) {
+  Widget myNeworders(
+      orderNumber,
+      buyerName,
+      buyerCity,
+      buyerAddress,
+      buyerPhone,
+      buyerEmail,
+      orderStatus,
+      productName,
+      price,
+      id,
+      avatar,
+      size) {
     return Column(
       children: [
         SizedBox(
@@ -145,7 +157,8 @@ class _ShopkeeperDeliveryOrdersScreenState
                                             productName,
                                             price,
                                             id,
-                                            avatar)));
+                                            avatar,
+                                            size)));
                           },
                           child: Text(
                             "التفاصيل",

@@ -49,13 +49,14 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                       orders[index].orderStatus,
                       orders[index].id,
                       orders[index].avatar,
+                      orders[index].size,
                     );
                   });
         });
   }
 
-  Widget myorders(
-      orderNumber, storeName, productName, price, orderStatus, id, avatar) {
+  Widget myorders(orderNumber, storeName, productName, price, orderStatus, id,
+      avatar, size) {
     return Column(
       children: [
         SizedBox(
@@ -229,7 +230,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                             ),
                             Spacer(),
                             Text(
-                              "....",
+                              size,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(

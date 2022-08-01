@@ -38,6 +38,7 @@ var productName;
 var price;
 var id;
 var avatar;
+var size;
 
 class ShopkeeperNewOrdersProductsScreen extends StatefulWidget {
   ShopkeeperNewOrdersProductsScreen(
@@ -51,12 +52,13 @@ class ShopkeeperNewOrdersProductsScreen extends StatefulWidget {
       productName,
       price,
       id,
-      avatar) {
+      avatar,
+      size) {
     this.setData(orderNumber, buyerName, buyerCity, buyerAddress, buyerPhone,
-        buyerEmail, orderStatus, productName, price, id, avatar);
+        buyerEmail, orderStatus, productName, price, id, avatar, size);
   }
   setData(OrderNumber, BuyerName, BuyerCity, BuyerAddress, BuyerPhone,
-      BuyerEmail, OrderStatus, ProductName, Price, Id, Avatar) {
+      BuyerEmail, OrderStatus, ProductName, Price, Id, Avatar, SIZE) {
     orderNumber = OrderNumber;
     buyerName = BuyerName;
     buyerCity = BuyerCity;
@@ -68,6 +70,7 @@ class ShopkeeperNewOrdersProductsScreen extends StatefulWidget {
     price = Price;
     id = Id;
     avatar = Avatar;
+    size = SIZE;
   }
 
   @override
@@ -456,7 +459,7 @@ class _ShopkeeperNewOrdersProductsScreenState
                           ),
                           Spacer(),
                           Text(
-                            "....",
+                            size,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.blue),

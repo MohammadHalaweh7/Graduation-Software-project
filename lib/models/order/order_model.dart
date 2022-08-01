@@ -17,6 +17,7 @@ class OrderModel {
   late final String storeName;
   late final String productName;
   late final String price;
+  late final String size;
   late final String orderStatus;
   late final String? avatar;
 
