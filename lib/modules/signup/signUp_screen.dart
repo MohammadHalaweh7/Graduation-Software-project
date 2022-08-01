@@ -59,6 +59,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
     print(userNameController.text);
     print(emailController.text);
     print(passwordController.text);
+    if (userNameController.text == '' ||
+        emailController.text == '' ||
+        passwordController.text == '' ||
+        interests == []) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => _buildPopupDialog(context),
+      );
+    }
     var body;
     if (!(myImage == null)) {
       var bytes = await new File(myImage.path).readAsBytes();
@@ -93,6 +102,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
           context, MaterialPageRoute(builder: (context) => MainScreen()));
       // navigateTo(context,MainScreen());
     }
+    if (result.statusCode == 413) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => _buildPopupDialog2(context),
+      );
+    }
   }
 
   @override
@@ -115,16 +130,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: [
-
-        ],
+        actions: [],
       ),
-
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Container(
           child: SingleChildScrollView(
-            physics:BouncingScrollPhysics(),
+            physics: BouncingScrollPhysics(),
             child: Column(
               // crossAxisAlignment: CrossAxisAlignment.center,
 
@@ -169,23 +181,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           children: [
                             _image != null
                                 ? CircleAvatar(
-                                radius: 52.0,
-                                child: ClipRRect(
-                                    borderRadius:
-                                    BorderRadius.circular(100),
-                                    child: Image.file(
-                                      _image!,
-                                      height: 100,
-                                      width: 100,
-                                      fit: BoxFit.cover,
-                                    )))
+                                    radius: 52.0,
+                                    child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        child: Image.file(
+                                          _image!,
+                                          height: 100,
+                                          width: 100,
+                                          fit: BoxFit.cover,
+                                        )))
                                 : ClipRRect(
-                                borderRadius: BorderRadius.circular(100),
-                                child: Image.network(
-                                  'http://futosite.teneceschoolsupport.com/wp-content/uploads/2022/01/1-1.png',
-                                  width: 90,
-                                  height: 90,
-                                )),
+                                    borderRadius: BorderRadius.circular(100),
+                                    child: Image.network(
+                                      'http://futosite.teneceschoolsupport.com/wp-content/uploads/2022/01/1-1.png',
+                                      width: 90,
+                                      height: 90,
+                                    )),
                             CircleAvatar(
                               radius: 15,
                               backgroundColor: Colors.blue,
@@ -338,7 +350,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         children: [
                           Row(
                             children: [
-                              Text('للأطفال'.tr,style: TextStyle(fontSize: 10),),
+                              Text(
+                                'للأطفال'.tr,
+                                style: TextStyle(fontSize: 10),
+                              ),
                               Checkbox(
                                 activeColor: Colors.blue,
                                 value: baby,
@@ -353,7 +368,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           Row(
                             children: [
-                              Text("الكترونيك".tr,style: TextStyle(fontSize: 10)),
+                              Text("الكترونيك".tr,
+                                  style: TextStyle(fontSize: 10)),
                               Checkbox(
                                 activeColor: Colors.blue,
                                 value: Arts,
@@ -366,11 +382,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               )
                             ],
                           ),
-
-
                           Row(
                             children: [
-                              Text("اكسسوارات".tr,style: TextStyle(fontSize: 10)),
+                              Text("اكسسوارات".tr,
+                                  style: TextStyle(fontSize: 10)),
                               Checkbox(
                                 activeColor: Colors.blue,
                                 value: Accessori,
@@ -391,7 +406,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         children: [
                           Row(
                             children: [
-                              Text("انارة".tr,style: TextStyle(fontSize: 10)),
+                              Text("انارة".tr, style: TextStyle(fontSize: 10)),
                               Checkbox(
                                 activeColor: Colors.blue,
                                 value: Gifts,
@@ -406,7 +421,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           Row(
                             children: [
-                              Text("عطور".tr,style: TextStyle(fontSize: 10)),
+                              Text("عطور".tr, style: TextStyle(fontSize: 10)),
                               Checkbox(
                                 activeColor: Colors.blue,
                                 value: perfume,
@@ -421,7 +436,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           Row(
                             children: [
-                              Text("ملابس".tr,style: TextStyle(fontSize: 10)),
+                              Text("ملابس".tr, style: TextStyle(fontSize: 10)),
                               Checkbox(
                                 activeColor: Colors.blue,
                                 value: Clothes,
@@ -436,7 +451,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           Row(
                             children: [
-                              Text("أحذية".tr,style: TextStyle(fontSize: 10)),
+                              Text("أحذية".tr, style: TextStyle(fontSize: 10)),
                               Checkbox(
                                 activeColor: Colors.blue,
                                 value: shoes,
@@ -457,7 +472,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         children: [
                           Row(
                             children: [
-                              Text("ماكولات".tr,style: TextStyle(fontSize: 10)),
+                              Text("ماكولات".tr,
+                                  style: TextStyle(fontSize: 10)),
                               Checkbox(
                                 activeColor: Colors.blue,
                                 value: Foods,
@@ -470,10 +486,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               )
                             ],
                           ),
-
                           Row(
                             children: [
-                              Text('للسيدات'.tr,style: TextStyle(fontSize: 10)),
+                              Text('للسيدات'.tr,
+                                  style: TextStyle(fontSize: 10)),
                               Checkbox(
                                 activeColor: Colors.blue,
                                 value: women,
@@ -488,7 +504,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           Row(
                             children: [
-                              Text("للرجال".tr,style: TextStyle(fontSize: 10)),
+                              Text("للرجال".tr, style: TextStyle(fontSize: 10)),
                               Checkbox(
                                 activeColor: Colors.blue,
                                 value: men,
@@ -501,7 +517,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               )
                             ],
                           ),
-
                         ],
                       )
                     ],
@@ -557,6 +572,69 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  //Pub up Function(2)--------------------------------------------------------------------------------------------
+  Widget _buildPopupDialog(BuildContext context) {
+    return new AlertDialog(
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CircleAvatar(
+              radius: 17,
+              backgroundColor: Colors.blue,
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          Text("الرجاء ادخال جميع الحقول ")
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Colors.blue,
+          child: Text('موافق'.tr),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPopupDialog2(BuildContext context) {
+    return new AlertDialog(
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CircleAvatar(
+              radius: 17,
+              backgroundColor: Colors.blue,
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          Text("حجم الصورة تجاوز الحد المسموح")
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Colors.blue,
+          child: Text('موافق'.tr),
+        ),
+      ],
     );
   }
 

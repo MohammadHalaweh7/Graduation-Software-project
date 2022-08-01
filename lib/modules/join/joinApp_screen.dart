@@ -84,6 +84,21 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
 
   Future<void> pendingStoreSignUp(BuildContext context) async {
     var body;
+    if (emailController.text == '' ||
+        passwordController.text == '' ||
+        nameController.text == '' ||
+        descriptionController.text == '' ||
+        phoneController.text == '' ||
+        detailedLocationController.text == '' ||
+        type == null ||
+        city == null ||
+        locationOnMapController.text == '' ||
+        whatsappController.text == '') {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => _buildPopupDialog2(context),
+      );
+    }
     if (!(myImage == null)) {
       var bytes = await new File(myImage.path).readAsBytes();
       String base64 = base64Encode(bytes);
@@ -135,6 +150,12 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
         builder: (BuildContext context) => _buildPopupDialog(context),
       );
     }
+    if (result.statusCode == 413) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => _buildPopupDialog3(context),
+      );
+    }
   }
 
   @override
@@ -157,12 +178,10 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: [
-
-        ],
+        actions: [],
       ),
       body: SingleChildScrollView(
-        physics:BouncingScrollPhysics(),
+        physics: BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -236,7 +255,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
 
                     //البريد الالكتروني------------------------------------------------------------------------------------------------------
                     Text(
-                      "البريد الالكتروني".tr,
+                      "* البريد الالكتروني".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -265,7 +284,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                     ),
                     //كلمة السر------------------------------------------------------------------------------------------------------
                     Text(
-                      "كلمة السر".tr,
+                      " * كلمة السر".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -301,7 +320,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                     ),
                     // المتجر الاسم-----------------------------------------------------------------------------------------------------------------
                     Text(
-                      "اسم المتجر".tr,
+                      " * اسم المتجر".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -325,7 +344,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                     ),
                     // وصف بسيط عن المتجر-----------------------------------------------------------------------------------------------------------------
                     Text(
-                      "وصف بسيط عن المتجر".tr,
+                      " * وصف بسيط عن المتجر".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -348,7 +367,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                     ),
                     //الهاتف---------------------------------------------------------------------------------------------------------------
                     Text(
-                      "الهاتف",
+                      " * الهاتف",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -377,7 +396,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                     ),
                     //عنوان المتجر -----------------------------------------------------------------------------------------------------------------
                     Text(
-                      "عنوان المتجر".tr,
+                      "* عنوان المتجر".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -394,7 +413,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                     ),
                     //الفئة--------------------------------------------------------------------------------------------------------------
                     Text(
-                      "اختر الفئة".tr,
+                      " * اختر الفئة".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -441,7 +460,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                     ),
                     //المدينة--------------------------------------------------------------------------------------------------------------
                     Text(
-                      "اختر المدينة".tr,
+                      " * اختر المدينة".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -538,7 +557,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                     ),
                     //رابط الخريطة--------------------------------------------------------------------------------------------------------------
                     Text(
-                      "رابط الخريطة".tr,
+                      " * رابط الخريطة".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -555,7 +574,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                     ),
                     //رقم واتس اب--------------------------------------------------------------------------------------------------------------
                     Text(
-                      "رقم واتس اب".tr,
+                      " * رقم واتس اب".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -636,12 +655,74 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
             //  Navigator.of(context).pop();
           },
           textColor: Colors.blue,
-          child:  Text('موافق'.tr),
+          child: Text('موافق'.tr),
         ),
       ],
     );
   }
   //-----------------------------------------------------------------------------------------------------------
+
+  Widget _buildPopupDialog2(BuildContext context) {
+    return new AlertDialog(
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CircleAvatar(
+              radius: 17,
+              backgroundColor: Colors.blue,
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          Text("الرجاء ادخال جميع الحقول ")
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Colors.blue,
+          child: Text('موافق'.tr),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPopupDialog3(BuildContext context) {
+    return new AlertDialog(
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CircleAvatar(
+              radius: 17,
+              backgroundColor: Colors.blue,
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          Text("حجم الصورة تجاوز الحد المسموح")
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Colors.blue,
+          child: Text('موافق'.tr),
+        ),
+      ],
+    );
+  }
 
   void onNotification() {
     Navigator.pop(context);

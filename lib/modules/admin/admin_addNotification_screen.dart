@@ -76,6 +76,12 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
   var descriptionController = TextEditingController();
 
   Future<void> createNotification(BuildContext context) async {
+    if (titleController.text == '' || descriptionController.text == '') {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => _buildPopupDialog2(context),
+      );
+    }
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
     var body;
@@ -113,6 +119,13 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
       );
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => AdminMainScreen()));
+    }
+
+    if (result.statusCode == 413) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => _buildPopupDialog3(context),
+      );
     }
   }
 
@@ -293,6 +306,68 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
           },
           textColor: Colors.blue,
           child: const Text('موافق'),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPopupDialog2(BuildContext context) {
+    return new AlertDialog(
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CircleAvatar(
+              radius: 17,
+              backgroundColor: Colors.blue,
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          Text("الرجاء ادخال جميع الحقول ")
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Colors.blue,
+          child: Text('موافق'),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPopupDialog3(BuildContext context) {
+    return new AlertDialog(
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CircleAvatar(
+              radius: 17,
+              backgroundColor: Colors.blue,
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          Text("حجم الصورة تجاوز الحد المسموح")
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Colors.blue,
+          child: Text('موافق'),
         ),
       ],
     );

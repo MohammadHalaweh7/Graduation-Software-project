@@ -74,14 +74,17 @@ class _LoginScreenState extends State<LoginScreen> {
       sharedPrefs.saveToken(body['token']);
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => ShopKeeperMainScreen()));
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => _buildPopupDialog(context),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-
       body: Padding(
         padding: const EdgeInsets.all(25),
         child: Container(
@@ -92,7 +95,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 // crossAxisAlignment: CrossAxisAlignment.center,
 
                 children: [
-                  SizedBox(height: 100,),
+                  SizedBox(
+                    height: 100,
+                  ),
                   Image.asset(
                     'assets/images/logo3.png',
                     width: 210,
@@ -171,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 20,
                   ),
                   Container(
-                    width:360,
+                    width: 360,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(20.0)),
                       color: Colors.blueAccent, // width: double.infinity,
@@ -205,7 +210,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               MaterialPageRoute(
                                   builder: (context) => PasswordScreen()));
                         },
-                        child: Text("هل نسيت كلمة المرور؟".tr,style: TextStyle(fontWeight: FontWeight.bold),),
+                        child: Text(
+                          "هل نسيت كلمة المرور؟".tr,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
                       // SizedBox(width: 71),
                       Spacer(),
@@ -216,7 +224,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               MaterialPageRoute(
                                   builder: (context) => SignUpScreen()));
                         },
-                        child: Text("جديد هنا؟ سجل الان!".tr,style: TextStyle(fontWeight: FontWeight.bold),),
+                        child: Text(
+                          "جديد هنا؟ سجل الان!".tr,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       )
                     ],
                   )
@@ -228,6 +239,36 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+}
 
-
+//Pub up Function(2)--------------------------------------------------------------------------------------------
+Widget _buildPopupDialog(BuildContext context) {
+  return new AlertDialog(
+    content: new Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        CircleAvatar(
+            radius: 17,
+            backgroundColor: Colors.blue,
+            child: Icon(
+              Icons.check,
+              color: Colors.white,
+            )),
+        SizedBox(
+          height: 10,
+        ),
+        Text("الايميل او كلمة السر غير صحيحة !!!")
+      ],
+    ),
+    actions: <Widget>[
+      new FlatButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        textColor: Colors.blue,
+        child: Text('موافق'.tr),
+      ),
+    ],
+  );
 }

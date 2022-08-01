@@ -89,6 +89,18 @@ class _OrderScreenState extends State<OrderScreen> {
 
   Future<OrderModel> createOrder(id, price, UsedPoints) async {
     var ID = id;
+    if (nameController.text == '' ||
+        emailController.text == '' ||
+        phoneController.text == '' ||
+        city == null ||
+        sizes == '' ||
+        addressController.text == '') {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => _buildPopupDialog5(context),
+      );
+    }
+
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
 
@@ -456,6 +468,38 @@ class _OrderScreenState extends State<OrderScreen> {
             Navigator.of(context).pop();
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => MainScreen()));
+          },
+          textColor: Colors.blue,
+          child: Text('موافق'.tr),
+        ),
+      ],
+    );
+  }
+
+  //Pub up Function(2)--------------------------------------------------------------------------------------------
+  Widget _buildPopupDialog5(BuildContext context) {
+    return new AlertDialog(
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CircleAvatar(
+              radius: 17,
+              backgroundColor: Colors.blue,
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          Text("الرجاء ادخال جميع الحقول ")
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
           },
           textColor: Colors.blue,
           child: Text('موافق'.tr),

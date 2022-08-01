@@ -45,6 +45,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
   Future<void> createProduct(BuildContext context) async {
     var token;
     var body;
+    if (nameController.text == '' ||
+        priceController.text == '' ||
+        descriptionController.text == '') {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => _buildPopupDialog4(context),
+      );
+    }
     if (!(myImage == null)) {
       var bytes = await new File(myImage.path).readAsBytes();
       String base64 = base64Encode(bytes);
@@ -90,6 +98,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
         builder: (BuildContext context) => _buildPopupDialog(context),
       );
     }
+
+    if (result.statusCode == 413) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => _buildPopupDialog5(context),
+      );
+    }
   }
 
   @override
@@ -112,7 +127,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -300,6 +314,68 @@ class _AddProductScreenState extends State<AddProductScreen> {
           },
           textColor: Colors.blue,
           child: const Text('موافق'),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPopupDialog4(BuildContext context) {
+    return new AlertDialog(
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CircleAvatar(
+              radius: 17,
+              backgroundColor: Colors.blue,
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          Text("الرجاء ادخال جميع الحقول ")
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Colors.blue,
+          child: Text('موافق'),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPopupDialog5(BuildContext context) {
+    return new AlertDialog(
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CircleAvatar(
+              radius: 17,
+              backgroundColor: Colors.blue,
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          Text("حجم الصورة تجاوز الحد المسموح")
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Colors.blue,
+          child: Text('موافق'),
         ),
       ],
     );
