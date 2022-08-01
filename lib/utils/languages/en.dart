@@ -42,7 +42,7 @@ const Map<String, String> en = {
   'سناب شات':'SnapShat',
   'واتس أب':'WhatsApp',
   'انستغرام':'Instagram',
-  'عنوان المتجر':'The Map',
+  'عنوان المتجر':'The Map/Location',
   'عن المتجر':'About the store',
   'المنتجات':'The Product',
   'اكتب اسم المنتج ...':'Type the name of the product ...',
@@ -101,6 +101,68 @@ const Map<String, String> en = {
   'المبلغ الاجمالي : ':'Total amount : ',
   'الحجم : ':'size : ',
   'حالة الطلب : ':'Order status : ',
+  'معلومات الاتصال':'contact information',
+  'الرجاء ادخال رقم الهاتف':'Please enter the phone number',
+  'المدينة':'City',
+  'الحجم':'Size',
+  'حدد الحجم ان لزم او اتركه فارغ \" .... \" ':'Select the size if necessary or leave it blank \" .... \" ',
+  'العنوان':'The address',
+  'حدد مكانك بالتفصيل':'Specify your location in detail',
+  'ارسال':'Send',
+  'تم اتمام طلبك بنجاح':'Your request has been successfully completed',
+  'الهاتف':'Phone',
+  'تسجيل الدخول':'Log In',
+  'هل نسيت كلمة المرور؟':'Forget Password ?',
+  'جديد هنا؟ سجل الان!':'Register now!',
+  'كلمة السر':'Password',
+  'عضو بالفعل؟ سجل الدخول!':'Already a member? Log in!',
+
+  'انشاء حساب':'Create an account',
+  'الصورة الشخصية':'Profile Picture',
+
+  'حدد اهتماماتك : ':'Select your interests : ',
+
+  'هل تريد انشاء متجر ؟ انشأه الان!':'Create Store ! ',
+
+  'صورة المتجر':'Store Picture',
+  'اختر صورة من المعرض':'Choose from gallery',
+
+
+  'اسم المتجر':'Store Name',
+  'وصف بسيط عن المتجر':'Simple description of the store',
+
+  'قم بوصف متجرك ':'Describe your store',
+
+  'اختر الفئة':'Choose category',
+
+  'اختر المدينة':'Choose the city',
+
+  'رابط فيسبوك':'Facebook link',
+
+  'رابط انستغرام':'Instagram link',
+  'رابط سناب شات':'SnapShat link',
+  'رابط الخريطة':'Map link',
+  'رقم واتس اب':'WhatsApp number',
+  'انشاء':'Creat',
+  'سوف تصلك رسالة قريبا بان تم قبول متجرك ام لا ':'You will soon receive a message that your store has been accepted or not',
+
+  'راماالله':'Ramallah',
+  'بيت لحم':'Betlahem',
+  'طولكرم':'Tolkarm',
+  'قلقيلية':'Qalqelyah',
+  'الخليل':'Hebron',
+  'سلفيت':'Salfeet',
+  'الداخل':'Occupied Palestine',
+  'هل نسيت كلمة المرور !':'did you forget your password !',
+
+
+
+
+
+
+
+
+
 
 
 

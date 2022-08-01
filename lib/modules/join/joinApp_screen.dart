@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/API/sharedPrefs.dart';
 import 'package:udemy_flutter/modules/home/main_screen.dart';
@@ -53,28 +54,28 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
   bool isPassword = true;
 
   final categoriesItems = [
-    'للأطفال',
-    'للسيدات',
-    "للرجال",
-    "اكسسوارات",
-    "انارة",
-    "ماكولات",
-    "ملابس",
-    "أحذية",
-    "عطور",
-    'الكترونيك'
+    'للأطفال'.tr,
+    'للسيدات'.tr,
+    "للرجال".tr,
+    "اكسسوارات".tr,
+    "انارة".tr,
+    "ماكولات".tr,
+    "ملابس".tr,
+    "أحذية".tr,
+    "عطور".tr,
+    'الكترونيك'.tr
   ];
 
   final citiesItems = [
-    'القدس',
-    'راماالله',
-    "نابلس",
-    "بيت لحم",
-    "طولكرم",
-    "قلقيلية",
-    "الخليل",
-    "سلفيت",
-    "الداخل"
+    'القدس'.tr,
+    'راماالله'.tr,
+    "نابلس".tr,
+    "بيت لحم".tr,
+    "طولكرم".tr,
+    "قلقيلية".tr,
+    "الخليل".tr,
+    "سلفيت".tr,
+    "الداخل".tr
   ];
 
   String? value2;
@@ -149,7 +150,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
               size: 35,
             )),
         title: Text(
-          "انشاء متجر",
+          "انشاء متجر".tr,
           style: TextStyle(
             color: Colors.blue,
             fontSize: 22,
@@ -184,7 +185,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
 
                     //  صورة المتجر-----------------------------------------------------------------------------------------------------------------
                     Text(
-                      " صورة المتجر",
+                      "صورة المتجر".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -202,7 +203,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                               getImage();
                             },
                             child: Text(
-                              "اختر صورة من المعرض",
+                              "اختر صورة من المعرض".tr,
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -235,7 +236,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
 
                     //البريد الالكتروني------------------------------------------------------------------------------------------------------
                     Text(
-                      "البريد الالكتروني",
+                      "البريد الالكتروني".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -250,7 +251,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                       },
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "الرجاء ادخال البريد الالكتروني";
+                          return "الرجاء ادخال البريد الالكتروني".tr;
                         }
                         return null;
                       },
@@ -264,7 +265,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                     ),
                     //كلمة السر------------------------------------------------------------------------------------------------------
                     Text(
-                      "كلمة السر",
+                      "كلمة السر".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -274,7 +275,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                       obscureText: isPassword,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "الرجاء ادخال كلمة السر";
+                          return "الرجاء ادخال كلمة السر".tr;
                         }
                         return null;
                       },
@@ -300,7 +301,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                     ),
                     // المتجر الاسم-----------------------------------------------------------------------------------------------------------------
                     Text(
-                      "اسم المتجر",
+                      "اسم المتجر".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -324,7 +325,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                     ),
                     // وصف بسيط عن المتجر-----------------------------------------------------------------------------------------------------------------
                     Text(
-                      "وصف بسيط عن المتجر",
+                      "وصف بسيط عن المتجر".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -336,7 +337,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                       keyboardType: TextInputType.multiline,
                       decoration: InputDecoration(
                           // labelText: 'ادخل معلومات متجرك وسنتواصل معك قريبا',
-                          hintText: 'قم بوصف متجرك ',
+                          hintText: 'قم بوصف متجرك '.tr,
                           helperStyle: TextStyle(color: Colors.white70),
                           border: OutlineInputBorder(
                               borderRadius:
@@ -362,7 +363,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                       },
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "الرجاء ادخال رقم الهاتف";
+                          return "الرجاء ادخال رقم الهاتف".tr;
                         }
                         return null;
                       },
@@ -376,7 +377,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                     ),
                     //عنوان المتجر -----------------------------------------------------------------------------------------------------------------
                     Text(
-                      "عنوان المتجر",
+                      "عنوان المتجر".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -393,7 +394,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                     ),
                     //الفئة--------------------------------------------------------------------------------------------------------------
                     Text(
-                      "اختر الفئة",
+                      "اختر الفئة".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -440,7 +441,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                     ),
                     //المدينة--------------------------------------------------------------------------------------------------------------
                     Text(
-                      "اختر المدينة",
+                      "اختر المدينة".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -486,7 +487,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                     ),
                     //رابط فيسبوك--------------------------------------------------------------------------------------------------------------
                     Text(
-                      "رابط فيسبوك",
+                      "رابط فيسبوك".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -503,7 +504,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                     ),
                     //رابط انستغرام--------------------------------------------------------------------------------------------------------------
                     Text(
-                      "رابط انستغرام",
+                      "رابط انستغرام".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -520,7 +521,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                     ),
                     //رابط سناب شات--------------------------------------------------------------------------------------------------------------
                     Text(
-                      "رابط سناب شات",
+                      "رابط سناب شات".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -537,7 +538,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                     ),
                     //رابط الخريطة--------------------------------------------------------------------------------------------------------------
                     Text(
-                      "رابط الخريطة",
+                      "رابط الخريطة".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -554,7 +555,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                     ),
                     //رقم واتس اب--------------------------------------------------------------------------------------------------------------
                     Text(
-                      "رقم واتس اب",
+                      "رقم واتس اب".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -582,7 +583,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
                           pendingStoreSignUp(context);
                         },
                         child: Text(
-                          "انشاء",
+                          "انشاء".tr,
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
@@ -624,7 +625,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
           SizedBox(
             height: 10,
           ),
-          Text("سوف تصلك رسالة قريبا بان تم قبول متجرك ام لا ")
+          Text("سوف تصلك رسالة قريبا بان تم قبول متجرك ام لا ".tr)
         ],
       ),
       actions: <Widget>[
@@ -635,7 +636,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
             //  Navigator.of(context).pop();
           },
           textColor: Colors.blue,
-          child: const Text('موافق'),
+          child:  Text('موافق'.tr),
         ),
       ],
     );

@@ -278,11 +278,11 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                     image: DecorationImage(
                         image: avatar == null
                             ? AssetImage(
-                                'assets/images/logo3.png',
-                              ) as ImageProvider
+                          'assets/images/logo3.png',
+                        ) as ImageProvider
                             : MemoryImage(
-                                base64Decode(avatar),
-                              ),
+                          base64Decode(avatar),
+                        ),
                         fit: BoxFit.cover),
                     borderRadius: BorderRadius.circular(30)),
               ),
@@ -386,7 +386,7 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                     Text(
                       phoneNumber,
                       style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -646,7 +646,7 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
                     Text(
                       whatsapp,
                       style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),

@@ -1,6 +1,7 @@
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:udemy_flutter/modules/web_view/web_view_screen.dart';
 
 Widget defaultButton(
@@ -41,7 +42,7 @@ Widget defaultFormField({
       },
       validator: (value) {
         if (value!.isEmpty) {
-          return "عبي الايميل يا حبيبي";
+          return "الرجاء ادخال البريد الالكتروني".tr;
         }
         return null;
       },

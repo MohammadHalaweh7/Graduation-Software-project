@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/layout/shop_layout/shop_layout.dart';
@@ -139,7 +140,7 @@ class _OrderScreenState extends State<OrderScreen> {
               size: 35,
             )),
         title: Text(
-          "استكمال الطلب",
+          "استكمال الطلب".tr,
           style: TextStyle(
             color: Colors.blue,
             fontSize: 22,
@@ -161,7 +162,7 @@ class _OrderScreenState extends State<OrderScreen> {
                   children: [
                     //معلومات الاتصال------------------------------------------------------------------------------------------------------
                     Text(
-                      "معلومات الاتصال",
+                      "معلومات الاتصال".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                     ),
@@ -170,7 +171,7 @@ class _OrderScreenState extends State<OrderScreen> {
                     ),
                     //الاسم-----------------------------------------------------------------------------------------------------------------
                     Text(
-                      "الاسم",
+                      "الاسم".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -184,7 +185,7 @@ class _OrderScreenState extends State<OrderScreen> {
                       },
                       decoration: InputDecoration(
                         // hintText: "البريد الالكتروني",
-                        labelText: "الاسم",
+                        labelText: "الاسم".tr,
 
                         border: OutlineInputBorder(),
                       ),
@@ -194,7 +195,7 @@ class _OrderScreenState extends State<OrderScreen> {
                     ),
                     //البريد الالكتروني------------------------------------------------------------------------------------------------------
                     Text(
-                      "البريد الالكتروني",
+                      "البريد الالكتروني".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -223,7 +224,7 @@ class _OrderScreenState extends State<OrderScreen> {
                     ),
                     //الهاتف---------------------------------------------------------------------------------------------------------------
                     Text(
-                      "الهاتف",
+                      "الهاتف".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -238,7 +239,7 @@ class _OrderScreenState extends State<OrderScreen> {
                       },
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "الرجاء ادخال رقم الهاتف";
+                          return "الرجاء ادخال رقم الهاتف".tr;
                         }
                         return null;
                       },
@@ -252,7 +253,7 @@ class _OrderScreenState extends State<OrderScreen> {
                     ),
                     //المدينة--------------------------------------------------------------------------------------------------------------
                     Text(
-                      "المدينة",
+                      "المدينة".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -300,7 +301,7 @@ class _OrderScreenState extends State<OrderScreen> {
                     ),
                     //الحجم--------------------------------------------------------------------------------------------------------------
                     Text(
-                      "الحجم",
+                      "الحجم".tr,
                       style:
                       TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -325,7 +326,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                     borderRadius: BorderRadius.circular(6)),
                                 child: DropdownButtonHideUnderline(
                                   child: DropdownButton<String>(
-                                    hint: Text("حدد الحجم ان لزم او اتركه فارغ \" .... \" "),
+                                    hint: Text("حدد الحجم ان لزم او اتركه فارغ \" .... \" ".tr),
                                     icon: Icon(Icons.arrow_downward_rounded),
                                     onTap: ()
                                     {
@@ -349,7 +350,7 @@ class _OrderScreenState extends State<OrderScreen> {
                     ),
                     //العنوان--------------------------------------------------------------------------------------------------------------
                     Text(
-                      "العنوان",
+                      "العنوان".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -359,7 +360,7 @@ class _OrderScreenState extends State<OrderScreen> {
                       maxLines: 5,
                       maxLength: 1000,
                       decoration: InputDecoration(
-                        labelText: "حدد مكانك بالتفصيل",
+                        labelText: "حدد مكانك بالتفصيل".tr,
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -385,7 +386,7 @@ class _OrderScreenState extends State<OrderScreen> {
                           }
                         },
                         child: Text(
-                          "ارسال",
+                          "ارسال".tr,
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
@@ -417,7 +418,7 @@ class _OrderScreenState extends State<OrderScreen> {
           SizedBox(
             height: 10,
           ),
-          Text("تم اتمام طلبك بنجاح")
+          Text("تم اتمام طلبك بنجاح".tr)
         ],
       ),
       actions: <Widget>[
@@ -428,7 +429,7 @@ class _OrderScreenState extends State<OrderScreen> {
                 context, MaterialPageRoute(builder: (context) => MainScreen()));
           },
           textColor: Colors.blue,
-          child: const Text('موافق'),
+          child:  Text('موافق'.tr),
         ),
       ],
     );

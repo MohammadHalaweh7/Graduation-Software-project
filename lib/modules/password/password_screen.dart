@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:get/get.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 // import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../login/login_screen.dart';
@@ -51,7 +52,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
               size: 35,
             )),
         title: Text(
-          "هل نسيت كلمة المرور !",
+          "هل نسيت كلمة المرور !".tr,
           style: TextStyle(
             color: Colors.blue,
             fontSize: 22,
@@ -95,13 +96,13 @@ class _PasswordScreenState extends State<PasswordScreen> {
                     },
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "حط رقم السر يا بيبي";
+                        return "الرجاء ادخال البريد الالكتروني".tr;
                       }
                       return null;
                     },
                     decoration: InputDecoration(
                       // hintText: "البريد الالكتروني",
-                      labelText: "البريد الالكتروني",
+                      labelText: "البريد الالكتروني".tr,
                       prefixIcon: Icon(Icons.email),
                       border: OutlineInputBorder(),
                     ),
@@ -120,7 +121,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                         ForgetPassword(context);
                       },
                       child: Text(
-                        "ارسال",
+                        "ارسال".tr,
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -139,7 +140,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                                   builder: (context) => LoginScreen()));
                         },
                         child: Text(
-                          "عضو بالفعل؟ سجل الدخول!",
+                          "عضو بالفعل؟ سجل الدخول!".tr,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),

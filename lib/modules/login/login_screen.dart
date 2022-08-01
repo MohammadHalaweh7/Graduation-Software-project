@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/API/sharedPrefs.dart';
@@ -107,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 30,
                   ),
                   defaultFormField(
-                      lable: "البريد الالكتروني",
+                      lable: "البريد الالكتروني".tr,
                       prefix: Icons.email,
                       type: TextInputType.emailAddress,
                       controller: emailController),
@@ -120,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     obscureText: isPassword,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "الرجاء ادخال كلمة السر";
+                        return "الرجاء ادخال كلمة السر".tr;
                       }
                       return null;
                     },
@@ -128,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       print(value);
                     },
                     decoration: InputDecoration(
-                      labelText: "كلمة السر",
+                      labelText: "كلمة السر".tr,
                       prefixIcon: Icon(Icons.lock),
                       suffixIcon: IconButton(
                           onPressed: () {
@@ -185,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                       },
                       child: Text(
-                        "تسجيل الدخول",
+                        "تسجيل الدخول".tr,
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -204,7 +205,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               MaterialPageRoute(
                                   builder: (context) => PasswordScreen()));
                         },
-                        child: Text("هل نسيت كلمة المرور؟",style: TextStyle(fontWeight: FontWeight.bold),),
+                        child: Text("هل نسيت كلمة المرور؟".tr,style: TextStyle(fontWeight: FontWeight.bold),),
                       ),
                       // SizedBox(width: 71),
                       Spacer(),
@@ -215,7 +216,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               MaterialPageRoute(
                                   builder: (context) => SignUpScreen()));
                         },
-                        child: Text("جديد هنا؟ سجل الان!",style: TextStyle(fontWeight: FontWeight.bold),),
+                        child: Text("جديد هنا؟ سجل الان!".tr,style: TextStyle(fontWeight: FontWeight.bold),),
                       )
                     ],
                   )

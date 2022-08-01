@@ -8,6 +8,7 @@ import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/models/store/store_model.dart';
+import 'package:udemy_flutter/modules/aboutUs/about_us_screen.dart';
 import 'package:udemy_flutter/modules/account/account_screen.dart';
 import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
 import 'package:udemy_flutter/modules/language/language_screen.dart';
@@ -399,7 +400,12 @@ class _MainScreenState extends State<MainScreen> {
                 ListTile(
                   title: Text("عن متجراتي".tr),
                   leading: Icon(Icons.assignment, color: Color(0xff758DFF)),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AboutUsScreen()));
+                  },
                 ),
                 ListTile(
                   title: Text("تسجيل خروج".tr),

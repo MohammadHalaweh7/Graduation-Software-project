@@ -2,6 +2,7 @@ import 'dart:convert';
 // import 'dart:js';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/API/sharedPrefs.dart';
 import 'package:udemy_flutter/modules/home/main_screen.dart';
@@ -107,7 +108,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               size: 35,
             )),
         title: Text(
-          "انشاء حساب",
+          "انشاء حساب".tr,
           style: TextStyle(
             color: Colors.blue,
             fontSize: 22,
@@ -155,7 +156,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         width: 5,
                       ),
                       Text(
-                        'الصورة الشخصية',
+                        'الصورة الشخصية'.tr,
                         style: TextStyle(fontSize: 18, color: Colors.grey),
                       ),
                       Spacer(),
@@ -236,7 +237,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   },
                   decoration: InputDecoration(
                     // hintText: "البريد الالكتروني",
-                    labelText: "اسم المستخدم",
+                    labelText: "اسم المستخدم".tr,
                     prefixIcon: Icon(Icons.person),
                     border: OutlineInputBorder(),
                   ),
@@ -256,7 +257,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   },
                   decoration: InputDecoration(
                     // hintText: "البريد الالكتروني",
-                    labelText: "البريد الالكتروني",
+                    labelText: "البريد الالكتروني".tr,
                     prefixIcon: Icon(Icons.email),
                     border: OutlineInputBorder(),
                   ),
@@ -273,7 +274,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   obscureText: isPassword,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "الرجاء ادخال كلمة السر";
+                      return "الرجاء ادخال كلمة السر".tr;
                     }
                     return null;
                   },
@@ -285,7 +286,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   },
                   decoration: InputDecoration(
                     // hintText: "البريد الالكتروني",
-                    labelText: "كلمة السر",
+                    labelText: "كلمة السر".tr,
                     prefixIcon: Icon(Icons.lock),
                     suffixIcon: IconButton(
                         onPressed: () {
@@ -327,7 +328,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Padding(
                         padding: const EdgeInsets.only(right: 5),
                         child: Text(
-                          'حدد اهتماماتك : ',
+                          'حدد اهتماماتك : '.tr,
                           style: TextStyle(fontSize: 18, color: Colors.black54),
                         ),
                       ),
@@ -337,7 +338,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         children: [
                           Row(
                             children: [
-                              Text('للأطفال'),
+                              Text('للأطفال'.tr,style: TextStyle(fontSize: 10),),
                               Checkbox(
                                 activeColor: Colors.blue,
                                 value: baby,
@@ -352,7 +353,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           Row(
                             children: [
-                              Text("الكترونيك"),
+                              Text("الكترونيك".tr,style: TextStyle(fontSize: 10)),
                               Checkbox(
                                 activeColor: Colors.blue,
                                 value: Arts,
@@ -369,7 +370,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                           Row(
                             children: [
-                              Text("اكسسوارات"),
+                              Text("اكسسوارات".tr,style: TextStyle(fontSize: 10)),
                               Checkbox(
                                 activeColor: Colors.blue,
                                 value: Accessori,
@@ -390,7 +391,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         children: [
                           Row(
                             children: [
-                              Text("انارة"),
+                              Text("انارة".tr,style: TextStyle(fontSize: 10)),
                               Checkbox(
                                 activeColor: Colors.blue,
                                 value: Gifts,
@@ -405,7 +406,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           Row(
                             children: [
-                              Text("عطور"),
+                              Text("عطور".tr,style: TextStyle(fontSize: 10)),
                               Checkbox(
                                 activeColor: Colors.blue,
                                 value: perfume,
@@ -420,7 +421,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           Row(
                             children: [
-                              Text("ملابس"),
+                              Text("ملابس".tr,style: TextStyle(fontSize: 10)),
                               Checkbox(
                                 activeColor: Colors.blue,
                                 value: Clothes,
@@ -435,7 +436,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           Row(
                             children: [
-                              Text("أحذية"),
+                              Text("أحذية".tr,style: TextStyle(fontSize: 10)),
                               Checkbox(
                                 activeColor: Colors.blue,
                                 value: shoes,
@@ -456,7 +457,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         children: [
                           Row(
                             children: [
-                              Text("ماكولات"),
+                              Text("ماكولات".tr,style: TextStyle(fontSize: 10)),
                               Checkbox(
                                 activeColor: Colors.blue,
                                 value: Foods,
@@ -472,7 +473,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                           Row(
                             children: [
-                              Text('للسيدات'),
+                              Text('للسيدات'.tr,style: TextStyle(fontSize: 10)),
                               Checkbox(
                                 activeColor: Colors.blue,
                                 value: women,
@@ -487,7 +488,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           Row(
                             children: [
-                              Text("للرجال"),
+                              Text("للرجال".tr,style: TextStyle(fontSize: 10)),
                               Checkbox(
                                 activeColor: Colors.blue,
                                 value: men,
@@ -524,7 +525,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       print(passwordController.text);
                     },
                     child: Text(
-                      "تسجيل",
+                      "تسجيل".tr,
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
@@ -544,7 +545,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 builder: (context) => JoinAppScreen()));
                       },
                       child: Text(
-                        "هل تريد انشاء متجر ؟ انشأه الان!",
+                        "هل تريد انشاء متجر ؟ انشأه الان!".tr,
                         style: TextStyle(
                             fontSize: 16.5, fontWeight: FontWeight.bold),
                       ),
