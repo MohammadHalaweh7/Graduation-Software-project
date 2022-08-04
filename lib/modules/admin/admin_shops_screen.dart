@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/models/pendingStore/pendingStore_model.dart';
@@ -149,7 +150,7 @@ class _AdminShopsScreenState extends State<AdminShopsScreen> {
                           Row(
                             children: [
                               Text(
-                                'اسم المتجر : ',
+                                'اسم المتجر : '.tr,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.blue),
@@ -166,7 +167,7 @@ class _AdminShopsScreenState extends State<AdminShopsScreen> {
                             height: 3,
                           ),
                           Text(
-                            'وصف المتجر : ',
+                            'وصف المتجر : '.tr,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, color: Colors.blue),
                           ),
@@ -366,7 +367,7 @@ class _AdminShopsScreenState extends State<AdminShopsScreen> {
               size: 35,
             )),
         title: Text(
-          "المتاجر",
+          "المتاجر".tr,
           style: TextStyle(
             color: Colors.blue,
             fontSize: 22,

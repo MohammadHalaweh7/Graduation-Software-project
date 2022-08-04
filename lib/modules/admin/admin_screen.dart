@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/models/pendingStore/pendingStore_model.dart';
@@ -153,7 +154,7 @@ class _AdminScreenState extends State<AdminScreen> {
       Row(
       children: [
       Text(
-      'اسم المتجر : ',
+      'اسم المتجر : '.tr,
       style: TextStyle(
       fontWeight: FontWeight.bold,
       color: Colors.blue),
@@ -170,7 +171,7 @@ class _AdminScreenState extends State<AdminScreen> {
       height: 3,
       ),
       Text(
-      'وصف المتجر : ',
+      'وصف المتجر : '.tr,
       style: TextStyle(
       fontWeight: FontWeight.bold, color: Colors.blue),
       ),
@@ -370,7 +371,7 @@ class _AdminScreenState extends State<AdminScreen> {
               size: 35,
             )),
         title: Text(
-          "طلبات المتاجر",
+          "طلبات المتاجر".tr,
           style: TextStyle(
             color: Colors.blue,
             fontSize: 22,
@@ -384,94 +385,6 @@ class _AdminScreenState extends State<AdminScreen> {
 
       body: Center(child: fetchPendingStores()),
 
-      //     //هاد بضم الكونتينر وكل اللي جواتو
-      //     GestureDetector(
-      //   onTap: () {
-      //     Navigator.push(
-      //         context,
-      //         MaterialPageRoute(
-      //             builder: (context) => AdminShopsDetailsScreen()));
-      //   },
-      //   child:
-      //       //هاد الكونتينر بضم كلشي
-      //       Container(
-      //     decoration: BoxDecoration(
-      //       borderRadius: BorderRadius.circular(15.0),
-      //       color: Colors.white,
-      //       boxShadow: [
-      //         BoxShadow(
-      //           color: Colors.grey,
-      //           offset: Offset(0, 1.0), //(x,y)
-      //           blurRadius: 5.0,
-      //         ),
-      //       ],
-      //     ),
-      //     child: Padding(
-      //       padding: const EdgeInsets.all(15.0),
-      //       child: Row(
-      //         children: [
-      //           Container(
-      //             width: 115,
-      //             height: 115,
-      //             decoration: BoxDecoration(
-      //                 borderRadius: BorderRadius.circular(10),
-      //                 image: DecorationImage(
-      //                     image: NetworkImage(
-      //                         'https://www.nicepng.com/png/detail/254-2540580_we-create-a-customized-solution-to-meet-all.png'),
-      //                     fit: BoxFit.cover)),
-      //           ),
-      //           SizedBox(
-      //             width: 10,
-      //           ),
-      //           Expanded(
-      //             child: Container(
-      //               height: 113,
-      //               child: Column(
-      //                 crossAxisAlignment: CrossAxisAlignment.start,
-      //                 mainAxisAlignment: MainAxisAlignment.start,
-      //                 mainAxisSize: MainAxisSize.min,
-      //                 children: [
-      //                   Row(
-      //                     children: [
-      //                       Text(
-      //                         'اسم المتجر : ',
-      //                         style: TextStyle(
-      //                             fontWeight: FontWeight.bold,
-      //                             color: Colors.blue),
-      //                       ),
-      //                       Text(
-      //                         'تنويرات الشروق',
-      //                         maxLines: 2,
-      //                         overflow: TextOverflow.ellipsis,
-      //                         style: TextStyle(),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                   SizedBox(
-      //                     height: 3,
-      //                   ),
-      //                   Text(
-      //                     'وصف المتجر : ',
-      //                     style: TextStyle(
-      //                         fontWeight: FontWeight.bold, color: Colors.blue),
-      //                   ),
-
-      //                   Expanded(
-      //                       child: Text(
-      //                     ' متجر متخصص لبيع كافة انواع التريات والاجهزة الكهربائية والمنزلية والمنزليةوالمنزليةوالمنزلية  ',
-      //                     maxLines: 2,
-      //                     overflow: TextOverflow.ellipsis,
-      //                   )),
-      //                   // Text('${article['publishedAt']}',style: TextStyle(color: Colors.grey,fontSize: 20),),
-      //                 ],
-      //               ),
-      //             ),
-      //           )
-      //         ],
-      //       ),
-      //     ),
-      //   ),
-      // ),
     );
   }
 

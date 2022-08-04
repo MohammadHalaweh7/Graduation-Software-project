@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/models/user/user_model.dart';
@@ -82,7 +83,7 @@ class _ShopkeeperEditPasswordScreenState
               size: 35,
             )),
         title: Text(
-          "تغييري كلمة السر",
+          "تغيير كلمة السر".tr,
           style: TextStyle(
             color: Colors.blue,
             fontSize: 22,
@@ -295,7 +296,7 @@ class _ShopkeeperEditPasswordScreenState
                             height: 10,
                           ),
                           Text(
-                            "كلمة المرور",
+                            "كلمة المرور".tr,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
@@ -313,7 +314,7 @@ class _ShopkeeperEditPasswordScreenState
                             },
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "الرجاء ادخال كلمة المرور";
+                                return "الرجاء ادخال كلمة المرور".tr;
                               }
                               return null;
                             },
@@ -328,7 +329,7 @@ class _ShopkeeperEditPasswordScreenState
                           //----------------------------------------------------------------------------------------------------
                           //تاكيد كلمة المرور
                           Text(
-                            " تاكيد كلمة المرور",
+                            "تاكيد كلمة المرور".tr,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
@@ -346,7 +347,7 @@ class _ShopkeeperEditPasswordScreenState
                             },
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "الرجاء ادخال كلمة المرور";
+                                return "الرجاء ادخال كلمة المرور".tr;
                               }
                               return null;
                             },
@@ -372,7 +373,7 @@ class _ShopkeeperEditPasswordScreenState
                                 editData();
                               },
                               child: Text(
-                                "تعديل",
+                                "تعديل".tr,
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),
@@ -424,7 +425,7 @@ class _ShopkeeperEditPasswordScreenState
           SizedBox(
             height: 10,
           ),
-          Text("تم تغيير كلمة السر بنجاح")
+          Text("تم تغيير كلمة السر بنجاح".tr)
         ],
       ),
       actions: <Widget>[
@@ -437,7 +438,7 @@ class _ShopkeeperEditPasswordScreenState
                     builder: (context) => ShopkeeperAccountScreen()));
           },
           textColor: Colors.blue,
-          child: const Text('موافق'),
+          child:  Text('موافق'.tr),
         ),
       ],
     );

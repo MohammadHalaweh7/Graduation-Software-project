@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/models/store/store_model.dart';
@@ -98,7 +99,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                     size: 35,
                   )),
               title: Text(
-                "متجري",
+                "متجري".tr,
                 style: TextStyle(
                   color: Colors.blue,
                   fontSize: 22,
@@ -348,7 +349,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                             child: Row(
                               children: [
                                 Text(
-                                  "تعديل الملف الشخصي",
+                                  "تعديل الملف الشخصي".tr,
                                   style: TextStyle(color: Colors.black),
                                 ),
                                 SizedBox(
@@ -416,7 +417,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                           Column(
                             children: [
                               Text(
-                                'اسم المتجر : ',
+                                'اسم المتجر : '.tr,
                                 style: TextStyle(
                                     color: Colors.blue,
                                     fontSize: 16,
@@ -462,7 +463,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                           Row(
                             children: [
                               Text(
-                                'وصف المتجر : ',
+                                'وصف المتجر : '.tr,
                                 style: TextStyle(
                                     color: Colors.blue,
                                     fontSize: 16,
@@ -515,7 +516,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                             width: 10,
                           ),
                           Text(
-                            "الفئة المختارة : ",
+                            'الفئة المختارة :'.tr,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -567,7 +568,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                             height: 10,
                           ),
                           Text(
-                            "رقم الهاتف المحمول : ",
+                            "رقم الهاتف المحمول : ".tr,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -613,7 +614,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                             width: 10,
                           ),
                           Text(
-                            "المدينة : ",
+                            "المدينة : ".tr,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -665,7 +666,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                             width: 10,
                           ),
                           Text(
-                            "عنوان المتجر : ",
+                            "عنوان المتجر : ".tr,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -717,7 +718,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                             height: 10,
                           ),
                           Text(
-                            "رابط الفيسبوك : ",
+                            "رابط الفيسبوك : ".tr,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -775,7 +776,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                             height: 10,
                           ),
                           Text(
-                            "رابط الانستاغرام : ",
+                            "رابط الانستاغرام : ".tr,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -833,7 +834,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                             height: 10,
                           ),
                           Text(
-                            "رابط السناب شات : ",
+                            "رابط السناب شات : ".tr,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -891,7 +892,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                             height: 10,
                           ),
                           Text(
-                            "رقم الواتس اب : ",
+                            "رقم الواتس اب : ".tr,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -937,7 +938,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                             height: 10,
                           ),
                           Text(
-                            "رابط الخريطة : ",
+                            "رابط الخريطة : ".tr,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -997,7 +998,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
           SizedBox(
             height: 10,
           ),
-          Text("تم حذف المتجر !! ")
+          Text("تم حذف المتجر !! ".tr)
         ],
       ),
       actions: <Widget>[
@@ -1008,7 +1009,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                 MaterialPageRoute(builder: (context) => AdminShopsScreen()));
           },
           textColor: Colors.blue,
-          child: const Text('موافق'),
+          child: Text('موافق'.tr),
         ),
       ],
     );

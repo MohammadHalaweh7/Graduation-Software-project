@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/modules/admin/adminMain_screen.dart';
@@ -147,7 +148,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
               size: 35,
             )),
         title: Text(
-          "تفاصيل المتجر",
+          "تفاصيل المتجر".tr,
           style: TextStyle(
             color: Colors.blue,
             fontSize: 22,
@@ -374,7 +375,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                     Column(
                       children: [
                         Text(
-                          'اسم المتجر : ',
+                          'اسم المتجر : '.tr,
                           style: TextStyle(
                               color: Colors.blue,
                               fontSize: 16,
@@ -420,7 +421,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                     Row(
                       children: [
                         Text(
-                          'وصف المتجر : ',
+                          'وصف المتجر : '.tr,
                           style: TextStyle(
                               color: Colors.blue,
                               fontSize: 16,
@@ -475,7 +476,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                       width: 10,
                     ),
                     Text(
-                      "الفئة المختارة : ",
+                      "الفئة المختارة :".tr,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -527,7 +528,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                       height: 10,
                     ),
                     Text(
-                      "رقم الهاتف المحمول : ",
+                      "رقم الهاتف المحمول : ".tr,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -573,7 +574,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                       width: 10,
                     ),
                     Text(
-                      "المدينة : ",
+                      "المدينة : ".tr,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -625,7 +626,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                       width: 10,
                     ),
                     Text(
-                      "عنوان المتجر : ",
+                      "عنوان المتجر : ".tr,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -679,7 +680,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                       height: 10,
                     ),
                     Text(
-                      "رابط الفيسبوك : ",
+                      "رابط الفيسبوك : ".tr,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -737,7 +738,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                       height: 10,
                     ),
                     Text(
-                      "رابط الانستاغرام : ",
+                      "رابط الانستاغرام : ".tr,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
@@ -798,7 +799,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                       height: 10,
                     ),
                     Text(
-                      "رابط السناب شات : ",
+                      "رابط السناب شات : ".tr,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -856,7 +857,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                       height: 10,
                     ),
                     Text(
-                      "رقم الواتس اب : ",
+                      "رقم الواتس اب : ".tr,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -902,7 +903,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                       height: 10,
                     ),
                     Text(
-                      "رابط الخريطة : ",
+                      "رابط الخريطة : ".tr,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -948,7 +949,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                         confirmPendingStore(context);
                       },
                       child: Text(
-                        "قبول",
+                        "قبول".tr,
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -965,7 +966,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                         declinePendingStore(context);
                       },
                       child: Text(
-                        "رفض",
+                        "رفض".tr,
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -999,7 +1000,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
           SizedBox(
             height: 10,
           ),
-          Text("تم قبول هذا المتجر")
+          Text("تم قبول هذا المتجر".tr)
         ],
       ),
       actions: <Widget>[
@@ -1010,7 +1011,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                 MaterialPageRoute(builder: (context) => AdminScreen()));
           },
           textColor: Colors.blue,
-          child: const Text('موافق'),
+          child:  Text('موافق'.tr),
         ),
       ],
     );
@@ -1032,7 +1033,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
           SizedBox(
             height: 10,
           ),
-          Text("تم رفض هذا المتجر")
+          Text("تم رفض هذا المتجر".tr)
         ],
       ),
       actions: <Widget>[
@@ -1043,7 +1044,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                 MaterialPageRoute(builder: (context) => AdminScreen()));
           },
           textColor: Colors.blue,
-          child: const Text('موافق'),
+          child: Text('موافق'.tr),
         ),
       ],
     );

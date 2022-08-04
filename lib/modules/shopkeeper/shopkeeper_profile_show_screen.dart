@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/models/store/store_model.dart';
@@ -388,7 +389,7 @@ class _ShopkeeperProfileShowScreenState
                                 width: 10,
                               ),
                               Text(
-                                "هاتف",
+                                "هاتف".tr,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -443,7 +444,7 @@ class _ShopkeeperProfileShowScreenState
                                 width: 10,
                               ),
                               Text(
-                                "زيارة موقعنا",
+                                "زيارة موقعنا".tr,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -510,7 +511,7 @@ class _ShopkeeperProfileShowScreenState
                                 width: 10,
                               ),
                               Text(
-                                "فيسبوك",
+                                "فيسبوك".tr,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -580,7 +581,7 @@ class _ShopkeeperProfileShowScreenState
                                 width: 10,
                               ),
                               Text(
-                                "سناب شات",
+                                "سناب شات".tr,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -650,7 +651,7 @@ class _ShopkeeperProfileShowScreenState
                                 width: 10,
                               ),
                               Text(
-                                "واتس أب",
+                                "واتس أب".tr,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -708,7 +709,7 @@ class _ShopkeeperProfileShowScreenState
                                 width: 10,
                               ),
                               Text(
-                                "انستغرام",
+                                "انستغرام".tr,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -778,7 +779,7 @@ class _ShopkeeperProfileShowScreenState
                                 width: 10,
                               ),
                               Text(
-                                "عنوان المتجر",
+                                "عنوان المتجر".tr,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,

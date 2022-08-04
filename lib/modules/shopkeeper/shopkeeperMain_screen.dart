@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/models/pendingStore/pendingStore_model.dart';
@@ -126,7 +127,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 220),
                       child: Text(
-                        "الرئيسية",
+                        "الرئيسية".tr,
                         style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
@@ -134,7 +135,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                       ),
                     ),
                     ListTile(
-                      title: Text("الى الرئيسية"),
+                      title: Text("الى الرئيسية".tr),
                       leading: Icon(Icons.store, color: Color(0xff758DFF)),
                       onTap: () {
                         Navigator.push(
@@ -154,7 +155,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 147),
                       child: Text(
-                        "معلومات المستخدم",
+                        "معلومات المستخدم".tr,
                         style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
@@ -162,7 +163,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                       ),
                     ),
                     ListTile(
-                      title: Text("حسابي"),
+                      title: Text("حسابي".tr),
                       leading: Icon(Icons.person, color: Color(0xff758DFF)),
                       onTap: () {
                         Navigator.push(
@@ -173,7 +174,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("متجري"),
+                      title: Text("متجري".tr),
                       leading: Icon(Icons.storefront, color: Color(0xff758DFF)),
                       onTap: () {
                         Navigator.push(
@@ -184,7 +185,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("منتجاتي"),
+                      title: Text("منتجاتي".tr),
                       leading: Icon(Icons.production_quantity_limits,
                           color: Color(0xff758DFF)),
                       onTap: () {
@@ -196,7 +197,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("اضافة منتج جديد"),
+                      title: Text("اضافة منتج جديد".tr),
                       leading: Icon(Icons.add_shopping_cart,
                           color: Color(0xff758DFF)),
                       onTap: () {
@@ -207,7 +208,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("الطلبات الجديدة"),
+                      title: Text("الطلبات الجديدة".tr),
                       leading: Icon(Icons.open_in_new_sharp,
                           color: Color(0xff758DFF)),
                       onTap: () {
@@ -219,7 +220,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("طلبات قيد التوصيل"),
+                      title: Text("طلبات قيد التوصيل".tr),
                       leading: Icon(Icons.delivery_dining_rounded,
                           color: Color(0xff758DFF)),
                       onTap: () {
@@ -231,7 +232,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("جميع الطلبات"),
+                      title: Text("جميع الطلبات".tr),
                       leading: Icon(Icons.clear_all_rounded,
                           color: Color(0xff758DFF)),
                       onTap: () {
@@ -243,7 +244,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("الاحصائيات"),
+                      title: Text("الاحصائيات".tr),
                       leading:
                           Icon(Icons.addchart_sharp, color: Color(0xff758DFF)),
                       onTap: () {
@@ -255,29 +256,18 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("حذف المتجر نهائيا"),
-                      leading: Icon(Icons.highlight_remove_sharp,
-                          color: Color(0xff758DFF)),
+                      title: Text("ارسال الاشعارات".tr),
+                      leading:
+                      Icon(Icons.add_alert, color: Color(0xff758DFF)),
                       onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => AddProductScreen()));
+                                builder: (context) =>
+                                    ShopkeeperAddNotificationScreen()));
                       },
                     ),
-                    ListTile(
-                      title: Text("تسجيل خروج"),
-                      leading: Icon(Icons.logout, color: Color(0xff758DFF)),
-                      onTap: () async {
-                        SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                        prefs.remove('token');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginScreen()));
-                      },
-                    ),
+
                     SizedBox(
                       height: 0,
                     ),
@@ -290,9 +280,9 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                       height: 20,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 220),
+                      padding: const EdgeInsets.only(left: 200),
                       child: Text(
-                        "التطبيق",
+                        "التطبيق".tr,
                         style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
@@ -300,7 +290,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                       ),
                     ),
                     ListTile(
-                      title: Text("اللغة"),
+                      title: Text("اللغة".tr),
                       leading:
                           Icon(Icons.g_translate, color: Color(0xff758DFF)),
                       onTap: () {
@@ -311,20 +301,24 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("عن متجراتي"),
+                      title: Text("عن متجراتي".tr),
                       leading: Icon(Icons.assignment, color: Color(0xff758DFF)),
                       onTap: () {},
                     ),
                     ListTile(
-                      title: Text("ضبط"),
-                      leading: Icon(Icons.gamepad, color: Color(0xff758DFF)),
-                      onTap: () {},
+                      title: Text("تسجيل خروج".tr),
+                      leading: Icon(Icons.logout, color: Color(0xff758DFF)),
+                      onTap: () async {
+                        SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                        prefs.remove('token');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()));
+                      },
                     ),
-                    ListTile(
-                      title: Text("سياسة الخصوصية"),
-                      leading: Icon(Icons.warning, color: Color(0xff758DFF)),
-                      onTap: () {},
-                    ),
+
                   ],
                 ),
               ),
@@ -441,7 +435,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                         height: 20,
                                       ),
                                       Text(
-                                        'بروفايلي',
+                                        'بروفايلي'.tr,
                                         style: TextStyle(
                                           fontSize: 18,
                                         ),
@@ -475,7 +469,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                         height: 20,
                                       ),
                                       Text(
-                                        'حسابي',
+                                        'حسابي'.tr,
                                         style: TextStyle(
                                           fontSize: 18,
                                         ),
@@ -509,7 +503,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                         height: 20,
                                       ),
                                       Text(
-                                        'منتجاتي',
+                                        'منتجاتي'.tr,
                                         style: TextStyle(
                                           fontSize: 18,
                                         ),
@@ -543,7 +537,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                         height: 20,
                                       ),
                                       Text(
-                                        'اضافة منتج جديد',
+                                        'اضافة منتج جديد'.tr,
                                         style: TextStyle(
                                           fontSize: 18,
                                         ),
@@ -577,7 +571,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                         height: 20,
                                       ),
                                       Text(
-                                        'الطلبات الجديدة',
+                                        'الطلبات الجديدة'.tr,
                                         style: TextStyle(
                                           fontSize: 18,
                                         ),
@@ -611,7 +605,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                         height: 20,
                                       ),
                                       Text(
-                                        'طلبات قيد التوصيل',
+                                        'طلبات قيد التوصيل'.tr,
                                         style: TextStyle(
                                           fontSize: 18,
                                         ),
@@ -645,7 +639,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                         height: 20,
                                       ),
                                       Text(
-                                        'جميع الطلبات',
+                                        'جميع الطلبات'.tr,
                                         style: TextStyle(
                                           fontSize: 18,
                                         ),
@@ -679,7 +673,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                         height: 20,
                                       ),
                                       Text(
-                                        'الاحصائيات',
+                                        'الاحصائيات'.tr,
                                         style: TextStyle(
                                           fontSize: 18,
                                         ),
@@ -710,7 +704,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                         height: 20,
                                       ),
                                       Text(
-                                        'ارسال الاشعارات',
+                                        'ارسال الاشعارات'.tr,
                                         style: TextStyle(
                                           fontSize: 18,
                                         ),
@@ -746,7 +740,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                         height: 20,
                                       ),
                                       Text(
-                                        'تسجيل الخروج',
+                                        'تسجيل الخروج'.tr,
                                         style: TextStyle(
                                           fontSize: 18,
                                         ),
@@ -786,7 +780,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
           SizedBox(
             height: 10,
           ),
-          Text("تم حذف هذا المتجر بنجاح")
+          Text("تم حذف هذا المتجر بنجاح".tr)
         ],
       ),
       actions: <Widget>[
@@ -797,7 +791,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
             //  Navigator.of(context).pop();
           },
           textColor: Colors.blue,
-          child: const Text('موافق'),
+          child:  Text('موافق'.tr),
         ),
       ],
     );

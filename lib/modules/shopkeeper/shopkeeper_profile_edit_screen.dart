@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/API/sharedPrefs.dart';
@@ -58,28 +59,28 @@ class _ShopkeeperProfileEditScreenState
   bool isPassword = true;
 
   final categoriesItems = [
-    'للأطفال',
-    'للسيدات',
-    "للرجال",
-    "اكسسوارات",
-    "هدايا",
-    "ماكولات",
-    "ملابس",
-    "أحذية",
-    "عطور",
-    'فنون'
+    'للأطفال'.tr,
+    'للسيدات'.tr,
+    "للرجال".tr,
+    "اكسسوارات".tr,
+    "هدايا".tr,
+    "ماكولات".tr,
+    "ملابس".tr,
+    "أحذية".tr,
+    "عطور".tr,
+    'فنون'.tr
   ];
 
   final citiesItems = [
-    'القدس',
-    'راماالله',
-    "نابلس",
-    "بيت لحم",
-    "طولكرم",
-    "قلقيلية",
-    "الخليل",
-    "سلفيت",
-    "الداخل"
+    'القدس'.tr,
+    'راماالله'.tr,
+    "نابلس".tr,
+    "بيت لحم".tr,
+    "طولكرم".tr,
+    "قلقيلية".tr,
+    "الخليل".tr,
+    "سلفيت".tr,
+    "الداخل".tr
   ];
 
   String? value2;
@@ -224,7 +225,7 @@ class _ShopkeeperProfileEditScreenState
                     size: 35,
                   )),
               title: Text(
-                "تعديل الملف الشخصي",
+                "تعديل الملف الشخصي".tr,
                 style: TextStyle(
                   color: Colors.blue,
                   fontSize: 22,
@@ -435,7 +436,7 @@ class _ShopkeeperProfileEditScreenState
                         children: [
                           //  صورة المتجر-----------------------------------------------------------------------------------------------------------------
                           Text(
-                            "صورة المتجر",
+                            "صورة المتجر".tr,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
@@ -453,7 +454,7 @@ class _ShopkeeperProfileEditScreenState
                                     getImage();
                                   },
                                   child: Text(
-                                    "تعديل الصورة",
+                                    "تعديل الصورة".tr,
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 ),
@@ -485,7 +486,7 @@ class _ShopkeeperProfileEditScreenState
                           ),
                           // المتجر الاسم-----------------------------------------------------------------------------------------------------------------
                           Text(
-                            "اسم المتجر",
+                            "اسم المتجر".tr,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
@@ -510,7 +511,7 @@ class _ShopkeeperProfileEditScreenState
 
                           // وصف بسيط عن المتجر-----------------------------------------------------------------------------------------------------------------
                           Text(
-                            "وصف بسيط عن المتجر",
+                            "وصف بسيط عن المتجر".tr,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
@@ -531,7 +532,7 @@ class _ShopkeeperProfileEditScreenState
                           ),
                           //الهاتف---------------------------------------------------------------------------------------------------------------
                           Text(
-                            "الهاتف",
+                            "الهاتف".tr,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
@@ -546,7 +547,7 @@ class _ShopkeeperProfileEditScreenState
                             },
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "الرجاء ادخال رقم الهاتف";
+                                return "الرجاء ادخال رقم الهاتف".tr;
                               }
                               return null;
                             },
@@ -560,7 +561,7 @@ class _ShopkeeperProfileEditScreenState
                           ),
                           //عنوان المتجر -----------------------------------------------------------------------------------------------------------------
                           Text(
-                            "عنوان المتجر",
+                            "عنوان المتجر".tr,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
@@ -577,7 +578,7 @@ class _ShopkeeperProfileEditScreenState
                           ),
                           //الفئة--------------------------------------------------------------------------------------------------------------
                           Text(
-                            "الفئة المختارة",
+                            "الفئة المختارة".tr,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
@@ -637,7 +638,7 @@ class _ShopkeeperProfileEditScreenState
                           ),
                           //المدينة--------------------------------------------------------------------------------------------------------------
                           Text(
-                            "المدينة المختارة",
+                            "المدينة المختارة".tr,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
@@ -688,7 +689,7 @@ class _ShopkeeperProfileEditScreenState
                           ),
                           //رابط فيسبوك--------------------------------------------------------------------------------------------------------------
                           Text(
-                            "رابط فيسبوك",
+                            "رابط فيسبوك".tr,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
@@ -705,7 +706,7 @@ class _ShopkeeperProfileEditScreenState
                           ),
                           //رابط انستغرام--------------------------------------------------------------------------------------------------------------
                           Text(
-                            "رابط انستغرام",
+                            "رابط انستغرام".tr,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
@@ -722,7 +723,7 @@ class _ShopkeeperProfileEditScreenState
                           ),
                           //رابط سناب شات--------------------------------------------------------------------------------------------------------------
                           Text(
-                            "رابط سناب شات",
+                            "رابط سناب شات".tr,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
@@ -739,7 +740,7 @@ class _ShopkeeperProfileEditScreenState
                           ),
                           //رابط الخريطة--------------------------------------------------------------------------------------------------------------
                           Text(
-                            "رابط الخريطة",
+                            "رابط الخريطة".tr,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
@@ -756,7 +757,7 @@ class _ShopkeeperProfileEditScreenState
                           ),
                           //رقم واتس اب--------------------------------------------------------------------------------------------------------------
                           Text(
-                            "رقم واتس اب",
+                            "رقم واتس اب".tr,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
@@ -787,7 +788,7 @@ class _ShopkeeperProfileEditScreenState
                                 editData();
                               },
                               child: Text(
-                                "تعديل",
+                                "تعديل".tr,
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),
@@ -832,7 +833,7 @@ class _ShopkeeperProfileEditScreenState
           SizedBox(
             height: 10,
           ),
-          Text("تم تعديل الملف الشخصي بنجاح")
+          Text("تم تعديل الملف الشخصي بنجاح".tr)
         ],
       ),
       actions: <Widget>[
@@ -845,7 +846,7 @@ class _ShopkeeperProfileEditScreenState
             //  Navigator.of(context).pop();
           },
           textColor: Colors.blue,
-          child: const Text('موافق'),
+          child: Text('موافق'.tr),
         ),
       ],
     );

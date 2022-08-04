@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/modules/admin/adminMain_screen.dart';
@@ -124,7 +125,7 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
               size: 35,
             )),
         title: Text(
-          "تفاصيل المتجر",
+          "تفاصيل المتجر".tr,
           style: TextStyle(
             color: Colors.blue,
             fontSize: 22,
@@ -351,7 +352,7 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                     Column(
                       children: [
                         Text(
-                          'اسم المتجر : ',
+                          'اسم المتجر : '.tr,
                           style: TextStyle(
                               color: Colors.blue,
                               fontSize: 16,
@@ -397,7 +398,7 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                     Row(
                       children: [
                         Text(
-                          'وصف المتجر : ',
+                          'وصف المتجر : '.tr,
                           style: TextStyle(
                               color: Colors.blue,
                               fontSize: 16,
@@ -450,7 +451,7 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                       width: 10,
                     ),
                     Text(
-                      "الفئة المختارة : ",
+                      "الفئة المختارة : ".tr,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -502,7 +503,7 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                       height: 10,
                     ),
                     Text(
-                      "رقم الهاتف المحمول : ",
+                      "رقم الهاتف المحمول : ".tr,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -548,7 +549,7 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                       width: 10,
                     ),
                     Text(
-                      "المدينة : ",
+                      "المدينة : ".tr,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -600,7 +601,7 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                       width: 10,
                     ),
                     Text(
-                      "عنوان المتجر : ",
+                      "عنوان المتجر : ".tr,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -652,7 +653,7 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                       height: 10,
                     ),
                     Text(
-                      "رابط الفيسبوك : ",
+                      "رابط الفيسبوك : ".tr,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -710,7 +711,7 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                       height: 10,
                     ),
                     Text(
-                      "رابط الانستاغرام : ",
+                      "رابط الانستاغرام : ".tr,
 
 
                       style: TextStyle(
@@ -776,7 +777,7 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                       height: 10,
                     ),
                     Text(
-                      "رابط السناب شات : ",
+                      "رابط السناب شات : ".tr,
 
                       style: TextStyle(
                         fontSize: 16,
@@ -835,7 +836,7 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                       height: 10,
                     ),
                     Text(
-                      "رقم الواتس اب : ",
+                      "رقم الواتس اب : ".tr,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -881,7 +882,7 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                       height: 10,
                     ),
                     Text(
-                      "رابط الخريطة : ",
+                      "رابط الخريطة : ".tr,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -926,7 +927,7 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                     removeStore(context);
                   },
                   child: Text(
-                    "حذف المتجر",
+                    "حذف المتجر".tr,
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -958,7 +959,7 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
           SizedBox(
             height: 10,
           ),
-          Text("تم حذف المتجر !! ")
+          Text("تم حذف المتجر !! ".tr)
         ],
       ),
       actions: <Widget>[
@@ -969,7 +970,7 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                 MaterialPageRoute(builder: (context) => AdminShopsScreen()));
           },
           textColor: Colors.blue,
-          child: const Text('موافق'),
+          child: Text('موافق'.tr),
         ),
       ],
     );

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/models/user/user_model.dart';
@@ -140,7 +141,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                     size: 35,
                   )),
               title: Text(
-                "حسابي",
+                "حسابي".tr,
                 style: TextStyle(
                   color: Colors.blue,
                   fontSize: 22,
@@ -414,7 +415,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                                   height: 10,
                                 ),
                                 Text(
-                                  "اسم المستخدم",
+                                  "اسم المستخدم".tr,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 17),
@@ -433,7 +434,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                                   },
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return "الرجاء ادخال اسم المستخدم";
+                                      return "الرجاء ادخال اسم المستخدم".tr;
                                     }
                                     return null;
                                   },
@@ -447,7 +448,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                                 //----------------------------------------------------------------------------------------------------
                                 //البريد الالكتروني
                                 Text(
-                                  "البريد الالكتروني",
+                                  "البريد الالكتروني".tr,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 17),
@@ -467,7 +468,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                                   },
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return "الرجاء ادخال البريد الالكتروني";
+                                      return "الرجاء ادخال البريد الالكتروني".tr;
                                     }
                                     return null;
                                   },
@@ -494,7 +495,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                                       editData();
                                     },
                                     child: Text(
-                                      "تعديل",
+                                      "تعديل".tr,
                                       style: TextStyle(color: Colors.white),
                                     ),
                                   ),
@@ -520,7 +521,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                                                   AdminEditPasswordScreen()));
                                     },
                                     child: Text(
-                                      "تغيير كلمة السر",
+                                      "تغيير كلمة السر".tr,
                                       style: TextStyle(color: Colors.white),
                                     ),
                                   ),
@@ -572,7 +573,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
           SizedBox(
             height: 10,
           ),
-          Text("تم تعديل البيانات بنجاح")
+          Text("تم تعديل البيانات بنجاح".tr)
         ],
       ),
       actions: <Widget>[
@@ -581,7 +582,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
             Navigator.of(context).pop();
           },
           textColor: Colors.blue,
-          child: const Text('موافق'),
+          child: Text('موافق'.tr),
         ),
       ],
     );

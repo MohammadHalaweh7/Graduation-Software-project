@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/models/store/store_model.dart';
@@ -155,7 +156,7 @@ class _ShopkeeperAccountScreenState extends State<ShopkeeperAccountScreen> {
                     size: 35,
                   )),
               title: Text(
-                "حسابي",
+                "حسابي".tr,
                 style: TextStyle(
                   color: Colors.blue,
                   fontSize: 22,
@@ -450,7 +451,7 @@ class _ShopkeeperAccountScreenState extends State<ShopkeeperAccountScreen> {
                                   height: 10,
                                 ),
                                 Text(
-                                  "اسم المستخدم",
+                                  "اسم المستخدم".tr,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 17),
@@ -469,7 +470,7 @@ class _ShopkeeperAccountScreenState extends State<ShopkeeperAccountScreen> {
                                   },
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return "الرجاء ادخال اسم المستخدم";
+                                      return "الرجاء ادخال اسم المستخدم".tr;
                                     }
                                     return null;
                                   },
@@ -483,7 +484,7 @@ class _ShopkeeperAccountScreenState extends State<ShopkeeperAccountScreen> {
                                 //----------------------------------------------------------------------------------------------------
                                 //البريد الالكتروني
                                 Text(
-                                  "البريد الالكتروني",
+                                  "البريد الالكتروني".tr,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 17),
@@ -503,7 +504,7 @@ class _ShopkeeperAccountScreenState extends State<ShopkeeperAccountScreen> {
                                   },
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return "الرجاء ادخال البريد الالكتروني";
+                                      return "الرجاء ادخال البريد الالكتروني".tr;
                                     }
                                     return null;
                                   },
@@ -530,7 +531,7 @@ class _ShopkeeperAccountScreenState extends State<ShopkeeperAccountScreen> {
                                       editData();
                                     },
                                     child: Text(
-                                      "تعديل",
+                                      "تعديل".tr,
                                       style: TextStyle(color: Colors.white),
                                     ),
                                   ),
@@ -556,7 +557,7 @@ class _ShopkeeperAccountScreenState extends State<ShopkeeperAccountScreen> {
                                                   ShopkeeperEditPasswordScreen()));
                                     },
                                     child: Text(
-                                      "تغيير كلمة السر",
+                                      "تغيير كلمة السر".tr,
                                       style: TextStyle(color: Colors.white),
                                     ),
                                   ),
@@ -608,7 +609,7 @@ class _ShopkeeperAccountScreenState extends State<ShopkeeperAccountScreen> {
           SizedBox(
             height: 10,
           ),
-          Text("تم تعديل البيانات بنجاح")
+          Text("تم تعديل البيانات بنجاح".tr)
         ],
       ),
       actions: <Widget>[
@@ -617,7 +618,7 @@ class _ShopkeeperAccountScreenState extends State<ShopkeeperAccountScreen> {
             Navigator.of(context).pop();
           },
           textColor: Colors.blue,
-          child: const Text('موافق'),
+          child:  Text('موافق'.tr),
         ),
       ],
     );

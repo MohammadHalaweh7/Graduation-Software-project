@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:objectid/objectid.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -142,7 +143,7 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
               size: 35,
             )),
         title: Text(
-          "ارسال تنبيه",
+          "ارسال تنبيه".tr,
           style: TextStyle(
             color: Colors.blue,
             fontSize: 22,
@@ -163,7 +164,7 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
                   children: [
                     //  صورة المنتج-----------------------------------------------------------------------------------------------------------------
                     Text(
-                      "اضف صورة للاشعار",
+                      "اضف صورة للاشعار".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -181,7 +182,7 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
                               getImage();
                             },
                             child: Text(
-                              "اختر صورة من المعرض",
+                              "اختر صورة من المعرض".tr,
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -207,7 +208,7 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
                     ),
                     //  عنوان الاشعار-----------------------------------------------------------------------------------------------------------------
                     Text(
-                      "عنوان الاشعار",
+                      "عنوان الاشعار".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -229,7 +230,7 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
 
                     // وصف الاشعار-----------------------------------------------------------------------------------------------------------------
                     Text(
-                      "وصف الاشعار",
+                      "وصف الاشعار".tr,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -240,7 +241,7 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
                       onTap: () {},
                       keyboardType: TextInputType.multiline,
                       decoration: InputDecoration(
-                          hintText: 'قم بوصف الاشعار ',
+                          hintText: 'قم بوصف الاشعار'.tr,
                           helperStyle: TextStyle(color: Colors.white70),
                           border: OutlineInputBorder(
                               borderRadius:
@@ -262,7 +263,7 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
                           createNotification(context);
                         },
                         child: Text(
-                          "ارسال",
+                          "ارسال".tr,
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
@@ -294,7 +295,7 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
           SizedBox(
             height: 10,
           ),
-          Text("تم ارسال اشعار للمستخدمين")
+          Text("تم ارسال اشعار للمستخدمين".tr)
         ],
       ),
       actions: <Widget>[
@@ -305,7 +306,7 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
                 MaterialPageRoute(builder: (context) => AdminMainScreen()));
           },
           textColor: Colors.blue,
-          child: const Text('موافق'),
+          child:  Text('موافق'.tr),
         ),
       ],
     );
@@ -327,7 +328,7 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
           SizedBox(
             height: 10,
           ),
-          Text("الرجاء ادخال جميع الحقول ")
+          Text("الرجاء ادخال جميع الحقول".tr)
         ],
       ),
       actions: <Widget>[
@@ -336,7 +337,7 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
             Navigator.of(context).pop();
           },
           textColor: Colors.blue,
-          child: Text('موافق'),
+          child: Text('موافق'.tr),
         ),
       ],
     );
@@ -358,7 +359,7 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
           SizedBox(
             height: 10,
           ),
-          Text("حجم الصورة تجاوز الحد المسموح")
+          Text("حجم الصورة تجاوز الحد المسموح".tr)
         ],
       ),
       actions: <Widget>[
@@ -367,7 +368,7 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
             Navigator.of(context).pop();
           },
           textColor: Colors.blue,
-          child: Text('موافق'),
+          child: Text('موافق'.tr),
         ),
       ],
     );

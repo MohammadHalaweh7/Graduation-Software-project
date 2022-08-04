@@ -90,10 +90,10 @@ const Map<String, String> en = {
   'البريد الالكتروني':'E-mail',
   'الرجاء ادخال البريد الالكتروني':'Please enter your email',
   'تعديل':'Edit',
-  'تغيير كلمة السر':'change Password',
-  'كلمة المرور':'password',
+  'تغيير كلمة السر':'Change Password',
+  'كلمة المرور':'Password',
   'الرجاء ادخال كلمة المرور':'الرجاء ادخال كلمة المرور',
-  'تاكيد كلمة المرور':'confirm password',
+  'تاكيد كلمة المرور':'Confirm password',
   'رقم الطلب : ':'Order number : ',
   'صورة المنتج : ':'Product Picture : ',
   'اسم المتجر : ':'Store name : ',
@@ -138,11 +138,21 @@ const Map<String, String> en = {
   'اختر المدينة':'Choose the city',
 
   'رابط فيسبوك':'Facebook link',
-
   'رابط انستغرام':'Instagram link',
   'رابط سناب شات':'SnapShat link',
   'رابط الخريطة':'Map link',
   'رقم واتس اب':'WhatsApp number',
+
+  'رابط الفيسبوك : ':'Facebook link : ',
+  'رابط الانستاغرام : ':'Instagram link : ',
+  'رابط السناب شات : ':'SnapShat link : ',
+  'رابط الخريطة : ':'Map link : ',
+  'رقم الواتس اب : ':'WhatsApp number : ',
+
+  'طلبات المتاجر':'Store orders',
+
+
+
   'انشاء':'Creat',
   'سوف تصلك رسالة قريبا بان تم قبول متجرك ام لا ':'You will soon receive a message that your store has been accepted or not',
 
@@ -154,6 +164,86 @@ const Map<String, String> en = {
   'سلفيت':'Salfeet',
   'الداخل':'Occupied Palestine',
   'هل نسيت كلمة المرور !':'did you forget your password !',
+
+
+  'الى الرئيسية':'Main Screen',
+
+  'طلبات المتاجر الجديدة':'New store orders',
+
+
+  'ارسال اشعارات':'Send Notifications',
+
+  'جميع المتاجر':'All Stores',
+  'الطلبات':'Requests',
+
+  'المالية':'Finance',
+  'الاحصائيات':'statistics',
+  'التنبيهات':'Notification',
+
+  'خروج':'Log out',
+  'تم تعديل البيانات بنجاح':'The data has been modified successfully',
+
+  'المتاجر':'Stores',
+  'وصف المتجر : ':'Store Description : ',
+
+  'تفاصيل المتجر':'Store details',
+
+
+  'الفئة المختارة :':'The selected category :',
+  'رقم الهاتف المحمول : ':'Mobile Phone Number :',
+
+  'المدينة : ':'City :',
+
+  'قبول':'Accept',
+  'رفض':'Reject',
+  'تم قبول هذا المتجر':'This store has been accepted',
+
+  'عنوان المتجر : ':'The Map/Location',
+
+
+
+  'تم رفض هذا المتجر':'This store has been rejected',
+
+
+  'تم حذف المتجر !! ':'Store removed!!',
+  'حذف المتجر':'Delete store',
+  'ارسال تنبيه':'Send notification',
+
+  'اضف صورة للاشعار':'Add a picture for the notification',
+
+  'عنوان الاشعار':'Title',
+
+  'وصف الاشعار':'Description',
+  'قم بوصف الاشعار':'Describe the notification',
+  'تم ارسال اشعار للمستخدمين':'Users have been notified',
+
+
+  'الرجاء ادخال جميع الحقول':'Please enter all fields',
+  'حجم الصورة تجاوز الحد المسموح':'Image size exceeded limit',
+
+//  Shopkeeper Pages
+
+   'متجري':'My Profile',
+  'منتجاتي':'My product',
+  'اضافة منتج جديد':'Add product',
+  'الطلبات الجديدة':'New orders',
+  'طلبات قيد التوصيل':'Delivery orders',
+  'جميع الطلبات':'All orders',
+  'بروفايلي': 'My Profile',
+  'ارسال الاشعارات':'Send notification' ,
+  'تسجيل الخروج':'Logout',
+//  -------------------------------------
+
+'تعديل الملف الشخصي':'Edit profile',
+  'تم تعديل الملف الشخصي بنجاح':'Profile modified successfully',
+
+'المدينة المختارة':'City selected',
+'الفئة المختارة':'Selected category' ,
+  'تعديل الصورة':'Edit photo',
+
+
+
+
 
 
 

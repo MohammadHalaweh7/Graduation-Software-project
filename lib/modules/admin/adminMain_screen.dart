@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/models/pendingStore/pendingStore_model.dart';
@@ -103,7 +104,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 220),
                       child: Text(
-                        "الرئيسية",
+                        "الرئيسية".tr,
                         style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
@@ -111,7 +112,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                       ),
                     ),
                     ListTile(
-                      title: Text("الى الرئيسية"),
+                      title: Text("الى الرئيسية".tr),
                       leading: Icon(Icons.store, color: Color(0xff758DFF)),
                       onTap: () {
                         Navigator.push(
@@ -121,7 +122,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("الى المتاجر"),
+                      title: Text("الى المتاجر".tr),
                       leading: Icon(Icons.storefront, color: Color(0xff758DFF)),
                       onTap: () {
                         Navigator.push(
@@ -144,7 +145,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 147),
                       child: Text(
-                        "معلومات المستخدم",
+                        "معلومات المستخدم".tr,
                         style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
@@ -152,7 +153,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                       ),
                     ),
                     ListTile(
-                      title: Text("حسابي"),
+                      title: Text("حسابي".tr),
                       leading: Icon(Icons.person, color: Color(0xff758DFF)),
                       onTap: () {
                         Navigator.push(
@@ -162,7 +163,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("طلبات المتاجر الجديدة"),
+                      title: Text("طلبات المتاجر الجديدة".tr),
                       leading: Icon(Icons.remove_from_queue_outlined,
                           color: Color(0xff758DFF)),
                       onTap: () {
@@ -173,7 +174,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("ارسال اشعارات"),
+                      title: Text("ارسال اشعارات".tr),
                       leading: Icon(Icons.notification_add,
                           color: Color(0xff758DFF)),
                       onTap: () {
@@ -195,9 +196,9 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                       height: 20,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 220),
+                      padding: const EdgeInsets.only(left: 200),
                       child: Text(
-                        "التطبيق",
+                        "التطبيق".tr,
                         style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
@@ -205,7 +206,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                       ),
                     ),
                     ListTile(
-                      title: Text("اللغة"),
+                      title: Text("اللغة".tr),
                       leading:
                           Icon(Icons.g_translate, color: Color(0xff758DFF)),
                       onTap: () {
@@ -216,12 +217,12 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("عن متجراتي"),
+                      title: Text("عن متجراتي".tr),
                       leading: Icon(Icons.assignment, color: Color(0xff758DFF)),
                       onTap: () {},
                     ),
                     ListTile(
-                      title: Text("تسجيل خروج"),
+                      title: Text("تسجيل خروج".tr),
                       leading: Icon(Icons.logout, color: Color(0xff758DFF)),
                       onTap: () async {
                         SharedPreferences prefs =
@@ -371,7 +372,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                                               height: 20,
                                             ),
                                             Text(
-                                              'جميع المتاجر',
+                                              'جميع المتاجر'.tr,
                                               style: TextStyle(
                                                 fontSize: 18,
                                               ),
@@ -409,7 +410,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                                               height: 20,
                                             ),
                                             Text(
-                                              'حسابي',
+                                              'حسابي'.tr,
                                               style: TextStyle(
                                                 fontSize: 18,
                                               ),
@@ -446,7 +447,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                                               height: 20,
                                             ),
                                             Text(
-                                              'الطلبات',
+                                              'الطلبات'.tr,
                                               style: TextStyle(
                                                 fontSize: 18,
                                               ),
@@ -480,7 +481,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                                               height: 20,
                                             ),
                                             Text(
-                                              'المالية',
+                                              'المالية'.tr,
                                               style: TextStyle(
                                                 fontSize: 18,
                                               ),
@@ -514,7 +515,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                                               height: 20,
                                             ),
                                             Text(
-                                              'الاحصائيات',
+                                              'الاحصائيات'.tr,
                                               style: TextStyle(
                                                 fontSize: 18,
                                               ),
@@ -552,7 +553,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                                               height: 20,
                                             ),
                                             Text(
-                                              'التنبيهات',
+                                              'التنبيهات'.tr,
                                               style: TextStyle(
                                                 fontSize: 18,
                                               ),
@@ -592,7 +593,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                                               height: 20,
                                             ),
                                             Text(
-                                              'خروج',
+                                              'خروج'.tr,
                                               style: TextStyle(
                                                 fontSize: 18,
                                               ),
