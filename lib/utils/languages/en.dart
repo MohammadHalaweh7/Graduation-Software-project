@@ -243,9 +243,20 @@ const Map<String, String> en = {
 
 
 
+//Admin pages
 
+'من نحن !':'About us',
+  'تعديل المعلومات':'Edit information',
+  'تواصل معنا':'Connect with us',
+  '- خصومات وعروض لا تفوتك \n- يضم عروض العديد من المتاجر في مختلف المجالات \n- فئات متنوعة تناسب احتاجاتك \n- سهولة في الطلب وسرعة في التوصيل. \n- افضل العروض في كافة مناطق فلسطين':'- Discounts and offers that you should not miss \n- It includes offers from many stores in various fields \n- Various categories that suit your needs \n- Ease of ordering and fast delivery. \n- The best offers in all regions of Palestine',
 
+  'ما يميزنا !':'What sets us apart!' ,
+  'كل ما يهمك تجده في تطبيقنا حيث ستجد باقة من المتاجر في تطبيق واحد. \n يتميز تطبيقنا بسهولة التسوق والبحث عن العروض والخصومات الخاصة بالمتاجر المفضلة لديك. يمكنك من خلال تصفح متاجرنا شراء ما تحتاجه بكبسه واحده يصلك طلبك إلى باب بيتك حيثما كنت في أنحاء فلسطين والدفع يتم عند استلامك لطلبك. \n هيا ماذا تنتظر سارع للانضمام إلى تطبيقنا وشاهد كل ما يحلو لك من المنتجات و البضائع والعروض والخصومات الهائلة والسرعه في الاستجابة. \n نسعى دومًا لمساعدتك في تحصيل العروض التي تبهرك!':'Everything you are interested in finds in our application where you will find a bouquet of stores in one application. \nOur application is easy to shop and search for offers and discounts for your favorite stores. By browsing our stores, you can buy what you need with one click. Your order will be delivered to your door, wherever you are in Palestine. Payment is made upon receipt of your order. \nCome on, what are you waiting for, hurry up to join our application and see all the products, merchandise, offers, huge discounts and speed of response. \nWe are always trying to help you find deals that amaze you!' ,
 
+  'عن متجراتي !':'About app',
+      'اهلا بك في تطبيقنا التطبيق الأول من نوعه في فلسطين في مجال الاون لاين. حيث يضم مجموعة متميزة من المتاجر الفلسطينية في مختلف المجالات الجمال و الصحة و الالبسة و الالكترونيات و الاطعمة وغيرها الكثير والكثير':'Welcome to our application, the first of its kind in Palestine in the online field. It includes a distinguished group of Palestinian stores in various fields of beauty, health, clothing, electronics, foods and many more' ,
+
+'تعديل صفحة التعريف':'Edit profile',
 
 
 

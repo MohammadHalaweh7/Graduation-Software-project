@@ -11,6 +11,7 @@ import 'package:udemy_flutter/models/user/user_model.dart';
 import 'package:udemy_flutter/modules/account/account_screen.dart';
 import 'package:udemy_flutter/modules/admin/admin_account_screen.dart';
 import 'package:udemy_flutter/modules/admin/admin_addNotification_screen.dart';
+import 'package:udemy_flutter/modules/admin/admin_profile_screen.dart';
 import 'package:udemy_flutter/modules/admin/admin_screen.dart';
 import 'package:udemy_flutter/modules/admin/admin_shops_details_screen.dart';
 import 'package:udemy_flutter/modules/admin/admin_shops_screen.dart';
@@ -349,45 +350,6 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  AdminShopsScreen()));
-                                    },
-                                    child:
-                                    Container(
-                                          // width:screenWidth*0.2 ,
-                                          // height: screenHight*0.1,
-                                      child: Card(
-                                        elevation: 15,
-                                        shadowColor: Colors.blue,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(20.0),
-                                        ),
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: <Widget>[
-                                            Image.network(
-                                              "https://hebergement-site-web.ma/hebergement-site-prestashop/wp-content/uploads/sites/24/2021/04/Selection_147.png",
-                                              height: 128,
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            Text(
-                                              'جميع المتاجر'.tr,
-                                              style: TextStyle(
-                                                fontSize: 18,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
                                                   AdminAccountScreen()));
                                     },
                                     child: Container(
@@ -422,6 +384,80 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
+                                      Navigator.push(context,MaterialPageRoute(builder: (context) => AdminProfileScreen()));
+                                    },
+                                    child: Container(
+                                      width:screenWidth/5 ,
+                                      height: screenWidth/9,
+                                      child: Card(
+                                        elevation: 15,
+                                        shadowColor: Colors.blue,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(20.0),
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            Image.network(
+                                              "https://library.kissclipart.com/20180914/bhw/kissclipart-7-clipart-ipho-1ff0ee7a9f7b557f.png",
+                                              height: 128,
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Text(
+                                              'من نحن !'.tr,
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  AdminShopsScreen()));
+                                    },
+                                    child:
+                                    Container(
+                                          // width:screenWidth*0.2 ,
+                                          // height: screenHight*0.1,
+                                      child: Card(
+                                        elevation: 15,
+                                        shadowColor: Colors.blue,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(20.0),
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            Image.network(
+                                              "https://hebergement-site-web.ma/hebergement-site-prestashop/wp-content/uploads/sites/24/2021/04/Selection_147.png",
+                                              height: 128,
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Text(
+                                              'جميع المتاجر'.tr,
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+
+                                  GestureDetector(
+                                    onTap: () {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
@@ -448,74 +484,6 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                                             ),
                                             Text(
                                               'الطلبات'.tr,
-                                              style: TextStyle(
-                                                fontSize: 18,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      // Navigator.push(context,MaterialPageRoute(builder: (context) => AdminScreen()));
-                                    },
-                                    child: Container(
-                                      width:screenWidth/5 ,
-                                      height: screenWidth/9,
-                                      child: Card(
-                                        elevation: 15,
-                                        shadowColor: Colors.blue,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(20.0),
-                                        ),
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: <Widget>[
-                                            Image.network(
-                                              "https://theyarnbazaar.com/images/FInance.png",
-                                              height: 128,
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            Text(
-                                              'المالية'.tr,
-                                              style: TextStyle(
-                                                fontSize: 18,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      // Navigator.push(context,MaterialPageRoute(builder: (context) => AdminScreen()));
-                                    },
-                                    child: Container(
-                                      width:screenWidth/5 ,
-                                      height: screenWidth/9,
-                                      child: Card(
-                                        elevation: 15,
-                                        shadowColor: Colors.blue,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(20.0),
-                                        ),
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: <Widget>[
-                                            Image.network(
-                                              "https://img.freepik.com/premium-vector/research-finance-sales-data-audit-mobile-phone-report-online-statistics-info-analysis-smartphone-vector-flat-cartoon-isolated_212005-118.jpg",
-                                              height: 128,
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            Text(
-                                              'الاحصائيات'.tr,
                                               style: TextStyle(
                                                 fontSize: 18,
                                               ),
