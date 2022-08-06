@@ -19,7 +19,7 @@ import 'package:udemy_flutter/modules/language/language_screen.dart';
 import 'package:udemy_flutter/modules/login/login_screen.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-// mama
+// baba
 
 class AdminAccountScreen extends StatefulWidget {
   @override
@@ -150,9 +150,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              actions: [
-
-              ],
+              actions: [],
             ),
             drawer: Drawer(
               child: SingleChildScrollView(
@@ -470,7 +468,8 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                                   },
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return "الرجاء ادخال البريد الالكتروني".tr;
+                                      return "الرجاء ادخال البريد الالكتروني"
+                                          .tr;
                                     }
                                     return null;
                                   },
