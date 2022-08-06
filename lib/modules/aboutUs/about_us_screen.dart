@@ -150,7 +150,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                           Padding(
                             padding: const EdgeInsets.only(right: 0),
                             child: Text(
-                              aboutUs!.aboutUsDescription,
+                              aboutUs.aboutUsDescription,
                               maxLines: 50,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
