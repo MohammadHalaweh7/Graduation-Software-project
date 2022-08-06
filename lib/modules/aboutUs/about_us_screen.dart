@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:udemy_flutter/API/fetchData.dart';
+import 'package:udemy_flutter/models/aboutus/aboutus_model.dart';
 import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
 import 'package:udemy_flutter/modules/language/language_screen.dart';
 import 'package:udemy_flutter/modules/login/login_screen.dart';
@@ -13,8 +15,7 @@ import 'package:udemy_flutter/modules/signup/signUp_screen.dart';
 import "package:url_launcher/url_launcher.dart";
 import '../../layout/shop_layout/shop_layout.dart';
 import '../../src/my_app.dart';
-
-
+import 'package:http/http.dart' as http;
 
 class AboutUsScreen extends StatefulWidget {
   @override
@@ -26,513 +27,544 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
 
   var linkText = TextStyle(color: Colors.black);
 
+  Future<AboutUsModel> loadData() async {
+    var result = await http.get(
+      Uri.parse(fetchData.baseURL + "/aboutUs/me"),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    print(result.statusCode);
+    //print(result.body);
+
+    AboutUsModel aboutusModel = AboutUsModel.fromJson(jsonDecode(result.body));
+
+    // nameController.text = userModel.name;
+    // emailController.text = userModel.email;
+    return aboutusModel;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton(
-            onPressed: onNotification,
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.blue,
-              size: 35,
-            )),
-        title: Text(
-          "من نحن  ! ".tr,
-          style: TextStyle(
-            color: Colors.blue,
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-
-      body: SingleChildScrollView(
-        physics:BouncingScrollPhysics(),
-        scrollDirection: Axis.vertical,
-        child: Container(
-          width: double.infinity,
-          child: Column(
-            children: [
-              //الصورة
-              Container(
-                height: 340,
-                margin: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey,
-                        offset: Offset(0, 1.0), //(x,y)
-                        blurRadius: 20.0,
-                      ),
-                    ],
-                    color: Colors.white,
-                    image: DecorationImage(
-                        image: avatar == null
-                            ? AssetImage(
-                          'assets/images/logo3.png',
-                        ) as ImageProvider
-                            : MemoryImage(
-                          base64Decode(avatar),
-                        ),
-                        fit: BoxFit.cover),
-                    borderRadius: BorderRadius.circular(30)),
+    return FutureBuilder<AboutUsModel>(
+      future: loadData(),
+      builder: (context, snapshot) {
+        var aboutUs = snapshot.data;
+        // print(snapshot.data);
+        if (!snapshot.hasData) {
+          return Container(
+            color: Colors.white,
+            child: Center(
+              child: CircularProgressIndicator(
+                valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+                backgroundColor: Colors.white,
               ),
-              //الشرح
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.0),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(0, 1.0), //(x,y)
-                      blurRadius: 5.0,
-                    ),
-                  ],
+            ),
+          );
+        } else {
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.white,
+              leading: IconButton(
+                  onPressed: onNotification,
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Colors.blue,
+                    size: 35,
+                  )),
+              title: Text(
+                "من نحن  ! ".tr,
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
                 ),
-                // color: Colors.white,
-                height: 670,
+              ),
+            ),
+            body: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              scrollDirection: Axis.vertical,
+              child: Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(20),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    //من نحن
-                    Center(
-                      child: Text(
-                        'من نحن ! ',
-                        style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
+                    //الصورة
+                    Container(
+                      height: 340,
+                      margin: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(0, 1.0), //(x,y)
+                              blurRadius: 20.0,
+                            ),
+                          ],
+                          color: Colors.white,
+                          image: DecorationImage(
+                              image: aboutUs!.avatar == null
+                                  ? AssetImage(
+                                      'assets/images/logo3.png',
+                                    ) as ImageProvider
+                                  : MemoryImage(
+                                      base64Decode(aboutUs.avatar.toString()),
+                                    ),
+                              fit: BoxFit.cover),
+                          borderRadius: BorderRadius.circular(30)),
                     ),
                     //الشرح
-                    Padding(
-                      padding: const EdgeInsets.only(right: 0),
-                      child: Text(
-                        'اهلا بك في تطبيقنا التطبيق الأول من نوعه في فلسطين في مجال الاون لاين. حيث يضم مجموعة متميزة من المتاجر الفلسطينية في مختلف المجالات الجمال و الصحة و الالبسة و الالكترونيات و الاطعمة وغيرها الكثير والكثير',
-                        maxLines: 50,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: 13, fontWeight: FontWeight.bold),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.0),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            offset: Offset(0, 1.0), //(x,y)
+                            blurRadius: 5.0,
+                          ),
+                        ],
+                      ),
+                      // color: Colors.white,
+                      height: 670,
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          //من نحن
+                          Center(
+                            child: Text(
+                              'من نحن ! ',
+                              style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          //الشرح
+                          Padding(
+                            padding: const EdgeInsets.only(right: 0),
+                            child: Text(
+                              aboutUs!.aboutUsDescription,
+                              maxLines: 50,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  fontSize: 13, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          //عن متجراتي
+                          Center(
+                            child: Text(
+                              'عن متجراتي ! ',
+                              style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          //الشرح
+                          Padding(
+                            padding: const EdgeInsets.only(right: 0),
+                            child: Text(
+                              aboutUs.aboutStoreDescription,
+                              maxLines: 50,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  fontSize: 13, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          //من نحن
+                          Center(
+                            child: Text(
+                              'ما يميزنا ! ',
+                              style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          //  الشرح
+                          Padding(
+                            padding: const EdgeInsets.only(right: 0),
+                            child: Text(
+                              aboutUs.makeUsSpecial,
+                              maxLines: 50,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  fontSize: 13, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
-                    //عن متجراتي
-                    Center(
-                      child: Text(
-                        'عن متجراتي ! ',
-                        style: TextStyle(
+
+                    //تواصل معنا
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 100),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(0.0),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
                             color: Colors.blue,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
+                            offset: Offset(0, 1.0), //(x,y)
+                            blurRadius: 7.0,
+                          ),
+                        ],
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    //الشرح
-                    Padding(
-                      padding: const EdgeInsets.only(right: 0),
-                      child: Text(
-                        'كل ما يهمك تجده في تطبيقنا حيث ستجد باقة من المتاجر في تطبيق واحد. \n يتميز تطبيقنا بسهولة التسوق والبحث عن العروض والخصومات الخاصة بالمتاجر المفضلة لديك. يمكنك من خلال تصفح متاجرنا شراء ما تحتاجه بكبسه واحده يصلك طلبك إلى باب بيتك حيثما كنت في أنحاء فلسطين والدفع يتم عند استلامك لطلبك. \n هيا ماذا تنتظر سارع للانضمام إلى تطبيقنا وشاهد كل ما يحلو لك من المنتجات و البضائع والعروض والخصومات الهائلة والسرعه في الاستجابة. \n نسعى دومًا لمساعدتك في تحصيل العروض التي تبهرك!',
-                        maxLines: 50,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: 13, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    //من نحن
-                    Center(
-                      child: Text(
-                        'ما يميزنا ! ',
-                        style: TextStyle(
+                      // color: Colors.white,
+                      height: 67,
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(20),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "تواصل معنا".tr,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blue,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Icon(
+                            Icons.phone,
                             color: Colors.blue,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
+                          ),
+                        ],
                       ),
                     ),
+                    //هاتف
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50.0),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            offset: Offset(0, 1.0), //(x,y)
+                            blurRadius: 5.0,
+                          ),
+                        ],
+                      ),
+                      // color: Colors.white,
+                      height: 67,
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(20),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.phone,
+                            color: Colors.blue,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "هاتف".tr,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blue,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            aboutUs.phoneNumber,
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    //فيسبوك
                     SizedBox(
                       height: 10,
                     ),
-                  //  الشرح
-                    Padding(
-                      padding: const EdgeInsets.only(right: 0),
-                      child: Text(
-                        '- خصومات وعروض لا تفوتك \n- يضم عروض العديد من المتاجر في مختلف المجالات \n- فئات متنوعة تناسب احتاجاتك \n- سهولة في الطلب وسرعة في التوصيل. \n- افضل العروض في كافة مناطق فلسطين',
-                        maxLines: 50,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: 13, fontWeight: FontWeight.bold),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50.0),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            offset: Offset(0, 1.0), //(x,y)
+                            blurRadius: 5.0,
+                          ),
+                        ],
+                      ),
+                      // color: Colors.white,
+                      height: 67,
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(20),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.facebook,
+                            color: Colors.blue,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "فيسبوك".tr,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blue,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            width: 230,
+                            child: RichText(
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                text: TextSpan(children: [
+                                  TextSpan(
+                                      style: linkText,
+                                      text: aboutUs.facebook,
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () async {
+                                          var url = facebook;
+                                          if (await canLaunch(url)) {
+                                            await launch(url);
+                                          } else {
+                                            throw " cannot load url";
+                                          }
+                                        }),
+                                ])),
+                          ),
+                        ],
                       ),
                     ),
+
+                    //سناب شات
                     SizedBox(
                       height: 10,
                     ),
-
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-
-
-              //تواصل معنا
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 100),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(0.0),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.blue,
-                      offset: Offset(0, 1.0), //(x,y)
-                      blurRadius: 7.0,
-                    ),
-                  ],
-                ),
-                // color: Colors.white,
-                height: 67,
-                width: double.infinity,
-                padding: const EdgeInsets.all(20),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "تواصل معنا".tr,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50.0),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            offset: Offset(0, 1.0), //(x,y)
+                            blurRadius: 5.0,
+                          ),
+                        ],
+                      ),
+                      // color: Colors.white,
+                      height: 67,
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(20),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.chat,
+                            color: Colors.blue,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "سناب شات".tr,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blue,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            width: 230,
+                            child: RichText(
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                text: TextSpan(children: [
+                                  TextSpan(
+                                      style: linkText,
+                                      text: aboutUs.snapChat,
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () async {
+                                          var url = snapchat;
+                                          if (await canLaunch(url)) {
+                                            await launch(url);
+                                          } else {
+                                            throw " cannot load url";
+                                          }
+                                        }),
+                                ])),
+                          ),
+                        ],
                       ),
                     ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Icon(
-                      Icons.phone,
-                      color: Colors.blue,
-                    ),
 
-                  ],
-                ),
-              ),
-              //هاتف
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50.0),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(0, 1.0), //(x,y)
-                      blurRadius: 5.0,
-                    ),
-                  ],
-                ),
-                // color: Colors.white,
-                height: 67,
-                width: double.infinity,
-                padding: const EdgeInsets.all(20),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.phone,
-                      color: Colors.blue,
-                    ),
+                    //انستغرام
                     SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "هاتف".tr,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      '0598939763',
-                      style:
-                      TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
-
-              //فيسبوك
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50.0),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(0, 1.0), //(x,y)
-                      blurRadius: 5.0,
-                    ),
-                  ],
-                ),
-                // color: Colors.white,
-                height: 67,
-                width: double.infinity,
-                padding: const EdgeInsets.all(20),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.facebook,
-                      color: Colors.blue,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "فيسبوك".tr,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
+                      height: 10,
                     ),
                     Container(
-                      width: 230,
-                      child: RichText(
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          text: TextSpan(children: [
-                            TextSpan(
-                                style: linkText,
-                                text: 'https://www.facebook.com/Matjarati',
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () async {
-                                    var url = facebook;
-                                    if (await canLaunch(url)) {
-                                      await launch(url);
-                                    } else {
-                                      throw " cannot load url";
-                                    }
-                                  }),
-                          ])),
-                    ),
-                  ],
-                ),
-              ),
-
-              //سناب شات
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50.0),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(0, 1.0), //(x,y)
-                      blurRadius: 5.0,
-                    ),
-                  ],
-                ),
-                // color: Colors.white,
-                height: 67,
-                width: double.infinity,
-                padding: const EdgeInsets.all(20),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.chat,
-                      color: Colors.blue,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "سناب شات".tr,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50.0),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            offset: Offset(0, 1.0), //(x,y)
+                            blurRadius: 5.0,
+                          ),
+                        ],
+                      ),
+                      // color: Colors.white,
+                      height: 67,
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(20),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.wysiwyg,
+                            color: Colors.blue,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "انستغرام".tr,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blue,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            width: 230,
+                            child: RichText(
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                text: TextSpan(children: [
+                                  TextSpan(
+                                      style: linkText,
+                                      text: aboutUs.instagram,
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () async {
+                                          var url = instagram;
+                                          if (await canLaunch(url)) {
+                                            await launch(url);
+                                          } else {
+                                            throw " cannot load url";
+                                          }
+                                        }),
+                                ])),
+                          ),
+                        ],
                       ),
                     ),
+
+                    //واتس أب
                     SizedBox(
-                      width: 10,
+                      height: 10,
                     ),
                     Container(
-                      width: 230,
-                      child: RichText(
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          text: TextSpan(children: [
-                            TextSpan(
-                                style: linkText,
-                                text: 'https://www.SnapShat.com/Matjarati',
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () async {
-                                    var url = snapchat;
-                                    if (await canLaunch(url)) {
-                                      await launch(url);
-                                    } else {
-                                      throw " cannot load url";
-                                    }
-                                  }),
-                          ])),
-                    ),
-                  ],
-                ),
-              ),
-
-              //انستغرام
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50.0),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(0, 1.0), //(x,y)
-                      blurRadius: 5.0,
-                    ),
-                  ],
-                ),
-                // color: Colors.white,
-                height: 67,
-                width: double.infinity,
-                padding: const EdgeInsets.all(20),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.wysiwyg,
-                      color: Colors.blue,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "انستغرام".tr,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50.0),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            offset: Offset(0, 1.0), //(x,y)
+                            blurRadius: 5.0,
+                          ),
+                        ],
+                      ),
+                      // color: Colors.white,
+                      height: 67,
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(20),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.phone,
+                            color: Colors.blue,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "واتس أب".tr,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blue,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            aboutUs.whatsapp,
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(
-                      width: 10,
-                    ),
-
-                    Container(
-                      width: 230,
-                      child: RichText(
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          text: TextSpan(children: [
-                            TextSpan(
-                                style: linkText,
-                                text: 'https://www.Instagram.com/Matjarati',
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () async {
-                                    var url = instagram;
-                                    if (await canLaunch(url)) {
-                                      await launch(url);
-                                    } else {
-                                      throw " cannot load url";
-                                    }
-                                  }),
-                          ])),
+                      height: 20,
                     ),
                   ],
                 ),
               ),
-
-              //واتس أب
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50.0),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(0, 1.0), //(x,y)
-                      blurRadius: 5.0,
-                    ),
-                  ],
-                ),
-                // color: Colors.white,
-                height: 67,
-                width: double.infinity,
-                padding: const EdgeInsets.all(20),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.phone,
-                      color: Colors.blue,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "واتس أب".tr,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      '+970598939763',
-                      style:
-                      TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-            ],
-          ),
-        ),
-      ),
+            ),
+          );
+        }
+      },
     );
   }
 

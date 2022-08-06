@@ -232,7 +232,6 @@ class _ShopkeeperProfileEditScreenState
                   fontWeight: FontWeight.bold,
                 ),
               ),
-
             ),
             drawer: Drawer(
               child: SingleChildScrollView(
@@ -423,7 +422,7 @@ class _ShopkeeperProfileEditScreenState
               ),
             ),
             body: SingleChildScrollView(
-              physics:BouncingScrollPhysics(),
+              physics: BouncingScrollPhysics(),
               scrollDirection: Axis.vertical,
               child: Padding(
                 padding: const EdgeInsets.all(20),
