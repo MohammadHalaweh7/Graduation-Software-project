@@ -80,7 +80,7 @@ class _ProfileShoScreenState extends State<ProfileShoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
         leading: IconButton(
             onPressed: onNotification,
             icon: Icon(

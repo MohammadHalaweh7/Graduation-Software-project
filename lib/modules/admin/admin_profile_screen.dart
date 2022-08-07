@@ -405,7 +405,7 @@ class _AdminProfileScreenState extends State<AdminProfileScreen> {
                             width: 10,
                           ),
                           Container(
-                            width: 200,
+                            width: 180,
                             child: RichText(
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -470,7 +470,7 @@ class _AdminProfileScreenState extends State<AdminProfileScreen> {
                             width: 10,
                           ),
                           Container(
-                            width: 200,
+                            width: 182,
                             child: RichText(
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -535,7 +535,7 @@ class _AdminProfileScreenState extends State<AdminProfileScreen> {
                             width: 10,
                           ),
                           Container(
-                            width: 200,
+                            width: 180,
                             child: RichText(
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,

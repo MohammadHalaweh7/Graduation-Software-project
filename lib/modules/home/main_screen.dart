@@ -41,14 +41,14 @@ class _MainScreenState extends State<MainScreen> {
   final citiesItems = [
     'الكل'.tr,
     'القدس'.tr,
-    'راماالله',
+    'راماالله'.tr,
     "نابلس".tr,
-    "بيت لحم",
-    "طولكرم",
-    "قلقيلية",
-    "الخليل",
-    "سلفيت",
-    "الداخل"
+    "بيت لحم".tr,
+    "طولكرم".tr,
+    "قلقيلية".tr,
+    "الخليل".tr,
+    "سلفيت".tr,
+    "الداخل".tr
   ];
   String? value2;
   String? value3;

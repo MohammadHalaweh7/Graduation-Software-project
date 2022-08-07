@@ -73,7 +73,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                     size: 35,
                   )),
               title: Text(
-                "من نحن  ! ".tr,
+                "من نحن !".tr,
                 style: TextStyle(
                   color: Colors.blue,
                   fontSize: 22,
@@ -136,7 +136,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                           //من نحن
                           Center(
                             child: Text(
-                              'من نحن ! ',
+                              'من نحن !'.tr,
                               style: TextStyle(
                                   color: Colors.blue,
                                   fontSize: 16,
@@ -150,7 +150,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                           Padding(
                             padding: const EdgeInsets.only(right: 0),
                             child: Text(
-                              aboutUs.aboutUsDescription,
+                              aboutUs.aboutUsDescription.tr,
                               maxLines: 50,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -163,7 +163,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                           //عن متجراتي
                           Center(
                             child: Text(
-                              'عن متجراتي ! ',
+                              'عن متجراتي !'.tr,
                               style: TextStyle(
                                   color: Colors.blue,
                                   fontSize: 16,
@@ -177,7 +177,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                           Padding(
                             padding: const EdgeInsets.only(right: 0),
                             child: Text(
-                              aboutUs.aboutStoreDescription,
+                              aboutUs.aboutStoreDescription.tr,
                               maxLines: 50,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -190,7 +190,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                           //من نحن
                           Center(
                             child: Text(
-                              'ما يميزنا ! ',
+                              'ما يميزنا !'.tr,
                               style: TextStyle(
                                   color: Colors.blue,
                                   fontSize: 16,
@@ -204,7 +204,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                           Padding(
                             padding: const EdgeInsets.only(right: 0),
                             child: Text(
-                              aboutUs.makeUsSpecial,
+                              aboutUs.makeUsSpecial.tr,
                               maxLines: 50,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -353,7 +353,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                             width: 10,
                           ),
                           Container(
-                            width: 230,
+                            width: 180,
                             child: RichText(
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -418,7 +418,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                             width: 10,
                           ),
                           Container(
-                            width: 230,
+                            width: 182,
                             child: RichText(
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -483,7 +483,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                             width: 10,
                           ),
                           Container(
-                            width: 230,
+                            width: 180,
                             child: RichText(
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
