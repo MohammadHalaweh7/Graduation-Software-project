@@ -85,41 +85,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                   Container(
                     child: Column(
                       children: [
-                        //رقم الطلب---------------------------------------------------------------------------------------------------------
-                        Row(
-                          children: [
-                            CircleAvatar(
-                                radius: 12,
-                                backgroundColor: Colors.blue,
-                                child: Icon(
-                                  Icons.check,
-                                  color: Colors.white,
-                                )),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Text(
-                              'رقم الطلب : '.tr,
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              orderNumber,
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        //الخط الفاصل---------------------------------------------------------------------------------------------------------
-                        Container(
-                          width: 300,
-                          height: 1,
-                          color: Colors.grey,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
+
                         //صورة المتجر---------------------------------------------------------------------------------------------------------
                         Row(
                           children: [
@@ -198,11 +164,11 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                           height: 5,
                         ),
 
-                        //المبلغ الاجمالي---------------------------------------------------------------------------------------------------------
+                        //سعر المنتج---------------------------------------------------------------------------------------------------------
                         Row(
                           children: [
                             Text(
-                              'المبلغ الاجمالي : '.tr,
+                              'سعر المنتج : '.tr,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.grey[500]),
@@ -242,26 +208,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                         SizedBox(
                           height: 5,
                         ),
-                        // حالة الطلب---------------------------------------------------------------------------------------------------------
-                        Row(
-                          children: [
-                            Text(
-                              'حالة الطلب : '.tr,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey[500]),
-                            ),
-                            Spacer(),
-                            Text(
-                              orderStatus,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.blue),
-                            )
-                          ],
-                        ),
+
                       ],
                     ),
                   ),
@@ -291,7 +238,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
               size: 35,
             )),
         title: Text(
-          "منتجات طلبتها".tr,
+          "تفاصيل الطلب".tr,
           style: TextStyle(
             color: Colors.blue,
             fontSize: 22,
@@ -305,7 +252,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
   }
 
   void onNotification() {
-    Navigator.pop(context);
+ Navigator.pop(context);
   }
 }
 

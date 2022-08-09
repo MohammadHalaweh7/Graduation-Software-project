@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/models/order/order_model.dart';
@@ -490,36 +491,39 @@ class _ShopkeeperNewOrdersProductsScreenState
                   ],
                 ),
                 width: double.infinity,
-                height: 80,
+                height: 120,
                 child: Column(
                   children: [
-                    // Row(
-                    //   children: [
-                    //     Text(
-                    //       'اجمالي المبلغ المطلوب : ',
-                    //       style: TextStyle(
-                    //           color: Colors.blue,
-                    //           fontSize: 15,
-                    //           fontWeight: FontWeight.bold),
-                    //     ),
-                    //     SizedBox(
-                    //       height: 5,
-                    //       width: 100,
-                    //       child: TextField(
-                    //         enabled: false,
-                    //         // controller: totalController,
-                    //         style: TextStyle(
-                    //             color: Colors.black,
-                    //             fontSize: 15,
-                    //             fontWeight: FontWeight.bold),
-                    //       ),
-                    //     ),
-                    //     Spacer(),
-                    //   ],
-                    // ),
-                    // SizedBox(
-                    //   height: 10,
-                    // ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Row(
+                        children: [
+                          Text(
+                            'مجموع السعر : '.tr,
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 5,
+                            width: 100,
+                            child: TextField(
+                              enabled: false,
+                              // controller: totalController,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Spacer(),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Container(
                       width: double.infinity,
                       decoration: BoxDecoration(

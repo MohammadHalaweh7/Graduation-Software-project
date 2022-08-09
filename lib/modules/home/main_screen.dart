@@ -13,6 +13,7 @@ import 'package:udemy_flutter/modules/account/account_screen.dart';
 import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
 import 'package:udemy_flutter/modules/language/language_screen.dart';
 import 'package:udemy_flutter/modules/login/login_screen.dart';
+import 'package:udemy_flutter/modules/my_orders/my_orders_all_screen.dart';
 import 'package:udemy_flutter/modules/my_orders/my_orders_screen.dart';
 import 'package:udemy_flutter/modules/notification/notification_screen.dart';
 import 'package:udemy_flutter/modules/password/password_screen.dart';
@@ -63,8 +64,6 @@ class _MainScreenState extends State<MainScreen> {
   List<StoreModel> stores = [];
   Widget fetchAllStores() {
 // -------------------------------
-
-
 FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
@@ -91,7 +90,7 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       AndroidNotification? android = message.notification?.android;
       if (notification != null && android != null) {
         showDialog(
-          context:context ,
+            context: context,
             builder: (_) {
               return AlertDialog(
                 title: Text("${notification.title}"),
@@ -115,8 +114,6 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                 color: Colors.blue,
                 playSound: true,
                 icon: '@mipmap/ic_launcher')));
-
-
 
 // -----------
 
@@ -382,7 +379,7 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                   height: 1,
                   color: Colors.grey[300],
                 ),
-                SizedBox(
+                SizedBox( 
                   height: 20,
                 ),
                 Padding(
@@ -412,7 +409,7 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => MyOrdersScreen()));
+                            builder: (context) => MyOrdersAllScreen()));
                   },
                 ),
                 ListTile(
