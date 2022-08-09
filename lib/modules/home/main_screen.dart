@@ -24,6 +24,14 @@ import 'package:udemy_flutter/shared/cubit/cubit.dart';
 
 import '../../layout/shop_layout/shop_layout.dart';
 
+
+
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
+import '../../main.dart';
+
 //Haytham Saleh
 class MainScreen extends StatefulWidget {
   @override
@@ -54,7 +62,69 @@ class _MainScreenState extends State<MainScreen> {
   String? value3;
   List<StoreModel> stores = [];
   Widget fetchAllStores() {
+// -------------------------------
+
+
+FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+      if (notification != null && android != null) {
+        flutterLocalNotificationsPlugin.show(
+            notification.hashCode,
+            notification.title,
+            notification.body,
+            NotificationDetails(
+              android: AndroidNotificationDetails(
+                channel.id,
+                channel.name,
+                color: Colors.pink,
+                playSound: true,
+                icon: '@mipmap/ic_launcher',
+              ),
+            ));
+      }
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('A new onMessageOpenedApp event was published!');
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+      if (notification != null && android != null) {
+        showDialog(
+          context:context ,
+            builder: (_) {
+              return AlertDialog(
+                title: Text("${notification.title}"),
+                content: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [Text("${notification.body}")],
+                  ),
+                ),
+              );
+            });
+      }
+    });
+        flutterLocalNotificationsPlugin.show(
+        0,
+        "Imprtant Meassge!",
+        "You have new messages",
+        NotificationDetails(
+            android: AndroidNotificationDetails(channel.id, channel.name,
+                importance: Importance.high,
+                color: Colors.blue,
+                playSound: true,
+                icon: '@mipmap/ic_launcher')));
+
+
+
+// -----------
+
+
     return FutureBuilder(
+
+
+
         future: fetch.allCityAndInterests(city),
         builder: (contxt, snapchot) {
           stores = snapchot.hasData ? snapchot.data as List<StoreModel> : [];
@@ -465,6 +535,7 @@ class _MainScreenState extends State<MainScreen> {
                   // scrollDirection: Axis.horizontal,
                 ),
               ),
+              
               //تسوق حسب الفئة------------------------------------------------------
               Container(
                 margin: EdgeInsets.only(top: 20),

@@ -25,40 +25,70 @@ import 'package:firebase_core/firebase_core.dart';
 
 import 'package:udemy_flutter/sharedPrefs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:udemy_flutter/notifications.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 
 // @dart=2.9
 //Mohammad Halaweh99
 
 late SharedPreferences prefs;
 
+const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'high_importance_channel', //id
+    'High Importance Notifications', //title
+    importance: Importance.high,
+    playSound: true);
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print('A bg message just showed up : ${message.messageId}');
+}
+
+
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // await Firebase.initializeApp(
-  //  options: const FirebaseOptions(
-  //    apiKey:"AAAA1-uKg5g:APA91bGbOCRD5CsqtzDADIVk35DlYMVKMwK-VqcJ7bAbXassPWok45rFdRkWH7kk2TYo_ogERYfUUTkBsHwcBuBsBy4evMbmniLQr7TRlK4XpA_glaqvUivQdl9wWrUpeZjceIRCIz4k" ,
-  //    appId: "1:927369692056:ios:ed7abdcb63a1e1133761ed",
-  //    messagingSenderId:"927369692056	" ,
-  //    projectId:"udemy-flutter-184b4" ,
-  //  ),
-  // );
+  await Firebase.initializeApp(
+    name: 'udemy_flutter',
+   options: const FirebaseOptions(
+     apiKey:"XXX" ,
+     appId: "XXX",
+     messagingSenderId:"XXX" ,
+     projectId:"XXX" ,
+   ),
+  );
 
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel);
 
-  await Firebase.initializeApp();
+   await  FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+
   runApp(MyApp());
   prefs = await SharedPreferences.getInstance();
 
   // var token = await FirebaseMessaging.instance.getToken();
   // print(token);
-  //
+  
   // FirebaseMessaging.onMessage.listen((event)
   // {
   //   print('on oppenning app');
   //   print(event.data.toString());
-  //
+  
   //   // showToast(text:'on massage',state: ToastStates.SUCCESS);
   // });
-  //
+  
   // FirebaseMessaging.onMessageOpenedApp.listen((event)
   // {
   //   print(event.data.toString());

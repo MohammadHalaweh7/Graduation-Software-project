@@ -1,5 +1,9 @@
 import 'dart:convert';
 
+
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/models/order/order_model.dart';
 import 'package:udemy_flutter/models/pendingStore/pendingStore_model.dart';
@@ -8,7 +12,13 @@ import 'package:udemy_flutter/models/store/store_model.dart';
 
 import 'package:http/http.dart' as http;
 
+import '../main.dart';
 import '../models/notification/notification_model.dart';
+
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
 
 class fetchData {
   static const String baseURL = 'https://mystoreapii.herokuapp.com';
@@ -28,6 +38,14 @@ class fetchData {
   }
 
   Future<List<StoreModel>> allCityAndInterests(city) async {
+
+
+// -----
+
+// ----
+
+
+
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
     var res = await http.get(
