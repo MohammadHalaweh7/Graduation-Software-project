@@ -57,29 +57,17 @@ class _ShopkeeperNewOrdersScreenState extends State<ShopkeeperNewOrdersScreen> {
                       orders[index].buyerPhone,
                       orders[index].buyerEmail,
                       orders[index].orderStatus,
-                      orders[index].productName,
-                      orders[index].price,
                       orders[index].id,
-                      orders[index].avatar,
                       orders[index].size,
+                      orders[index].storeName,
+                      orders[index].total,
                     );
                   });
         });
   }
 
-  Widget myNeworders(
-      orderNumber,
-      buyerName,
-      buyerCity,
-      buyerAddress,
-      buyerPhone,
-      buyerEmail,
-      orderStatus,
-      productName,
-      price,
-      id,
-      avatar,
-      size) {
+  Widget myNeworders(orderNumber, buyerName, buyerCity, buyerAddress,
+      buyerPhone, buyerEmail, orderStatus, id, size, storeName, total) {
     return //لكونتينر اللي بضم كلشي
         Column(
       children: [
@@ -137,23 +125,16 @@ class _ShopkeeperNewOrdersScreenState extends State<ShopkeeperNewOrdersScreen> {
                         ),
                         child: MaterialButton(
                           onPressed: () {
+                            ShopkeeperNewOrdersProductsScreen().setID(id);
+                            ShopkeeperNewOrdersProductsScreen().setSize(size);
+                            ShopkeeperNewOrdersProductsScreen().setTotal(total);
+                            ShopkeeperNewOrdersProductsScreen()
+                                .setStoreName(storeName);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        ShopkeeperNewOrdersProductsScreen(
-                                            orderNumber,
-                                            buyerName,
-                                            buyerCity,
-                                            buyerAddress,
-                                            buyerPhone,
-                                            buyerEmail,
-                                            orderStatus,
-                                            productName,
-                                            price,
-                                            id,
-                                            avatar,
-                                            size)));
+                                        ShopkeeperNewOrdersProductsScreen()));
                           },
                           child: Text(
                             "التفاصيل",
@@ -161,7 +142,6 @@ class _ShopkeeperNewOrdersScreenState extends State<ShopkeeperNewOrdersScreen> {
                           ),
                         ),
                       ),
-                    
                     ],
                   ),
                   SizedBox(

@@ -28,38 +28,51 @@ import '../../src/my_app.dart';
 
 class MyOrdersAllScreen extends StatefulWidget {
   @override
-  State<MyOrdersAllScreen> createState() =>
-      _MyOrdersAllScreenState();
+  State<MyOrdersAllScreen> createState() => _MyOrdersAllScreenState();
 }
 
 class _MyOrdersAllScreenState extends State<MyOrdersAllScreen> {
+  fetchData fetch = fetchData();
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton(
-            onPressed: onNotification,
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.blue,
-              size: 35,
-            )),
-        title: Text(
-          "طلباتي",
-          style: TextStyle(
-            color: Colors.blue,
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        actions: [],
-      ),
-     
-      body:  
-      // هاد بضم كلشي
-      Column(
+  Widget getAllOrders() {
+    return FutureBuilder(
+        future: fetch.getorders(),
+        builder: (contxt, snapchot) {
+          print(snapchot.data);
+          var orders = snapchot.data as List<OrderModel>;
+          // print(orders.length);
+          return snapchot.data == null
+              ? Center(
+                  child: CircularProgressIndicator(
+                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+                  ),
+                )
+              : ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: orders == null ? 0 : orders.length,
+                  itemBuilder: (context, index) {
+                    return myNeworders(
+                      orders[index].orderNumber,
+                      orders[index].buyerName,
+                      orders[index].buyerCity,
+                      orders[index].buyerAddress,
+                      orders[index].buyerPhone,
+                      orders[index].buyerEmail,
+                      orders[index].total,
+                      orders[index].orderStatus,
+                      orders[index].size,
+                      orders[index].id,
+                      orders[index].storeName,
+                    );
+                  });
+        });
+  }
+
+  Widget myNeworders(orderNumber, buyerName, buyerCity, buyerAddress,
+      buyerPhone, buyerEmail, total, orderStatus, size, id, storeName) {
+    return // هاد بضم كلشي
+        Column(
       children: [
         SizedBox(
           height: 10,
@@ -102,7 +115,7 @@ class _MyOrdersAllScreenState extends State<MyOrdersAllScreen> {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        '12121515465',
+                        orderNumber,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Spacer(),
@@ -115,13 +128,13 @@ class _MyOrdersAllScreenState extends State<MyOrdersAllScreen> {
                         ),
                         child: MaterialButton(
                           onPressed: () {
-                                                    Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MyOrdersScreen()));
-
-
-
+                            MyOrdersScreen().setID(id);
+                            MyOrdersScreen().setSize(size);
+                            MyOrdersScreen().setStoreName(storeName);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MyOrdersScreen()));
                           },
                           child: Text(
                             "التفاصيل",
@@ -129,7 +142,6 @@ class _MyOrdersAllScreenState extends State<MyOrdersAllScreen> {
                           ),
                         ),
                       ),
-                    
                     ],
                   ),
                   SizedBox(
@@ -155,7 +167,7 @@ class _MyOrdersAllScreenState extends State<MyOrdersAllScreen> {
                       ),
                       Spacer(),
                       Text(
-                        'هيسسم صالح',
+                        buyerName,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.blue),
                       )
@@ -175,7 +187,7 @@ class _MyOrdersAllScreenState extends State<MyOrdersAllScreen> {
                       ),
                       Spacer(),
                       Text(
-                        'سلفيت',
+                        buyerCity,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.blue),
                       )
@@ -195,7 +207,7 @@ class _MyOrdersAllScreenState extends State<MyOrdersAllScreen> {
                       ),
                       Spacer(),
                       Text(
-                        "كفل حارس",
+                        buyerAddress,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.blue),
                       )
@@ -215,7 +227,7 @@ class _MyOrdersAllScreenState extends State<MyOrdersAllScreen> {
                       ),
                       Spacer(),
                       Text(
-                        "0599658777",
+                        buyerPhone,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.blue),
                       )
@@ -235,7 +247,7 @@ class _MyOrdersAllScreenState extends State<MyOrdersAllScreen> {
                       ),
                       Spacer(),
                       Text(
-                        "haytham@gmail.com",
+                        buyerEmail,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.blue),
                       )
@@ -255,16 +267,16 @@ class _MyOrdersAllScreenState extends State<MyOrdersAllScreen> {
                       ),
                       Spacer(),
                       Text(
-                        "2000 NIS",
+                        total.toString(),
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.blue),
-                      ) 
+                      )
                     ],
                   ),
                   SizedBox(
                     height: 1,
                   ),
-                 //الحالة---------------------------------------------------------------------------------------------------------
+                  //الحالة---------------------------------------------------------------------------------------------------------
 
                   Row(
                     children: [
@@ -276,13 +288,13 @@ class _MyOrdersAllScreenState extends State<MyOrdersAllScreen> {
                       ),
                       Spacer(),
                       Text(
-                        "قيد التحضير",
+                        orderStatus,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.blue),
                       )
                     ],
                   ),
-                  
+
                   SizedBox(
                     height: 1,
                   ),
@@ -293,16 +305,37 @@ class _MyOrdersAllScreenState extends State<MyOrdersAllScreen> {
           height: 5,
         ),
       ],
-    )
-  
     );
   }
 
-  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        leading: IconButton(
+            onPressed: onNotification,
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.blue,
+              size: 35,
+            )),
+        title: Text(
+          "طلباتي",
+          style: TextStyle(
+            color: Colors.blue,
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: [],
+      ),
+      body: getAllOrders(),
+    );
+  }
 
   void onNotification() {
     Navigator.pop(context);
-
   }
 }
 

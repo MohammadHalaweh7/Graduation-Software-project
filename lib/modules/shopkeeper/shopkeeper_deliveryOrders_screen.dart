@@ -63,10 +63,10 @@ class _ShopkeeperDeliveryOrdersScreenState
                       orders[index].buyerPhone,
                       orders[index].buyerEmail,
                       orders[index].orderStatus,
-                      orders[index].productName,
-                      orders[index].price,
+                      // orders[index].productName,
+                      // orders[index].price,
                       orders[index].id,
-                      orders[index].avatar,
+                      // orders[index].avatar,
                       orders[index].size,
                     );
                   });
@@ -81,10 +81,10 @@ class _ShopkeeperDeliveryOrdersScreenState
       buyerPhone,
       buyerEmail,
       orderStatus,
-      productName,
-      price,
+      //   productName,
+      // price,
       id,
-      avatar,
+      // avatar,
       size) {
     return Column(
       children: [
@@ -154,10 +154,10 @@ class _ShopkeeperDeliveryOrdersScreenState
                                             buyerPhone,
                                             buyerEmail,
                                             orderStatus,
-                                            productName,
-                                            price,
+                                            "productName",
+                                            "price",
                                             id,
-                                            avatar,
+                                            "avatar",
                                             size)));
                           },
                           child: Text(

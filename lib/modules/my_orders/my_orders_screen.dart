@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/models/order/order_model.dart';
+import 'package:udemy_flutter/models/product/product_model.dart';
 import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
 import 'package:udemy_flutter/modules/language/language_screen.dart';
 import 'package:udemy_flutter/modules/login/login_screen.dart';
@@ -17,18 +18,34 @@ import 'package:udemy_flutter/modules/signup/signUp_screen.dart';
 import "package:url_launcher/url_launcher.dart";
 import '../../src/my_app.dart';
 
+var id;
+var size;
+var storeName;
+
 class MyOrdersScreen extends StatefulWidget {
+  setID(ID) {
+    id = ID;
+  }
+
+  setSize(S) {
+    size = S;
+  }
+
+  setStoreName(Storename) {
+    storeName = Storename;
+  }
+
   @override
   State<MyOrdersScreen> createState() => _MyOrdersScreenState();
 }
 
 class _MyOrdersScreenState extends State<MyOrdersScreen> {
   fetchData fetch = fetchData();
-  Widget getAllOrders() {
+  Widget getAllOrderProducts() {
     return FutureBuilder(
-        future: fetch.getorders(),
+        future: fetch.getOrderProducts(id),
         builder: (contxt, snapchot) {
-          var orders = snapchot.data as List<OrderModel>;
+          var products = snapchot.data as List<ProductModel>;
           return snapchot.data == null
               ? Center(
                   child: CircularProgressIndicator(
@@ -39,24 +56,19 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                   physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  itemCount: orders == null ? 0 : orders.length,
+                  itemCount: products == null ? 0 : products.length,
                   itemBuilder: (context, index) {
                     return myorders(
-                      orders[index].orderNumber,
-                      orders[index].storeName,
-                      orders[index].productName,
-                      orders[index].price,
-                      orders[index].orderStatus,
-                      orders[index].id,
-                      orders[index].avatar,
-                      orders[index].size,
+                      products[index].id,
+                      products[index].name,
+                      products[index].price,
+                      products[index].avatar,
                     );
                   });
         });
   }
 
-  Widget myorders(orderNumber, storeName, productName, price, orderStatus, id,
-      avatar, size) {
+  Widget myorders(id, name, price, avatar) {
     return Column(
       children: [
         SizedBox(
@@ -85,7 +97,6 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                   Container(
                     child: Column(
                       children: [
-
                         //صورة المتجر---------------------------------------------------------------------------------------------------------
                         Row(
                           children: [
@@ -151,7 +162,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                             ),
                             Spacer(),
                             Text(
-                              productName,
+                              name,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -175,7 +186,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                             ),
                             Spacer(),
                             Text(
-                              price + ' NIS',
+                              price.toString() + ' NIS',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.blue),
@@ -208,7 +219,6 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                         SizedBox(
                           height: 5,
                         ),
-
                       ],
                     ),
                   ),
@@ -247,12 +257,12 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
         ),
         actions: [],
       ),
-      body: Center(child: getAllOrders()),
+      body: Center(child: getAllOrderProducts()),
     );
   }
 
   void onNotification() {
- Navigator.pop(context);
+    Navigator.pop(context);
   }
 }
 

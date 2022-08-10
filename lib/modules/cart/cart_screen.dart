@@ -106,7 +106,7 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 )
               : ListView.builder(
-              physics:BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemCount: products.length,
@@ -404,12 +404,12 @@ class _CartScreenState extends State<CartScreen> {
                                   } else {
                                     if (int.parse(pointscontroller.text) ==
                                         50) {
-                                      for (int i = 0;
-                                          i < products.length;
-                                          i++) {
-                                        products[i].price =
-                                            products[i].price * 0.97;
-                                      }
+                                      // for (int i = 0;
+                                      //     i < products.length;
+                                      //     i++) {
+                                      //   products[i].price =
+                                      //       products[i].price * 0.97;
+                                      // }
                                       OrderScreen().setUsedPoints(
                                           int.parse(pointscontroller.text));
                                       OrderScreen().setPoints(account.points);
@@ -422,12 +422,12 @@ class _CartScreenState extends State<CartScreen> {
                                     } else if (int.parse(
                                             pointscontroller.text) ==
                                         100) {
-                                      for (int i = 0;
-                                          i < products.length;
-                                          i++) {
-                                        products[i].price =
-                                            products[i].price * 0.94;
-                                      }
+                                      // for (int i = 0;
+                                      //     i < products.length;
+                                      //     i++) {
+                                      //   products[i].price =
+                                      //       products[i].price * 0.94;
+                                      // }
                                       OrderScreen().setUsedPoints(
                                           int.parse(pointscontroller.text));
                                       OrderScreen().setPoints(account.points);
@@ -440,12 +440,12 @@ class _CartScreenState extends State<CartScreen> {
                                     } else if (int.parse(
                                             pointscontroller.text) ==
                                         150) {
-                                      for (int i = 0;
-                                          i < products.length;
-                                          i++) {
-                                        products[i].price =
-                                            products[i].price * 0.90;
-                                      }
+                                      // for (int i = 0;
+                                      //     i < products.length;
+                                      //     i++) {
+                                      //   products[i].price =
+                                      //       products[i].price * 0.90;
+                                      // }
                                       OrderScreen().setUsedPoints(
                                           int.parse(pointscontroller.text));
                                       OrderScreen().setPoints(account.points);
@@ -567,7 +567,7 @@ class _CartScreenState extends State<CartScreen> {
             //     context, MaterialPageRoute(builder: (context) => ShopLayout()));
           },
           textColor: Colors.blue,
-          child:  Text('موافق'.tr),
+          child: Text('موافق'.tr),
         ),
       ],
     );
@@ -600,7 +600,7 @@ class _CartScreenState extends State<CartScreen> {
             Navigator.of(context).pop();
           },
           textColor: Colors.blue,
-          child:  Text('موافق'.tr),
+          child: Text('موافق'.tr),
         ),
       ],
     );
@@ -633,7 +633,7 @@ class _CartScreenState extends State<CartScreen> {
             Navigator.of(context).pop();
           },
           textColor: Colors.blue,
-          child:  Text('موافق'.tr),
+          child: Text('موافق'.tr),
         ),
       ],
     );
@@ -664,7 +664,7 @@ class _CartScreenState extends State<CartScreen> {
             Navigator.of(context).pop();
           },
           textColor: Colors.blue,
-          child:  Text('موافق'.tr),
+          child: Text('موافق'.tr),
         ),
       ],
     );
@@ -695,7 +695,7 @@ class _CartScreenState extends State<CartScreen> {
             Navigator.of(context).pop();
           },
           textColor: Colors.blue,
-          child:  Text('موافق'.tr),
+          child: Text('موافق'.tr),
         ),
       ],
     );

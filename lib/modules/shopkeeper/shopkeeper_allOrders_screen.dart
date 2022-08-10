@@ -60,17 +60,14 @@ class _ShopkeeperAllOrdersScreenState extends State<ShopkeeperAllOrdersScreen> {
                       orders[index].buyerPhone,
                       orders[index].buyerEmail,
                       orders[index].orderStatus,
-                      orders[index].productName,
-                      orders[index].price,
                       orders[index].id,
-                      orders[index].avatar,
                     );
                   });
         });
   }
 
   Widget myNeworders(orderNumber, buyerName, buyerCity, buyerAddress,
-      buyerPhone, buyerEmail, orderStatus, productName, price, id, avatar) {
+      buyerPhone, buyerEmail, orderStatus, id) {
     return Column(
       children: [
         SizedBox(

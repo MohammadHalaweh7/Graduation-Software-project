@@ -15,11 +15,9 @@ OrderModel _$OrderModelFromJson(Map<String, dynamic> json) => OrderModel()
   ..buyerAddress = json['buyerAddress'] as String
   ..orderNumber = json['orderNumber'] as String
   ..storeName = json['storeName'] as String
-  ..productName = json['productName'] as String
-  ..price = json['price'] as String
+  ..total = (json['total'] as num).toDouble()
   ..size = json['size'] as String
-  ..orderStatus = json['orderStatus'] as String
-  ..avatar = json['avatar'] as String?;
+  ..orderStatus = json['orderStatus'] as String;
 
 Map<String, dynamic> _$OrderModelToJson(OrderModel instance) =>
     <String, dynamic>{
@@ -31,9 +29,7 @@ Map<String, dynamic> _$OrderModelToJson(OrderModel instance) =>
       'buyerAddress': instance.buyerAddress,
       'orderNumber': instance.orderNumber,
       'storeName': instance.storeName,
-      'productName': instance.productName,
-      'price': instance.price,
+      'total': instance.total,
       'size': instance.size,
       'orderStatus': instance.orderStatus,
-      'avatar': instance.avatar,
     };

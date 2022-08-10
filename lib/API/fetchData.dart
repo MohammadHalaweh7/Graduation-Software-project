@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -18,7 +17,6 @@ import '../models/notification/notification_model.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-
 
 class fetchData {
   static const String baseURL = 'https://mystoreapii.herokuapp.com';
@@ -38,13 +36,9 @@ class fetchData {
   }
 
   Future<List<StoreModel>> allCityAndInterests(city) async {
-
-
 // -----
 
 // ----
-
-
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
@@ -63,7 +57,7 @@ class fetchData {
 
   Future<List<StoreModel>> alltypestores(type) async {
     var res =
-    await http.get(Uri.parse(fetchData.baseURL + '/store/typeall/' + type));
+        await http.get(Uri.parse(fetchData.baseURL + '/store/typeall/' + type));
 
     var body = jsonDecode(res.body) as List<dynamic>;
 
@@ -81,7 +75,7 @@ class fetchData {
 
   Future<List<NotificationModel>> allNotifications() async {
     var res =
-    await http.get(Uri.parse(fetchData.baseURL + '/notifications/getAll'));
+        await http.get(Uri.parse(fetchData.baseURL + '/notifications/getAll'));
 
     var body = jsonDecode(res.body) as List<dynamic>;
 
@@ -144,6 +138,18 @@ class fetchData {
     return body.map((product) => ProductModel.fromJson(product)).toList();
   }
 
+  Future<List<ProductModel>> getOrderProducts(id) async {
+    var res = await http.get(
+        Uri.parse(fetchData.baseURL + '/order/orderProducts/' + id),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        });
+    print(res.statusCode);
+    var body = jsonDecode(res.body) as List<dynamic>;
+
+    return body.map((product) => ProductModel.fromJson(product)).toList();
+  }
+
   Future<List<OrderModel>> getorders() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
@@ -155,6 +161,8 @@ class fetchData {
     });
 
     var body = jsonDecode(res.body) as List<dynamic>;
+    //print(res.body);
+    // print(body.toString());
 
     return body.map((order) => OrderModel.fromJson(order)).toList();
   }

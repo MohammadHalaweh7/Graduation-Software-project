@@ -24,6 +24,8 @@ import '../../src/my_app.dart';
 import 'package:http/http.dart' as http;
 
 var products;
+//var products_IDS =  [];
+
 var price;
 int points = 0;
 var id;
@@ -90,7 +92,6 @@ class _OrderScreenState extends State<OrderScreen> {
   Future<OrderModel> createOrder(id, price, UsedPoints) async {
     var ID = id;
     if (nameController.text == '' ||
-        emailController.text == '' ||
         phoneController.text == '' ||
         city == null ||
         sizes == '' ||
@@ -106,7 +107,6 @@ class _OrderScreenState extends State<OrderScreen> {
 
     var body = jsonEncode({
       'buyerName': nameController.text,
-      'buyerEmail': emailController.text,
       'buyerPhone': phoneController.text,
       'buyerCity': city,
       'buyerAddress': addressController.text,
@@ -140,7 +140,56 @@ class _OrderScreenState extends State<OrderScreen> {
     return orderModel;
   }
 
-  Future<OrderModel> deleteFromCart() async {
+  Future<void> createCartOrder(UsedPoints, products_ID) async {
+    var ID = id;
+    if (nameController.text == '' ||
+        phoneController.text == '' ||
+        city == null ||
+        sizes == '' ||
+        addressController.text == '') {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => _buildPopupDialog5(context),
+      );
+    }
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+    print(jsonEncode(products));
+
+    var body = jsonEncode({
+      'buyerName': nameController.text,
+      'buyerPhone': phoneController.text,
+      'buyerCity': city,
+      'buyerAddress': addressController.text,
+      'size': sizes,
+      'products': products_ID
+    });
+
+    var result = await http.post(
+        Uri.parse(
+            fetchData.baseURL + "/cart/createOrder/" + UsedPoints.toString()),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ' + token.toString()
+        },
+        body: body);
+
+    print('my status code ' + result.statusCode.toString());
+
+    if (result.statusCode == 200) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => _buildPopupDialog(context),
+      );
+    }
+
+    // OrderModel orderModel = OrderModel.fromJson(jsonDecode(result.body));
+
+    // return orderModel;
+  }
+
+  Future<void> deleteFromCart() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
 
@@ -158,9 +207,9 @@ class _OrderScreenState extends State<OrderScreen> {
       print("Doneeeeeeeeeeeee");
     }
 
-    OrderModel orderModel = OrderModel.fromJson(jsonDecode(result.body));
+    // OrderModel orderModel = OrderModel.fromJson(jsonDecode(result.body));
 
-    return orderModel;
+    // return orderModel;
   }
 
   @override
@@ -230,34 +279,34 @@ class _OrderScreenState extends State<OrderScreen> {
                       height: 15,
                     ),
                     //البريد الالكتروني------------------------------------------------------------------------------------------------------
-                    Text(
-                      "البريد الالكتروني".tr,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-                    ),
-                    TextFormField(
-                      controller: emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      onFieldSubmitted: (String value) {
-                        print(value);
-                      },
-                      onChanged: (String value) {
-                        print(value);
-                      },
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "الرجاء ادخال البريد الالكتروني";
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.email),
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
+                    // Text(
+                    //   "البريد الالكتروني".tr,
+                    //   style:
+                    //       TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                    // ),
+                    // TextFormField(
+                    //   controller: emailController,
+                    //   keyboardType: TextInputType.emailAddress,
+                    //   onFieldSubmitted: (String value) {
+                    //     print(value);
+                    //   },
+                    //   onChanged: (String value) {
+                    //     print(value);
+                    //   },
+                    //   validator: (value) {
+                    //     if (value!.isEmpty) {
+                    //       return "الرجاء ادخال البريد الالكتروني";
+                    //     }
+                    //     return null;
+                    //   },
+                    //   decoration: InputDecoration(
+                    //     prefixIcon: Icon(Icons.email),
+                    //     border: OutlineInputBorder(),
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: 15,
+                    // ),
                     //الهاتف---------------------------------------------------------------------------------------------------------------
                     Text(
                       "الهاتف".tr,
@@ -417,10 +466,13 @@ class _OrderScreenState extends State<OrderScreen> {
                       child: MaterialButton(
                         onPressed: () {
                           if (id == null) {
+                            List<String> products_IDS = [];
+
                             for (int i = 0; i < products.length; i++) {
-                              createOrder(products[i].id, products[i].price,
-                                  usedPoints);
+                              products_IDS.add((products[i].id).toString());
+                              print(products[i].id);
                             }
+                            createCartOrder(usedPoints, products_IDS);
                             deleteFromCart();
                           } else {
                             createOrder(id, price, usedPoints);

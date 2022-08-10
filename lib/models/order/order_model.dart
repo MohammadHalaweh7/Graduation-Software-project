@@ -15,11 +15,13 @@ class OrderModel {
   late final String buyerAddress;
   late final String orderNumber;
   late final String storeName;
-  late final String productName;
-  late final String price;
+  // late final String price;
+  late final double total;
+  // late final String totalAfterDisccount;
   late final String size;
   late final String orderStatus;
-  late final String? avatar;
+  // late final products;
+  // late final String? avatar;
 
   OrderModel();
 
