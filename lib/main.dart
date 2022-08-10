@@ -14,6 +14,7 @@ import 'package:udemy_flutter/shared/cubit/cubit.dart';
 import 'package:udemy_flutter/shared/cubit/states.dart';
 import 'package:udemy_flutter/shared/network/remote/dio_helper.dart';
 import 'package:udemy_flutter/shared/styles/themes.dart';
+import 'package:udemy_flutter/splash.dart';
 import 'package:udemy_flutter/translations.dart';
 
 //import 'package:fluttertoast/fluttertoast.dart';
@@ -145,7 +146,7 @@ class MyApp extends StatelessWidget {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   if (snapshot.data == true) {
-                    return MainScreen();
+                    return SplashScreen();
                   } else {
                     return OnBoardingScreen();
                   }
@@ -153,6 +154,9 @@ class MyApp extends StatelessWidget {
                 return Container();
               },
             ),
+
+
+            
           );
         },
       ),
