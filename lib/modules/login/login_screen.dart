@@ -89,6 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: const EdgeInsets.all(25),
         child: Container(
           child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
             child: Form(
               key: formkey,
               child: Column(

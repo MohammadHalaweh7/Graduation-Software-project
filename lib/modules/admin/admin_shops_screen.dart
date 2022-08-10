@@ -155,11 +155,15 @@ class _AdminShopsScreenState extends State<AdminShopsScreen> {
                                     fontWeight: FontWeight.bold,
                                     color: Colors.blue),
                               ),
-                              Text(
-                                name,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(),
+                              Container(
+                  
+                                width: 150,
+                                child: Text(
+                                  name,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(),
+                                ),
                               ),
                             ],
                           ),

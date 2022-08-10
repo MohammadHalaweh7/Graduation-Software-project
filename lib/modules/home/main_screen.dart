@@ -188,6 +188,14 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                         width: 200,
                         height: 200,
                         decoration: BoxDecoration(
+                        boxShadow: [
+                            BoxShadow(
+                                      color: Colors.blueGrey,
+                                       offset: Offset(1, 1.0), //(x,y)
+                                      blurRadius: 5.0,
+                                       ),
+                                    ],
+                          border: Border.all(color: Colors.grey),
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
                               image: avatar == null
@@ -601,9 +609,7 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                           ],
                         ),
                       ),
-                      SizedBox(
-                        width: 0,
-                      ),
+
                       Container(
                         width: 90,
                         child: Column(
@@ -639,9 +645,7 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                           ],
                         ),
                       ),
-                      SizedBox(
-                        width: 0,
-                      ),
+    
                       Container(
                         width: 90,
                         child: Column(
@@ -677,8 +681,189 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                           ],
                         ),
                       ),
-                      SizedBox(
-                        width: 0,
+       
+                      Container(
+                        width: 90,
+                        child: Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                ShopsScreen().setTitle("انارة - ".tr + city!);
+                                ShopsScreen().setType('انارة');
+                                ShopsScreen().setCity(city);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ShopsScreen()));
+                              },
+                              child: Material(
+                                elevation: 10,
+                                borderRadius: BorderRadius.circular(35),
+                                child: CircleAvatar(
+                                  radius: 35.0,
+                                  backgroundImage:
+                                  AssetImage('assets/images/lights.png'),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            Text(
+                              "انارة".tr,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            )
+                          ],
+                        ),
+                      ),
+            
+                      Container(
+                        width: 90,
+                        child: Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                ShopsScreen().setTitle("أحذية - ".tr + city!);
+                                ShopsScreen().setType('أحذية');
+                                ShopsScreen().setCity(city);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ShopsScreen()));
+                              },
+                              child: Material(
+                                elevation: 10,
+                                borderRadius: BorderRadius.circular(35),
+                                child: CircleAvatar(
+                                  radius: 35.0,
+                                  backgroundImage:
+                                  AssetImage('assets/images/shoes.png'),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            Text(
+                              "أحذية".tr,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            )
+                          ],
+                        ),
+                      ),
+                
+                     
+                    
+                    
+                      Container(
+                        width: 90,
+                        child: Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                ShopsScreen().setTitle("ملابس - ".tr + city!);
+                                ShopsScreen().setType('ملابس');
+                                ShopsScreen().setCity(city);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ShopsScreen()));
+                              },
+                              child: Material(
+                                elevation: 10,
+                                borderRadius: BorderRadius.circular(35),
+                                child: CircleAvatar(
+                                  radius: 35.0,
+                                  backgroundImage:
+                                  AssetImage('assets/images/clothes.jpg'),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            Text(
+                              "ملابس".tr,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            )
+                          ],
+                        ),
+                      ),
+                
+                   
+                      Container(
+                        width: 90,
+                        child: Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                ShopsScreen().setTitle("عطور - ".tr + city!);
+                                ShopsScreen().setType('عطور');
+                                ShopsScreen().setCity(city);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ShopsScreen()));
+                              },
+                              child: Material(
+                                elevation: 10,
+                                borderRadius: BorderRadius.circular(35),
+                                child: CircleAvatar(
+                                  radius: 35.0,
+                                  backgroundImage:
+                                  AssetImage('assets/images/perfumes.png'),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            Text(
+                              "عطور".tr,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            )
+                          ],
+                        ),
+                      ),
+                  
+                      Container(
+                        width: 90,
+                        child: Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                ShopsScreen().setTitle("الكترونيك - ".tr + city!);
+                                ShopsScreen().setType('الكترونيك');
+                                ShopsScreen().setCity(city);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ShopsScreen()));
+                              },
+                              child: Material(
+                                elevation: 10,
+                                borderRadius: BorderRadius.circular(35),
+                                child: CircleAvatar(
+                                  radius: 35.0,
+                                  backgroundImage: AssetImage(
+                                      'assets/images/electronics.png'),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            Text(
+                              "الكترونيك".tr,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            )
+                          ],
+                        ),
                       ),
                       Container(
                         width: 90,
@@ -715,47 +900,6 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                           ],
                         ),
                       ),
-                      SizedBox(
-                        width: 0,
-                      ),
-                      Container(
-                        width: 90,
-                        child: Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                ShopsScreen().setTitle("انارة - ".tr + city!);
-                                ShopsScreen().setType('انارة');
-                                ShopsScreen().setCity(city);
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ShopsScreen()));
-                              },
-                              child: Material(
-                                elevation: 10,
-                                borderRadius: BorderRadius.circular(35),
-                                child: CircleAvatar(
-                                  radius: 35.0,
-                                  backgroundImage:
-                                  AssetImage('assets/images/lights.png'),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            Text(
-                              "انارة".tr,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            )
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: 0,
-                      ),
                       Container(
                         width: 90,
                         child: Column(
@@ -791,161 +935,7 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                           ],
                         ),
                       ),
-                      SizedBox(
-                        width: 0,
-                      ),
-                      Container(
-                        width: 90,
-                        child: Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                ShopsScreen().setTitle("ملابس - ".tr + city!);
-                                ShopsScreen().setType('ملابس');
-                                ShopsScreen().setCity(city);
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ShopsScreen()));
-                              },
-                              child: Material(
-                                elevation: 10,
-                                borderRadius: BorderRadius.circular(35),
-                                child: CircleAvatar(
-                                  radius: 35.0,
-                                  backgroundImage:
-                                  AssetImage('assets/images/clothes.jpg'),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            Text(
-                              "ملابس".tr,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            )
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: 0,
-                      ),
-                      Container(
-                        width: 90,
-                        child: Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                ShopsScreen().setTitle("أحذية - ".tr + city!);
-                                ShopsScreen().setType('أحذية');
-                                ShopsScreen().setCity(city);
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ShopsScreen()));
-                              },
-                              child: Material(
-                                elevation: 10,
-                                borderRadius: BorderRadius.circular(35),
-                                child: CircleAvatar(
-                                  radius: 35.0,
-                                  backgroundImage:
-                                  AssetImage('assets/images/shoes.png'),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            Text(
-                              "أحذية".tr,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            )
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: 0,
-                      ),
-                      Container(
-                        width: 90,
-                        child: Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                ShopsScreen().setTitle("عطور - ".tr + city!);
-                                ShopsScreen().setType('عطور');
-                                ShopsScreen().setCity(city);
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ShopsScreen()));
-                              },
-                              child: Material(
-                                elevation: 10,
-                                borderRadius: BorderRadius.circular(35),
-                                child: CircleAvatar(
-                                  radius: 35.0,
-                                  backgroundImage:
-                                  AssetImage('assets/images/perfumes.png'),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            Text(
-                              "عطور".tr,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            )
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: 0,
-                      ),
-                      Container(
-                        width: 90,
-                        child: Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                ShopsScreen().setTitle("الكترونيك - ".tr + city!);
-                                ShopsScreen().setType('الكترونيك');
-                                ShopsScreen().setCity(city);
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ShopsScreen()));
-                              },
-                              child: Material(
-                                elevation: 10,
-                                borderRadius: BorderRadius.circular(35),
-                                child: CircleAvatar(
-                                  radius: 35.0,
-                                  backgroundImage: AssetImage(
-                                      'assets/images/electronics.png'),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            Text(
-                              "الكترونيك".tr,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            )
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: 0,
-                      ),
+                
                     ],
                   ),
                 ),

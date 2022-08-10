@@ -51,6 +51,7 @@ class _ShopkeeperDeliveryOrdersScreenState
                   ),
                 )
               : ListView.builder(
+                physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemCount: orders == null ? 0 : orders.length,

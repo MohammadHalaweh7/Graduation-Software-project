@@ -150,7 +150,7 @@ class _ShopsScreenState extends State<ShopsScreen> {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                     fontSize: 25,
-                    fontStyle: FontStyle.italic,
+                    // fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(

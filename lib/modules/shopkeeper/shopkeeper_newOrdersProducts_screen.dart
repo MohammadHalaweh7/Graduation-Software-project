@@ -115,7 +115,8 @@ class _ShopkeeperNewOrdersProductsScreenState
 
   Widget myorders(id, name, price, avatar) {
     totalController.text = total.toString();
-    return Column(
+    return 
+    Column(
       children: [
         SizedBox(
           height: 10,
@@ -235,85 +236,7 @@ class _ShopkeeperNewOrdersProductsScreenState
           height: 20,
         ),
         //كبسة ارسال الطلب
-        Container(
-            padding: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5.0),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  offset: Offset(0, 1.0), //(x,y)
-                  blurRadius: 5.0,
-                ),
-              ],
-            ),
-            width: double.infinity,
-            height: 120,
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Row(
-                    children: [
-                      Text(
-                        'مجموع السعر : '.tr,
-                        style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 5,
-                        width: 100,
-                        child: TextField(
-                          enabled: false,
-                          controller: totalController,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Spacer(),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                    color: Colors.blueAccent, // width: double.infinity,
-                  ),
-                  child: MaterialButton(
-                    onPressed: () {
-                      changeOrderStatus(id);
-                    },
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "ارسال الطلب",
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Icon(
-                          Icons.delivery_dining_outlined,
-                          color: Colors.white,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            )),
+     
       ],
     );
   }
@@ -566,7 +489,97 @@ class _ShopkeeperNewOrdersProductsScreenState
           ),
         ),
       ),
-      body: getAllOrderProducts(),
+      body:
+    Column(
+      children: [
+        Expanded(child: getAllOrderProducts()),
+        SizedBox(height: 10,),
+        Container(
+            padding: EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5.0),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  offset: Offset(0, 1.0), //(x,y)
+                  blurRadius: 5.0,
+                ),
+              ],
+            ),
+            width: double.infinity,
+            height: 120,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Row(
+                    children: [
+                      Text(
+                        'مجموع السعر : '.tr,
+                        style: TextStyle(
+                            color: Colors.blue,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 5,
+                        width: 100,
+                        child: TextField(
+                          enabled: false,
+                          controller: totalController,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Spacer(),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                    color: Colors.blueAccent, // width: double.infinity,
+                  ),
+                  child: MaterialButton(
+                    onPressed: () {
+                      changeOrderStatus(id);
+                    },
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "ارسال الطلب",
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Icon(
+                          Icons.delivery_dining_outlined,
+                          color: Colors.white,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            )),
+      
+      ],
+    )
+      
+      
+      
+       
     );
   }
 

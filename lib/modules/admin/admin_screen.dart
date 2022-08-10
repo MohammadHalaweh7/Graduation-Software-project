@@ -389,7 +389,8 @@ class _AdminScreenState extends State<AdminScreen> {
   }
 
   void onNotification() {
-    Navigator.pop(context);
+              Navigator.push(
+              context, MaterialPageRoute(builder: (context) => AdminMainScreen()));
   }
 }
 
