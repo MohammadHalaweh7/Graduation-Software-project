@@ -92,7 +92,8 @@ class _ShopsScreenState extends State<ShopsScreen> {
       detailedLocation, facebook, snapchat, whatsapp, instagram) {
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
-      child: GestureDetector(
+      child: 
+      GestureDetector(
         onTap: () {
           ShopLayout().setData(
             id,
@@ -110,7 +111,8 @@ class _ShopsScreenState extends State<ShopsScreen> {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => ShopLayout()));
         },
-        child: Container(
+        child:
+         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.0),
             color: Colors.white,
@@ -140,7 +142,8 @@ class _ShopsScreenState extends State<ShopsScreen> {
                           base64Decode(avatar),
                         ),
                         fit: BoxFit.cover),
-                  )),
+                  )
+                  ),
               SizedBox(
                 height: 15,
               ),
@@ -174,6 +177,7 @@ class _ShopsScreenState extends State<ShopsScreen> {
             ],
           ),
         ),
+      
       ),
     );
   }

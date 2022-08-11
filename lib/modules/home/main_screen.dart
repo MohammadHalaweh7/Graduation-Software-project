@@ -900,7 +900,7 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                           ],
                         ),
                       ),
-                      Container(
+                     Container(
                         width: 90,
                         child: Column(
                           children: [

@@ -21,6 +21,7 @@ import 'package:udemy_flutter/modules/my_orders/my_orders_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/addProduct_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_account_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_addNotification_screen.dart';
+import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_add_ad_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_allOrders_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_deliveryOrders_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_newOrders_screen.dart';
@@ -257,8 +258,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                     ),
                     ListTile(
                       title: Text("ارسال الاشعارات".tr),
-                      leading:
-                      Icon(Icons.add_alert, color: Color(0xff758DFF)),
+                      leading: Icon(Icons.add_alert, color: Color(0xff758DFF)),
                       onTap: () {
                         Navigator.push(
                             context,
@@ -267,7 +267,6 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                     ShopkeeperAddNotificationScreen()));
                       },
                     ),
-
                     SizedBox(
                       height: 0,
                     ),
@@ -310,7 +309,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                       leading: Icon(Icons.logout, color: Color(0xff758DFF)),
                       onTap: () async {
                         SharedPreferences prefs =
-                        await SharedPreferences.getInstance();
+                            await SharedPreferences.getInstance();
                         prefs.remove('token');
                         Navigator.push(
                             context,
@@ -318,7 +317,6 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                 builder: (context) => LoginScreen()));
                       },
                     ),
-
                   ],
                 ),
               ),
@@ -362,11 +360,14 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                           'https://kecbatusopang.paserkab.go.id/po-content/uploads/profil-photo.jpg',
                                         ) as ImageProvider)
                                       : MemoryImage(
-                                          base64Decode(account.avatar.toString()),
+                                          base64Decode(
+                                              account.avatar.toString()),
                                         ),
                                 ),
                               ),
-                              SizedBox(width: 4,),
+                              SizedBox(
+                                width: 4,
+                              ),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -391,8 +392,14 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                               ),
                               Spacer(),
                               Builder(
-                                builder: (context) => IconButton(icon: new Icon(Icons.menu,size: 38,color: Colors.white,),
-                                  onPressed: () => Scaffold.of(context).openEndDrawer(),
+                                builder: (context) => IconButton(
+                                  icon: new Icon(
+                                    Icons.menu,
+                                    size: 38,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: () =>
+                                      Scaffold.of(context).openEndDrawer(),
                                 ),
                               ),
                             ],
@@ -403,47 +410,13 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                         ),
                         Expanded(
                           child: GridView.count(
-                            physics:BouncingScrollPhysics(),
-                            mainAxisSpacing: 10,
-                            crossAxisSpacing: 10,
-                            childAspectRatio: 1 / 1.3,
-                            crossAxisCount: 2,
+                            physics: BouncingScrollPhysics(),
+                            mainAxisSpacing: 5,
+                            crossAxisSpacing: 5,
+                            childAspectRatio: 1 / 1.9,
+                            crossAxisCount: 3,
                             primary: false,
                             children: <Widget>[
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ShopkeeperProfileScreen()));
-                                },
-                                child: Card(
-                                  elevation: 15,
-                                  shadowColor: Colors.blue,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Image.network(
-                                        "https://library.kissclipart.com/20180914/bhw/kissclipart-7-clipart-ipho-1ff0ee7a9f7b557f.png",
-                                        height: 128,
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                        'بروفايلي'.tr,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
                               GestureDetector(
                                 onTap: () {
                                   Navigator.push(
@@ -463,7 +436,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                     children: <Widget>[
                                       Image.asset(
                                         'assets/images/adminIMG.jpg',
-                                        height: 128,
+                                        height: 105,
                                       ),
                                       SizedBox(
                                         height: 20,
@@ -484,7 +457,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              ShopkeeperProductsScreen()));
+                                              ShopkeeperProfileScreen()));
                                 },
                                 child: Card(
                                   elevation: 15,
@@ -496,14 +469,48 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       Image.network(
-                                        'https://library.kissclipart.com/20180831/tww/kissclipart-ecommerce-shopping-clipart-e-commerce-online-shopp-6884ad9727e26283.png',
-                                        height: 128,
+                                        "https://library.kissclipart.com/20180914/bhw/kissclipart-7-clipart-ipho-1ff0ee7a9f7b557f.png",
+                                        height: 105,
                                       ),
                                       SizedBox(
                                         height: 20,
                                       ),
                                       Text(
-                                        'منتجاتي'.tr,
+                                        'بروفايلي'.tr,
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ShopkeeperAddNotificationScreen()));
+                                },
+                                child: Card(
+                                  elevation: 15,
+                                  shadowColor: Colors.blue,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Image.network(
+                                        "https://static.vecteezy.com/system/resources/previews/002/130/449/original/new-message-notification-icon-email-alert-chat-notice-illustration-with-smartphone-screen-isolated-mobile-reminder-web-concept-envelopes-number-one-online-message-push-notification-logo-vector.jpg",
+                                        height: 105,
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text(
+                                        'ارسال الاشعارات'.tr,
                                         style: TextStyle(
                                           fontSize: 18,
                                         ),
@@ -531,13 +538,81 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                     children: <Widget>[
                                       Image.network(
                                         "https://thumbs.dreamstime.com/b/add-to-cart-icon-adding-shopping-cart-well-organized-fully-editable-add-to-cart-icon-adding-shopping-cart-any-use-like-167547900.jpg",
-                                        height: 128,
+                                        height: 105,
                                       ),
                                       SizedBox(
                                         height: 20,
                                       ),
                                       Text(
-                                        'اضافة منتج جديد'.tr,
+                                        'اضافة منتج'.tr,
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ShopkeeperProductsScreen()));
+                                },
+                                child: Card(
+                                  elevation: 15,
+                                  shadowColor: Colors.blue,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Image.network(
+                                        'https://library.kissclipart.com/20180831/tww/kissclipart-ecommerce-shopping-clipart-e-commerce-online-shopp-6884ad9727e26283.png',
+                                        height: 105,
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text(
+                                        'منتجاتي'.tr,
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ShopkeeperAddAdScreen()));
+                                },
+                                child: Card(
+                                  elevation: 15,
+                                  shadowColor: Colors.blue,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Image.network(
+                                        "https://www.owesomesoft.com/img/mobilemarket.png",
+                                        height: 105,
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text(
+                                        'انشاء اعلان'.tr,
                                         style: TextStyle(
                                           fontSize: 18,
                                         ),
@@ -565,7 +640,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                     children: <Widget>[
                                       Image.asset(
                                         'assets/images/shopkeeper2.png',
-                                        height: 128,
+                                        height: 105,
                                       ),
                                       SizedBox(
                                         height: 20,
@@ -599,13 +674,13 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                     children: <Widget>[
                                       Image.asset(
                                         'assets/images/shopkeeper3.png',
-                                        height: 128,
+                                        height: 105,
                                       ),
                                       SizedBox(
                                         height: 20,
                                       ),
                                       Text(
-                                        'طلبات قيد التوصيل'.tr,
+                                        'قيد التوصيل'.tr,
                                         style: TextStyle(
                                           fontSize: 18,
                                         ),
@@ -633,7 +708,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                     children: <Widget>[
                                       Image.asset(
                                         'assets/images/shopkeeper1.png',
-                                        height: 128,
+                                        height: 105,
                                       ),
                                       SizedBox(
                                         height: 20,
@@ -667,44 +742,13 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                     children: <Widget>[
                                       Image.network(
                                         "https://img.freepik.com/premium-vector/research-finance-sales-data-audit-mobile-phone-report-online-statistics-info-analysis-smartphone-vector-flat-cartoon-isolated_212005-118.jpg",
-                                        height: 128,
+                                        height: 105,
                                       ),
                                       SizedBox(
                                         height: 20,
                                       ),
                                       Text(
                                         'الاحصائيات'.tr,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(context,MaterialPageRoute(builder: (context) => ShopkeeperAddNotificationScreen()));
-
-                                },
-                                child: Card(
-                                  elevation: 15,
-                                  shadowColor: Colors.blue,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Image.network(
-                                        "https://static.vecteezy.com/system/resources/previews/002/130/449/original/new-message-notification-icon-email-alert-chat-notice-illustration-with-smartphone-screen-isolated-mobile-reminder-web-concept-envelopes-number-one-online-message-push-notification-logo-vector.jpg",
-                                        height: 128,
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                        'ارسال الاشعارات'.tr,
                                         style: TextStyle(
                                           fontSize: 18,
                                         ),
@@ -734,7 +778,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                     children: <Widget>[
                                       Image.network(
                                         "https://us.123rf.com/450wm/faysalfarhan/faysalfarhan1710/faysalfarhan171013860/88895640-logout-icon-isolated-on-special-red-square-button-abstract-illustration.jpg?ver=6",
-                                        height: 128,
+                                        height: 105,
                                       ),
                                       SizedBox(
                                         height: 20,
@@ -791,7 +835,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
             //  Navigator.of(context).pop();
           },
           textColor: Colors.blue,
-          child:  Text('موافق'.tr),
+          child: Text('موافق'.tr),
         ),
       ],
     );

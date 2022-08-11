@@ -251,9 +251,9 @@ Widget _buildPopupDialog(BuildContext context) {
       children: <Widget>[
         CircleAvatar(
             radius: 17,
-            backgroundColor: Colors.blue,
+            backgroundColor: Colors.red,
             child: Icon(
-              Icons.check,
+              Icons.error,
               color: Colors.white,
             )),
         SizedBox(

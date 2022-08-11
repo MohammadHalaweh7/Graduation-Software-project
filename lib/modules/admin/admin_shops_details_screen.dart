@@ -973,6 +973,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                   ),
                 ],
               ),
+              
               SizedBox(
                 height: 20,
               ),
