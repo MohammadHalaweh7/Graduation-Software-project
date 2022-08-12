@@ -1,11 +1,14 @@
 import 'dart:convert';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
+import 'package:udemy_flutter/models/admin/admin_model.dart';
 import 'package:udemy_flutter/models/pendingStore/pendingStore_model.dart';
 import 'package:udemy_flutter/models/user/user_model.dart';
 import 'package:udemy_flutter/modules/account/account_screen.dart';
@@ -24,14 +27,20 @@ import 'package:udemy_flutter/modules/login/login_screen.dart';
 import 'package:udemy_flutter/modules/my_orders/my_orders_screen.dart';
 import 'package:http/http.dart' as http;
 
+import '../../main.dart';
+
+var adminNotification;
+
 class AdminMainScreen extends StatefulWidget {
   @override
   State<AdminMainScreen> createState() => _AdminMainScreenState();
 }
 
 class _AdminMainScreenState extends State<AdminMainScreen> {
+  fetchData fetch = new fetchData();
+
   var nameController = TextEditingController();
-  Future<UserModel> loadData() async {
+  Future<AdminModel> loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
 
@@ -44,11 +53,68 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
     );
     print(result.statusCode);
 
-    UserModel userModel = UserModel.fromJson(jsonDecode(result.body));
+    AdminModel adminModel = AdminModel.fromJson(jsonDecode(result.body));
 
-    nameController.text = userModel.name;
+    nameController.text = adminModel.name;
+    adminNotification = adminModel.NotificationFromPendingStore;
 
-    return userModel;
+    if (adminNotification == true) {
+      FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+        RemoteNotification? notification = message.notification;
+        AndroidNotification? android = message.notification?.android;
+        if (notification != null && android != null) {
+          flutterLocalNotificationsPlugin.show(
+              notification.hashCode,
+              notification.title,
+              notification.body,
+              NotificationDetails(
+                android: AndroidNotificationDetails(
+                  channel.id,
+                  channel.name,
+                  color: Colors.pink,
+                  playSound: true,
+                  icon: '@mipmap/ic_launcher',
+                ),
+              ));
+        }
+      });
+
+      FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+        print('A new onMessageOpenedApp event was published!');
+        RemoteNotification? notification = message.notification;
+        AndroidNotification? android = message.notification?.android;
+        if (notification != null && android != null) {
+          showDialog(
+              context: context,
+              builder: (_) {
+                return AlertDialog(
+                  title: Text("${notification.title}"),
+                  content: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [Text("${notification.body}")],
+                    ),
+                  ),
+                );
+              });
+        }
+      });
+      flutterLocalNotificationsPlugin.show(
+          0,
+          "Imprtant Meassge!",
+          "You have new Pending Shop , you should see it !!!",
+          NotificationDetails(
+              android: AndroidNotificationDetails(channel.id, channel.name,
+                  importance: Importance.high,
+                  color: Colors.blue,
+                  playSound: true,
+                  icon: '@mipmap/ic_launcher')));
+
+      //change state of notification
+      fetch.adminchangeNotificationState();
+    }
+
+    return adminModel;
   }
 
   @override
@@ -57,7 +123,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
     double screenHight = MediaQuery.of(context).size.height;
 
     var size = MediaQuery.of(context).size;
-    return FutureBuilder<UserModel>(
+    return FutureBuilder<AdminModel>(
       future: loadData(),
       builder: (context, snapshot) {
         var account = snapshot.data;
@@ -671,10 +737,6 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                                       ),
                                     ),
                                   ),
-                                 
-                                 
-                                 
-                                 
                                   GestureDetector(
                                     onTap: () async {
                                       SharedPreferences prefs =

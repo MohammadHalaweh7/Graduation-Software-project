@@ -8,6 +8,7 @@ import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/models/store/store_model.dart';
+import 'package:udemy_flutter/models/user/user_model.dart';
 import 'package:udemy_flutter/modules/aboutUs/about_us_screen.dart';
 import 'package:udemy_flutter/modules/account/account_screen.dart';
 import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
@@ -25,13 +26,14 @@ import 'package:udemy_flutter/shared/cubit/cubit.dart';
 
 import '../../layout/shop_layout/shop_layout.dart';
 
-
-
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 import '../../main.dart';
+
+var shopNotification;
+var adminNotification;
 
 //Haytham Saleh
 class MainScreen extends StatefulWidget {
@@ -62,96 +64,175 @@ class _MainScreenState extends State<MainScreen> {
   String? value2;
   String? value3;
   List<StoreModel> stores = [];
+  Future<UserModel> loadData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+
+    var result = await http.get(
+      Uri.parse(fetchData.baseURL + "/users/me"),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer ' + token.toString()
+      },
+    );
+    print(result.statusCode);
+
+    UserModel userModel = UserModel.fromJson(jsonDecode(result.body));
+
+    shopNotification = userModel.NotificationFromShop;
+    adminNotification = userModel.NotificationFromAdmin;
+
+    return userModel;
+  }
+
   Widget fetchAllStores() {
 // -------------------------------
-FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      RemoteNotification? notification = message.notification;
-      AndroidNotification? android = message.notification?.android;
-      if (notification != null && android != null) {
-        flutterLocalNotificationsPlugin.show(
-            notification.hashCode,
-            notification.title,
-            notification.body,
-            NotificationDetails(
-              android: AndroidNotificationDetails(
-                channel.id,
-                channel.name,
-                color: Colors.pink,
-                playSound: true,
-                icon: '@mipmap/ic_launcher',
-              ),
-            ));
-      }
-    });
-
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('A new onMessageOpenedApp event was published!');
-      RemoteNotification? notification = message.notification;
-      AndroidNotification? android = message.notification?.android;
-      if (notification != null && android != null) {
-        showDialog(
-            context: context,
-            builder: (_) {
-              return AlertDialog(
-                title: Text("${notification.title}"),
-                content: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text("${notification.body}")],
-                  ),
+    loadData();
+    print(adminNotification);
+    if (shopNotification == true) {
+      FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+        RemoteNotification? notification = message.notification;
+        AndroidNotification? android = message.notification?.android;
+        if (notification != null && android != null) {
+          flutterLocalNotificationsPlugin.show(
+              notification.hashCode,
+              notification.title,
+              notification.body,
+              NotificationDetails(
+                android: AndroidNotificationDetails(
+                  channel.id,
+                  channel.name,
+                  color: Colors.pink,
+                  playSound: true,
+                  icon: '@mipmap/ic_launcher',
                 ),
-              );
-            });
-      }
-    });
-        flutterLocalNotificationsPlugin.show(
-        0,
-        "Imprtant Meassge!",
-        "You have new messages",
-        NotificationDetails(
-            android: AndroidNotificationDetails(channel.id, channel.name,
-                importance: Importance.high,
-                color: Colors.blue,
-                playSound: true,
-                icon: '@mipmap/ic_launcher')));
+              ));
+        }
+      });
+
+      FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+        print('A new onMessageOpenedApp event was published!');
+        RemoteNotification? notification = message.notification;
+        AndroidNotification? android = message.notification?.android;
+        if (notification != null && android != null) {
+          showDialog(
+              context: context,
+              builder: (_) {
+                return AlertDialog(
+                  title: Text("${notification.title}"),
+                  content: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [Text("${notification.body}")],
+                    ),
+                  ),
+                );
+              });
+        }
+      });
+      flutterLocalNotificationsPlugin.show(
+          0,
+          "Imprtant Meassge!",
+          "You have new messages from shops",
+          NotificationDetails(
+              android: AndroidNotificationDetails(channel.id, channel.name,
+                  importance: Importance.high,
+                  color: Colors.blue,
+                  playSound: true,
+                  icon: '@mipmap/ic_launcher')));
+
+      //change state of notification
+      fetch.userchangeShopNotificationState();
+    }
+    if (adminNotification == true) {
+      FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+        RemoteNotification? notification = message.notification;
+        AndroidNotification? android = message.notification?.android;
+        if (notification != null && android != null) {
+          flutterLocalNotificationsPlugin.show(
+              notification.hashCode,
+              notification.title,
+              notification.body,
+              NotificationDetails(
+                android: AndroidNotificationDetails(
+                  channel.id,
+                  channel.name,
+                  color: Colors.pink,
+                  playSound: true,
+                  icon: '@mipmap/ic_launcher',
+                ),
+              ));
+        }
+      });
+
+      FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+        print('A new onMessageOpenedApp event was published!');
+        RemoteNotification? notification = message.notification;
+        AndroidNotification? android = message.notification?.android;
+        if (notification != null && android != null) {
+          showDialog(
+              context: context,
+              builder: (_) {
+                return AlertDialog(
+                  title: Text("${notification.title}"),
+                  content: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [Text("${notification.body}")],
+                    ),
+                  ),
+                );
+              });
+        }
+      });
+      flutterLocalNotificationsPlugin.show(
+          0,
+          "Imprtant Meassge!",
+          "You have new messages from admin",
+          NotificationDetails(
+              android: AndroidNotificationDetails(channel.id, channel.name,
+                  importance: Importance.high,
+                  color: Colors.blue,
+                  playSound: true,
+                  icon: '@mipmap/ic_launcher')));
+
+      //change state of notification
+      fetch.userChangeAdminNotificationState();
+    }
 
 // -----------
 
-
     return FutureBuilder(
-
-
-
         future: fetch.allCityAndInterests(city),
         builder: (contxt, snapchot) {
           stores = snapchot.hasData ? snapchot.data as List<StoreModel> : [];
           return !snapchot.hasData
               ? Center(
-            child: CircularProgressIndicator(
-              valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
-            ),
-          )
+                  child: CircularProgressIndicator(
+                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+                  ),
+                )
               : ListView.builder(
-              physics: BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              itemCount: stores == null ? 0 : stores.length,
-              itemBuilder: (context, index) {
-                print(stores.length);
-                return mystore(
-                  stores[index].name,
-                  stores[index].description,
-                  stores[index].id,
-                  stores[index].phoneNumber,
-                  stores[index].locationOnMap,
-                  stores[index].avatar,
-                  stores[index].detailedLocation,
-                  stores[index].facebook,
-                  stores[index].snapchat,
-                  stores[index].whatsapp,
-                  stores[index].instagram,
-                );
-              });
+                  physics: BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  itemCount: stores == null ? 0 : stores.length,
+                  itemBuilder: (context, index) {
+                    print(stores.length);
+                    return mystore(
+                      stores[index].name,
+                      stores[index].description,
+                      stores[index].id,
+                      stores[index].phoneNumber,
+                      stores[index].locationOnMap,
+                      stores[index].avatar,
+                      stores[index].detailedLocation,
+                      stores[index].facebook,
+                      stores[index].snapchat,
+                      stores[index].whatsapp,
+                      stores[index].instagram,
+                    );
+                  });
         });
   }
 
@@ -188,23 +269,23 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                         width: 200,
                         height: 200,
                         decoration: BoxDecoration(
-                        boxShadow: [
+                          boxShadow: [
                             BoxShadow(
-                                      color: Colors.blueGrey,
-                                       offset: Offset(1, 1.0), //(x,y)
-                                      blurRadius: 5.0,
-                                       ),
-                                    ],
+                              color: Colors.blueGrey,
+                              offset: Offset(1, 1.0), //(x,y)
+                              blurRadius: 5.0,
+                            ),
+                          ],
                           border: Border.all(color: Colors.grey),
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
                               image: avatar == null
                                   ? (AssetImage(
-                                'assets/images/logo3.png',
-                              ) as ImageProvider)
+                                      'assets/images/logo3.png',
+                                    ) as ImageProvider)
                                   : MemoryImage(
-                                base64Decode(avatar),
-                              ),
+                                      base64Decode(avatar),
+                                    ),
                               fit: BoxFit.cover),
                         )),
                     SizedBox(
@@ -271,7 +352,7 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          // backgroundColor: Colors.white,
+            // backgroundColor: Colors.white,
             leading: Builder(
               builder: (context) => IconButton(
                 icon: new Icon(
@@ -299,7 +380,7 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                         width: 100,
                         margin: EdgeInsets.all(0),
                         padding:
-                        EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                            EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.blue, width: 2),
                             borderRadius: BorderRadius.circular(6)),
@@ -314,7 +395,7 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                             value: value3,
                             items: citiesItems.map(buildMenuItem).toList(),
                             onChanged: (value) => setState(
-                                    () => {this.value3 = value, city = value}),
+                                () => {this.value3 = value, city = value}),
                           ),
                         ),
                       ),
@@ -387,7 +468,7 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                   height: 1,
                   color: Colors.grey[300],
                 ),
-                SizedBox( 
+                SizedBox(
                   height: 20,
                 ),
                 Padding(
@@ -487,7 +568,7 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                   leading: Icon(Icons.logout, color: Color(0xff758DFF)),
                   onTap: () async {
                     SharedPreferences prefs =
-                    await SharedPreferences.getInstance();
+                        await SharedPreferences.getInstance();
                     prefs.remove('token');
                     prefs.remove('admintoken');
                     prefs.remove('storetoken');
@@ -510,19 +591,19 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
               CarouselSlider(
                 items: imgList
                     .map((e) => ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      Image.network(
-                        e,
-                        height: 200,
-                        width: 100,
-                        fit: BoxFit.cover,
-                      ),
-                    ],
-                  ),
-                ))
+                          borderRadius: BorderRadius.circular(20),
+                          child: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              Image.network(
+                                e,
+                                height: 200,
+                                width: 100,
+                                fit: BoxFit.cover,
+                              ),
+                            ],
+                          ),
+                        ))
                     .toList(),
                 //   //خصائصها
 
@@ -540,7 +621,7 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                   // scrollDirection: Axis.horizontal,
                 ),
               ),
-              
+
               //تسوق حسب الفئة------------------------------------------------------
               Container(
                 margin: EdgeInsets.only(top: 20),
@@ -594,7 +675,7 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                                 child: CircleAvatar(
                                   radius: 35.0,
                                   backgroundImage:
-                                  AssetImage('assets/images/baby.jpg'),
+                                      AssetImage('assets/images/baby.jpg'),
                                 ),
                               ),
                             ),
@@ -609,7 +690,6 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                           ],
                         ),
                       ),
-
                       Container(
                         width: 90,
                         child: Column(
@@ -630,7 +710,7 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                                 child: CircleAvatar(
                                   radius: 35.0,
                                   backgroundImage:
-                                  AssetImage('assets/images/women.png'),
+                                      AssetImage('assets/images/women.png'),
                                 ),
                               ),
                             ),
@@ -645,7 +725,6 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                           ],
                         ),
                       ),
-    
                       Container(
                         width: 90,
                         child: Column(
@@ -666,7 +745,7 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                                 child: CircleAvatar(
                                   radius: 35.0,
                                   backgroundImage:
-                                  AssetImage('assets/images/man.jpg'),
+                                      AssetImage('assets/images/man.jpg'),
                                 ),
                               ),
                             ),
@@ -681,7 +760,6 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                           ],
                         ),
                       ),
-       
                       Container(
                         width: 90,
                         child: Column(
@@ -702,7 +780,7 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                                 child: CircleAvatar(
                                   radius: 35.0,
                                   backgroundImage:
-                                  AssetImage('assets/images/lights.png'),
+                                      AssetImage('assets/images/lights.png'),
                                 ),
                               ),
                             ),
@@ -717,7 +795,6 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                           ],
                         ),
                       ),
-            
                       Container(
                         width: 90,
                         child: Column(
@@ -738,7 +815,7 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                                 child: CircleAvatar(
                                   radius: 35.0,
                                   backgroundImage:
-                                  AssetImage('assets/images/shoes.png'),
+                                      AssetImage('assets/images/shoes.png'),
                                 ),
                               ),
                             ),
@@ -753,10 +830,6 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                           ],
                         ),
                       ),
-                
-                     
-                    
-                    
                       Container(
                         width: 90,
                         child: Column(
@@ -777,7 +850,7 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                                 child: CircleAvatar(
                                   radius: 35.0,
                                   backgroundImage:
-                                  AssetImage('assets/images/clothes.jpg'),
+                                      AssetImage('assets/images/clothes.jpg'),
                                 ),
                               ),
                             ),
@@ -792,8 +865,6 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                           ],
                         ),
                       ),
-                
-                   
                       Container(
                         width: 90,
                         child: Column(
@@ -814,7 +885,7 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                                 child: CircleAvatar(
                                   radius: 35.0,
                                   backgroundImage:
-                                  AssetImage('assets/images/perfumes.png'),
+                                      AssetImage('assets/images/perfumes.png'),
                                 ),
                               ),
                             ),
@@ -829,14 +900,14 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                           ],
                         ),
                       ),
-                  
                       Container(
                         width: 90,
                         child: Column(
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("الكترونيك - ".tr + city!);
+                                ShopsScreen()
+                                    .setTitle("الكترونيك - ".tr + city!);
                                 ShopsScreen().setType('الكترونيك');
                                 ShopsScreen().setCity(city);
                                 Navigator.push(
@@ -871,7 +942,8 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                ShopsScreen().setTitle("اكسسوارات - ".tr + city!);
+                                ShopsScreen()
+                                    .setTitle("اكسسوارات - ".tr + city!);
                                 ShopsScreen().setType('اكسسوارات');
                                 ShopsScreen().setCity(city);
                                 Navigator.push(
@@ -900,7 +972,7 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                           ],
                         ),
                       ),
-                     Container(
+                      Container(
                         width: 90,
                         child: Column(
                           children: [
@@ -920,7 +992,7 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                                 child: CircleAvatar(
                                   radius: 35.0,
                                   backgroundImage:
-                                  AssetImage('assets/images/food.jpg'),
+                                      AssetImage('assets/images/food.jpg'),
                                 ),
                               ),
                             ),
@@ -935,7 +1007,6 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
                           ],
                         ),
                       ),
-                
                     ],
                   ),
                 ),
@@ -1052,12 +1123,12 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
 
   //هاد الفنكشن لخيارات الفئة---------------------------------------------------------------------------------
   DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
-    value: item,
-    child: Text(
-      item,
-      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-    ),
-  );
+        value: item,
+        child: Text(
+          item,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+        ),
+      );
   //--------------------------------------------------------------------------------------------------
 
   void onNotification() {

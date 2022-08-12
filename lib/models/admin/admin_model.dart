@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'user_model.g.dart';
+part 'admin_model.g.dart';
 
 @JsonSerializable()
-class UserModel {
+class AdminModel {
   // ignore: unused_field
 
   @JsonKey(name: '_id')
@@ -11,15 +11,13 @@ class UserModel {
   late final String name;
   late final String email;
   late final String? avatar;
-  late int points;
-  late final bool NotificationFromShop;
-  late final bool NotificationFromAdmin;
-  UserModel();
+  late final bool NotificationFromPendingStore;
+  AdminModel();
 
   /// factory.
-  factory UserModel.fromJson(Map<String, dynamic> json) =>
-      _$UserModelFromJson(json);
+  factory AdminModel.fromJson(Map<String, dynamic> json) =>
+      _$AdminModelFromJson(json);
 
   /// Connect the generated [_$PersonToJson] function to the `toJson` method.
-  Map<String, dynamic> toJson() => _$UserModelToJson(this);
+  Map<String, dynamic> toJson() => _$AdminModelToJson(this);
 }

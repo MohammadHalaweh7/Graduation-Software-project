@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/API/sharedPrefs.dart';
+import 'package:udemy_flutter/models/admin/admin_model.dart';
 import 'package:udemy_flutter/modules/home/main_screen.dart';
 import '../login/login_screen.dart';
 import 'package:http/http.dart' as http;
@@ -149,6 +151,7 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
         context: context,
         builder: (BuildContext context) => _buildPopupDialog(context),
       );
+      SendNotificationToAdmin();
     }
     if (result.statusCode == 413) {
       showDialog(
@@ -156,6 +159,20 @@ class _JoinAppScreenState extends State<JoinAppScreen> {
         builder: (BuildContext context) => _buildPopupDialog3(context),
       );
     }
+  }
+
+  Future<AdminModel> SendNotificationToAdmin() async {
+    var result = await http.get(
+      Uri.parse(fetchData.baseURL + "/admin/pendingShopCreatedNotification"),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    print(result.statusCode);
+
+    AdminModel adminModel = AdminModel.fromJson(jsonDecode(result.body));
+
+    return adminModel;
   }
 
   @override

@@ -4,12 +4,14 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:udemy_flutter/models/admin/admin_model.dart';
 import 'package:udemy_flutter/models/order/order_model.dart';
 import 'package:udemy_flutter/models/pendingStore/pendingStore_model.dart';
 import 'package:udemy_flutter/models/product/product_model.dart';
 import 'package:udemy_flutter/models/store/store_model.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:udemy_flutter/models/user/user_model.dart';
 
 import '../main.dart';
 import '../models/notification/notification_model.dart';
@@ -228,5 +230,55 @@ class fetchData {
     return body
         .map((pendingStore) => pendingStoreModel.fromJson(pendingStore))
         .toList();
+  }
+
+  Future<List<UserModel>> userchangeShopNotificationState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+
+    var res = await http.post(
+        Uri.parse(fetchData.baseURL + '/users/shopChangeNotification'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ' + token.toString()
+        });
+    print(res.body);
+
+    var body = jsonDecode(res.body) as List<dynamic>;
+
+    return body.map((user) => UserModel.fromJson(user)).toList();
+  }
+
+  Future<List<UserModel>> userChangeAdminNotificationState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+
+    var res = await http.post(
+        Uri.parse(fetchData.baseURL + '/users/adminChangeNotification'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ' + token.toString()
+        });
+
+    var body = jsonDecode(res.body) as List<dynamic>;
+
+    return body.map((user) => UserModel.fromJson(user)).toList();
+  }
+
+  Future<List<AdminModel>> adminchangeNotificationState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+
+    var res = await http.post(
+        Uri.parse(fetchData.baseURL + '/admin/notificationSeen'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ' + token.toString()
+        });
+    print(res.body);
+
+    var body = jsonDecode(res.body) as List<dynamic>;
+
+    return body.map((user) => AdminModel.fromJson(user)).toList();
   }
 }

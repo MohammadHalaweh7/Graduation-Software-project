@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:objectid/objectid.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
+import 'package:udemy_flutter/models/user/user_model.dart';
 import 'package:udemy_flutter/modules/admin/adminMain_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeperMain_screen.dart';
 import '../login/login_screen.dart';
@@ -112,6 +113,7 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
     print(result.statusCode);
 
     if (result.statusCode == 201) {
+      adminSendNotification();
       var body = jsonDecode(result.body);
       sendNotfiy(titleController.text, descriptionController.text);
       showDialog(
@@ -128,6 +130,24 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
         builder: (BuildContext context) => _buildPopupDialog3(context),
       );
     }
+  }
+
+  Future<UserModel> adminSendNotification() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+
+    var result = await http.get(
+      Uri.parse(fetchData.baseURL + "/users/adminSendNotification"),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer ' + token.toString()
+      },
+    );
+    print(result.statusCode);
+
+    UserModel userModel = UserModel.fromJson(jsonDecode(result.body));
+
+    return userModel;
   }
 
   @override
@@ -306,7 +326,7 @@ class _AddNotificationScreenState extends State<AddNotificationScreen> {
                 MaterialPageRoute(builder: (context) => AdminMainScreen()));
           },
           textColor: Colors.blue,
-          child:  Text('موافق'.tr),
+          child: Text('موافق'.tr),
         ),
       ],
     );
