@@ -114,9 +114,7 @@ class _ShopkeeperNewOrdersProductsScreenState
   }
 
   Widget myorders(id, name, price, avatar) {
-    totalController.text = total.toString();
-    return 
-    Column(
+    return Column(
       children: [
         SizedBox(
           height: 10,
@@ -236,351 +234,347 @@ class _ShopkeeperNewOrdersProductsScreenState
           height: 20,
         ),
         //كبسة ارسال الطلب
-     
       ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    totalController.text = total.toString();
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton(
-            onPressed: onNotification,
-            icon: Icon(
-              Icons.arrow_back,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          leading: IconButton(
+              onPressed: onNotification,
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.blue,
+                size: 35,
+              )),
+          title: Text(
+            "تفاصيل الطلب",
+            style: TextStyle(
               color: Colors.blue,
-              size: 35,
-            )),
-        title: Text(
-          "تفاصيل الطلب",
-          style: TextStyle(
-            color: Colors.blue,
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        actions: [],
-      ),
-      drawer: Drawer(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 8, top: 30),
-                child: Image.asset(
-                  'assets/images/logo3.png',
-                  width: 150,
-                ),
-              ),
-              Text(
-                "متجراتي",
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xff758DFF)),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                width: 300,
-                height: 1,
-                color: Colors.grey[300],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 220),
-                child: Text(
-                  "الرئيسية",
-                  style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xff758DFF)),
-                ),
-              ),
-              ListTile(
-                title: Text("الى الرئيسية"),
-                leading: Icon(Icons.store, color: Color(0xff758DFF)),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ShopKeeperMainScreen()));
-                },
-              ),
-              Container(
-                width: 300,
-                height: 1,
-                color: Colors.grey[300],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 147),
-                child: Text(
-                  "معلومات المستخدم",
-                  style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xff758DFF)),
-                ),
-              ),
-              ListTile(
-                title: Text("حسابي"),
-                leading: Icon(Icons.person, color: Color(0xff758DFF)),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ShopkeeperAccountScreen()));
-                },
-              ),
-              ListTile(
-                title: Text("متجري"),
-                leading: Icon(Icons.storefront, color: Color(0xff758DFF)),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ShopkeeperProfileScreen()));
-                },
-              ),
-              ListTile(
-                title: Text("منتجاتي"),
-                leading: Icon(Icons.production_quantity_limits,
-                    color: Color(0xff758DFF)),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ShopkeeperProductsScreen()));
-                },
-              ),
-              ListTile(
-                title: Text("اضافة منتج جديد"),
-                leading:
-                    Icon(Icons.add_shopping_cart, color: Color(0xff758DFF)),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AddProductScreen()));
-                },
-              ),
-              ListTile(
-                title: Text("الطلبات الجديدة"),
-                leading:
-                    Icon(Icons.open_in_new_sharp, color: Color(0xff758DFF)),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ShopkeeperNewOrdersScreen()));
-                },
-              ),
-              ListTile(
-                title: Text("طلبات قيد التوصيل"),
-                leading: Icon(Icons.delivery_dining_rounded,
-                    color: Color(0xff758DFF)),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              ShopkeeperDeliveryOrdersScreen()));
-                },
-              ),
-              ListTile(
-                title: Text("جميع الطلبات"),
-                leading:
-                    Icon(Icons.clear_all_rounded, color: Color(0xff758DFF)),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ShopkeeperAllOrdersScreen()));
-                },
-              ),
-              ListTile(
-                title: Text("الاحصائيات"),
-                leading: Icon(Icons.addchart_sharp, color: Color(0xff758DFF)),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ShopkeeperAllOrdersScreen()));
-                },
-              ),
-              ListTile(
-                title: Text("حذف المتجر نهائيا"),
-                leading: Icon(Icons.highlight_remove_sharp,
-                    color: Color(0xff758DFF)),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AddProductScreen()));
-                },
-              ),
-              ListTile(
-                title: Text("تسجيل خروج"),
-                leading: Icon(Icons.logout, color: Color(0xff758DFF)),
-                onTap: () async {
-                  SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
-                  prefs.remove('token');
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()));
-                },
-              ),
-              SizedBox(
-                height: 0,
-              ),
-              Container(
-                width: 300,
-                height: 1,
-                color: Colors.grey[300],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 220),
-                child: Text(
-                  "التطبيق",
-                  style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xff758DFF)),
-                ),
-              ),
-              ListTile(
-                title: Text("اللغة"),
-                leading: Icon(Icons.g_translate, color: Color(0xff758DFF)),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => LanguageScreen()));
-                },
-              ),
-              ListTile(
-                title: Text("عن متجراتي"),
-                leading: Icon(Icons.assignment, color: Color(0xff758DFF)),
-                onTap: () {},
-              ),
-              ListTile(
-                title: Text("ضبط"),
-                leading: Icon(Icons.gamepad, color: Color(0xff758DFF)),
-                onTap: () {},
-              ),
-              ListTile(
-                title: Text("سياسة الخصوصية"),
-                leading: Icon(Icons.warning, color: Color(0xff758DFF)),
-                onTap: () {},
-              ),
-            ],
-          ),
-        ),
-      ),
-      body:
-    Column(
-      children: [
-        Expanded(child: getAllOrderProducts()),
-        SizedBox(height: 10,),
-        Container(
-            padding: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5.0),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  offset: Offset(0, 1.0), //(x,y)
-                  blurRadius: 5.0,
-                ),
-              ],
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
             ),
-            width: double.infinity,
-            height: 120,
+          ),
+          actions: [],
+        ),
+        drawer: Drawer(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Row(
-                    children: [
-                      Text(
-                        'مجموع السعر : '.tr,
-                        style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 5,
-                        width: 100,
-                        child: TextField(
-                          enabled: false,
-                          controller: totalController,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Spacer(),
-                    ],
+                  padding: const EdgeInsets.only(right: 8, top: 30),
+                  child: Image.asset(
+                    'assets/images/logo3.png',
+                    width: 150,
                   ),
+                ),
+                Text(
+                  "متجراتي",
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff758DFF)),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                    color: Colors.blueAccent, // width: double.infinity,
-                  ),
-                  child: MaterialButton(
-                    onPressed: () {
-                      changeOrderStatus(id);
-                    },
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "ارسال الطلب",
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Icon(
-                          Icons.delivery_dining_outlined,
-                          color: Colors.white,
-                        )
-                      ],
-                    ),
+                  width: 300,
+                  height: 1,
+                  color: Colors.grey[300],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 220),
+                  child: Text(
+                    "الرئيسية",
+                    style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xff758DFF)),
                   ),
                 ),
+                ListTile(
+                  title: Text("الى الرئيسية"),
+                  leading: Icon(Icons.store, color: Color(0xff758DFF)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ShopKeeperMainScreen()));
+                  },
+                ),
+                Container(
+                  width: 300,
+                  height: 1,
+                  color: Colors.grey[300],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 147),
+                  child: Text(
+                    "معلومات المستخدم",
+                    style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xff758DFF)),
+                  ),
+                ),
+                ListTile(
+                  title: Text("حسابي"),
+                  leading: Icon(Icons.person, color: Color(0xff758DFF)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ShopkeeperAccountScreen()));
+                  },
+                ),
+                ListTile(
+                  title: Text("متجري"),
+                  leading: Icon(Icons.storefront, color: Color(0xff758DFF)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ShopkeeperProfileScreen()));
+                  },
+                ),
+                ListTile(
+                  title: Text("منتجاتي"),
+                  leading: Icon(Icons.production_quantity_limits,
+                      color: Color(0xff758DFF)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ShopkeeperProductsScreen()));
+                  },
+                ),
+                ListTile(
+                  title: Text("اضافة منتج جديد"),
+                  leading:
+                      Icon(Icons.add_shopping_cart, color: Color(0xff758DFF)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AddProductScreen()));
+                  },
+                ),
+                ListTile(
+                  title: Text("الطلبات الجديدة"),
+                  leading:
+                      Icon(Icons.open_in_new_sharp, color: Color(0xff758DFF)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ShopkeeperNewOrdersScreen()));
+                  },
+                ),
+                ListTile(
+                  title: Text("طلبات قيد التوصيل"),
+                  leading: Icon(Icons.delivery_dining_rounded,
+                      color: Color(0xff758DFF)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ShopkeeperDeliveryOrdersScreen()));
+                  },
+                ),
+                ListTile(
+                  title: Text("جميع الطلبات"),
+                  leading:
+                      Icon(Icons.clear_all_rounded, color: Color(0xff758DFF)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ShopkeeperAllOrdersScreen()));
+                  },
+                ),
+                ListTile(
+                  title: Text("الاحصائيات"),
+                  leading: Icon(Icons.addchart_sharp, color: Color(0xff758DFF)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ShopkeeperAllOrdersScreen()));
+                  },
+                ),
+                ListTile(
+                  title: Text("حذف المتجر نهائيا"),
+                  leading: Icon(Icons.highlight_remove_sharp,
+                      color: Color(0xff758DFF)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AddProductScreen()));
+                  },
+                ),
+                ListTile(
+                  title: Text("تسجيل خروج"),
+                  leading: Icon(Icons.logout, color: Color(0xff758DFF)),
+                  onTap: () async {
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    prefs.remove('token');
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()));
+                  },
+                ),
+                SizedBox(
+                  height: 0,
+                ),
+                Container(
+                  width: 300,
+                  height: 1,
+                  color: Colors.grey[300],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 220),
+                  child: Text(
+                    "التطبيق",
+                    style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xff758DFF)),
+                  ),
+                ),
+                ListTile(
+                  title: Text("اللغة"),
+                  leading: Icon(Icons.g_translate, color: Color(0xff758DFF)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LanguageScreen()));
+                  },
+                ),
+                ListTile(
+                  title: Text("عن متجراتي"),
+                  leading: Icon(Icons.assignment, color: Color(0xff758DFF)),
+                  onTap: () {},
+                ),
+                ListTile(
+                  title: Text("ضبط"),
+                  leading: Icon(Icons.gamepad, color: Color(0xff758DFF)),
+                  onTap: () {},
+                ),
+                ListTile(
+                  title: Text("سياسة الخصوصية"),
+                  leading: Icon(Icons.warning, color: Color(0xff758DFF)),
+                  onTap: () {},
+                ),
               ],
-            )),
-      
-      ],
-    )
-      
-      
-      
-       
-    );
+            ),
+          ),
+        ),
+        body: Column(
+          children: [
+            Expanded(child: getAllOrderProducts()),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(0, 1.0), //(x,y)
+                      blurRadius: 5.0,
+                    ),
+                  ],
+                ),
+                width: double.infinity,
+                height: 120,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Row(
+                        children: [
+                          Text(
+                            'مجموع السعر : '.tr,
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 5,
+                            width: 100,
+                            child: TextField(
+                              enabled: false,
+                              controller: totalController,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Spacer(),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                        color: Colors.blueAccent, // width: double.infinity,
+                      ),
+                      child: MaterialButton(
+                        onPressed: () {
+                          changeOrderStatus(id);
+                        },
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "ارسال الطلب",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Icon(
+                              Icons.delivery_dining_outlined,
+                              color: Colors.white,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                )),
+          ],
+        ));
   }
 
   //Pub up Function--------------------------------------------------------------------------------------------

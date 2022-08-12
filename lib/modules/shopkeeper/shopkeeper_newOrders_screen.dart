@@ -45,7 +45,7 @@ class _ShopkeeperNewOrdersScreenState extends State<ShopkeeperNewOrdersScreen> {
                   ),
                 )
               : ListView.builder(
-                physics: BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemCount: orders == null ? 0 : orders.length,

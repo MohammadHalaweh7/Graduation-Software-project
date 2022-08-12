@@ -51,7 +51,7 @@ class _ShopkeeperDeliveryOrdersScreenState
                   ),
                 )
               : ListView.builder(
-                physics: BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemCount: orders == null ? 0 : orders.length,
@@ -64,29 +64,17 @@ class _ShopkeeperDeliveryOrdersScreenState
                       orders[index].buyerPhone,
                       orders[index].buyerEmail,
                       orders[index].orderStatus,
-                      // orders[index].productName,
-                      // orders[index].price,
                       orders[index].id,
-                      // orders[index].avatar,
                       orders[index].size,
+                      orders[index].total,
+                      orders[index].storeName,
                     );
                   });
         });
   }
 
-  Widget myNeworders(
-      orderNumber,
-      buyerName,
-      buyerCity,
-      buyerAddress,
-      buyerPhone,
-      buyerEmail,
-      orderStatus,
-      //   productName,
-      // price,
-      id,
-      // avatar,
-      size) {
+  Widget myNeworders(orderNumber, buyerName, buyerCity, buyerAddress,
+      buyerPhone, buyerEmail, orderStatus, id, size, total, storeName) {
     return Column(
       children: [
         SizedBox(
@@ -143,23 +131,19 @@ class _ShopkeeperDeliveryOrdersScreenState
                         ),
                         child: MaterialButton(
                           onPressed: () {
+                            ShopkeeperDeliveryOrdersProductsScreen().setID(id);
+                            ShopkeeperDeliveryOrdersProductsScreen()
+                                .setSize(size);
+                            ShopkeeperDeliveryOrdersProductsScreen()
+                                .setTotal(total);
+                            ShopkeeperDeliveryOrdersProductsScreen()
+                              ..setStoreName(storeName);
+
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        ShopkeeperDeliveryOrdersProductsScreen(
-                                            orderNumber,
-                                            buyerName,
-                                            buyerCity,
-                                            buyerAddress,
-                                            buyerPhone,
-                                            buyerEmail,
-                                            orderStatus,
-                                            "productName",
-                                            "price",
-                                            id,
-                                            "avatar",
-                                            size)));
+                                        ShopkeeperDeliveryOrdersProductsScreen()));
                           },
                           child: Text(
                             "التفاصيل",

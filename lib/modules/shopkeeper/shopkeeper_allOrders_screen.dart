@@ -13,6 +13,7 @@ import 'package:udemy_flutter/modules/order/order_screen.dart';
 import 'package:udemy_flutter/modules/password/password_screen.dart';
 import 'package:udemy_flutter/modules/phone/phone_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeperMain_screen.dart';
+import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_deliveryOrdersProducts_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_newOrdersProducts_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_newOrders_screen.dart';
 import 'package:udemy_flutter/shared/components/components.dart';
@@ -48,7 +49,7 @@ class _ShopkeeperAllOrdersScreenState extends State<ShopkeeperAllOrdersScreen> {
                   ),
                 )
               : ListView.builder(
-                physics: BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemCount: orders == null ? 0 : orders.length,
@@ -62,13 +63,16 @@ class _ShopkeeperAllOrdersScreenState extends State<ShopkeeperAllOrdersScreen> {
                       orders[index].buyerEmail,
                       orders[index].orderStatus,
                       orders[index].id,
+                      orders[index].size,
+                      orders[index].total,
+                      orders[index].storeName,
                     );
                   });
         });
   }
 
   Widget myNeworders(orderNumber, buyerName, buyerCity, buyerAddress,
-      buyerPhone, buyerEmail, orderStatus, id) {
+      buyerPhone, buyerEmail, orderStatus, id, size, total, storeName) {
     return Column(
       children: [
         SizedBox(
@@ -125,7 +129,19 @@ class _ShopkeeperAllOrdersScreenState extends State<ShopkeeperAllOrdersScreen> {
                         ),
                         child: MaterialButton(
                           onPressed: () {
-                            // Navigator.push(context,MaterialPageRoute(builder: (context) =>ShopkeeperDeliveryOrdersProductsScreen()));
+                            ShopkeeperDeliveryOrdersProductsScreen().setID(id);
+                            ShopkeeperDeliveryOrdersProductsScreen()
+                                .setSize(size);
+                            ShopkeeperDeliveryOrdersProductsScreen()
+                                .setTotal(total);
+                            ShopkeeperDeliveryOrdersProductsScreen()
+                              ..setStoreName(storeName);
+
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ShopkeeperDeliveryOrdersProductsScreen()));
                           },
                           child: Text(
                             "التفاصيل",
