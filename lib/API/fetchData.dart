@@ -4,6 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:udemy_flutter/models/PendingPhotos/PendingPhotos_model.dart';
 import 'package:udemy_flutter/models/admin/admin_model.dart';
 import 'package:udemy_flutter/models/order/order_model.dart';
 import 'package:udemy_flutter/models/pendingStore/pendingStore_model.dart';
@@ -280,5 +281,37 @@ class fetchData {
     var body = jsonDecode(res.body) as List<dynamic>;
 
     return body.map((user) => AdminModel.fromJson(user)).toList();
+  }
+
+  Future<List<PendingPhotosModel>> getAllPendingAds() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+
+    var res = await http
+        .get(Uri.parse(fetchData.baseURL + '/PendingPhotos/getAll'), headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer ' + token.toString()
+    });
+    print(res.body);
+
+    var body = jsonDecode(res.body) as List<dynamic>;
+
+    return body.map((Ads) => PendingPhotosModel.fromJson(Ads)).toList();
+  }
+
+  Future<List<PendingPhotosModel>> getAllAds() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+
+    var res = await http
+        .get(Uri.parse(fetchData.baseURL + '/photos/getAll'), headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer ' + token.toString()
+    });
+    print(res.body);
+
+    var body = jsonDecode(res.body) as List<dynamic>;
+
+    return body.map((Ads) => PendingPhotosModel.fromJson(Ads)).toList();
   }
 }

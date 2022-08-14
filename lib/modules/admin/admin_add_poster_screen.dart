@@ -12,7 +12,18 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 
+var email;
+var storeName;
+
 class AdminAddPosterScreen extends StatefulWidget {
+  SetEmail(E) {
+    email = E;
+  }
+
+  SetStoreName(N) {
+    storeName = N;
+  }
+
   @override
   State<AdminAddPosterScreen> createState() => _AdminAddPosterScreenState();
 }
@@ -33,6 +44,36 @@ class _AdminAddPosterScreenState extends State<AdminAddPosterScreen> {
       this._image = imageTemporary;
       //print(image.path);
     });
+  }
+
+  Future<void> CreateAD() async {
+    var token;
+    var body;
+    if (!(myImage == null)) {
+      var bytes = await new File(myImage.path).readAsBytes();
+      String base64 = base64Encode(bytes);
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      token = prefs.get('token');
+      // print(token);
+      body =
+          jsonEncode({'photo': base64, 'email': email, 'storename': storeName});
+    }
+
+    var result = await http.post(Uri.parse(fetchData.baseURL + '/admin/photos'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ' + token.toString()
+        },
+        body: body);
+
+    print(result.statusCode);
+
+    if (result.statusCode == 201) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => _buildPopupDialog(context),
+      );
+    }
   }
 
   @override
@@ -70,7 +111,6 @@ class _AdminAddPosterScreenState extends State<AdminAddPosterScreen> {
                     child: Image.asset(
                       'assets/images/ad3.gif',
                       width: 150,
-                    
                     ),
                   ),
 
@@ -90,20 +130,23 @@ class _AdminAddPosterScreenState extends State<AdminAddPosterScreen> {
                         onPressed: () {
                           getImage();
                         },
-                        child:
-                         Row(
+                        child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
-                           children: [
-                             Text(
+                          children: [
+                            Text(
                               "أضف اعلانك",
                               style: TextStyle(color: Colors.white),
+                            ),
+                            SizedBox(
+                              width: 7,
+                            ),
+                            Icon(
+                              Icons.add_photo_alternate,
+                              color: Colors.white,
+                            )
+                          ],
                         ),
-                        SizedBox(width: 7,),
-                        Icon(Icons.add_photo_alternate,color: Colors.white,)
-                         
-                           ],
-                         ),
                       ),
                     ),
                   ),
@@ -152,11 +195,15 @@ class _AdminAddPosterScreenState extends State<AdminAddPosterScreen> {
                     ),
                     child: MaterialButton(
                       onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) =>
-                              _buildPopupDialog(context),
-                        );
+                        if (!(myImage == null)) {
+                          CreateAD();
+                        } else {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                _buildPopupDialog2(context),
+                          );
+                        }
                       },
                       child: Text(
                         "انشاء الاعلان",
@@ -190,18 +237,48 @@ class _AdminAddPosterScreenState extends State<AdminAddPosterScreen> {
           SizedBox(
             height: 10,
           ),
-          Text(
-              "تم انشاء الاعلان بنجاح")
+          Text("تم انشاء الاعلان بنجاح")
         ],
       ),
       actions: <Widget>[
         new FlatButton(
           onPressed: () {
             Navigator.of(context).pop();
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => AdminMainScreen()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AdminMainScreen()));
+          },
+          textColor: Colors.blue,
+          child: const Text('موافق'),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPopupDialog2(BuildContext context) {
+    return new AlertDialog(
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CircleAvatar(
+              radius: 17,
+              backgroundColor: Colors.blue,
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          Text('الرجاء ادخال الصورة ثم اضغط على انشاء الاعلان')
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AdminMainScreen()));
           },
           textColor: Colors.blue,
           child: const Text('موافق'),

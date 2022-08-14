@@ -619,6 +619,10 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
+                                      AdminAddPosterScreen()
+                                          .SetEmail(account.email);
+                                      AdminAddPosterScreen()
+                                          .SetStoreName(account.name);
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(

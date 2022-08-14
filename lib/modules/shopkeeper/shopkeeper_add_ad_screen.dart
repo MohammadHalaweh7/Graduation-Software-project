@@ -7,13 +7,25 @@ import 'package:image_picker/image_picker.dart';
 import 'package:objectid/objectid.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
+import 'package:udemy_flutter/models/PendingPhotos/PendingPhotos_model.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeperMain_screen.dart';
 import '../login/login_screen.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 
+var email;
+var storeName;
+
 class ShopkeeperAddAdScreen extends StatefulWidget {
+  SetEmail(E) {
+    email = E;
+  }
+
+  SetStoreName(N) {
+    storeName = N;
+  }
+
   @override
   State<ShopkeeperAddAdScreen> createState() => _ShopkeeperAddAdScreenState();
 }
@@ -34,6 +46,37 @@ class _ShopkeeperAddAdScreenState extends State<ShopkeeperAddAdScreen> {
       this._image = imageTemporary;
       //print(image.path);
     });
+  }
+
+  Future<void> CreateAD() async {
+    var token;
+    var body;
+    if (!(myImage == null)) {
+      var bytes = await new File(myImage.path).readAsBytes();
+      String base64 = base64Encode(bytes);
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      token = prefs.get('token');
+      // print(token);
+      body =
+          jsonEncode({'photo': base64, 'email': email, 'storename': storeName});
+    }
+
+    var result =
+        await http.post(Uri.parse(fetchData.baseURL + '/PendingPhotos/create'),
+            headers: {
+              'Content-Type': 'application/json; charset=UTF-8',
+              'Authorization': 'Bearer ' + token.toString()
+            },
+            body: body);
+
+    print(result.statusCode);
+
+    if (result.statusCode == 201) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => _buildPopupDialog(context),
+      );
+    }
   }
 
   @override
@@ -72,7 +115,6 @@ class _ShopkeeperAddAdScreenState extends State<ShopkeeperAddAdScreen> {
                       child: Image.asset(
                         'assets/images/ad3.gif',
                         width: 150,
-                      
                       ),
                     ),
 
@@ -92,20 +134,23 @@ class _ShopkeeperAddAdScreenState extends State<ShopkeeperAddAdScreen> {
                           onPressed: () {
                             getImage();
                           },
-                          child:
-                           Row(
+                          child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
-                             children: [
-                               Text(
+                            children: [
+                              Text(
                                 "أضف اعلانك",
                                 style: TextStyle(color: Colors.white),
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Icon(
+                                Icons.add_photo_alternate,
+                                color: Colors.white,
+                              )
+                            ],
                           ),
-                          SizedBox(width: 7,),
-                          Icon(Icons.add_photo_alternate,color: Colors.white,)
-                           
-                             ],
-                           ),
                         ),
                       ),
                     ),
@@ -154,11 +199,15 @@ class _ShopkeeperAddAdScreenState extends State<ShopkeeperAddAdScreen> {
                       ),
                       child: MaterialButton(
                         onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) =>
-                                _buildPopupDialog(context),
-                          );
+                          if (!(myImage == null)) {
+                            CreateAD();
+                          } else {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) =>
+                                  _buildPopupDialog2(context),
+                            );
+                          }
                         },
                         child: Text(
                           "ارسال الطلب",
@@ -205,6 +254,37 @@ class _ShopkeeperAddAdScreenState extends State<ShopkeeperAddAdScreen> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => ShopKeeperMainScreen()));
+          },
+          textColor: Colors.blue,
+          child: const Text('موافق'),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPopupDialog2(BuildContext context) {
+    return new AlertDialog(
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CircleAvatar(
+              radius: 17,
+              backgroundColor: Colors.blue,
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          Text("الرجاء ادخال صورة الاعلان ثم اضغط على ارسال الطلب")
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
           },
           textColor: Colors.blue,
           child: const Text('موافق'),

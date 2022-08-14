@@ -589,6 +589,10 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                               ),
                               GestureDetector(
                                 onTap: () {
+                                  ShopkeeperAddAdScreen()
+                                      .SetEmail(account.email);
+                                  ShopkeeperAddAdScreen()
+                                      .SetStoreName(account.name);
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
