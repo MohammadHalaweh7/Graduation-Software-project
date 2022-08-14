@@ -54,7 +54,7 @@ class fetchData {
     print(res.statusCode);
     // print(res.body);
     var body = jsonDecode(res.body) as List<dynamic>;
-    print(body);
+    // print(body);
     return body.map((store) => StoreModel.fromJson(store)).toList();
   }
 

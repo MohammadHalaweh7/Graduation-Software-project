@@ -34,6 +34,7 @@ import '../../main.dart';
 
 var shopNotification;
 var adminNotification;
+List<dynamic> AdsList = [];
 
 //Haytham Saleh
 class MainScreen extends StatefulWidget {
@@ -64,6 +65,23 @@ class _MainScreenState extends State<MainScreen> {
   String? value2;
   String? value3;
   List<StoreModel> stores = [];
+
+  Future<List<dynamic>> getAds() async {
+    var result = await http.get(
+      Uri.parse(fetchData.baseURL + "/Ads/getAll"),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    print(result.statusCode);
+    var body = jsonDecode(result.body); // as List<String>;
+    // print(body);
+    AdsList = body;
+    //print(AdsList);
+
+    return body;
+  }
+
   Future<UserModel> loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
@@ -86,6 +104,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Widget fetchAllStores() {
+    getAds();
 // -------------------------------
     loadData();
     print(adminNotification);
@@ -570,8 +589,6 @@ class _MainScreenState extends State<MainScreen> {
                     SharedPreferences prefs =
                         await SharedPreferences.getInstance();
                     prefs.remove('token');
-                    prefs.remove('admintoken');
-                    prefs.remove('storetoken');
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => LoginScreen()));
                   },
@@ -589,22 +606,38 @@ class _MainScreenState extends State<MainScreen> {
                 height: 10,
               ),
               CarouselSlider(
-                items: imgList
-                    .map((e) => ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              Image.network(
-                                e,
-                                height: 200,
-                                width: 100,
-                                fit: BoxFit.cover,
-                              ),
-                            ],
-                          ),
-                        ))
-                    .toList(),
+                items: AdsList.map(
+                  (e) =>
+                      // ClipRRect(
+                      //       borderRadius: BorderRadius.circular(20),
+                      //       child: Stack(
+                      //         fit: StackFit.expand,
+                      //         children: [
+                      //           Image.network(
+                      //             e,
+                      //             height: 200,
+                      //             width: 100,
+                      //             fit: BoxFit.cover,
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     )
+                      Container(
+                          width: 391,
+                          height: 200,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            image: DecorationImage(
+                                image: e == null
+                                    ? (AssetImage(
+                                        'assets/images/adImage5.jfif',
+                                      ) as ImageProvider)
+                                    : MemoryImage(
+                                        base64Decode(e),
+                                      ),
+                                fit: BoxFit.cover),
+                          )),
+                ).toList(),
                 //   //خصائصها
 
                 options: CarouselOptions(

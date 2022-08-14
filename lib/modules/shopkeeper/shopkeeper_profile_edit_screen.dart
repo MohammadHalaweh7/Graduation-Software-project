@@ -63,12 +63,12 @@ class _ShopkeeperProfileEditScreenState
     'للسيدات'.tr,
     "للرجال".tr,
     "اكسسوارات".tr,
-    "هدايا".tr,
+    "انارة".tr,
     "ماكولات".tr,
     "ملابس".tr,
     "أحذية".tr,
     "عطور".tr,
-    'فنون'.tr
+    'الكترونيك'.tr
   ];
 
   final citiesItems = [
@@ -663,6 +663,15 @@ class _ShopkeeperProfileEditScreenState
                                               BorderRadius.circular(6)),
                                       child: DropdownButtonHideUnderline(
                                         child: DropdownButton<String>(
+                                          hint: Container(
+                                            width: 150, //and here
+                                            child: Text(
+                                              city,
+                                              style: TextStyle(
+                                                  color: Colors.black),
+                                              textAlign: TextAlign.end,
+                                            ),
+                                          ),
                                           onTap: () {},
                                           icon: Icon(
                                               Icons.arrow_downward_rounded),
