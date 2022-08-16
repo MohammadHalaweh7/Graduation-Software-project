@@ -29,7 +29,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/notifications.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-
 // @dart=2.9
 //Mohammad Halaweh99
 
@@ -49,28 +48,26 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print('A bg message just showed up : ${message.messageId}');
 }
 
-
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
     name: 'udemy_flutter',
-   options: const FirebaseOptions(
-     apiKey:"XXX" ,
-     appId: "XXX",
-     messagingSenderId:"XXX" ,
-     projectId:"XXX" ,
-   ),
+    options: const FirebaseOptions(
+      apiKey: "XXX",
+      appId: "XXX",
+      messagingSenderId: "XXX",
+      projectId: "XXX",
+    ),
   );
 
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
 
-   await  FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
     badge: true,
     sound: true,
@@ -81,15 +78,15 @@ void main() async {
 
   // var token = await FirebaseMessaging.instance.getToken();
   // print(token);
-  
+
   // FirebaseMessaging.onMessage.listen((event)
   // {
   //   print('on oppenning app');
   //   print(event.data.toString());
-  
+
   //   // showToast(text:'on massage',state: ToastStates.SUCCESS);
   // });
-  
+
   // FirebaseMessaging.onMessageOpenedApp.listen((event)
   // {
   //   print(event.data.toString());
@@ -154,9 +151,6 @@ class MyApp extends StatelessWidget {
                 return Container();
               },
             ),
-
-
-            
           );
         },
       ),
