@@ -15,7 +15,7 @@ import 'package:udemy_flutter/layout/shop_layout/shop_layout.dart';
 import 'package:udemy_flutter/modules/signup/signUp_screen.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
-var type;
+var type = '';
 var title;
 var city;
 var search = 'all';
@@ -61,7 +61,7 @@ class _ShopsScreenState extends State<ShopsScreen> {
       search = searchController.text;
     }
     return FutureBuilder(
-        future: (ShopsScreen().getType() != null)
+        future: (ShopsScreen().getType() != '')
             ? fetch.alltypeCitystores(ShopsScreen().getType(), city, search)
             : (fetch.allCityStores(city, search)),
         builder: (contxt, snapchot) {

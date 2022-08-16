@@ -21,6 +21,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
+import '../modules/shops/shops_screen.dart';
+
 class fetchData {
   static const String baseURL = 'https://mystoreapii.herokuapp.com';
 
@@ -77,6 +79,7 @@ class fetchData {
         search));
 
     var body = jsonDecode(res.body) as List<dynamic>;
+    ShopsScreen().setType('');
 
     return body.map((store) => StoreModel.fromJson(store)).toList();
   }
