@@ -18,6 +18,7 @@ import 'package:get/get_utils/src/extensions/internacionalization.dart';
 var type;
 var title;
 var city;
+var search = 'all';
 
 class ShopsScreen extends StatefulWidget {
   setType(S) {
@@ -50,41 +51,47 @@ class ShopsScreen extends StatefulWidget {
 }
 
 class _ShopsScreenState extends State<ShopsScreen> {
+  var searchController = TextEditingController();
   fetchData fetch = fetchData();
 
   Widget fetchTypeStores() {
+    if (searchController.text == '') {
+      search = 'all';
+    } else {
+      search = searchController.text;
+    }
     return FutureBuilder(
         future: (ShopsScreen().getType() != null)
-            ? fetch.alltypeCitystores(ShopsScreen().getType(), city)
-            : (fetch.allCityStores(city)),
+            ? fetch.alltypeCitystores(ShopsScreen().getType(), city, search)
+            : (fetch.allCityStores(city, search)),
         builder: (contxt, snapchot) {
           var stores = snapchot.data as List<StoreModel>;
           return snapchot.data == null
               ? Center(
-            child: CircularProgressIndicator(
-              valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
-            ),
-          )
+                  child: CircularProgressIndicator(
+                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+                  ),
+                )
               : ListView.builder(
-              physics: BouncingScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemCount: stores == null ? 0 : stores.length,
-              itemBuilder: (context, index) {
-                return mystore(
-                  stores[index].name,
-                  stores[index].description,
-                  stores[index].id,
-                  stores[index].phoneNumber,
-                  stores[index].locationOnMap,
-                  stores[index].avatar,
-                  stores[index].detailedLocation,
-                  stores[index].facebook,
-                  stores[index].snapchat,
-                  stores[index].whatsapp,
-                  stores[index].instagram,
-                );
-              });
+                  physics: BouncingScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: stores == null ? 0 : stores.length,
+                  itemBuilder: (context, index) {
+                    return mystore(
+                      stores[index].name,
+                      stores[index].description,
+                      stores[index].id,
+                      stores[index].phoneNumber,
+                      stores[index].locationOnMap,
+                      stores[index].avatar,
+                      stores[index].detailedLocation,
+                      stores[index].facebook,
+                      stores[index].snapchat,
+                      stores[index].whatsapp,
+                      stores[index].instagram,
+                    );
+                  });
         });
   }
 
@@ -92,8 +99,7 @@ class _ShopsScreenState extends State<ShopsScreen> {
       detailedLocation, facebook, snapchat, whatsapp, instagram) {
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
-      child: 
-      GestureDetector(
+      child: GestureDetector(
         onTap: () {
           ShopLayout().setData(
             id,
@@ -111,8 +117,7 @@ class _ShopsScreenState extends State<ShopsScreen> {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => ShopLayout()));
         },
-        child:
-         Container(
+        child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.0),
             color: Colors.white,
@@ -136,14 +141,13 @@ class _ShopsScreenState extends State<ShopsScreen> {
                     image: DecorationImage(
                         image: avatar == null
                             ? (AssetImage(
-                          'assets/images/logo3.png',
-                        ) as ImageProvider)
+                                'assets/images/logo3.png',
+                              ) as ImageProvider)
                             : MemoryImage(
-                          base64Decode(avatar),
-                        ),
+                                base64Decode(avatar),
+                              ),
                         fit: BoxFit.cover),
-                  )
-                  ),
+                  )),
               SizedBox(
                 height: 15,
               ),
@@ -177,10 +181,17 @@ class _ShopsScreenState extends State<ShopsScreen> {
             ],
           ),
         ),
-      
       ),
     );
   }
+
+  //للبحث
+  Icon customIcon = const Icon(
+    Icons.search,
+    size: 35,
+  );
+
+  Widget customSearchBar = Text(ShopsScreen().getTitle());
 
   @override
   Widget build(BuildContext context) {
@@ -195,15 +206,48 @@ class _ShopsScreenState extends State<ShopsScreen> {
               color: Colors.blue,
               size: 35,
             )),
-        title: Text(
-          ShopsScreen().getTitle(),
-          style: TextStyle(
-            color: Colors.blue,
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        actions: [],
+        title: customSearchBar,
+        // title: Text(
+        //   ShopsScreen().getTitle(),
+        //   style: TextStyle(
+        //     color: Colors.blue,
+        //     fontSize: 22,
+        //     fontWeight: FontWeight.bold,
+        //   ),
+        // ),
+
+        //كبسة السيرش
+        actions: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                if (customIcon.icon == Icons.search) {
+                  customIcon = const Icon(Icons.cancel);
+                  customSearchBar = ListTile(
+                    title: TextField(
+                      controller: searchController,
+                      onChanged: (value) =>
+                          setState(() => {search = searchController.text}),
+                      decoration: InputDecoration(
+                        hintText: 'اكتب اسم المتجر ...'.tr,
+                        hintStyle: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 18,
+                          fontStyle: FontStyle.italic,
+                        ),
+                        border: InputBorder.none,
+                      ),
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                  );
+                }
+              });
+            },
+            icon: customIcon,
+          )
+        ],
       ),
       drawer: Drawer(
         child: SingleChildScrollView(

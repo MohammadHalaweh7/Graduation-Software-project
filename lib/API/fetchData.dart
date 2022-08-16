@@ -31,9 +31,9 @@ class fetchData {
     return body.map((store) => StoreModel.fromJson(store)).toList();
   }
 
-  Future<List<StoreModel>> allCityStores(city) async {
-    var res = await http
-        .get(Uri.parse(fetchData.baseURL + '/store/locationall/' + city));
+  Future<List<StoreModel>> allCityStores(city, search) async {
+    var res = await http.get(Uri.parse(
+        fetchData.baseURL + '/store/locationall/' + city + '/' + search));
     var body = jsonDecode(res.body) as List<dynamic>;
     return body.map((store) => StoreModel.fromJson(store)).toList();
   }
@@ -67,9 +67,14 @@ class fetchData {
     return body.map((store) => StoreModel.fromJson(store)).toList();
   }
 
-  Future<List<StoreModel>> alltypeCitystores(type, city) async {
-    var res = await http.get(Uri.parse(
-        fetchData.baseURL + '/store/CityAndType/' + city + '/' + type));
+  Future<List<StoreModel>> alltypeCitystores(type, city, search) async {
+    var res = await http.get(Uri.parse(fetchData.baseURL +
+        '/store/CityAndType/' +
+        city +
+        '/' +
+        type +
+        '/' +
+        search));
 
     var body = jsonDecode(res.body) as List<dynamic>;
 
