@@ -132,14 +132,12 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: [
-
-        ],
+        actions: [],
       ),
       drawer: Drawer(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          physics:BouncingScrollPhysics(),
+          physics: BouncingScrollPhysics(),
           child: Column(
             children: [
               Padding(
@@ -243,6 +241,7 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                   SharedPreferences prefs =
                       await SharedPreferences.getInstance();
                   prefs.remove('token');
+                  prefs.remove('type');
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LoginScreen()));
                 },
@@ -298,7 +297,7 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        physics:BouncingScrollPhysics(),
+        physics: BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         child: Container(
           width: double.infinity,
@@ -667,19 +666,19 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         text: TextSpan(children: [
-                      TextSpan(
-                          style: linkText,
-                          text: facebook,
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () async {
-                              var url = facebook;
-                              if (await canLaunch(url)) {
-                                await launch(url);
-                              } else {
-                                throw " cannot load url";
-                              }
-                            }),
-                    ])),
+                          TextSpan(
+                              style: linkText,
+                              text: facebook,
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () async {
+                                  var url = facebook;
+                                  if (await canLaunch(url)) {
+                                    await launch(url);
+                                  } else {
+                                    throw " cannot load url";
+                                  }
+                                }),
+                        ])),
                   ],
                 ),
               ),
@@ -712,8 +711,6 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                     ),
                     Text(
                       "رابط الانستاغرام : ".tr,
-
-
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -727,27 +724,22 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         text: TextSpan(children: [
-                      TextSpan(
+                          TextSpan(
+                              style: linkText,
+                              text: instagram,
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () async {
+                                  var url = instagram;
 
-                          style: linkText,
-                          text: instagram,
-
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () async {
-                              var url = instagram;
-
-                              if (await canLaunch(url)) {
-                                await launch(url);
-                              } else {
-                                throw " cannot load url";
-                              }
-                            }),
-
-                    ])),
-
+                                  if (await canLaunch(url)) {
+                                    await launch(url);
+                                  } else {
+                                    throw " cannot load url";
+                                  }
+                                }),
+                        ])),
                   ],
                 ),
-
               ),
               //سناب شات
               SizedBox(
@@ -778,7 +770,6 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                     ),
                     Text(
                       "رابط السناب شات : ".tr,
-
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -792,19 +783,19 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         text: TextSpan(children: [
-                      TextSpan(
-                          style: linkText,
-                          text: snapchat,
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () async {
-                              var url = snapchat;
-                              if (await canLaunch(url)) {
-                                await launch(url);
-                              } else {
-                                throw " cannot load url";
-                              }
-                            }),
-                    ])),
+                          TextSpan(
+                              style: linkText,
+                              text: snapchat,
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () async {
+                                  var url = snapchat;
+                                  if (await canLaunch(url)) {
+                                    await launch(url);
+                                  } else {
+                                    throw " cannot load url";
+                                  }
+                                }),
+                        ])),
                   ],
                 ),
               ),
@@ -896,19 +887,19 @@ class _AdminShopsShowScreenState extends State<AdminShopsShowScreen> {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         text: TextSpan(children: [
-                      TextSpan(
-                          style: linkText,
-                          text: locationOnMap,
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () async {
-                              // var url = locationOnMap;
-                              // if (await canLaunch(url)) {
-                              //   await launch(url);
-                              // } else {
-                              //   throw " cannot load url";
-                              // }
-                            }),
-                    ])),
+                          TextSpan(
+                              style: linkText,
+                              text: locationOnMap,
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () async {
+                                  // var url = locationOnMap;
+                                  // if (await canLaunch(url)) {
+                                  //   await launch(url);
+                                  // } else {
+                                  //   throw " cannot load url";
+                                  // }
+                                }),
+                        ])),
                   ],
                 ),
               ),

@@ -23,7 +23,7 @@ import "package:url_launcher/url_launcher.dart";
 import '../../src/my_app.dart';
 import 'package:http/http.dart' as http;
 
-var products;
+var products_list;
 //var products_IDS =  [];
 
 var price;
@@ -41,7 +41,7 @@ class OrderScreen extends StatefulWidget {
   }
 
   setProducts(P) {
-    products = P;
+    products_list = P;
   }
 
   setID(ID) {
@@ -155,7 +155,7 @@ class _OrderScreenState extends State<OrderScreen> {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.get('token');
-    print(jsonEncode(products));
+    // print(jsonEncode(products));
 
     var body = jsonEncode({
       'buyerName': nameController.text,
@@ -163,9 +163,9 @@ class _OrderScreenState extends State<OrderScreen> {
       'buyerCity': city,
       'buyerAddress': addressController.text,
       'size': sizes,
-      'products': products_ID
+      'products': products_list
     });
-
+    print(body);
     var result = await http.post(
         Uri.parse(
             fetchData.baseURL + "/cart/createOrder/" + UsedPoints.toString()),
@@ -466,13 +466,7 @@ class _OrderScreenState extends State<OrderScreen> {
                       child: MaterialButton(
                         onPressed: () {
                           if (id == null) {
-                            List<String> products_IDS = [];
-
-                            for (int i = 0; i < products.length; i++) {
-                              products_IDS.add((products[i].id).toString());
-                              print(products[i].id);
-                            }
-                            createCartOrder(usedPoints, products_IDS);
+                            createCartOrder(usedPoints, products_list);
                             deleteFromCart();
                           } else {
                             createOrder(id, price, usedPoints);

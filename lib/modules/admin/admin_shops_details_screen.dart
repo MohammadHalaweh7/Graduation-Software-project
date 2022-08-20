@@ -155,14 +155,12 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: [
-
-        ],
+        actions: [],
       ),
       drawer: Drawer(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          physics:BouncingScrollPhysics(),
+          physics: BouncingScrollPhysics(),
           child: Column(
             children: [
               Padding(
@@ -266,6 +264,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                   SharedPreferences prefs =
                       await SharedPreferences.getInstance();
                   prefs.remove('token');
+                  prefs.remove('type');
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LoginScreen()));
                 },
@@ -321,7 +320,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        physics:BouncingScrollPhysics(),
+        physics: BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         child: Container(
           width: double.infinity,
@@ -694,19 +693,19 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         text: TextSpan(children: [
-                      TextSpan(
-                          style: linkText,
-                          text: facebook,
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () async {
-                              var url = facebook;
-                              if (await canLaunch(url)) {
-                                await launch(url);
-                              } else {
-                                throw " cannot load url";
-                              }
-                            }),
-                    ])),
+                          TextSpan(
+                              style: linkText,
+                              text: facebook,
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () async {
+                                  var url = facebook;
+                                  if (await canLaunch(url)) {
+                                    await launch(url);
+                                  } else {
+                                    throw " cannot load url";
+                                  }
+                                }),
+                        ])),
                   ],
                 ),
               ),
@@ -745,7 +744,6 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Colors.blue,
-
                       ),
                     ),
                     SizedBox(
@@ -755,19 +753,19 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         text: TextSpan(children: [
-                      TextSpan(
-                          style: linkText,
-                          text: instagram,
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () async {
-                              var url = instagram;
-                              if (await canLaunch(url)) {
-                                await launch(url);
-                              } else {
-                                throw " cannot load url";
-                              }
-                            }),
-                    ])),
+                          TextSpan(
+                              style: linkText,
+                              text: instagram,
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () async {
+                                  var url = instagram;
+                                  if (await canLaunch(url)) {
+                                    await launch(url);
+                                  } else {
+                                    throw " cannot load url";
+                                  }
+                                }),
+                        ])),
                   ],
                 ),
               ),
@@ -813,19 +811,19 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         text: TextSpan(children: [
-                      TextSpan(
-                          style: linkText,
-                          text: snapchat,
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () async {
-                              var url = snapchat;
-                              if (await canLaunch(url)) {
-                                await launch(url);
-                              } else {
-                                throw " cannot load url";
-                              }
-                            }),
-                    ])),
+                          TextSpan(
+                              style: linkText,
+                              text: snapchat,
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () async {
+                                  var url = snapchat;
+                                  if (await canLaunch(url)) {
+                                    await launch(url);
+                                  } else {
+                                    throw " cannot load url";
+                                  }
+                                }),
+                        ])),
                   ],
                 ),
               ),
@@ -917,19 +915,19 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         text: TextSpan(children: [
-                      TextSpan(
-                          style: linkText,
-                          text: locationOnMap,
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () async {
-                              // var url = locationOnMap;
-                              // if (await canLaunch(url)) {
-                              //   await launch(url);
-                              // } else {
-                              //   throw " cannot load url";
-                              // }
-                            }),
-                    ])),
+                          TextSpan(
+                              style: linkText,
+                              text: locationOnMap,
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () async {
+                                  // var url = locationOnMap;
+                                  // if (await canLaunch(url)) {
+                                  //   await launch(url);
+                                  // } else {
+                                  //   throw " cannot load url";
+                                  // }
+                                }),
+                        ])),
                   ],
                 ),
               ),
@@ -973,7 +971,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                   ),
                 ],
               ),
-              
+
               SizedBox(
                 height: 20,
               ),
@@ -1012,7 +1010,7 @@ class _AdminShopsDetailsScreenState extends State<AdminShopsDetailsScreen> {
                 MaterialPageRoute(builder: (context) => AdminScreen()));
           },
           textColor: Colors.blue,
-          child:  Text('موافق'.tr),
+          child: Text('موافق'.tr),
         ),
       ],
     );

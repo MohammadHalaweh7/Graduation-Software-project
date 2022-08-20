@@ -149,7 +149,7 @@ class fetchData {
     return body.map((product) => ProductModel.fromJson(product)).toList();
   }
 
-  Future<List<ProductModel>> getOrderProducts(id) async {
+  Future<List<dynamic>> getOrderProducts(id) async {
     var res = await http.get(
         Uri.parse(fetchData.baseURL + '/order/orderProducts/' + id),
         headers: {
@@ -157,8 +157,7 @@ class fetchData {
         });
     print(res.statusCode);
     var body = jsonDecode(res.body) as List<dynamic>;
-
-    return body.map((product) => ProductModel.fromJson(product)).toList();
+    return body;
   }
 
   Future<List<OrderModel>> getorders() async {

@@ -487,6 +487,7 @@ class _ShopkeeperAllOrdersScreenState extends State<ShopkeeperAllOrdersScreen> {
                   SharedPreferences prefs =
                       await SharedPreferences.getInstance();
                   prefs.remove('token');
+                  prefs.remove('type');
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LoginScreen()));
                 },

@@ -48,7 +48,7 @@ class _ShopkeeperProductsScreenState extends State<ShopkeeperProductsScreen> {
                   ),
                 )
               : ListView.builder(
-              physics:BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemCount: products.length,
@@ -68,126 +68,133 @@ class _ShopkeeperProductsScreenState extends State<ShopkeeperProductsScreen> {
   Widget myproducts(name, description, id, price, owner, avatar) {
     return //هاد بضم الكونتينر وكل اللي جواتو
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.5),
-          child: Column(children: [
-            SizedBox(height: 5,),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ShopkeeperProductsEditScreen(
-                            name, description, id, price, owner, avatar)));
-              },
-              child:
-              //هاد الكونتينر بضم كلشي
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(0, 1.0), //(x,y)
-                      blurRadius: 5.0,
-                    ),
-                  ],
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Row(
-                    children: [
-                      //هاد للصورة
-                      Container(
-                        width: 135,
-                        height: 135,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                              image: avatar == null
-                                  ? (AssetImage(
-                                'assets/images/logo3.png',
-                              ) as ImageProvider)
-                                  : MemoryImage(
-                                base64Decode(avatar),
-                              ),
-                              fit: BoxFit.cover),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child: Container(
-                          height: 141,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    'الأسم : ',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.blue),
-                                  ),
-                                  Text(
-                                    name,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 3,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    'السعر : ',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.blue),
-                                  ),
-                                  Text(
-                                    price.toString() + ' NIS',
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 3,
-                              ),
-                              Text(
-                                'الوصف : ',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, color: Colors.blue),
-                              ),
-                              Expanded(
-                                  child: Text(
-                                    description,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  )),
-
-                              // Text('${article['publishedAt']}',style: TextStyle(color: Colors.grey,fontSize: 20),),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
+      padding: const EdgeInsets.symmetric(horizontal: 12.5),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 5,
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ShopkeeperProductsEditScreen(
+                          name, description, id, price, owner, avatar)));
+            },
+            child:
+                //هاد الكونتينر بضم كلشي
+                Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.0),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0, 1.0), //(x,y)
+                    blurRadius: 5.0,
                   ),
+                ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Row(
+                  children: [
+                    //هاد للصورة
+                    Container(
+                      width: 135,
+                      height: 135,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                            image: avatar == null
+                                ? (AssetImage(
+                                    'assets/images/logo3.png',
+                                  ) as ImageProvider)
+                                : MemoryImage(
+                                    base64Decode(avatar),
+                                  ),
+                            fit: BoxFit.cover),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                      child: Container(
+                        height: 141,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  'الأسم : ',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blue),
+                                ),
+                                Text(
+                                  name,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 3,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'السعر : ',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blue),
+                                ),
+                                Text(
+                                  price.toString() + ' NIS',
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 3,
+                            ),
+                            Text(
+                              'الوصف : ',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blue),
+                            ),
+                            Expanded(
+                                child: Text(
+                              description,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            )),
+
+                            // Text('${article['publishedAt']}',style: TextStyle(color: Colors.grey,fontSize: 20),),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ),
             ),
-            SizedBox(height: 7,)
-          ],),
-        );
+          ),
+          SizedBox(
+            height: 7,
+          )
+        ],
+      ),
+    );
   }
 
   @override
@@ -210,7 +217,6 @@ class _ShopkeeperProductsScreenState extends State<ShopkeeperProductsScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-
       ),
       drawer: Drawer(
         child: SingleChildScrollView(
@@ -340,6 +346,7 @@ class _ShopkeeperProductsScreenState extends State<ShopkeeperProductsScreen> {
                   SharedPreferences prefs =
                       await SharedPreferences.getInstance();
                   prefs.remove('token');
+                  prefs.remove('type');
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LoginScreen()));
                 },

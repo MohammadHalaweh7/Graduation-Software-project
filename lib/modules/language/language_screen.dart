@@ -148,8 +148,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                     SharedPreferences prefs =
                         await SharedPreferences.getInstance();
                     prefs.remove('token');
-                    prefs.remove('admintoken');
-                    prefs.remove('storetoken');
+                    prefs.remove('type');
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => LoginScreen()));
                   },

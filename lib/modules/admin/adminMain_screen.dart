@@ -296,6 +296,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                         SharedPreferences prefs =
                             await SharedPreferences.getInstance();
                         prefs.remove('token');
+                        prefs.remove('type');
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -746,6 +747,8 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                                       SharedPreferences prefs =
                                           await SharedPreferences.getInstance();
                                       prefs.remove('token');
+                                      prefs.remove('type');
+
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(

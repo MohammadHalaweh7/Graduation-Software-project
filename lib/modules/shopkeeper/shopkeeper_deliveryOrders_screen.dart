@@ -489,6 +489,7 @@ class _ShopkeeperDeliveryOrdersScreenState
                   SharedPreferences prefs =
                       await SharedPreferences.getInstance();
                   prefs.remove('token');
+                  prefs.remove('type');
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LoginScreen()));
                 },

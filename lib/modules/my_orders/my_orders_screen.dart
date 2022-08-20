@@ -42,33 +42,42 @@ class MyOrdersScreen extends StatefulWidget {
 class _MyOrdersScreenState extends State<MyOrdersScreen> {
   fetchData fetch = fetchData();
   Widget getAllOrderProducts() {
-    return FutureBuilder(
+    return FutureBuilder<List<dynamic>>(
         future: fetch.getOrderProducts(id),
         builder: (contxt, snapchot) {
-          var products = snapchot.data as List<ProductModel>;
-          return snapchot.data == null
-              ? Center(
-                  child: CircularProgressIndicator(
-                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
-                  ),
-                )
-              : ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: products == null ? 0 : products.length,
-                  itemBuilder: (context, index) {
-                    return myorders(
-                      products[index].id,
-                      products[index].name,
-                      products[index].price,
-                      products[index].avatar,
-                    );
-                  });
+          if (snapchot.hasData) {
+            // var products =
+            //     snapchot.data?.map<ProductModel>((e) => e.product).toList() ?? [];
+            List<ProductModel> products = snapchot.data!
+                .map((product) => ProductModel.fromJson(product["product"]))
+                .toList();
+            print(products[0].toJson());
+
+            return ListView.builder(
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  return myorders(
+                    products[index].id,
+                    products[index].name,
+                    products[index].price,
+                    products[index].avatar,
+                    snapchot.data![index]['size'],
+                  );
+                });
+          } else {
+            return Center(
+                child: CircularProgressIndicator(
+              valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+            ));
+          }
         });
   }
 
-  Widget myorders(id, name, price, avatar) {
+  Widget myorders(id, name, price, avatar, size) {
+    print(id);
     return Column(
       children: [
         SizedBox(

@@ -85,7 +85,6 @@ class _ShopkeeperProfileShowScreenState
                 Icons.remove_red_eye_sharp,
                 size: 30,
               ),
-
             ),
             drawer: Drawer(
               child: SingleChildScrollView(
@@ -218,6 +217,7 @@ class _ShopkeeperProfileShowScreenState
                         SharedPreferences prefs =
                             await SharedPreferences.getInstance();
                         prefs.remove('token');
+                        prefs.remove('type');
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -276,7 +276,7 @@ class _ShopkeeperProfileShowScreenState
               ),
             ),
             body: SingleChildScrollView(
-              physics:BouncingScrollPhysics(),
+              physics: BouncingScrollPhysics(),
               scrollDirection: Axis.vertical,
               child: Container(
                 width: double.infinity,
@@ -459,14 +459,12 @@ class _ShopkeeperProfileShowScreenState
                           Padding(
                             padding: const EdgeInsets.only(right: 0),
                             child: Text(
-
                               account.detailedLocation,
                               style: TextStyle(
                                   fontSize: 13, fontWeight: FontWeight.bold),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
-
                           ),
                           SizedBox(
                             height: 10,
@@ -527,19 +525,19 @@ class _ShopkeeperProfileShowScreenState
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               text: TextSpan(children: [
-                            TextSpan(
-                                style: linkText,
-                                text: account.facebook,
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () async {
-                                    var url = account.facebook;
-                                    if (await canLaunch(url)) {
-                                      await launch(url);
-                                    } else {
-                                      throw " cannot load url";
-                                    }
-                                  }),
-                          ])),
+                                TextSpan(
+                                    style: linkText,
+                                    text: account.facebook,
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () async {
+                                        var url = account.facebook;
+                                        if (await canLaunch(url)) {
+                                          await launch(url);
+                                        } else {
+                                          throw " cannot load url";
+                                        }
+                                      }),
+                              ])),
                         ],
                       ),
                     ),
@@ -597,19 +595,19 @@ class _ShopkeeperProfileShowScreenState
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               text: TextSpan(children: [
-                            TextSpan(
-                                style: linkText,
-                                text: account.snapchat,
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () async {
-                                    var url = account.snapchat;
-                                    if (await canLaunch(url)) {
-                                      await launch(url);
-                                    } else {
-                                      throw " cannot load url";
-                                    }
-                                  }),
-                          ])),
+                                TextSpan(
+                                    style: linkText,
+                                    text: account.snapchat,
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () async {
+                                        var url = account.snapchat;
+                                        if (await canLaunch(url)) {
+                                          await launch(url);
+                                        } else {
+                                          throw " cannot load url";
+                                        }
+                                      }),
+                              ])),
                         ],
                       ),
                     ),
@@ -725,19 +723,19 @@ class _ShopkeeperProfileShowScreenState
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               text: TextSpan(children: [
-                            TextSpan(
-                                style: linkText,
-                                text: account.instagram,
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () async {
-                                    var url = account.instagram;
-                                    if (await canLaunch(url)) {
-                                      await launch(url);
-                                    } else {
-                                      throw " cannot load url";
-                                    }
-                                  }),
-                          ])),
+                                TextSpan(
+                                    style: linkText,
+                                    text: account.instagram,
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () async {
+                                        var url = account.instagram;
+                                        if (await canLaunch(url)) {
+                                          await launch(url);
+                                        } else {
+                                          throw " cannot load url";
+                                        }
+                                      }),
+                              ])),
                         ],
                       ),
                     ),
@@ -795,19 +793,19 @@ class _ShopkeeperProfileShowScreenState
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               text: TextSpan(children: [
-                            TextSpan(
-                                style: linkText,
-                                text: account.locationOnMap,
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () async {
-                                    var url = locationOnMap;
-                                    if (await canLaunch(url)) {
-                                      await launch(url);
-                                    } else {
-                                      throw " cannot load url";
-                                    }
-                                  }),
-                          ])),
+                                TextSpan(
+                                    style: linkText,
+                                    text: account.locationOnMap,
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () async {
+                                        var url = locationOnMap;
+                                        if (await canLaunch(url)) {
+                                          await launch(url);
+                                        } else {
+                                          throw " cannot load url";
+                                        }
+                                      }),
+                              ])),
                         ],
                       ),
                     ),

@@ -40,7 +40,7 @@ class _AdminShopsScreenState extends State<AdminShopsScreen> {
                   ),
                 )
               : ListView.builder(
-              physics:BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemCount: stores.length,
@@ -80,122 +80,127 @@ class _AdminShopsScreenState extends State<AdminShopsScreen> {
       location) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.5),
-      child: Column(children: [
-        SizedBox(height: 5,),
-        GestureDetector(
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => AdminShopsShowScreen(
-                        name,
-                        description,
-                        id,
-                        phoneNumber,
-                        locationOnMap,
-                        avatar,
-                        detailedLocation,
-                        facebook,
-                        snapchat,
-                        whatsapp,
-                        instagram,
-                        type,
-                        location)));
-          },
-          child:
-          //هاد الكونتينر بضم كلشي
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15.0),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  offset: Offset(0, 1.0), //(x,y)
-                  blurRadius: 5.0,
-                ),
-              ],
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Row(
-                children: [
-                  Container(
-                    width: 115,
-                    height: 115,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                          image: avatar == null
-                              ? (AssetImage(
-                            'assets/images/logo3.png',
-                          ) as ImageProvider)
-                              : MemoryImage(
-                            base64Decode(avatar),
-                          ),
-                          fit: BoxFit.cover),
-                    ),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 5,
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AdminShopsShowScreen(
+                          name,
+                          description,
+                          id,
+                          phoneNumber,
+                          locationOnMap,
+                          avatar,
+                          detailedLocation,
+                          facebook,
+                          snapchat,
+                          whatsapp,
+                          instagram,
+                          type,
+                          location)));
+            },
+            child:
+                //هاد الكونتينر بضم كلشي
+                Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.0),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0, 1.0), //(x,y)
+                    blurRadius: 5.0,
                   ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    child: Container(
-                      height: 113,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                'اسم المتجر : '.tr,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blue),
-                              ),
-                              Container(
-                  
-                                width: 150,
-                                child: Text(
-                                  name,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 3,
-                          ),
-                          Text(
-                            'وصف المتجر : '.tr,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, color: Colors.blue),
-                          ),
-
-                          Expanded(
-                              child: Text(
-                                description,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              )),
-                          // Text('${article['publishedAt']}',style: TextStyle(color: Colors.grey,fontSize: 20),),
-                        ],
+                ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 115,
+                      height: 115,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                            image: avatar == null
+                                ? (AssetImage(
+                                    'assets/images/logo3.png',
+                                  ) as ImageProvider)
+                                : MemoryImage(
+                                    base64Decode(avatar),
+                                  ),
+                            fit: BoxFit.cover),
                       ),
                     ),
-                  )
-                ],
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                      child: Container(
+                        height: 113,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  'اسم المتجر : '.tr,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blue),
+                                ),
+                                Container(
+                                  width: 150,
+                                  child: Text(
+                                    name,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 3,
+                            ),
+                            Text(
+                              'وصف المتجر : '.tr,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blue),
+                            ),
+
+                            Expanded(
+                                child: Text(
+                              description,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            )),
+                            // Text('${article['publishedAt']}',style: TextStyle(color: Colors.grey,fontSize: 20),),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        SizedBox(height: 7,)
-      ],),
-    );//هاد بضم الكونتينر وكل اللي جواتو
-
+          SizedBox(
+            height: 7,
+          )
+        ],
+      ),
+    ); //هاد بضم الكونتينر وكل اللي جواتو
   }
 
   @override
@@ -307,6 +312,7 @@ class _AdminShopsScreenState extends State<AdminShopsScreen> {
                   SharedPreferences prefs =
                       await SharedPreferences.getInstance();
                   prefs.remove('token');
+                  prefs.remove('type');
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LoginScreen()));
                 },
@@ -378,9 +384,7 @@ class _AdminShopsScreenState extends State<AdminShopsScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: [
-
-        ],
+        actions: [],
       ),
       body: fetchAllStores(),
       //     //هاد بضم الكونتينر وكل اللي جواتو
@@ -478,7 +482,4 @@ class _AdminShopsScreenState extends State<AdminShopsScreen> {
   }
 }
 
-
-
 //--------------------------------------------------------------------------
-

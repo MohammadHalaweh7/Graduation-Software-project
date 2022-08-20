@@ -260,6 +260,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                         SharedPreferences prefs =
                             await SharedPreferences.getInstance();
                         prefs.remove('token');
+                        prefs.remove('type');
                         Navigator.push(
                             context,
                             MaterialPageRoute(

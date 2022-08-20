@@ -158,7 +158,6 @@ class _ShopkeeperProductsEditScreenState
             fontWeight: FontWeight.bold,
           ),
         ),
-
       ),
       drawer: Drawer(
         child: SingleChildScrollView(
@@ -288,6 +287,7 @@ class _ShopkeeperProductsEditScreenState
                   SharedPreferences prefs =
                       await SharedPreferences.getInstance();
                   prefs.remove('token');
+                  prefs.remove('type');
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LoginScreen()));
                 },

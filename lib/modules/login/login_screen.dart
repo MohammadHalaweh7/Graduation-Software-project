@@ -61,17 +61,17 @@ class _LoginScreenState extends State<LoginScreen> {
 
     if (result.statusCode == 200) {
       var body = jsonDecode(result.body);
-      sharedPrefs.saveToken(body['token']);
+      sharedPrefs.saveToken(body['token'], 'USER');
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => MainScreen()));
     } else if (result2.statusCode == 200) {
       var body = jsonDecode(result2.body);
-      sharedPrefs.saveToken(body['token']);
+      sharedPrefs.saveToken(body['token'], 'ADMIN');
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => AdminMainScreen()));
     } else if (result3.statusCode == 200) {
       var body = jsonDecode(result3.body);
-      sharedPrefs.saveToken(body['token']);
+      sharedPrefs.saveToken(body['token'], 'STORE');
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => ShopKeeperMainScreen()));
     } else {

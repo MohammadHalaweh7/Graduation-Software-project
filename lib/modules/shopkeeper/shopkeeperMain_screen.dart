@@ -311,6 +311,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                         SharedPreferences prefs =
                             await SharedPreferences.getInstance();
                         prefs.remove('token');
+                        prefs.remove('type');
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -766,6 +767,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                   SharedPreferences prefs =
                                       await SharedPreferences.getInstance();
                                   prefs.remove('token');
+                                  prefs.remove('type');
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(

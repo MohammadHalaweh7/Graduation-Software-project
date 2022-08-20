@@ -589,6 +589,7 @@ class _MainScreenState extends State<MainScreen> {
                     SharedPreferences prefs =
                         await SharedPreferences.getInstance();
                     prefs.remove('token');
+                    prefs.remove('type');
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => LoginScreen()));
                   },
@@ -605,54 +606,66 @@ class _MainScreenState extends State<MainScreen> {
               SizedBox(
                 height: 10,
               ),
-              CarouselSlider(
-                items: AdsList.map(
-                  (e) =>
-                      // ClipRRect(
-                      //       borderRadius: BorderRadius.circular(20),
-                      //       child: Stack(
-                      //         fit: StackFit.expand,
-                      //         children: [
-                      //           Image.network(
-                      //             e,
-                      //             height: 200,
-                      //             width: 100,
-                      //             fit: BoxFit.cover,
-                      //           ),
-                      //         ],
-                      //       ),
-                      //     )
-                      Container(
-                          width: 391,
-                          height: 200,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            image: DecorationImage(
-                                image: e == null
-                                    ? (AssetImage(
-                                        'assets/images/adImage5.jfif',
-                                      ) as ImageProvider)
-                                    : MemoryImage(
-                                        base64Decode(e),
-                                      ),
-                                fit: BoxFit.cover),
-                          )),
-                ).toList(),
-                //   //خصائصها
+              FutureBuilder<List<dynamic>>(
+                future: getAds(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return CarouselSlider(
+                      items: snapshot.data!
+                          .map(
+                            (e) =>
+                                // ClipRRect(
+                                //       borderRadius: BorderRadius.circular(20),
+                                //       child: Stack(
+                                //         fit: StackFit.expand,
+                                //         children: [
+                                //           Image.network(
+                                //             e,
+                                //             height: 200,
+                                //             width: 100,
+                                //             fit: BoxFit.cover,
+                                //           ),
+                                //         ],
+                                //       ),
+                                //     )
+                                Container(
+                                    width: 391,
+                                    height: 200,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      image: DecorationImage(
+                                          image: e == null
+                                              ? (AssetImage(
+                                                  'assets/images/adImage5.jfif',
+                                                ) as ImageProvider)
+                                              : MemoryImage(
+                                                  base64Decode(e),
+                                                ),
+                                          fit: BoxFit.cover),
+                                    )),
+                          )
+                          .toList(),
+                      //   //خصائصها
 
-                options: CarouselOptions(
-                  height: 217,
-                  autoPlay: true,
-                  enableInfiniteScroll: true,
-                  enlargeCenterPage: true,
-                  // initialPage: 0,
-                  // viewportFraction: 0.85,
-                  // reverse: false,
-                  autoPlayInterval: Duration(seconds: 3),
-                  autoPlayAnimationDuration: Duration(seconds: 1),
-                  // autoPlayCurve: Curves.fastOutSlowIn,
-                  // scrollDirection: Axis.horizontal,
-                ),
+                      options: CarouselOptions(
+                        height: 217,
+                        autoPlay: true,
+                        enableInfiniteScroll: true,
+                        enlargeCenterPage: true,
+                        // initialPage: 0,
+                        // viewportFraction: 0.85,
+                        // reverse: false,
+                        autoPlayInterval: Duration(seconds: 3),
+                        autoPlayAnimationDuration: Duration(seconds: 1),
+                        // autoPlayCurve: Curves.fastOutSlowIn,
+                        // scrollDirection: Axis.horizontal,
+                      ),
+                    );
+                  }
+                  return CircularProgressIndicator(
+                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+                  );
+                },
               ),
 
               //تسوق حسب الفئة------------------------------------------------------

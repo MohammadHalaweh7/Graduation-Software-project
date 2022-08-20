@@ -97,7 +97,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     if (result.statusCode == 201) {
       var body = jsonDecode(result.body);
-      sharedPrefs.saveToken(body['token']);
+      sharedPrefs.saveToken(body['token'], 'USER');
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => MainScreen()));
       // navigateTo(context,MainScreen());

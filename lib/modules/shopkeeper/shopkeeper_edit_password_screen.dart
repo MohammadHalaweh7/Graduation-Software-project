@@ -90,9 +90,7 @@ class _ShopkeeperEditPasswordScreenState
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: [
-
-        ],
+        actions: [],
       ),
       drawer: Drawer(
         child: SingleChildScrollView(
@@ -222,6 +220,7 @@ class _ShopkeeperEditPasswordScreenState
                   SharedPreferences prefs =
                       await SharedPreferences.getInstance();
                   prefs.remove('token');
+                  prefs.remove('type');
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LoginScreen()));
                 },
@@ -438,7 +437,7 @@ class _ShopkeeperEditPasswordScreenState
                     builder: (context) => ShopkeeperAccountScreen()));
           },
           textColor: Colors.blue,
-          child:  Text('موافق'.tr),
+          child: Text('موافق'.tr),
         ),
       ],
     );

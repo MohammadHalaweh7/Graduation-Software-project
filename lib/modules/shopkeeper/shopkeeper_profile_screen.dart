@@ -106,7 +106,6 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-
             ),
             drawer: Drawer(
               child: SingleChildScrollView(
@@ -239,6 +238,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                         SharedPreferences prefs =
                             await SharedPreferences.getInstance();
                         prefs.remove('token');
+                        prefs.remove('type');
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -298,7 +298,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
             ),
             body: SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              physics:BouncingScrollPhysics(),
+              physics: BouncingScrollPhysics(),
               child: Container(
                 width: double.infinity,
                 child: Column(
@@ -732,19 +732,19 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               text: TextSpan(children: [
-                            TextSpan(
-                                style: linkText,
-                                text: account.facebook,
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () async {
-                                    var url = account.facebook;
-                                    if (await canLaunch(url)) {
-                                      await launch(url);
-                                    } else {
-                                      throw " cannot load url";
-                                    }
-                                  }),
-                          ])),
+                                TextSpan(
+                                    style: linkText,
+                                    text: account.facebook,
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () async {
+                                        var url = account.facebook;
+                                        if (await canLaunch(url)) {
+                                          await launch(url);
+                                        } else {
+                                          throw " cannot load url";
+                                        }
+                                      }),
+                              ])),
                         ],
                       ),
                     ),
@@ -790,19 +790,19 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               text: TextSpan(children: [
-                            TextSpan(
-                                style: linkText,
-                                text: account.instagram,
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () async {
-                                    var url = account.instagram;
-                                    if (await canLaunch(url)) {
-                                      await launch(url);
-                                    } else {
-                                      throw " cannot load url";
-                                    }
-                                  }),
-                          ])),
+                                TextSpan(
+                                    style: linkText,
+                                    text: account.instagram,
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () async {
+                                        var url = account.instagram;
+                                        if (await canLaunch(url)) {
+                                          await launch(url);
+                                        } else {
+                                          throw " cannot load url";
+                                        }
+                                      }),
+                              ])),
                         ],
                       ),
                     ),
@@ -848,19 +848,19 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               text: TextSpan(children: [
-                            TextSpan(
-                                style: linkText,
-                                text: account.snapchat,
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () async {
-                                    var url = account.snapchat;
-                                    if (await canLaunch(url)) {
-                                      await launch(url);
-                                    } else {
-                                      throw " cannot load url";
-                                    }
-                                  }),
-                          ])),
+                                TextSpan(
+                                    style: linkText,
+                                    text: account.snapchat,
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () async {
+                                        var url = account.snapchat;
+                                        if (await canLaunch(url)) {
+                                          await launch(url);
+                                        } else {
+                                          throw " cannot load url";
+                                        }
+                                      }),
+                              ])),
                         ],
                       ),
                     ),
@@ -952,19 +952,19 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               text: TextSpan(children: [
-                            TextSpan(
-                                style: linkText,
-                                text: account.locationOnMap,
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () async {
-                                    // var url = locationOnMap;
-                                    // if (await canLaunch(url)) {
-                                    //   await launch(url);
-                                    // } else {
-                                    //   throw " cannot load url";
-                                    // }
-                                  }),
-                          ])),
+                                TextSpan(
+                                    style: linkText,
+                                    text: account.locationOnMap,
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () async {
+                                        // var url = locationOnMap;
+                                        // if (await canLaunch(url)) {
+                                        //   await launch(url);
+                                        // } else {
+                                        //   throw " cannot load url";
+                                        // }
+                                      }),
+                              ])),
                         ],
                       ),
                     ),

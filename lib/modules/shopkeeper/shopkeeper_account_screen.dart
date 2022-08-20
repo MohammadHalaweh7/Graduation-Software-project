@@ -163,7 +163,6 @@ class _ShopkeeperAccountScreenState extends State<ShopkeeperAccountScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-
             ),
             drawer: Drawer(
               child: SingleChildScrollView(
@@ -296,6 +295,7 @@ class _ShopkeeperAccountScreenState extends State<ShopkeeperAccountScreen> {
                         SharedPreferences prefs =
                             await SharedPreferences.getInstance();
                         prefs.remove('token');
+                        prefs.remove('type');
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -504,7 +504,8 @@ class _ShopkeeperAccountScreenState extends State<ShopkeeperAccountScreen> {
                                   },
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return "الرجاء ادخال البريد الالكتروني".tr;
+                                      return "الرجاء ادخال البريد الالكتروني"
+                                          .tr;
                                     }
                                     return null;
                                   },
@@ -618,7 +619,7 @@ class _ShopkeeperAccountScreenState extends State<ShopkeeperAccountScreen> {
             Navigator.of(context).pop();
           },
           textColor: Colors.blue,
-          child:  Text('موافق'.tr),
+          child: Text('موافق'.tr),
         ),
       ],
     );

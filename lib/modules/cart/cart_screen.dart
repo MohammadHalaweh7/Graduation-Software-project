@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -33,7 +34,9 @@ class _CartScreenState extends State<CartScreen> {
   var i = 0;
   var prod;
   int toNumbrs = 0;
+
   var myPoints;
+  List<List> sizes = [];
   fetchData fetch = fetchData();
   TextEditingController totalController = new TextEditingController(text: '0');
   TextEditingController countcontroller = new TextEditingController(text: '0');
@@ -87,6 +90,9 @@ class _CartScreenState extends State<CartScreen> {
         builder: (contxt, snapchot) {
           products =
               snapchot.hasData ? snapchot.data as List<ProductModel> : [];
+          if (sizes.isEmpty) {
+            sizes = products.map((e) => {e.id, null}.toList()).toList();
+          }
           Future.delayed(Duration(milliseconds: 1000), () {
             if (snapchot.hasData) {
               products.forEach((element) {
@@ -123,7 +129,23 @@ class _CartScreenState extends State<CartScreen> {
         });
   }
 
+  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+        value: item,
+        child: Text(
+          item,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+        ),
+      );
+
   Widget myCartProducts(name, description, id, price, owner, avatar) {
+    final sizes_items = [
+      'Small (S)',
+      'Medium (M)',
+      "Large (L)",
+      "Extra Large (XL)",
+      "Double Extra Large (XXL)",
+      "...."
+    ];
     return Column(
       children: [
         SizedBox(
@@ -183,6 +205,38 @@ class _CartScreenState extends State<CartScreen> {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.bodyText1,
+                        )),
+                        Expanded(
+                            child: Container(
+                          margin: EdgeInsets.all(0),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey, width: 2),
+                              borderRadius: BorderRadius.circular(6)),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                              hint: Text(
+                                  "حدد الحجم ان لزم او اتركه فارغ \" .... \" "
+                                      .tr),
+                              icon: Icon(Icons.arrow_downward_rounded),
+                              onTap: () {
+                                //  انسخ ياروحي انسخ
+                              },
+                              isExpanded: true,
+                              value: sizes
+                                  .firstWhere((element) => element[0] == id)[1],
+                              items: sizes_items.map(buildMenuItem).toList(),
+                              onChanged: (value2) {
+                                setState(() {
+                                  var size = sizes.firstWhere(
+                                      (element) => element[0] == id);
+                                  size[1] = value2;
+                                  print(sizes);
+                                });
+                              },
+                            ),
+                          ),
                         )),
                         Row(
                           children: [
@@ -410,15 +464,18 @@ class _CartScreenState extends State<CartScreen> {
                                       //   products[i].price =
                                       //       products[i].price * 0.97;
                                       // }
-                                      OrderScreen().setUsedPoints(
-                                          int.parse(pointscontroller.text));
-                                      OrderScreen().setPoints(account.points);
-                                      OrderScreen().setProducts(products);
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  OrderScreen()));
+                                      if (sizes.any(
+                                          (element) => (element[1] != null))) {
+                                        OrderScreen().setUsedPoints(
+                                            int.parse(pointscontroller.text));
+                                        OrderScreen().setPoints(account.points);
+                                        OrderScreen().setProducts(sizes);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    OrderScreen()));
+                                      }
                                     } else if (int.parse(
                                             pointscontroller.text) ==
                                         100) {
@@ -428,15 +485,18 @@ class _CartScreenState extends State<CartScreen> {
                                       //   products[i].price =
                                       //       products[i].price * 0.94;
                                       // }
-                                      OrderScreen().setUsedPoints(
-                                          int.parse(pointscontroller.text));
-                                      OrderScreen().setPoints(account.points);
-                                      OrderScreen().setProducts(products);
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  OrderScreen()));
+                                      if (sizes.any(
+                                          (element) => (element[1] != null))) {
+                                        OrderScreen().setUsedPoints(
+                                            int.parse(pointscontroller.text));
+                                        OrderScreen().setPoints(account.points);
+                                        OrderScreen().setProducts(sizes);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    OrderScreen()));
+                                      }
                                     } else if (int.parse(
                                             pointscontroller.text) ==
                                         150) {
@@ -446,15 +506,20 @@ class _CartScreenState extends State<CartScreen> {
                                       //   products[i].price =
                                       //       products[i].price * 0.90;
                                       // }
-                                      OrderScreen().setUsedPoints(
-                                          int.parse(pointscontroller.text));
-                                      OrderScreen().setPoints(account.points);
-                                      OrderScreen().setProducts(products);
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  OrderScreen()));
+
+                                      if (sizes.any(
+                                          (element) => (element[1] != null))) {
+                                        OrderScreen().setUsedPoints(
+                                            int.parse(pointscontroller.text));
+                                        OrderScreen().setPoints(account.points);
+                                        OrderScreen().setProducts(sizes);
+
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    OrderScreen()));
+                                      }
                                     } else {
                                       showDialog(
                                         context: context,
@@ -492,12 +557,19 @@ class _CartScreenState extends State<CartScreen> {
                           ),
                           child: MaterialButton(
                             onPressed: () {
-                              OrderScreen().setUsedPoints(0);
-                              OrderScreen().setProducts(products);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => OrderScreen()));
+                              print(sizes);
+                              if (sizes
+                                  .any((element) => (element[1] != null))) {
+                                OrderScreen().setUsedPoints(0);
+                                OrderScreen().setProducts(sizes);
+
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => OrderScreen()));
+                              } else {
+                                print('object');
+                              }
                             },
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
