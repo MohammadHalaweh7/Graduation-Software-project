@@ -91,7 +91,9 @@ class _CartScreenState extends State<CartScreen> {
           products =
               snapchot.hasData ? snapchot.data as List<ProductModel> : [];
           if (sizes.isEmpty) {
-            sizes = products.map((e) => {e.id, null}.toList()).toList();
+            sizes = products
+                .map((e) => {e.id, new TextEditingController()}.toList())
+                .toList();
           }
           Future.delayed(Duration(milliseconds: 1000), () {
             if (snapchot.hasData) {
@@ -146,6 +148,9 @@ class _CartScreenState extends State<CartScreen> {
       "Double Extra Large (XXL)",
       "...."
     ];
+    sizes.firstWhere((element) => element[0] == id)[1];
+    var size = sizes.firstWhere((element) => element[0] == id);
+
     return Column(
       children: [
         SizedBox(
@@ -206,38 +211,22 @@ class _CartScreenState extends State<CartScreen> {
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.bodyText1,
                         )),
-                        Expanded(
-                            child: Container(
-                          margin: EdgeInsets.all(0),
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(6)),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton<String>(
-                              hint: Text(
-                                  "حدد الحجم ان لزم او اتركه فارغ \" .... \" "
-                                      .tr),
-                              icon: Icon(Icons.arrow_downward_rounded),
-                              onTap: () {
-                                //  انسخ ياروحي انسخ
-                              },
-                              isExpanded: true,
-                              value: sizes
-                                  .firstWhere((element) => element[0] == id)[1],
-                              items: sizes_items.map(buildMenuItem).toList(),
-                              onChanged: (value2) {
-                                setState(() {
-                                  var size = sizes.firstWhere(
-                                      (element) => element[0] == id);
-                                  size[1] = value2;
-                                  print(sizes);
-                                });
-                              },
+                        SizedBox(
+                          width: 180,
+                          height: 25,
+                          child: TextFormField(
+                            controller: size[1],
+                            onFieldSubmitted: (String value) {
+                              print(value);
+                            },
+                            onChanged: (String value) {
+                              print(value);
+                            },
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
                             ),
                           ),
-                        )),
+                        ),
                         Row(
                           children: [
                             Text(
@@ -469,6 +458,7 @@ class _CartScreenState extends State<CartScreen> {
                                         OrderScreen().setUsedPoints(
                                             int.parse(pointscontroller.text));
                                         OrderScreen().setPoints(account.points);
+
                                         OrderScreen().setProducts(sizes);
                                         Navigator.push(
                                             context,
@@ -557,6 +547,9 @@ class _CartScreenState extends State<CartScreen> {
                           ),
                           child: MaterialButton(
                             onPressed: () {
+                              sizes = sizes
+                                  .map((e) => {e[0], e[1].text}.toList())
+                                  .toList();
                               print(sizes);
                               if (sizes
                                   .any((element) => (element[1] != null))) {
