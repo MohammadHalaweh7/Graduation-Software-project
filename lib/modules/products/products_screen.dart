@@ -41,7 +41,18 @@ class ProductsScreen extends StatefulWidget {
 }
 
 class _ProductsScreenState extends State<ProductsScreen> {
+  final sizes_items = [
+    'Small (S)',
+    'Medium (M)',
+    "Large (L)",
+    "Extra Large (XL)",
+    "Double Extra Large (XXL)",
+    "...."
+  ];
+  List<List> sizes = [];
+
   var searchController = TextEditingController();
+  var sizeController = TextEditingController();
   fetchData fetch = fetchData();
   var prod;
 
@@ -72,6 +83,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
         future: fetch.allstoreproduct(Storeid, search),
         builder: (contxt, snapchot) {
           var products = snapchot.data as List<ProductModel>;
+
           return snapchot.data == null
               ? Center(
                   child: CircularProgressIndicator(
@@ -212,13 +224,18 @@ class _ProductsScreenState extends State<ProductsScreen> {
                         elevation: 20,
                       ),
                       onPressed: () {
-                        OrderScreen().setID(id);
-                        OrderScreen().setPrice(price);
-                        OrderScreen().setUsedPoints(0);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => OrderScreen()));
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) =>
+                              _buildPopupDialog5(id, price),
+                        );
+                        // OrderScreen().setID(id);
+                        // OrderScreen().setPrice(price);
+                        // OrderScreen().setUsedPoints(0);
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => OrderScreen()));
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -402,6 +419,61 @@ class _ProductsScreenState extends State<ProductsScreen> {
       ],
     );
   }
+
+  Widget _buildPopupDialog5(id, price) {
+    var products = [id];
+    if (sizes.isEmpty) {
+      sizes = products.map((e) => {id, null}.toList()).toList();
+    }
+    return new AlertDialog(
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          TextFormField(
+            controller: sizeController,
+            keyboardType: TextInputType.multiline,
+            maxLines: 2,
+            maxLength: 1000,
+            decoration: InputDecoration(
+              labelText: "اكتب ملاحظاتك".tr,
+              border: OutlineInputBorder(),
+            ),
+          ),
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            sizes.firstWhere((element) => element[0] == id)[1];
+            if (sizeController.text != '') {
+              var size = sizes.firstWhere((element) => element[0] == id);
+              size[1] = sizeController.text;
+              print(sizes);
+              OrderScreen().setProducts(sizes);
+              OrderScreen().setPrice(price);
+              OrderScreen().setUsedPoints(0);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => OrderScreen()));
+              sizes = products.map((e) => {id, null}.toList()).toList();
+              sizeController.text = '';
+            }
+          },
+          textColor: Colors.blue,
+          child: Text('موافق'.tr),
+        ),
+      ],
+    );
+  }
+
+  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+        value: item,
+        child: Text(
+          item,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+        ),
+      );
+
   //-----------------------------------------------------------------------------------------------------------
 
   //فنكشن مش مهم انساه

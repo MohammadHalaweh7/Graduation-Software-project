@@ -57,7 +57,17 @@ class SearhResultScreen extends StatefulWidget {
 }
 
 class _SearhResultScreenState extends State<SearhResultScreen> {
+  final sizes_items = [
+    'Small (S)',
+    'Medium (M)',
+    "Large (L)",
+    "Extra Large (XL)",
+    "Double Extra Large (XXL)",
+    "...."
+  ];
+  List<List> sizes = [];
   var searchController = TextEditingController();
+  var sizeController = TextEditingController();
   fetchData fetch = fetchData();
   var prod;
 
@@ -224,13 +234,11 @@ class _SearhResultScreenState extends State<SearhResultScreen> {
                         elevation: 20,
                       ),
                       onPressed: () {
-                        OrderScreen().setID(id);
-                        OrderScreen().setPrice(price);
-                        OrderScreen().setUsedPoints(0);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => OrderScreen()));
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) =>
+                              _buildPopupDialog5(id, price),
+                        );
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -369,6 +377,60 @@ class _SearhResultScreenState extends State<SearhResultScreen> {
       ],
     );
   }
+
+  Widget _buildPopupDialog5(id, price) {
+    var products = [id];
+    if (sizes.isEmpty) {
+      sizes = products.map((e) => {id, null}.toList()).toList();
+    }
+    return new AlertDialog(
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          TextFormField(
+            controller: sizeController,
+            keyboardType: TextInputType.multiline,
+            maxLines: 2,
+            maxLength: 1000,
+            decoration: InputDecoration(
+              labelText: "اكتب ملاحظاتك",
+              border: OutlineInputBorder(),
+            ),
+          ),
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            sizes.firstWhere((element) => element[0] == id)[1];
+            if (sizeController.text != '') {
+              var size = sizes.firstWhere((element) => element[0] == id);
+              size[1] = sizeController.text;
+              print(sizes);
+              OrderScreen().setProducts(sizes);
+              OrderScreen().setPrice(price);
+              OrderScreen().setUsedPoints(0);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => OrderScreen()));
+              sizes = products.map((e) => {id, null}.toList()).toList();
+              sizeController.text = '';
+            }
+          },
+          textColor: Colors.blue,
+          child: Text('موافق'),
+        ),
+      ],
+    );
+  }
+
+  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+        value: item,
+        child: Text(
+          item,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+        ),
+      );
   //-----------------------------------------------------------------------------------------------------------
 
   //فنكشن مش مهم انساه

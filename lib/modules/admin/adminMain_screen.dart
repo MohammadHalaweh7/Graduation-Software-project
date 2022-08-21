@@ -101,8 +101,8 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
       });
       flutterLocalNotificationsPlugin.show(
           0,
-          "Imprtant Meassge!",
-          "You have new Pending Shop , you should see it !!!",
+          "PS محلات",
+          "لديك متاجر جديدة تقدمت لطلب الانضمام للتطبيق",
           NotificationDetails(
               android: AndroidNotificationDetails(channel.id, channel.name,
                   importance: Importance.high,

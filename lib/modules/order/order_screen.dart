@@ -28,7 +28,7 @@ var products_list;
 
 var price;
 int points = 0;
-var id;
+var id_List;
 int usedPoints = 0;
 
 class OrderScreen extends StatefulWidget {
@@ -45,7 +45,7 @@ class OrderScreen extends StatefulWidget {
   }
 
   setID(ID) {
-    id = ID;
+    id_List = ID;
   }
 
   setUsedPoints(int U) {
@@ -141,7 +141,6 @@ class _OrderScreenState extends State<OrderScreen> {
   }
 
   Future<void> createCartOrder(UsedPoints, products_ID) async {
-    var ID = id;
     if (nameController.text == '' ||
         phoneController.text == '' ||
         city == null ||
@@ -465,12 +464,8 @@ class _OrderScreenState extends State<OrderScreen> {
                       ),
                       child: MaterialButton(
                         onPressed: () {
-                          if (id == null) {
-                            createCartOrder(usedPoints, products_list);
-                            deleteFromCart();
-                          } else {
-                            createOrder(id, price, usedPoints);
-                          }
+                          createCartOrder(usedPoints, products_list);
+                          deleteFromCart();
                         },
                         child: Text(
                           "ارسال".tr,

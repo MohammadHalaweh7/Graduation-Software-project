@@ -151,8 +151,8 @@ class _MainScreenState extends State<MainScreen> {
       });
       flutterLocalNotificationsPlugin.show(
           0,
-          "Imprtant Meassge!",
-          "You have new messages from shops",
+          "PS محلات",
+          "لديك رسالة جديدة تفقد الاشعارات",
           NotificationDetails(
               android: AndroidNotificationDetails(channel.id, channel.name,
                   importance: Importance.high,
@@ -206,8 +206,8 @@ class _MainScreenState extends State<MainScreen> {
       });
       flutterLocalNotificationsPlugin.show(
           0,
-          "Imprtant Meassge!",
-          "You have new messages from admin",
+          "PS محلات",
+          "لديك رسالة جديدة تفقد الاشعارات ",
           NotificationDetails(
               android: AndroidNotificationDetails(channel.id, channel.name,
                   importance: Importance.high,

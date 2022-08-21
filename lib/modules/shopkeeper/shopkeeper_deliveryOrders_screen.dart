@@ -28,6 +28,7 @@ import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_deliveryOrders_scree
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_newOrdersProducts_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_products_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_profile_screen.dart';
+import 'package:http/http.dart' as http;
 
 class ShopkeeperDeliveryOrdersScreen extends StatefulWidget {
   @override
@@ -37,6 +38,32 @@ class ShopkeeperDeliveryOrdersScreen extends StatefulWidget {
 
 class _ShopkeeperDeliveryOrdersScreenState
     extends State<ShopkeeperDeliveryOrdersScreen> {
+  Future<OrderModel> changeOrderStatus(id) async {
+    var ID = id;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.get('token');
+
+    var result = await http.patch(
+      Uri.parse(fetchData.baseURL + "/orders/changeStatusToDelievered/" + ID),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer ' + token.toString()
+      },
+    );
+    print(result.statusCode);
+    if (result.statusCode == 200) {
+      setState(() {
+        text = "تم التسليم";
+        color = Colors.green;
+        CheckIcon = Icons.check;
+      });
+    }
+
+    OrderModel orderModel = OrderModel.fromJson(jsonDecode(result.body));
+
+    return orderModel;
+  }
+
   fetchData fetch = fetchData();
 
   Widget getInArrivalOrders() {
@@ -275,6 +302,46 @@ class _ShopkeeperDeliveryOrdersScreenState
                             color: Colors.grey[500]),
                       ),
                       Spacer(),
+                      Spacer(),
+                      Spacer(),
+                      Spacer(),
+                      Spacer(),
+                      Spacer(),
+                      Spacer(),
+                      Spacer(),
+                      Spacer(),
+                      Spacer(),
+                      Spacer(),
+                      Spacer(),
+                      Spacer(),
+                      Spacer(),
+                      Spacer(),
+                      Spacer(),
+                      Spacer(),
+                      Spacer(),
+                      Container(
+                        width: 60,
+                        height: 26,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                          color: color, // width: double.infinity,
+                        ),
+                        child: MaterialButton(
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) =>
+                                  _buildPopupDialog(id),
+                            );
+                          },
+                          child: Icon(
+                            CheckIcon,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      Spacer(),
+                      Spacer(),
                       Text(
                         orderStatus,
                         style: TextStyle(
@@ -295,6 +362,9 @@ class _ShopkeeperDeliveryOrdersScreenState
     );
   }
 
+  var text = "قيد التوصيل";
+  var color = Colors.grey;
+  var CheckIcon = Icons.question_mark;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -489,7 +559,6 @@ class _ShopkeeperDeliveryOrdersScreenState
                   SharedPreferences prefs =
                       await SharedPreferences.getInstance();
                   prefs.remove('token');
-                  prefs.remove('type');
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LoginScreen()));
                 },
@@ -546,6 +615,52 @@ class _ShopkeeperDeliveryOrdersScreenState
       ),
       body: getInArrivalOrders(),
       //    الكونتينر اللي بضم كلشي
+    );
+  }
+
+  Widget _buildPopupDialog(id) {
+    return new AlertDialog(
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CircleAvatar(
+              radius: 17,
+              backgroundColor: Colors.blue,
+              child: Icon(
+                Icons.question_mark,
+                color: Colors.white,
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            children: [
+              Text("هل انت متاكد انه تم تسليم الطلب ؟"),
+              SizedBox(
+                width: 7,
+              ),
+            ],
+          )
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            changeOrderStatus(id);
+            Navigator.of(context).pop();
+          },
+          textColor: Colors.blue,
+          child: const Text('نعم'),
+        ),
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Colors.red,
+          child: const Text('لا'),
+        ),
+      ],
     );
   }
 
