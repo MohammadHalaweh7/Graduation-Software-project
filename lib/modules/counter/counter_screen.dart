@@ -24,7 +24,9 @@ class _CounterScreenState extends State<CounterScreen> {
         title: Text("عداد"),
       ),
       body: Center(
-        child: Row(
+        child:
+        
+         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment:MainAxisAlignment.center ,
           children: [

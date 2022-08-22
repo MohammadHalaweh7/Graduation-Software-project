@@ -31,6 +31,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   ),
                 )
               : ListView.builder(
+                physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemCount: notifications == null ? 0 : notifications.length,
@@ -46,87 +47,90 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   Widget mynotifications(title, description, avatar) {
     return //هاد بضم كلشي
-        Column(
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12.5),
+          child: Column(
       children: [
-        SizedBox(
-          height: 10,
-        ),
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15.0),
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey,
-                offset: Offset(0, 1.0), //(x,y)
-                blurRadius: 5.0,
-              ),
-            ],
+          SizedBox(
+            height: 10,
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Row(
-              children: [
-                //هاد للصورة
-                Container(
-                  width: 90,
-                  height: 90,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(
-                        image: avatar == null
-                            ? (NetworkImage(
-                                'https://www.cmarix.com/blog/wp-content/uploads/2020/07/The-best-eCommerce-platform-for-Food-delivery.png',
-                              ) as ImageProvider)
-                            : MemoryImage(
-                                base64Decode(avatar),
-                              ),
-                        fit: BoxFit.cover),
-                  ),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15.0),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  offset: Offset(0, 1.0), //(x,y)
+                  blurRadius: 5.0,
                 ),
-                SizedBox(
-                  width: 10,
-                ),
-                Expanded(
-                  child: Container(
-                    height: 80,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        //The title
-                        Text(
-                          title,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-
-                        //The description
-                        Expanded(
-                            child: Text(
-                          description,
-                          style: TextStyle(fontSize: 12),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        )),
-
-                        // Text('${article['publishedAt']}',style: TextStyle(color: Colors.grey,fontSize: 20),),
-                      ],
-                    ),
-                  ),
-                )
               ],
             ),
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Row(
+                children: [
+                  //هاد للصورة
+                  Container(
+                    width: 90,
+                    height: 90,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                          image: avatar == null
+                              ? (NetworkImage(
+                                  'https://www.cmarix.com/blog/wp-content/uploads/2020/07/The-best-eCommerce-platform-for-Food-delivery.png',
+                                ) as ImageProvider)
+                              : MemoryImage(
+                                  base64Decode(avatar),
+                                ),
+                          fit: BoxFit.cover),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: Container(
+                      height: 80,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          //The title
+                          Text(
+                            title,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+
+                          //The description
+                          Expanded(
+                              child: Text(
+                            description,
+                            style: TextStyle(fontSize: 12),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          )),
+
+                          // Text('${article['publishedAt']}',style: TextStyle(color: Colors.grey,fontSize: 20),),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
-        ),
-        SizedBox(
-          height: 5,
-        ),
+          SizedBox(
+            height: 5,
+          ),
       ],
-    );
+    ),
+        );
   }
 
   @override

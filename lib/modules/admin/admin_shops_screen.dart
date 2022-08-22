@@ -150,24 +150,28 @@ class _AdminShopsScreenState extends State<AdminShopsScreen> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Row(
-                              children: [
-                                Text(
-                                  'اسم المتجر : '.tr,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.blue),
-                                ),
-                                Container(
-                                  width: 150,
-                                  child: Text(
-                                    name,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(),
+                            Container(
+                              // color: Colors.red,
+                              width: 230,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'اسم المتجر : '.tr,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.blue),
                                   ),
-                                ),
-                              ],
+                                  Container(
+                                    width: 150,
+                                    child: Text(
+                                      name,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                             SizedBox(
                               height: 3,

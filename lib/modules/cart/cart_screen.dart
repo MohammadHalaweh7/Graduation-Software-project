@@ -35,6 +35,8 @@ class _CartScreenState extends State<CartScreen> {
   var prod;
   int toNumbrs = 0;
 
+  var count=0;
+
   var myPoints;
   List<List> sizes = [];
   fetchData fetch = fetchData();
@@ -204,17 +206,89 @@ class _CartScreenState extends State<CartScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Expanded(
-                            child: Text(
-                          name,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.bodyText1,
-                        )),
+                        Row(
+                          children: [
+                            Container(
+                              // color: Colors.red,
+                              width: 160,
+                              child: 
+                              
+                              Expanded(
+                                  child: Text(
+                                name,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: Theme.of(context).textTheme.bodyText1,
+                              )),
+                            ),
+                         Spacer(),
+                               Container(
+                                alignment: Alignment.center,
+                                width: 90,
+                                height: 36,
+                                // color: Colors.grey,
+                               
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                Container(
+                                  padding: EdgeInsets.only(bottom: 5),
+                                  width: 30,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    
+                                       shape: BoxShape.circle,
+                                      color: Colors.lightBlueAccent
+
+                                  ),
+                                  child: IconButton(
+                                    
+                                  
+                                  
+                                    icon: const Icon(Icons.add,size: 15,),
+                                    color: Colors.white,
+                                   
+                                    onPressed: () {
+                                      setState(() {
+                                        count++;
+                                      });
+                                  
+                                    },
+                                  ),
+                                ),
+                                SizedBox(width: 5,),
+                                Text("$count",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
+                                SizedBox(width: 5,),
+                                Container(
+                                width: 30,
+                                  height: 30,
+                                   decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.grey
+
+                                  ),
+                                  padding: EdgeInsets.only(bottom: 10),
+                                  child: IconButton(
+                                    
+                                    icon: const Icon(Icons.minimize,size: 11,),
+                                    color: Colors.white,
+                                    onPressed: () {
+                                    setState(() {
+                                      count--;
+                                    });
+                                    },
+                                  ),
+                                ),
+                               ]),)
+                               
+                          ],
+                        ),
+                        SizedBox(height: 3,),
                         SizedBox(
-                          width: 180,
+                          width: 160,
                           height: 25,
                           child: TextFormField(
+                            
                             controller: size[1],
                             onFieldSubmitted: (String value) {
                               print(value);
