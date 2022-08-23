@@ -383,59 +383,6 @@ class _OrderScreenState extends State<OrderScreen> {
                         ),
                       ),
                     ),
-                    //الحجم--------------------------------------------------------------------------------------------------------------
-                    Text(
-                      "الحجم".tr,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: Container(
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.vertical,
-                          child: Column(
-                            // crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 0,
-                              ),
-                              Container(
-                                margin: EdgeInsets.all(0),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 4),
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.grey, width: 2),
-                                    borderRadius: BorderRadius.circular(6)),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton<String>(
-                                    hint: Text(
-                                        "حدد الحجم ان لزم او اتركه فارغ \" .... \" "
-                                            .tr),
-                                    icon: Icon(Icons.arrow_downward_rounded),
-                                    onTap: () {
-                                      //  انسخ ياروحي انسخ
-                                    },
-                                    isExpanded: true,
-                                    value: value2,
-                                    items:
-                                        sizes_items.map(buildMenuItem).toList(),
-                                    onChanged: (value2) => setState(() => {
-                                          this.value2 = value2,
-                                          sizes = value2!
-                                        }),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
                     //العنوان--------------------------------------------------------------------------------------------------------------
                     Text(
                       "العنوان".tr,

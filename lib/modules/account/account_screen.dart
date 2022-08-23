@@ -4,12 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter/API/fetchData.dart';
 import 'package:udemy_flutter/models/user/user_model.dart';
 import 'package:udemy_flutter/modules/editPassword/editPassword.dart';
 import 'package:udemy_flutter/modules/home/main_screen.dart';
 import 'package:http/http.dart' as http;
+import 'package:universal_io/io.dart';
 
 class AccountScreen extends StatefulWidget {
   @override
@@ -17,6 +19,20 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
+   //هدول للصورة
+  File? _image;
+  var myImage;
+  Future getImage() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (image == null) return;
+
+    final imageTemporary = File(image.path);
+    myImage = image;
+
+    setState(() {
+      this._image = imageTemporary;
+    });
+  }
   var formkey = GlobalKey<FormState>();
   String? value;
   var nameController = TextEditingController();
@@ -44,22 +60,44 @@ class _AccountScreenState extends State<AccountScreen> {
 
     return userModel;
   }
+   Future<UserModel> editData() async {
+    var token;
+    var body;
+    if (!(myImage == null)) {
+      var bytes = await new File(myImage.path).readAsBytes();
+      String base64 = base64Encode(bytes);
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      token = prefs.get('token');
+      body = jsonEncode({
+        'email': emailController.text,
+        'name': nameController.text,
+        'avatar': base64
+      });
+    } else {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      token = prefs.get('token');
+      body = jsonEncode({
+        'email': emailController.text,
+        'name': nameController.text,
+      });
+    }
 
-  Future<UserModel> editData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.get('token');
-
-    var body = jsonEncode(
-        {'email': emailController.text, 'name': nameController.text});
-
-    var result = await http.patch(Uri.parse(fetchData.baseURL + "/users/me"),
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer ' + token.toString()
-        },
-        body: body);
+    var result =
+        await http.patch(Uri.parse(fetchData.baseURL + "/users/me"),
+            headers: {
+              'Content-Type': 'application/json; charset=UTF-8',
+              'Authorization': 'Bearer ' + token.toString()
+            },
+            body: body);
 
     print(result.statusCode);
+
+    if (result.statusCode == 200) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => _buildPopupDialog(context),
+      );
+    }
 
     UserModel userModel = UserModel.fromJson(jsonDecode(result.body));
 
@@ -68,6 +106,7 @@ class _AccountScreenState extends State<AccountScreen> {
 
     return userModel;
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -113,30 +152,38 @@ class _AccountScreenState extends State<AccountScreen> {
                     Container(
                       child: Row(
                         children: [
-                          //الصورة الشخصية
+                            //الصورة الشخصية
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => MainScreen()));
+                              getImage();
                             },
                             child: Stack(
                               alignment: AlignmentDirectional.bottomEnd,
                               children: [
-                                CircleAvatar(
-                                  radius: 50.0,
-                                  // backgroundImage: NetworkImage(
-                                  //     'https://mystoreapii.herokuapp.com/users/${snapshot.data!.id}/avatar'),
-                                  backgroundImage: account!.avatar == null
-                                      ? (AssetImage(
-                                          'assets/images/logo3.png',
-                                        ) as ImageProvider)
-                                      : MemoryImage(
-                                          base64Decode(
-                                              account.avatar.toString()),
-                                        ),
-                                ),
+                                _image != null
+                                    ? CircleAvatar(
+                                        radius: 52.0,
+                                        child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                            child: Image.file(
+                                              _image!,
+                                              height: 120,
+                                              width: 120,
+                                              fit: BoxFit.cover,
+                                            )))
+                                    : CircleAvatar(
+                                        radius: 50.0,
+                                        backgroundColor: Colors.white,
+                                        backgroundImage: account!.avatar == null
+                                            ? (NetworkImage(
+                                                'https://static.thenounproject.com/png/3322766-200.png',
+                                              ) as ImageProvider)
+                                            : MemoryImage(
+                                                base64Decode(
+                                                    account.avatar.toString()),
+                                              ),
+                                      ),
                                 CircleAvatar(
                                   radius: 15.8,
                                   backgroundColor: Colors.blue,
@@ -338,6 +385,38 @@ class _AccountScreenState extends State<AccountScreen> {
           );
         }
       },
+    );
+  }
+
+    //Pub up Function--------------------------------------------------------------------------------------------
+  Widget _buildPopupDialog(BuildContext context) {
+    return new AlertDialog(
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CircleAvatar(
+              radius: 17,
+              backgroundColor: Colors.blue,
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              )),
+          SizedBox(
+            height: 10,
+          ),
+          Text("تم تعديل البيانات بنجاح".tr)
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Colors.blue,
+          child: Text('موافق'.tr),
+        ),
+      ],
     );
   }
 
