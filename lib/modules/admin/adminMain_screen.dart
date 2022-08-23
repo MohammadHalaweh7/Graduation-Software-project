@@ -144,20 +144,17 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                 scrollDirection: Axis.vertical,
                 child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8, top: 30),
-                      child: Image.asset(
-                        'assets/images/logo3.png',
-                        width: 150,
-                      ),
-                    ),
-                    Text(
-                      "متجراتي",
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff758DFF)),
-                    ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 8, top: 30),
+                  child: Image.asset(
+                    'assets/images/logo3.png',
+                    width: 180,
+                  ),
+                ),
+
                     SizedBox(
                       height: 20,
                     ),
@@ -285,9 +282,15 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("عن متجراتي".tr),
+                      title: Text("عن محلات PS".tr),
                       leading: Icon(Icons.assignment, color: Color(0xff758DFF)),
-                      onTap: () {},
+                      onTap: () {
+                            Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  AdminProfileScreen()));
+                      },
                     ),
                     ListTile(
                       title: Text("تسجيل خروج".tr),
@@ -307,6 +310,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                 ),
               ),
             ),
+            
             body: Stack(
               children: <Widget>[
                 Container(
@@ -315,9 +319,8 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                   decoration: BoxDecoration(
                       image: DecorationImage(
                     alignment: Alignment.topCenter,
-                    image: Image.network(
-                            "https://www.pngkey.com/png/full/336-3369360_website-banner-background-png-header-png.png")
-                        .image,
+                    
+                    image: AssetImage('assets/images/header.png') as ImageProvider 
                   )),
                 ),
                 SafeArea(

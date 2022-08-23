@@ -83,7 +83,7 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/icons/1024.png"
+  image_path: "assets/icons/1025.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -142,14 +142,11 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-
-
-
-#   fonts:
-#     - family: myFont
-#       fonts:
-#         - asset: assets/fonts/myFont1.ttf
-#           weight: 700
+   fonts:
+     - family: myFont
+       fonts:
+         - asset: assets/fonts/JannaLTBold.ttf
+           weight: 700
 
 
 

@@ -71,19 +71,16 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 // crossAxisAlignment: CrossAxisAlignment.center,
 
                 children: [
-                  Image.asset(
-                    'assets/images/logo3.png',
-                    width: 170,
+                  SizedBox(height: 40,),
+                  Center(
+                    child: Image.asset(
+                      'assets/images/logo3.png',
+                      width: 220,
+                    ),
                   ),
-                  Text(
-                    "متجراتي",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue),
-                  ),
+
                   SizedBox(
-                    height: 80,
+                    height: 40,
                   ),
                   TextFormField(
                     controller: emailController,
@@ -141,7 +138,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                         },
                         child: Text(
                           "عضو بالفعل؟ سجل الدخول!".tr,
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold,color: Color(0xFF391248)),
                         ),
                       ),
                     ],

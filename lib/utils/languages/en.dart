@@ -255,7 +255,7 @@ const Map<String, String> en = {
 
 'كل ما يهمك تجده في تطبيقنا حيث ستجد باقة من المتاجر في تطبيق واحد.\nيتميز تطبيقنا بسهولة التسوق والبحث عن العروض والخصومات الخاصة بالمتاجر المفضلة لديك.\nيمكنك من خلال تصفح متاجرنا شراء ما تحتاجه بكبسه واحده يصلك طلبك إلى باب بيتك حيثما كنت في أنحاء فلسطين والدفع يتم عند استلامك لطلبك.\nهيا ماذا تنتظر سارع للانضمام إلى تطبيقنا وشاهد كل ما يحلو لك من المنتجات و البضائع والعروض والخصومات الهائلة والسرعه في الاستجابة.\nنسعى دومًا لمساعدتك في تحصيل العروض التي تبهرك!':'Everything you are interested in finds in our application where you will find a bouquet of stores in one application. \nOur application is easy to shop and search for offers and discounts for your favorite stores. By browsing our stores, you can buy what you need with one click. Your order will be delivered to your door, wherever you are in Palestine. Payment is made upon receipt of your order. \nCome on, what are you waiting for, hurry up to join our application and see all the products, merchandise, offers, huge discounts and speed of response. \nWe are always trying to help you find deals that amaze you!',
   
-  'عن متجراتي !':'About app !',
+  'عن محلات PS':'About app !',
       'اهلا بك في تطبيقنا التطبيق الأول من نوعه في فلسطين في مجال الاون لاين. حيث يضم مجموعة متميزة من المتاجر الفلسطينية في مختلف المجالات الجمال و الصحة و الالبسة و الالكترونيات و الانارة و الاطعمة وغيرها الكثير والكثير':'Welcome to our application, the first of its kind in Palestine in the online field. It includes a distinguished group of Palestinian stores in various fields of beauty, health, clothing, electronics, foods and many more' ,
 
 'تعديل صفحة التعريف':'Edit profile',

@@ -23,6 +23,12 @@ import "package:url_launcher/url_launcher.dart";
 import '../../src/my_app.dart';
 import 'package:http/http.dart' as http;
 
+import '../aboutUs/about_us_screen.dart';
+import '../account/account_screen.dart';
+import '../home/main_screen.dart';
+import '../my_orders/my_orders_all_screen.dart';
+import '../notification/notification_screen.dart';
+
 class CartScreen extends StatefulWidget {
   @override
   State<CartScreen> createState() => _CartScreenState();
@@ -369,6 +375,169 @@ class _CartScreenState extends State<CartScreen> {
         } else {
           allpointscontroller.text = account!.points.toString();
           return Scaffold(
+            drawer: Drawer(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              children: [
+                                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 8, top: 30),
+                  child: Image.asset(
+                    'assets/images/logo3.png',
+                    width: 180,
+                  ),
+                ),
+
+
+                Container(
+                  width: 300,
+                  height: 1,
+                  color: Colors.grey[300],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 220),
+                  child: Text(
+                    "الرئيسية".tr,
+                    style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xff758DFF)),
+                  ),
+                ),
+                ListTile(
+                  title: Text("الى المتاجر".tr),
+                  leading: Icon(Icons.store, color: Color(0xff758DFF)),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MainScreen()));
+                  },
+                ),
+                SizedBox(
+                  height: 0,
+                ),
+                Container(
+                  width: 300,
+                  height: 1,
+                  color: Colors.grey[300],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 147),
+                  child: Text(
+                    "معلومات المستخدم".tr,
+                    style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xff758DFF)),
+                  ),
+                ),
+                ListTile(
+                  title: Text("حسابي".tr),
+                  leading: Icon(Icons.person, color: Color(0xff758DFF)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AccountScreen()));
+                  },
+                ),
+                ListTile(
+                  title: Text("منتجات طلبتها".tr),
+                  leading: Icon(Icons.add_chart, color: Color(0xff758DFF)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MyOrdersAllScreen()));
+                  },
+                ),
+                ListTile(
+                  title: Text("الاشعارات".tr),
+                  leading: Icon(Icons.notification_important_outlined,
+                      color: Color(0xff758DFF)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => NotificationScreen()));
+                  },
+                ),
+                SizedBox(
+                  height: 0,
+                ),
+                Container(
+                  width: 300,
+                  height: 1,
+                  color: Colors.grey[300],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 200),
+                  child: Text(
+                    "التطبيق".tr,
+                    style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xff758DFF)),
+                  ),
+                ),
+                ListTile(
+                  title: Text("اللغة".tr),
+                  leading: Icon(Icons.g_translate, color: Color(0xff758DFF)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LanguageScreen()));
+                  },
+                ),
+                ListTile(
+                  title: Text("انشاء متجر".tr),
+                  leading: Icon(Icons.person_add, color: Color(0xff758DFF)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => JoinAppScreen()));
+                  },
+                ),
+                ListTile(
+                  title: Text("عن محلات PS".tr),
+                  leading: Icon(Icons.assignment, color: Color(0xff758DFF)),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AboutUsScreen()));
+                  },
+                ),
+                ListTile(
+                  title: Text("تسجيل خروج".tr),
+                  leading: Icon(Icons.logout, color: Color(0xff758DFF)),
+                  onTap: () async {
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    prefs.remove('token');
+                    prefs.remove('type');
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()));
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+       
             appBar: AppBar(
               backgroundColor: Colors.white,
               leading: IconButton(

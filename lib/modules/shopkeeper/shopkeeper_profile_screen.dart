@@ -19,6 +19,10 @@ import 'package:udemy_flutter/modules/phone/phone_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/addProduct_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeperMain_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_account_screen.dart';
+import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_addNotification_screen.dart';
+import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_allOrders_screen.dart';
+import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_deliveryOrders_screen.dart';
+import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_newOrders_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_products_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_profile_edit_screen.dart';
 import 'package:udemy_flutter/modules/shopkeeper/shopkeeper_profile_show_screen.dart';
@@ -107,28 +111,21 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                 ),
               ),
             ),
-            drawer: Drawer(
+                     drawer: Drawer(
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8, top: 30),
-                      child: Image.asset(
-                        'assets/images/logo3.png',
-                        width: 150,
-                      ),
-                    ),
-                    Text(
-                      "متجراتي",
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff758DFF)),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 8, top: 30),
+                  child: Image.asset(
+                    'assets/images/logo3.png',
+                    width: 180,
+                  ),
+                ),
                     Container(
                       width: 300,
                       height: 1,
@@ -140,7 +137,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 220),
                       child: Text(
-                        "الرئيسية",
+                        "الرئيسية".tr,
                         style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
@@ -148,7 +145,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                       ),
                     ),
                     ListTile(
-                      title: Text("الى الرئيسية"),
+                      title: Text("الى الرئيسية".tr),
                       leading: Icon(Icons.store, color: Color(0xff758DFF)),
                       onTap: () {
                         Navigator.push(
@@ -168,7 +165,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 147),
                       child: Text(
-                        "معلومات المستخدم",
+                        "معلومات المستخدم".tr,
                         style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
@@ -176,7 +173,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                       ),
                     ),
                     ListTile(
-                      title: Text("حسابي"),
+                      title: Text("حسابي".tr),
                       leading: Icon(Icons.person, color: Color(0xff758DFF)),
                       onTap: () {
                         Navigator.push(
@@ -187,7 +184,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("متجري"),
+                      title: Text("متجري".tr),
                       leading: Icon(Icons.storefront, color: Color(0xff758DFF)),
                       onTap: () {
                         Navigator.push(
@@ -198,7 +195,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("منتجاتي"),
+                      title: Text("منتجاتي".tr),
                       leading: Icon(Icons.production_quantity_limits,
                           color: Color(0xff758DFF)),
                       onTap: () {
@@ -210,7 +207,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("اضافة منتج جديد"),
+                      title: Text("اضافة منتج جديد".tr),
                       leading: Icon(Icons.add_shopping_cart,
                           color: Color(0xff758DFF)),
                       onTap: () {
@@ -221,28 +218,51 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("حذف المتجر نهائيا"),
-                      leading: Icon(Icons.highlight_remove_sharp,
+                      title: Text("الطلبات الجديدة".tr),
+                      leading: Icon(Icons.open_in_new_sharp,
                           color: Color(0xff758DFF)),
                       onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => AddProductScreen()));
+                                builder: (context) =>
+                                    ShopkeeperNewOrdersScreen()));
                       },
                     ),
                     ListTile(
-                      title: Text("تسجيل خروج"),
-                      leading: Icon(Icons.logout, color: Color(0xff758DFF)),
-                      onTap: () async {
-                        SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                        prefs.remove('token');
-                        prefs.remove('type');
+                      title: Text("طلبات قيد التوصيل".tr),
+                      leading: Icon(Icons.delivery_dining_rounded,
+                          color: Color(0xff758DFF)),
+                      onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LoginScreen()));
+                                builder: (context) =>
+                                    ShopkeeperDeliveryOrdersScreen()));
+                      },
+                    ),
+                    ListTile(
+                      title: Text("جميع الطلبات".tr),
+                      leading: Icon(Icons.clear_all_rounded,
+                          color: Color(0xff758DFF)),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ShopkeeperAllOrdersScreen()));
+                      },
+                    ),
+
+                    ListTile(
+                      title: Text("ارسال الاشعارات".tr),
+                      leading: Icon(Icons.add_alert, color: Color(0xff758DFF)),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ShopkeeperAddNotificationScreen()));
                       },
                     ),
                     SizedBox(
@@ -257,9 +277,9 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                       height: 20,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 220),
+                      padding: const EdgeInsets.only(left: 200),
                       child: Text(
-                        "التطبيق",
+                        "التطبيق".tr,
                         style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
@@ -267,7 +287,7 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                       ),
                     ),
                     ListTile(
-                      title: Text("اللغة"),
+                      title: Text("اللغة".tr),
                       leading:
                           Icon(Icons.g_translate, color: Color(0xff758DFF)),
                       onTap: () {
@@ -278,24 +298,29 @@ class _ShopkeeperProfileScreenState extends State<ShopkeeperProfileScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("عن متجراتي"),
+                      title: Text("عن محلات PS".tr),
                       leading: Icon(Icons.assignment, color: Color(0xff758DFF)),
                       onTap: () {},
                     ),
                     ListTile(
-                      title: Text("ضبط"),
-                      leading: Icon(Icons.gamepad, color: Color(0xff758DFF)),
-                      onTap: () {},
-                    ),
-                    ListTile(
-                      title: Text("سياسة الخصوصية"),
-                      leading: Icon(Icons.warning, color: Color(0xff758DFF)),
-                      onTap: () {},
+                      title: Text("تسجيل خروج".tr),
+                      leading: Icon(Icons.logout, color: Color(0xff758DFF)),
+                      onTap: () async {
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        prefs.remove('token');
+                        prefs.remove('type');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()));
+                      },
                     ),
                   ],
                 ),
               ),
             ),
+           
             body: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               physics: BouncingScrollPhysics(),

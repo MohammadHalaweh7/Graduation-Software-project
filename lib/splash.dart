@@ -43,19 +43,28 @@ class _SplashScreenState extends State<SplashScreen> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset('assets/images/logo3.png', width: 180),
-        Text(
-          "محلاتي",
-          style: TextStyle(
-              fontSize: 15, fontWeight: FontWeight.bold, color: Colors.blue),
-        ),
+        Spacer(),
+        Image.asset('assets/images/logo3.png', width: 220),
+      
         SizedBox(
-          height: 10,
+          height: 30,
         ),
         Center(
             child: CircularProgressIndicator(
-          color: Colors.blue,
+          color: Color(0xFF391248)
         )),
+        Spacer(),
+                                   Text(
+                    "محلات فلسطين في مكان واحد",
+                    style: TextStyle(
+                      fontFamily:'myFont',
+                        fontSize: 17,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF391248)),
+                  ),
+                  Spacer(),
+       
       ],
     )));
   }

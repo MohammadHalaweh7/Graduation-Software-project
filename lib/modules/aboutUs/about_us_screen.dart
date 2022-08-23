@@ -163,7 +163,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                           //عن متجراتي
                           Center(
                             child: Text(
-                              'عن متجراتي !'.tr,
+                              'عن محلات PS'.tr,
                               style: TextStyle(
                                   color: Colors.blue,
                                   fontSize: 16,

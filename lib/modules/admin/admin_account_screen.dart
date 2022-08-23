@@ -19,6 +19,9 @@ import 'package:udemy_flutter/modules/language/language_screen.dart';
 import 'package:udemy_flutter/modules/login/login_screen.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+
+import 'admin_addNotification_screen.dart';
+import 'admin_profile_screen.dart';
 // baba
 
 class AdminAccountScreen extends StatefulWidget {
@@ -157,20 +160,17 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                 scrollDirection: Axis.vertical,
                 child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8, top: 30),
-                      child: Image.asset(
-                        'assets/images/logo3.png',
-                        width: 150,
-                      ),
-                    ),
-                    Text(
-                      "متجراتي",
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff758DFF)),
-                    ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 8, top: 30),
+                  child: Image.asset(
+                    'assets/images/logo3.png',
+                    width: 180,
+                  ),
+                ),
+
                     SizedBox(
                       height: 20,
                     ),
@@ -185,7 +185,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 220),
                       child: Text(
-                        "الرئيسية",
+                        "الرئيسية".tr,
                         style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
@@ -193,7 +193,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                       ),
                     ),
                     ListTile(
-                      title: Text("الى الرئيسية"),
+                      title: Text("الى الرئيسية".tr),
                       leading: Icon(Icons.store, color: Color(0xff758DFF)),
                       onTap: () {
                         Navigator.push(
@@ -203,7 +203,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("الى المتاجر"),
+                      title: Text("الى المتاجر".tr),
                       leading: Icon(Icons.storefront, color: Color(0xff758DFF)),
                       onTap: () {
                         Navigator.push(
@@ -226,7 +226,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 147),
                       child: Text(
-                        "معلومات المستخدم",
+                        "معلومات المستخدم".tr,
                         style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
@@ -234,7 +234,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                       ),
                     ),
                     ListTile(
-                      title: Text("حسابي"),
+                      title: Text("حسابي".tr),
                       leading: Icon(Icons.person, color: Color(0xff758DFF)),
                       onTap: () {
                         Navigator.push(
@@ -244,8 +244,9 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("طلبات المتاجر الجديدة"),
-                      leading: Icon(Icons.person, color: Color(0xff758DFF)),
+                      title: Text("طلبات المتاجر الجديدة".tr),
+                      leading: Icon(Icons.remove_from_queue_outlined,
+                          color: Color(0xff758DFF)),
                       onTap: () {
                         Navigator.push(
                             context,
@@ -254,17 +255,14 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("تسجيل خروج"),
-                      leading: Icon(Icons.logout, color: Color(0xff758DFF)),
-                      onTap: () async {
-                        SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                        prefs.remove('token');
-                        prefs.remove('type');
+                      title: Text("ارسال اشعارات".tr),
+                      leading: Icon(Icons.notification_add,
+                          color: Color(0xff758DFF)),
+                      onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LoginScreen()));
+                                builder: (context) => AddNotificationScreen()));
                       },
                     ),
                     SizedBox(
@@ -279,9 +277,9 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                       height: 20,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 220),
+                      padding: const EdgeInsets.only(left: 200),
                       child: Text(
-                        "التطبيق",
+                        "التطبيق".tr,
                         style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
@@ -289,7 +287,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                       ),
                     ),
                     ListTile(
-                      title: Text("اللغة"),
+                      title: Text("اللغة".tr),
                       leading:
                           Icon(Icons.g_translate, color: Color(0xff758DFF)),
                       onTap: () {
@@ -300,24 +298,35 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("عن متجراتي"),
+                      title: Text("عن محلات PS".tr),
                       leading: Icon(Icons.assignment, color: Color(0xff758DFF)),
-                      onTap: () {},
+                      onTap: () {
+                            Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  AdminProfileScreen()));
+                      },
                     ),
                     ListTile(
-                      title: Text("ضبط"),
-                      leading: Icon(Icons.gamepad, color: Color(0xff758DFF)),
-                      onTap: () {},
-                    ),
-                    ListTile(
-                      title: Text("سياسة الخصوصية"),
-                      leading: Icon(Icons.warning, color: Color(0xff758DFF)),
-                      onTap: () {},
+                      title: Text("تسجيل خروج".tr),
+                      leading: Icon(Icons.logout, color: Color(0xff758DFF)),
+                      onTap: () async {
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        prefs.remove('token');
+                        prefs.remove('type');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()));
+                      },
                     ),
                   ],
                 ),
               ),
             ),
+            
             body: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Column(

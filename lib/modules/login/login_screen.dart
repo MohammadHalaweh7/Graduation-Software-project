@@ -104,11 +104,25 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: 210,
                   ),
                   Text(
-                    "متجراتي",
+                    "أهلا بك في محلات PS",
                     style: TextStyle(
-                        fontSize: 15,
+                      fontFamily:'myFont',
+                        fontSize: 20,
+                        fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.bold,
-                        color: Colors.blue),
+                        color: Color(0xFF391248)),
+                  ),
+                    SizedBox(
+                    height: 0,
+                  ),
+                                   Text(
+                    "محلات فلسطين في مكان واحد",
+                    style: TextStyle(
+                      fontFamily:'myFont',
+                        fontSize: 17,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF999999)),
                   ),
                   SizedBox(
                     height: 30,
@@ -213,7 +227,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         child: Text(
                           "هل نسيت كلمة المرور؟".tr,
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold,color: Color(0xFF391248)),
                         ),
                       ),
                       // SizedBox(width: 71),
@@ -227,7 +241,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         child: Text(
                           "جديد هنا؟ سجل الان!".tr,
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold,color: Color(0xFF391248)),
                         ),
                       )
                     ],

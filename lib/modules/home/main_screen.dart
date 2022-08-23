@@ -436,23 +436,18 @@ class _MainScreenState extends State<MainScreen> {
             scrollDirection: Axis.vertical,
             child: Column(
               children: [
+                SizedBox(
+                  height: 20,
+                ),
                 Padding(
                   padding: const EdgeInsets.only(right: 8, top: 30),
                   child: Image.asset(
                     'assets/images/logo3.png',
-                    width: 150,
+                    width: 180,
                   ),
                 ),
-                Text(
-                  "متجراتي".tr,
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xff758DFF)),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
+
+
                 Container(
                   width: 300,
                   height: 1,
@@ -573,7 +568,7 @@ class _MainScreenState extends State<MainScreen> {
                   },
                 ),
                 ListTile(
-                  title: Text("عن متجراتي".tr),
+                  title: Text("عن محلات PS".tr),
                   leading: Icon(Icons.assignment, color: Color(0xff758DFF)),
                   onTap: () {
                     Navigator.push(
@@ -598,6 +593,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
         ),
+       
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           scrollDirection: Axis.vertical,

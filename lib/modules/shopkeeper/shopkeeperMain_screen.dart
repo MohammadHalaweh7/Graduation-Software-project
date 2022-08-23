@@ -100,23 +100,16 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                 scrollDirection: Axis.vertical,
                 child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8, top: 30),
-                      child: Image.asset(
-                        'assets/images/logo3.png',
-                        width: 150,
-                      ),
-                    ),
-                    Text(
-                      "متجراتي",
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff758DFF)),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 8, top: 30),
+                  child: Image.asset(
+                    'assets/images/logo3.png',
+                    width: 180,
+                  ),
+                ),
                     Container(
                       width: 300,
                       height: 1,
@@ -244,18 +237,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                     ShopkeeperAllOrdersScreen()));
                       },
                     ),
-                    ListTile(
-                      title: Text("الاحصائيات".tr),
-                      leading:
-                          Icon(Icons.addchart_sharp, color: Color(0xff758DFF)),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    ShopkeeperAllOrdersScreen()));
-                      },
-                    ),
+
                     ListTile(
                       title: Text("ارسال الاشعارات".tr),
                       leading: Icon(Icons.add_alert, color: Color(0xff758DFF)),
@@ -300,7 +282,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                       },
                     ),
                     ListTile(
-                      title: Text("عن متجراتي".tr),
+                      title: Text("عن محلات PS".tr),
                       leading: Icon(Icons.assignment, color: Color(0xff758DFF)),
                       onTap: () {},
                     ),
@@ -322,6 +304,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                 ),
               ),
             ),
+           
             body: Stack(
               children: <Widget>[
                 Container(
@@ -728,40 +711,7 @@ class _ShopKeeperMainScreenState extends State<ShopKeeperMainScreen> {
                                   ),
                                 ),
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ShopkeeperProfileScreen()));
-                                },
-                                child: Card(
-                                  elevation: 15,
-                                  shadowColor: Colors.blue,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Image.network(
-                                        "https://img.freepik.com/premium-vector/research-finance-sales-data-audit-mobile-phone-report-online-statistics-info-analysis-smartphone-vector-flat-cartoon-isolated_212005-118.jpg",
-                                        height: 105,
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                        'الاحصائيات'.tr,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
+                       
                               GestureDetector(
                                 onTap: () async {
                                   SharedPreferences prefs =

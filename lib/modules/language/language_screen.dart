@@ -7,7 +7,10 @@ import 'package:udemy_flutter/modules/home/main_screen.dart';
 import 'package:udemy_flutter/modules/join/joinApp_screen.dart';
 import 'package:udemy_flutter/modules/my_orders/my_orders_screen.dart';
 // import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import '../aboutUs/about_us_screen.dart';
 import '../login/login_screen.dart';
+import '../my_orders/my_orders_all_screen.dart';
+import '../notification/notification_screen.dart';
 
 class LanguageScreen extends StatefulWidget {
   @override
@@ -41,28 +44,23 @@ class _LanguageScreenState extends State<LanguageScreen> {
           ),
           actions: [],
         ),
-        drawer: Drawer(
+       drawer: Drawer(
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(
               children: [
+                                SizedBox(
+                  height: 20,
+                ),
                 Padding(
                   padding: const EdgeInsets.only(right: 8, top: 30),
                   child: Image.asset(
                     'assets/images/logo3.png',
-                    width: 150,
+                    width: 180,
                   ),
                 ),
-                Text(
-                  "متجراتي".tr,
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xff758DFF)),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
+
+
                 Container(
                   width: 300,
                   height: 1,
@@ -121,36 +119,24 @@ class _LanguageScreenState extends State<LanguageScreen> {
                   },
                 ),
                 ListTile(
-                  title: Text("منتجات أعجبتني".tr),
-                  leading: Icon(Icons.favorite, color: Color(0xff758DFF)),
-                  onTap: () {},
-                ),
-                ListTile(
                   title: Text("منتجات طلبتها".tr),
                   leading: Icon(Icons.add_chart, color: Color(0xff758DFF)),
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => MyOrdersScreen()));
+                            builder: (context) => MyOrdersAllScreen()));
                   },
                 ),
                 ListTile(
-                  title: Text("منتجات شاهدتها".tr),
-                  leading: Icon(Icons.remove_red_eye_outlined,
+                  title: Text("الاشعارات".tr),
+                  leading: Icon(Icons.notification_important_outlined,
                       color: Color(0xff758DFF)),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text("تسجيل خروج".tr),
-                  leading: Icon(Icons.logout, color: Color(0xff758DFF)),
-                  onTap: () async {
-                    SharedPreferences prefs =
-                        await SharedPreferences.getInstance();
-                    prefs.remove('token');
-                    prefs.remove('type');
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()));
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => NotificationScreen()));
                   },
                 ),
                 SizedBox(
@@ -185,7 +171,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                   },
                 ),
                 ListTile(
-                  title: Text("للانضمام الى متجراتي".tr),
+                  title: Text("انشاء متجر".tr),
                   leading: Icon(Icons.person_add, color: Color(0xff758DFF)),
                   onTap: () {
                     Navigator.push(
@@ -195,29 +181,32 @@ class _LanguageScreenState extends State<LanguageScreen> {
                   },
                 ),
                 ListTile(
-                  title: Text("عن متجراتي".tr),
+                  title: Text("عن محلات PS".tr),
                   leading: Icon(Icons.assignment, color: Color(0xff758DFF)),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AboutUsScreen()));
+                  },
                 ),
                 ListTile(
-                  title: Text("ضبط".tr),
-                  leading: Icon(Icons.gamepad, color: Color(0xff758DFF)),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text("سياسة الخصوصية".tr),
-                  leading: Icon(Icons.warning, color: Color(0xff758DFF)),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text("قيم هذا التطبيق".tr),
-                  leading: Icon(Icons.star, color: Color(0xff758DFF)),
-                  onTap: () {},
+                  title: Text("تسجيل خروج".tr),
+                  leading: Icon(Icons.logout, color: Color(0xff758DFF)),
+                  onTap: () async {
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    prefs.remove('token');
+                    prefs.remove('type');
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()));
+                  },
                 ),
               ],
             ),
           ),
         ),
+       
         body: Center(
           child: Container(
             margin: EdgeInsets.all(16),

@@ -141,20 +141,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               // crossAxisAlignment: CrossAxisAlignment.center,
 
               children: [
-                Image.asset(
-                  'assets/images/logo3.png',
-                  width: 170,
-                ),
-                Text(
-                  "متجراتي",
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
+
 
                 //الصورة الشخصية------------------------------------------------------------------------------------------------------
                 Container(
@@ -562,7 +549,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: Text(
                         "هل تريد انشاء متجر ؟ انشأه الان!".tr,
                         style: TextStyle(
-                            fontSize: 16.5, fontWeight: FontWeight.bold),
+                            fontSize: 16.5, fontWeight: FontWeight.bold,color: Color(0xFF391248)),
                       ),
                     ),
                   ],
