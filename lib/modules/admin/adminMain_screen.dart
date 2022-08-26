@@ -320,7 +320,7 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
                       image: DecorationImage(
                     alignment: Alignment.topCenter,
                     
-                    image: AssetImage('assets/images/header.png') as ImageProvider 
+                    image: AssetImage('assets/images/header2.png') as ImageProvider 
                   )),
                 ),
                 SafeArea(
