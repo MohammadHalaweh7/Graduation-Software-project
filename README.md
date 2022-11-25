@@ -1,16 +1,8 @@
 # udemy_flutter
 
-A new Flutter project.
+Tools - flutter as a front end, Node JS, Mongo DB as a backend.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Screenshot 2022-09-12 220538](https://user-images.githubusercontent.com/78410547/203979275-0e967e7f-2e01-4437-ae29-cfab7d3d0422.jpg)
+![Screenshot 2022-08-15 220916](https://user-images.githubusercontent.com/78410547/203979410-ee0a97d3-e85e-4fc0-83cb-33ec19774bb4.jpg)
+![31209a8e-2500-4435-a3ad-21e6ff93d8c6](https://user-images.githubusercontent.com/78410547/203979576-7159cb46-4180-4ee9-a27c-6244497ce6a1.jpg)
+![836c6cdc-e1fc-4607-ba5e-b508881a9085](https://user-images.githubusercontent.com/78410547/203979978-36648186-f77d-4d6c-82cd-18487a12bd66.jpg)
